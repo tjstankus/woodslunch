@@ -1,3 +1,25 @@
+/* 
+Some styles culled from:
+http://www.endigodesign.com/2010/07/html5-sticky-footer/
+*/
+
+$wrapper_width: 1035px;
+$nav_height: 53px;
+$footer_height: $nav_height;
+$neg_footer_height: -53px;
+$content_padding_tb: 16px;
+$content_padding_lr: 100px;
+$nav_link_padding_tb: 16px;
+$nav_link_padding_lr: 20px;
+
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
   background: {
     color: #1e0e02;
@@ -5,8 +27,11 @@ body {
 }
 
 #wrapper {
-  margin: 0 auto;
-  width: 1035px;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto $neg_footer_height;
+  min-height: 100%;
+  width: $wrapper_width;
 }
 
 #header {
@@ -31,4 +56,44 @@ body {
   a#header_link:hover {
     text-decoration: none;
   }
+}
+
+#nav {
+  height: $nav_height - $nav_link_padding_tb;
+  padding: $nav_link_padding_tb $content_padding_lr 0 $content_padding_lr - $nav_link_padding_lr;
+  a {
+    color: #f0c397;
+    font: {
+      family: Georgia, "Times New Roman", Times, serif;
+      size: 18px;
+    }
+    padding: $nav_link_padding_tb $nav_link_padding_lr;
+    text-decoration: none;
+  }
+  a:hover {
+    background: {
+      image: url('/images/nav_hover.png');
+      repeat: repeat-x;
+    }
+  }
+}
+
+#content {
+  background: {
+    color: #fbfaf6;
+    image: url('/images/bg_content.jpg');
+    repeat: no-repeat;
+  }
+  font: {
+    family: 'Droid Serif';
+    size: 16px;
+  }
+  line-height: 1.3;
+  min-height: 463px;
+  padding: $content_padding_tb $content_padding_lr;
+  
+}
+
+footer, .push {
+  height: $footer_height;
 }
