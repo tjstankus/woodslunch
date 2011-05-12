@@ -3,6 +3,13 @@
   %head
     %title Woods Charter School Lunch Ordering
     = csrf_meta_tag
+    = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'print.css', :media => 'print'
+    /[if IE]
+      = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
   %body
-    = render 'shared/flash'
-    = yield
+    #wrapper
+      #header
+        = header_link
+      = render 'shared/flash'
+      = yield

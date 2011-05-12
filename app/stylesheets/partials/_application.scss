@@ -1,0 +1,34 @@
+body {
+  background: {
+    color: #1e0e02;
+  }
+}
+
+#wrapper {
+  margin: 0 auto;
+  width: 1035px;
+}
+
+#header {
+  background: {
+    image: url('/images/bg_header.jpg');
+  }
+  height: 144px;
+  text-align: center;
+  a#header_link {
+    text-decoration: none;
+    span#heading {
+      color: #fefefe;
+      font: {
+        family: Helvetica, Arial, sans-serif;
+        size: 46px;
+        weight: 200;
+      }
+      position: relative;
+      top: -52px;
+    }
+  }
+  a#header_link:hover {
+    text-decoration: none;
+  }
+}
