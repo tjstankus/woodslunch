@@ -5,6 +5,7 @@ gem 'rails', '3.0.7'
 gem 'sqlite3', '1.3.3'
 gem 'devise', '1.3.4'
 gem 'haml', '3.1.1'
+gem 'compass', '0.11.1'
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
 # gem 'ruby-debug'
