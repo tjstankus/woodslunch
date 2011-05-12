@@ -4,7 +4,7 @@ class HomeTest < ActionDispatch::IntegrationTest
 
   test 'root path' do
     get '/'
-    assert_select 'h2', 'Lunch Ordering'
+    assert_select 'div#wrapper'
   end
   
 end
