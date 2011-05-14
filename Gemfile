@@ -23,4 +23,5 @@ gem 'rdiscount', '1.6.8'
 # and rake tasks are available in development mode:
 group :development, :test do
   gem 'rspec-rails'
+  gem 'capybara', '1.0.0.beta1'
 end
