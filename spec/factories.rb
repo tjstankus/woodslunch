@@ -8,4 +8,8 @@ FactoryGirl.define do
     password 'secret'
   end
 
+  factory :admin, :parent => :user do
+    role 'admin'
+  end
+
 end
