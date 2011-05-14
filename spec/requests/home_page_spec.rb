@@ -1,14 +1,21 @@
 require 'spec_helper'
 
-describe 'Visiting the home page' do
+feature 'home page' do
 
-  it 'displays content' do
-    visit root_path
-    page.should have_xpath('//div[@id="wrapper"]')
+  context 'given a logged in user' do
+
+    it 'displays a logged in message'
+
+    it 'displays user account info'
+
   end
 
-  # TODO: When this is passing, remove the 'displays content' example
-  it 'displays the login form'
+  context 'for public browsing' do
+    
+    it 'displays the login form'
 
-  it 'displays a link to the account request page'
+    it 'displays a link to the account request page'
+
+  end
+
 end
