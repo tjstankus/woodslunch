@@ -22,6 +22,8 @@ gem 'rdiscount', '1.6.8'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
+  gem 'faker', '0.9.5'
   gem 'rspec-rails'
   gem 'capybara', '1.0.0.beta1'
+  gem 'factory_girl_rails', '1.1.beta1'
 end
