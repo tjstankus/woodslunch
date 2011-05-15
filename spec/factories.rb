@@ -12,4 +12,9 @@ FactoryGirl.define do
     role 'admin'
   end
 
+  factory :menu_item do
+  	name 'Grilled cheese'
+    price { MenuItem::DEFAULT_PRICE }
+  end
+
 end
