@@ -13,4 +13,8 @@ describe MenuItem do
   it 'sets default price attribute on new record' do
     MenuItem.new.price.should == MenuItem::DEFAULT_PRICE
   end
+
+  it 'builds a valid factory' do
+    FactoryGirl.build(:menu_item).should be_valid
+  end
 end
