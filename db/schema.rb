@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(:version => 20110514215024) do
     t.datetime "updated_at"
   end
 
+  add_index "menu_items", ["name"], :name => "index_menu_items_on_name", :unique => true
+
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
     t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
