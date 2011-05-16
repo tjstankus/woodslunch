@@ -9,7 +9,7 @@ FactoryGirl.define do
   end
 
   factory :admin, :parent => :user do
-    role 'admin'
+    roles { [:admin] }
   end
 
   factory :menu_item do
