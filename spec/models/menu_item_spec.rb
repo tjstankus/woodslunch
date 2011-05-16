@@ -10,7 +10,7 @@ describe MenuItem do
     it { should validate_uniqueness_of(:name).case_insensitive }
   end
 
-  context 'sets default price attribute on new record' do
+  it 'sets default price attribute on new record' do
     MenuItem.new.price.should == MenuItem::DEFAULT_PRICE
   end
 end
