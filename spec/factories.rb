@@ -2,7 +2,8 @@ FactoryGirl.define do
 
   factory :user do
     sequence :email do |n|
-      "#{Faker::Name.first_name}.#{Faker::Name.last_name}#{n}@example.com".
+      "#{Faker::Name.first_name}.#{Faker::Name.last_name}" + 
+      "-#{SecureRandom.hex(10)}#{n}@example.com".
         downcase
     end
     password 'secret'
