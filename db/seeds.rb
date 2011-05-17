@@ -6,8 +6,14 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-User.create(:email => 'user@example.com', :password => 'secret')
+if Rails.env.development?
+  User.find_or_create_by_email('user@example.com', :password => 'secret')
 
-u = User.new(:email => 'admin@example.com', :password => 'secret')
-u.roles = [:admin]
-u.save!
+  admin_email = 'admin@example.com'
+  unless User.find_by_email(admin_email)
+    User.new(:email => admin_email, :password => 'secret').tap do |u|
+      u.roles = [:admin]
+      u.save!
+    end
+  end
+end
