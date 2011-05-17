@@ -4,6 +4,8 @@ describe MenuItem do
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:price) }
   it { should validate_numericality_of(:price).with_message(/must be a number/) }
+  it { should have_many(:daily_menu_items) }
+  it { should have_many(:days_of_week).through(:daily_menu_items) }
 
   context 'given a saved menu item' do
     let!(:menu_item) { FactoryGirl.create(:menu_item) }

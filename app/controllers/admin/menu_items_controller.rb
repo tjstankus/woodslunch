@@ -5,5 +5,9 @@ module Admin
       @menu_items = MenuItem.all
     end
 
+    def new
+      @menu_item = MenuItem.new
+    end
+
   end
 end

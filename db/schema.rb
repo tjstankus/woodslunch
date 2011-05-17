@@ -10,7 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110514215024) do
+ActiveRecord::Schema.define(:version => 20110517024721) do
+
+  create_table "daily_menu_items", :force => true do |t|
+    t.integer  "day_of_week_id"
+    t.integer  "menu_item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "days_of_week", :force => true do |t|
+    t.string "name"
+  end
+
+  add_index "days_of_week", ["name"], :name => "index_days_of_week_on_name", :unique => true
 
   create_table "menu_items", :force => true do |t|
     t.string   "name"

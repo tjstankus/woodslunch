@@ -17,3 +17,7 @@ if Rails.env.development?
     end
   end
 end
+
+DayOfWeek::NAMES.each do |day_name|
+  DayOfWeek.find_or_create_by_name(day_name)
+end

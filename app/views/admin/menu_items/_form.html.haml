@@ -1,0 +1,18 @@
+= simple_form_for [:admin, @menu_item] do |f|
+
+  = f.error_notification
+
+  = f.input :name
+
+  = f.input :description, :required => false
+
+  = f.input :price, :as => :decimal, :label => 'Price $', 
+    :input_html => { :value => sprintf("%0.2f", @menu_item.price),
+    :size => 4 }
+
+  = f.association :days_of_week, :as => :check_boxes, 
+    :collection => DayOfWeek.weekdays, :label => 'Served on'
+
+  .actions
+    = f.submit
+

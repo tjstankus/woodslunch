@@ -4,6 +4,7 @@ gem 'rails', '3.0.7'
 
 gem 'sqlite3', '1.3.3'
 gem 'devise', '1.3.4'
+gem 'simple_form', '1.3.1'
 gem 'haml', '3.1.1'
 gem 'compass', '0.11.1'
 gem 'rdiscount', '1.6.8'
