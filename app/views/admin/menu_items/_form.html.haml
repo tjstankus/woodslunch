@@ -6,9 +6,7 @@
 
   = f.input :description, :required => false
 
-  = f.input :price, :as => :decimal, :label => 'Price $', 
-    :input_html => { :value => sprintf("%0.2f", @menu_item.price),
-    :size => 4 }
+  = f.input :price, :as => :string, :label => 'Price $', :input_html => { :value => sprintf("%0.2f", @menu_item.price), :size => 6 }
 
   = f.association :days_of_week, :as => :check_boxes, 
     :collection => DayOfWeek.weekdays, :label => 'Served on'

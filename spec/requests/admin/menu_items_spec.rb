@@ -39,10 +39,10 @@ describe 'Managing menu items' do
       visit new_admin_menu_item_path
     end
 
-    it 'prefills price field with default price' do
+    it 'prefills price field with default price presented as text/string ' do
       # Then the price field should be filled in
       page.should have_selector(:xpath, 
-          "//input[@type='number']" + 
+          "//input[@type='text']" + 
           "[@id='menu_item_price']" + 
           "[@value='4.00']")
     end
