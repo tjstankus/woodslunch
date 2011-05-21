@@ -1,3 +1,6 @@
+- content_for :javascripts do
+  = javascript_include_tag 'admin/menu_items.js'
+
 = simple_form_for [:admin, @menu_item] do |f|
 
   = f.error_notification
@@ -6,7 +9,7 @@
 
   = f.input :description, :required => false
 
-  = f.input :price, :as => :string, :label => 'Price $', :input_html => { :value => sprintf("%0.2f", @menu_item.price), :size => 6 }
+  = f.input :price, :as => :string, :label => 'Price', :input_html => { :value => sprintf("%0.2f", @menu_item.price), :size => 6 }
 
   = f.association :days_of_week, :as => :check_boxes, 
     :collection => DayOfWeek.weekdays, :label => 'Served on'

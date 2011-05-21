@@ -1,0 +1,19 @@
+form.simple_form {
+  div.input {
+    margin: 24px 0;
+  }
+  label {
+    display: block;
+  }
+  label.required abbr {
+    color: #f00;
+  }
+  div.check_boxes {
+    label.collection_check_boxes {
+      margin: 4px 0;
+      input.check_boxes {
+        margin: 0 5px;
+      }
+    }
+  }
+}

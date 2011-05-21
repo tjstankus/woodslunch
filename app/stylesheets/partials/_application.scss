@@ -27,6 +27,10 @@ body {
 }
 
 #wrapper {
+  background: {
+    image: url('/images/bg_wrapper.jpg');
+    repeat: repeat-y;
+  }
   height: auto !important;
   height: 100%;
   margin: 0 auto $neg_footer_height;
@@ -59,6 +63,9 @@ body {
 }
 
 #nav {
+  background: {
+    color: #1e0e02;
+  }
   height: $nav_height - $nav_link_padding_tb;
   padding: $nav_link_padding_tb $content_padding_lr 0 $content_padding_lr - $nav_link_padding_lr;
   a {
@@ -80,10 +87,9 @@ body {
 
 #content {
   background: {
-    color: #fbfaf6;
     image: url('/images/bg_content.jpg');
     repeat: no-repeat;
-  }
+  }  
   font: {
     family: 'Droid Serif';
     size: 16px;
@@ -91,9 +97,20 @@ body {
   line-height: 1.3;
   min-height: 463px;
   padding: $content_padding_tb $content_padding_lr;
-  
 }
 
 footer, .push {
+  background: {
+    color: #1e0e02;
+  }
   height: $footer_height;
+}
+
+h1 {
+  color: #9e5b28;
+  font: {
+    family: 'Droid Sans', arial, serif;
+    size: 24px;
+    weight: 400;
+  }
 }
