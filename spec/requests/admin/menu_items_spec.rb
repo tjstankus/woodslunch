@@ -2,11 +2,12 @@ require 'spec_helper'
 
 describe 'Managing menu items' do
 
-  let!(:menu_item) { FactoryGirl.create(:menu_item) }
+  let!(:daily_menu_item) { FactoryGirl.create(:daily_menu_item) }
+  let(:menu_item) { daily_menu_item.menu_item }
   let!(:admin) { FactoryGirl.create(:admin) }
   let!(:user) { FactoryGirl.create(:user) }
 
-  describe 'index listing' do
+  describe 'GET admin_menu_items_path' do
 
     context 'when logged in as an admin' do
       before(:each) do
@@ -31,7 +32,7 @@ describe 'Managing menu items' do
     end
   end
 
-  describe 'new menu item' do
+  describe 'GET new_admin_menu_item_path' do
     before(:each) do
       sign_in_as(admin)
 
@@ -62,7 +63,41 @@ describe 'Managing menu items' do
     end
   end
 
-  describe 'create menu item' do
+  describe 'POST admin_menu_items_path' do
+    before(:each) do
+      sign_in_as(admin)
 
+      # When I go to the new menu item page
+      visit new_admin_menu_item_path
+    end
+
+    it 'creates menu item' do
+      # When I fill in Name with "Tacos"
+      fill_in 'Name', :with => 'Tacos'
+
+      # And I check "Monday" for "Served on"
+      check 'Monday'
+
+      # And I press submit
+      click_button 'menu_item_submit'
+
+      # Then I should see the menu item listed under Monday
+      page.should have_xpath("//div[@id='monday']//a[text()='Tacos']")
+    end
+
+    context 'without a served on day' do
+      it 'displays menu item as unassigned to a day' do
+        pending 'regular create working'
+
+        # When I fill in Name with "Tacos"
+        fill_in 'Name', :with => 'Tacos'
+
+        # And I press submit
+        click_button 'menu_item_submit'
+
+        # Then I should see the menu item listed as unassigned to a day
+        page.should have_xpath("//div[contains(@class, 'unassigned')]//a[text()='Tacos']")
+      end
     end
   end
+end

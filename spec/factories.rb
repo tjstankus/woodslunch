@@ -18,4 +18,9 @@ FactoryGirl.define do
     price { MenuItem::DEFAULT_PRICE }
   end
 
+  factory :daily_menu_item do
+    association :menu_item
+    day_of_week { DayOfWeek.first }
+  end
+
 end

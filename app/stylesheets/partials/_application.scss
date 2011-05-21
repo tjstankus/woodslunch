@@ -106,11 +106,22 @@ footer, .push {
   height: $footer_height;
 }
 
-h1 {
+h1, h2 {
   color: #9e5b28;
   font: {
     family: 'Droid Sans', arial, serif;
+  }
+
+}
+h1 {
+  font: {
     size: 24px;
     weight: 400;
+  }
+}
+h2 {
+  font: {
+    size: 20px;
+    weight: 200;
   }
 }

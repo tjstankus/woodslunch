@@ -1,2 +1,8 @@
-- @menu_items.each do |menu_item|
-	%div[menu_item]= menu_item.name
+- @days.each do |day|
+  .menu_item_day{ :id => day.name.downcase }
+    %h2
+      = day.name.titlecase
+    - day.menu_items.each do |menu_item|
+      .menu_item
+        = link_to(menu_item.name, edit_admin_menu_item_path(menu_item))
+
