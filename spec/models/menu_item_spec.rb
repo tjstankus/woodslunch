@@ -19,4 +19,30 @@ describe MenuItem do
   it 'builds a valid factory' do
     FactoryGirl.build(:menu_item).should be_valid
   end
+
+  describe '.unassigned_to_day' do
+    
+    context 'given menu item records with no days of week assigned' do
+      
+      before(:each) do
+        @menu_items = [].tap do |a| 
+          3.times do |i|
+            a << FactoryGirl.create(:menu_item, :name => "Food Item #{i}")
+          end
+        end
+      end
+
+      it 'have empty #days_of_week collections' do
+        @menu_items.each { |menu_item| menu_item.days_of_week.should be_empty }
+      end
+
+      it 'returns those menu items' do
+        unassigned = MenuItem.unassigned_to_day
+        @menu_items.each do |menu_item|
+          unassigned.should include(menu_item)
+        end
+        unassigned.size.should == @menu_items.size 
+      end
+    end
+  end
 end

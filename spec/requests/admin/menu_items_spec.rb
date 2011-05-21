@@ -87,8 +87,6 @@ describe 'Managing menu items' do
 
     context 'without a served on day' do
       it 'displays menu item as unassigned to a day' do
-        pending 'regular create working'
-
         # When I fill in Name with "Tacos"
         fill_in 'Name', :with => 'Tacos'
 

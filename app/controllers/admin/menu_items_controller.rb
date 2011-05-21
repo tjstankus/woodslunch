@@ -3,6 +3,7 @@ module Admin
 
     def index
       @days = DayOfWeek.weekdays
+      @unassigned_menu_items = MenuItem.unassigned_to_day
     end
 
     def new

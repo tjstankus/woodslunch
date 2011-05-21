@@ -15,4 +15,8 @@ class MenuItem < ActiveRecord::Base
     self.price = DEFAULT_PRICE if self.new_record?
   end
 
+  def self.unassigned_to_day
+    where("id not in (select menu_item_id from daily_menu_items)")
+  end
+
 end
