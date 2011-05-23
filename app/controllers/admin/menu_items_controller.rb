@@ -21,5 +21,20 @@ module Admin
       end
     end
 
+    def edit
+      @menu_item = MenuItem.find(params[:id])
+    end
+
+    def update
+      @menu_item = MenuItem.find(params[:id])
+
+      if @menu_item.update_attributes(params[:menu_item])
+        redirect_to(admin_menu_items_path, 
+                    :notice => 'Menu item was successfully updated.')
+      else
+        render :action => 'edit'
+      end
+    end
+
   end
 end

@@ -8,4 +8,7 @@ module SessionHelpers
     page.should have_xpath('//div[@id="notice"]', :text => 'Signed in successfully.')
   end
 
+  def sign_out
+    visit destroy_user_session_path
+  end
 end

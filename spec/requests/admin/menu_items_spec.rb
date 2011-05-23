@@ -1,19 +1,19 @@
 require 'spec_helper'
 
-describe 'Managing menu items' do
+describe 'Menu items' do
 
   let!(:daily_menu_item) { FactoryGirl.create(:daily_menu_item) }
   let(:menu_item) { daily_menu_item.menu_item }
   let!(:admin) { FactoryGirl.create(:admin) }
   let!(:user) { FactoryGirl.create(:user) }
 
-  describe 'GET admin_menu_items_path' do
+  before(:each) do
+    sign_in_as(admin)
+  end
+
+  describe 'GET index listing' do
 
     context 'when logged in as an admin' do
-      before(:each) do
-        sign_in_as(admin)   
-      end
-
       it 'displays menu items' do
         visit admin_menu_items_path 
         page.should have_content(menu_item.name)
@@ -22,6 +22,7 @@ describe 'Managing menu items' do
 
     context 'when logged in as a regular user' do
       before(:each) do
+        sign_out
         sign_in_as(user)
       end
 
@@ -32,10 +33,9 @@ describe 'Managing menu items' do
     end
   end
 
-  describe 'GET new_admin_menu_item_path' do
-    before(:each) do
-      sign_in_as(admin)
+  describe 'GET new' do
 
+    before(:each) do
       # When I go to the new menu item page
       visit new_admin_menu_item_path
     end
@@ -63,10 +63,9 @@ describe 'Managing menu items' do
     end
   end
 
-  describe 'POST admin_menu_items_path' do
-    before(:each) do
-      sign_in_as(admin)
+  describe 'POST create' do
 
+    before(:each) do
       # When I go to the new menu item page
       visit new_admin_menu_item_path
     end
@@ -96,6 +95,25 @@ describe 'Managing menu items' do
         # Then I should see the menu item listed as unassigned to a day
         page.should have_xpath("//div[contains(@class, 'unassigned')]//a[text()='Tacos']")
       end
+    end
+  end
+
+  describe 'PUT update' do
+
+    it 'changes name of menu item' do
+      # Given a daily menu item
+
+      # When I go to the edit menu item page
+      visit edit_admin_menu_item_path(menu_item)
+
+      # And I change the menu item name to "Banana split"
+      fill_in 'menu_item_name', :with => 'Banana split'
+
+      # And I press submit
+      click_button 'menu_item_submit'
+
+      # Then I should see a menu item named "Banana split"
+      page.should have_xpath("//a[text()='Banana split']")
     end
   end
 end

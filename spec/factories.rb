@@ -2,8 +2,9 @@ FactoryGirl.define do
 
   factory :user do
     sequence :email do |n|
+      # WTF do I need to do to ensure uniqueness
       "#{Faker::Name.first_name}.#{Faker::Name.last_name}" + 
-      "-#{SecureRandom.hex(10)}#{n}@example.com".
+      "-#{SecureRandom.hex(4)}#{rand(10000)}#{n}@example.com".
         downcase
     end
     password 'secret'
