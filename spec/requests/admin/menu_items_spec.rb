@@ -116,4 +116,14 @@ describe 'Menu items' do
       page.should have_xpath("//a[text()='Banana split']")
     end
   end
+
+
+  describe 'DELETE destroy' do
+    
+    it 'redirects to index'
+    
+    it 'displays flash notice'
+
+    it 'destroys record'
+  end
 end

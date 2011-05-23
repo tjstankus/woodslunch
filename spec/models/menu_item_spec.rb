@@ -45,4 +45,27 @@ describe MenuItem do
       end
     end
   end
+
+  describe '#destroy' do
+
+    let!(:daily_menu_item) { Factory(:daily_menu_item) }
+    let!(:menu_item) { daily_menu_item.menu_item }
+    
+    it 'removes record from database' do
+      id = menu_item.id
+      menu_item.destroy
+      lambda {
+        MenuItem.find(id)
+      }.should raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it 'destroys associated daily_menu_items' do
+      menu_item.daily_menu_items.should include(daily_menu_item)
+      id = daily_menu_item.id
+      menu_item.destroy
+      lambda {
+        DailyMenuItem.find(id)
+      }.should raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
 end
