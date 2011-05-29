@@ -1,0 +1,2 @@
+- Style title bar area in admin.
+- Figure out email validation errors when running specs. I suspect uniqueness, but not sure.
