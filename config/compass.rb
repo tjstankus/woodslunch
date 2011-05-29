@@ -1,3 +1,5 @@
+require 'fancy-buttons'
+
 # This configuration file works with both the Compass command line tool and within Rails.
 # Require any additional compass plugins here.
 project_type = :rails
@@ -39,3 +41,4 @@ Rails.configuration.middleware.insert_before('Rack::Sendfile', 'Sass::Plugin::Ra
 
 Rails.configuration.middleware.insert_before('Rack::Sendfile', 'Rack::Static',
   :urls => ['/stylesheets'], :root => "#{Rails.root}/tmp")
+

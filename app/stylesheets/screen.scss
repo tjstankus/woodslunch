@@ -3,8 +3,12 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
+$fb-dark-text: #9e5b28;
+
 @import "compass";
 @import "compass/reset";
+@import 'fancy-buttons';
 @import "partials/application";
 @import "partials/forms";
 @import "partials/admin";
+

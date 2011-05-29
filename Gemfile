@@ -7,6 +7,7 @@ gem 'devise', '1.3.4'
 gem 'simple_form', '1.3.1'
 gem 'haml', '3.1.1'
 gem 'compass', '0.11.1'
+gem 'fancy-buttons', '1.1.1'
 gem 'rdiscount', '1.6.8'
 gem 'role_model', '0.7.0'
 
