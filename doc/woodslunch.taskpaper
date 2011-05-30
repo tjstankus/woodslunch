@@ -1,2 +1,8 @@
-- Style title bar area in admin.
+- Style title bar area in admin. @done
+- Seed menu items data from current menu @done
+- Finish menu items
+- Admin landing page
+- Orders
+- Parent landing page
+- Accounts
 - Figure out email validation errors when running specs. I suspect uniqueness, but not sure.
