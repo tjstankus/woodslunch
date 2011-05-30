@@ -1,0 +1,7 @@
+.actions
+  - if @menu_item.new_record?
+    = f.submit('Create Menu Item')
+  - else
+    = f.submit('Update Menu Item')
+    = link_to('Delete', admin_menu_item_path, :method => :delete, 
+      :confirm => 'Are you sure?', :class => 'delete')

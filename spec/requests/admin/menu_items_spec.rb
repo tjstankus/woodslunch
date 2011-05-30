@@ -81,7 +81,8 @@ describe 'Menu items' do
       click_button 'menu_item_submit'
 
       # Then I should see the menu item listed under Monday
-      page.should have_xpath("//div[@id='monday']//a[text()='Tacos']")
+      page.should have_xpath("//div[@id='monday']" + 
+        "//span[@class='menu_item_name']", :text => 'Tacos')
     end
 
     context 'without a served on day' do
@@ -113,15 +114,16 @@ describe 'Menu items' do
       click_button 'menu_item_submit'
 
       # Then I should see a menu item named "Banana split"
-      page.should have_xpath("//a[text()='Banana split']")
+      page.should have_xpath("//span[@class='menu_item_name']", 
+        :text => 'Banana split')
     end
   end
 
 
   describe 'DELETE destroy' do
     
-    it 'redirects to index'
-    
+    it 'redirects to index'    
+
     it 'displays flash notice'
 
     it 'destroys record'

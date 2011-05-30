@@ -22,6 +22,7 @@ group :development, :test do
   gem 'faker', '0.9.5'
   gem 'rspec-rails'
   gem 'capybara', '1.0.0.beta1'
+  gem 'launchy'
   gem 'factory_girl_rails', '1.1.beta1'
   gem 'shoulda', '2.11.3'
 end

@@ -36,5 +36,9 @@ module Admin
       end
     end
 
+    def destroy
+      
+    end
+
   end
 end

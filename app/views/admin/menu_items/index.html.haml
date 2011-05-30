@@ -7,12 +7,10 @@
     %h2.day_name
       = day.name.titlecase
     - day.menu_items.each do |menu_item|
-      .menu_item{:class => cycle('odd', 'even')}
-        = menu_item.name
+      %div[menu_item]{:class => cycle('odd', 'even')}
+        %span.menu_item_name= menu_item.name
         %span.actions
           = link_to('Edit', edit_admin_menu_item_path(menu_item))
-          = link_to('Delete', admin_menu_item_path(menu_item), 
-            :method => :delete, :confirm => 'Are you sure?')
 
 %h2 Not assigned to a day
 - @unassigned_menu_items.each do |menu_item|
