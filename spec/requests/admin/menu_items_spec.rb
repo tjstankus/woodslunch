@@ -121,11 +121,40 @@ describe 'Menu items' do
 
 
   describe 'DELETE destroy' do
+
+    before(:each) do
+      # Given a daily menu item
+
+      # When I go to the edit menu item page
+      visit edit_admin_menu_item_path(menu_item)
+    end
     
-    it 'redirects to index'    
+    it 'redirects to index', :wip => true do
+      # And I click the 'Delete' link 
+      click_link 'Delete'
 
-    it 'displays flash notice'
+      # Then I should be back on the admin menu items index page
+      current_path.should == admin_menu_items_path
+    end
 
-    it 'destroys record'
+    it 'displays flash notice' do
+      name = menu_item.name
+
+      # And I click the 'Delete' link 
+      click_link 'Delete'
+
+      # Then I should see a flash message displayed
+      page.should have_xpath("//div[@id='notice']", 
+        :text => "Successfully deleted #{name}.")
+   end
+
+    it 'destroys record' do
+      # And I click the 'Delete' link 
+      # Then the menu item should be destroyed
+      lambda {
+        click_link 'Delete'
+      }.should change{ MenuItem.count }.by(-1)
+    end
+
   end
 end
