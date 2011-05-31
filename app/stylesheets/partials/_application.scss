@@ -125,3 +125,17 @@ h2 {
     weight: 200;
   }
 }
+
+.flash {
+  padding: 5px;
+  margin: 0 0 8px 0;
+}
+.flash#notice {
+  background-color: #79a786;
+  border: 1px solid #425b49;
+}
+.flash#alert {
+  background-color: #feb5b5;
+  border: 1px solid #b20000;
+}
+
