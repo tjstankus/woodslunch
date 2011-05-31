@@ -107,6 +107,18 @@ footer, .push {
   height: $footer_height;
 }
 
+#footer_content {
+  margin: 0 auto;
+  min-height: 20px;
+  padding: 5px;
+  width: $wrapper_width - 10px;
+  span#signed_in_as {
+    color: #ae8260;
+    float: right;
+    font-size: 16px;
+  }
+}
+
 h1, h2 {
   color: #9e5b28;
   font: {
@@ -138,4 +150,5 @@ h2 {
   background-color: #feb5b5;
   border: 1px solid #b20000;
 }
+
 

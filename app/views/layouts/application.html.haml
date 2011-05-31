@@ -24,3 +24,7 @@
       .push
         <!-- sticky footer push -->
     %footer
+      #footer_content
+        - if user_signed_in?
+          %span#signed_in_as= "Signed in as #{current_user.email}"
+
