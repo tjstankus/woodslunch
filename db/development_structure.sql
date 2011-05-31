@@ -1,6 +1,7 @@
 CREATE TABLE "daily_menu_items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "day_of_week_id" integer, "menu_item_id" integer, "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "days_of_week" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255));
 CREATE TABLE "menu_items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "price" decimal(5,2), "created_at" datetime, "updated_at" datetime);
+CREATE TABLE "ordered_menu_items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "menu_item_id" integer, "order_id" integer, "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "orders" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "served_on" date, "student_id" integer, "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL);
 CREATE TABLE "students" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "grade" varchar(255), "created_at" datetime, "updated_at" datetime);
@@ -21,3 +22,5 @@ INSERT INTO schema_migrations (version) VALUES ('20110517024721');
 INSERT INTO schema_migrations (version) VALUES ('20110531114523');
 
 INSERT INTO schema_migrations (version) VALUES ('20110531120356');
+
+INSERT INTO schema_migrations (version) VALUES ('20110531121058');
