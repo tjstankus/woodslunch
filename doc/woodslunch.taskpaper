@@ -5,6 +5,7 @@
 	- Form button should be styled with fancy buttons. @done
 	- Delete should be available from the edit menu item page only. It should be a button styled with red. @done
 - Style better flash messages. They shouldn't exist in DOM unless there's a flash message for that type.
+- Home page
 - Admin landing page
 - Orders
 - Parent landing page
