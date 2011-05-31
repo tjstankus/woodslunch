@@ -24,4 +24,10 @@ FactoryGirl.define do
     day_of_week { DayOfWeek.first }
   end
 
+  factory :student do
+    first_name 'John'
+    last_name 'Doe'
+    grade '1'
+  end
+
 end
