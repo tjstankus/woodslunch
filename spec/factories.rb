@@ -1,12 +1,12 @@
 FactoryGirl.define do
 
+  sequence :email do |n|
+    "#{Faker::Name.first_name}.#{Faker::Name.last_name}#{n}@example.com".
+      downcase
+  end
+
   factory :user do
-    sequence :email do |n|
-      # WTF do I need to do to ensure uniqueness
-      "#{Faker::Name.first_name}.#{Faker::Name.last_name}" + 
-      "-#{SecureRandom.hex(4)}#{rand(10000)}#{n}@example.com".
-        downcase
-    end
+    email
     password 'secret'
   end
 
@@ -25,9 +25,10 @@ FactoryGirl.define do
   end
 
   factory :student do
-    first_name 'John'
-    last_name 'Doe'
-    grade '1'
+    association :user
+    first_name Faker::Name.first_name
+    last_name Faker::Name.last_name
+    grade Student::GRADES.sample
   end
 
 end

@@ -5,7 +5,7 @@ describe 'Menu items' do
   let!(:daily_menu_item) { FactoryGirl.create(:daily_menu_item) }
   let(:menu_item) { daily_menu_item.menu_item }
   let!(:admin) { FactoryGirl.create(:admin) }
-  let!(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user) }
 
   before(:each) do
     sign_in_as(admin)

@@ -19,6 +19,7 @@ gem 'role_model', '0.7.0'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
+  gem 'database_cleaner', '0.6.7'
   gem 'faker', '0.9.5'
   gem 'rspec-rails'
   gem 'capybara', '1.0.0.beta1'
