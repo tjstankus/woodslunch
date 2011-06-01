@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   include RoleModel
   roles :admin
 
+  has_many :students
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, 
   # :registerable, :timeoutable, and :omniauthable

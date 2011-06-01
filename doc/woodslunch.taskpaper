@@ -10,6 +10,6 @@
 - Parent landing page
 - Accounts
 - Figure out email validation errors when running specs. I suspect uniqueness, but not sure.
-
-Orders:
+- Preseter gem
+Student Orders:
 	

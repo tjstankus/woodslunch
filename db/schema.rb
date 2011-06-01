@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20110531121058) do
   end
 
   create_table "students", :force => true do |t|
+    t.integer  "user_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "grade"
