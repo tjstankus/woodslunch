@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe 'Student orders' do
-  
-  context 'a signed in user with associated student' do
 
-    let!(:student) { FactoryGirl.create(:student) }
-    let!(:user) { student.user }
+  let(:student) { FactoryGirl.create(:student) }
+  let(:user) { student.user }
+
+  context 'a signed in user with associated student' do
 
     before(:each) do
       # Given I am signed in
@@ -24,5 +24,28 @@ describe 'Student orders' do
     end
     
     it 'cannot view student order form for unassociated student'
+  end
+
+  describe 'GET /students/:student_id/:year/:month' do
+
+    let(:month) { '5' }
+    let(:year) { '2011' }
+
+    before(:each) do
+      visit student_order_path(student, :year => year, :month => month)
+    end
+    
+    it 'displays month' do
+      page.should have_xpath("//h3[@id='month_year'][text()[contains(.,'#{month}')]]")
+    end
+
+    it 'displays year' do
+      page.should have_xpath("//h3[@id='month_year'][text()[contains(.,'#{year}')]]")
+    end
+
+    it 'displays student name' do
+      page.should have_xpath("//h2[@id='student_name']" + 
+        "[text()[contains(.,'#{student.name}')]]")
+    end
   end
 end
