@@ -5,12 +5,12 @@ describe 'Student orders' do
   let(:student) { FactoryGirl.create(:student) }
   let(:user) { student.user }
 
-  context 'a signed in user with associated student' do
+  before(:each) do
+    # Given I am signed in
+    sign_in_as(user)
+  end
 
-    before(:each) do
-      # Given I am signed in
-      sign_in_as(user)
-    end
+  context 'a signed in user with associated student' do
 
     it 'views order form for that student' do
       # When I go to the home page
@@ -23,7 +23,25 @@ describe 'Student orders' do
       page.should have_content(student.name)
     end
     
-    it 'cannot view student order form for unassociated student'
+    it 'cannot view student order form for unassociated student' do
+      pending
+      # TODO: Implement similar to verify_admin
+    end
+  end
+
+  describe 'when not signed in' do
+    
+    before(:each) do
+      sign_out
+    end
+
+    describe 'GET /students/:student_id/:year/:month' do
+
+      it 'redirects to sign in page' do
+        visit student_orders_path(student, :year => '2011', :month => '4') 
+        current_path.should == new_user_session_path
+      end
+    end
   end
 
   describe 'GET /students/:student_id/:year/:month' do
@@ -32,7 +50,7 @@ describe 'Student orders' do
     let(:year) { '2011' }
 
     before(:each) do
-      visit student_order_path(student, :year => year, :month => month)
+      visit student_orders_path(student, :year => year, :month => month)
     end
     
     it 'displays month' do
@@ -52,6 +70,15 @@ describe 'Student orders' do
       DayOfWeek.weekdays.collect(&:name).each do |day|
         page.should have_content(day)
       end
+    end
+
+    context 'given a menu item served on Mondays' do
+      let(:daily_menu_item) { 
+        FactoryGirl.create(:daily_menu_item, 
+          :day_of_week => DayOfWeek.find_by_name('Monday'))
+      }
+
+      
     end
   end
 end

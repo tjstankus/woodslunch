@@ -5,7 +5,7 @@ Woodslunch::Application.routes.draw do
   devise_for :users
 
   match '/students/:student_id/orders/:year/:month' => 'student_orders#edit',
-    :as => :student_order
+    :as => :student_orders
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
