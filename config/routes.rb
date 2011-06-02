@@ -4,6 +4,9 @@ Woodslunch::Application.routes.draw do
 
   devise_for :users
 
+  match '/students/:student_id/order/:year/:month' => 'student_orders#edit',
+    :as => :student_order
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
