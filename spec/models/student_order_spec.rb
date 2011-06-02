@@ -73,4 +73,20 @@ describe StudentOrder do
       end
     end
   end
+
+  describe '#first_date_of_month' do
+    
+    let(:month) { '4' }
+    let(:year) { '2011' }
+
+    before(:each) do
+      student_order.stub(:month).and_return(month)
+      student_order.stub(:year).and_return(year)
+    end
+
+    it 'returns a Date object for the first day of the month' do
+      expected_date = Date.civil(year.to_i, month.to_i, 1)
+      student_order.first_date_of_month.should == expected_date
+    end
+  end
 end

@@ -15,7 +15,8 @@ describe Student do
 
     invalid_grades = %w(foo bar 0 13)
     invalid_grades.each do |invalid_grade|
-      FactoryGirl.build(:student, :grade => invalid_grade).should_not be_valid
+      FactoryGirl.build(:student, :grade => invalid_grade, :user => nil).
+        should_not be_valid
     end
   end
 

@@ -20,4 +20,7 @@ class StudentOrder
     @student ||= Student.find(student_id)
   end
 
+  def first_date_of_month
+    Date.civil(year.to_i, month.to_i, 1)
+  end
 end

@@ -36,7 +36,7 @@ describe 'Student orders' do
     end
     
     it 'displays month' do
-      page.should have_xpath("//h3[@id='month_year'][text()[contains(.,'#{month}')]]")
+      page.should have_xpath("//h3[@id='month_year'][text()[contains(.,'May')]]")
     end
 
     it 'displays year' do
@@ -46,6 +46,12 @@ describe 'Student orders' do
     it 'displays student name' do
       page.should have_xpath("//h2[@id='student_name']" + 
         "[text()[contains(.,'#{student.name}')]]")
+    end
+
+    it 'displays weekdays' do
+      DayOfWeek.weekdays.collect(&:name).each do |day|
+        page.should have_content(day)
+      end
     end
   end
 end
