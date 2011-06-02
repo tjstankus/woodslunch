@@ -89,4 +89,36 @@ describe StudentOrder do
       student_order.first_date_of_month.should == expected_date
     end
   end
+
+  describe '#orders_by_weekday' do
+    it 'returns an array of arrays' do
+      orders_by_weekday = student_order.orders_by_weekday
+      orders_by_weekday.should be_an(Array)
+      orders_by_weekday.first.should be_an(Array)
+    end
+
+    context 'given a Friday as the first day of the month' do
+      let(:month) { '4' }
+      let(:year) { '2011' }
+      let(:params) { {'student_id' => student.id, 
+                      'year' => year, 
+                      'month' => month} }
+      let(:student_order) { 
+        StudentOrder.new(params)
+      }
+
+      context 'the array representing the first week of the month' do
+
+        let(:week) { student_order.orders_by_weekday.first }
+
+        it 'has nils as its first four items' do
+          (0..3).each { |i| week[i].should be_nil }
+        end
+
+        it 'has an Order as its last item' do
+          week.last.should be_an(Order)
+        end
+      end
+    end
+  end
 end
