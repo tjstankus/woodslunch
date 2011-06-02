@@ -1,7 +1,6 @@
 - if user_signed_in?
   - current_user.students.each do |student|
-    = link_to("Lunch order for #{student.name}", student_order_path(student, 
-      :year => Date.today.year, :month => Date.today.month))
+    = link_to_current_student_order(student)
 - else
   :markdown
     Welcome to the [Woods Charter School](http://woodscharter.org/) lunch ordering

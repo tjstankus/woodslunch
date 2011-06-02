@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StudentOrder do
+describe 'Student orders' do
   
   context 'a signed in user with associated student' do
 
@@ -12,14 +12,17 @@ describe StudentOrder do
       sign_in_as(user)
     end
 
-    it 'should be able to view order form for that student' do
+    it 'views order form for that student' do
       # When I go to the home page
       visit root_path
 
       # And I click on the student order link
       click_on "Lunch order for #{student.name}"
+
+      # Then I should see the order form for that student
+      page.should have_content(student.name)
     end
     
-    it 'should not be able to view student order form for unassociated student'
+    it 'cannot view student order form for unassociated student'
   end
 end
