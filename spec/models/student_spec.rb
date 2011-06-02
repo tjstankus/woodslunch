@@ -10,7 +10,7 @@ describe Student do
     
     valid_grades = %w(K 1 2 3 4 5 6 7 8 9 10 11 12)
     valid_grades.each do |grade|
-      FactoryGirl.build(:student, :grade => grade).should be_valid
+      FactoryGirl.build(:student, :grade => grade, :user => nil).should be_valid
     end
 
     invalid_grades = %w(foo bar 0 13)
@@ -23,7 +23,8 @@ describe Student do
     it 'returns first and last name' do
       student = FactoryGirl.build(:student, 
                                   :first_name => 'Jane', 
-                                  :last_name => 'Doe')
+                                  :last_name => 'Doe',
+                                  :user => nil)
       student.name.should == 'Jane Doe'
     end
   end

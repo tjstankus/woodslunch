@@ -1,12 +1,10 @@
 FactoryGirl.define do
 
-  sequence :email do |n|
-    "#{Faker::Name.first_name}.#{Faker::Name.last_name}#{n}@example.com".
-      downcase
-  end
-
   factory :user do
-    email
+    sequence :email do |n|
+      "#{Faker::Name.first_name}.#{Faker::Name.last_name}#{n}@example.com".
+        downcase
+    end
     password 'secret'
   end
 
