@@ -12,4 +12,5 @@
 - Figure out email validation errors when running specs. I suspect uniqueness, but not sure.
 - Preseter gem
 Student Orders:
-	
+	- Get current failing specs (left on purpose) passing. @next
+	- Setup student seed data so that I can test orders manually in the browser.

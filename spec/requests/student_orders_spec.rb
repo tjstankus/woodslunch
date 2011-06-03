@@ -49,24 +49,24 @@ describe 'Student orders' do
     let(:month) { '5' }
     let(:year) { '2011' }
 
-    before(:each) do
-      visit student_orders_path(student, :year => year, :month => month)
-    end
-    
     it 'displays month' do
+      visit student_orders_path(student, :year => year, :month => month)
       page.should have_xpath("//h3[@id='month_year'][text()[contains(.,'May')]]")
     end
 
     it 'displays year' do
+      visit student_orders_path(student, :year => year, :month => month)
       page.should have_xpath("//h3[@id='month_year'][text()[contains(.,'#{year}')]]")
     end
 
     it 'displays student name' do
+      visit student_orders_path(student, :year => year, :month => month)
       page.should have_xpath("//h2[@id='student_name']" + 
         "[text()[contains(.,'#{student.name}')]]")
     end
 
     it 'displays weekdays' do
+      visit student_orders_path(student, :year => year, :month => month)
       DayOfWeek.weekdays.collect(&:name).each do |day|
         page.should have_content(day)
       end
@@ -78,7 +78,10 @@ describe 'Student orders' do
           :day_of_week => DayOfWeek.find_by_name('Monday'))
       }
 
-      
+      it 'displays the menu item on each Monday'  do
+        
+      end
+
     end
   end
 end

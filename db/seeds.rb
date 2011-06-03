@@ -9,7 +9,7 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
 if Rails.env.development?
-  User.find_or_create_by_email('user@example.com', :password => 'secret')
+  user = User.find_or_create_by_email('user@example.com', :password => 'secret')
 
   admin_email = 'admin@example.com'
   unless User.find_by_email(admin_email)
@@ -18,6 +18,10 @@ if Rails.env.development?
       u.save!
     end
   end
+
+  student = Student.find_or_create_by_first_name_and_last_name_and_grade('John', 'Doe', 'K')
+  student.user = user
+  student.save!
 end
 
 DayOfWeek::NAMES.each do |day_name|

@@ -29,4 +29,8 @@ FactoryGirl.define do
     grade Student::GRADES.sample
   end
 
+  factory :order do
+    association :student
+    served_on { Date.civil(2011, 4, 1) }
+  end
 end

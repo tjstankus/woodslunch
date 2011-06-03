@@ -1,8 +1,34 @@
 %h2#student_name= "Lunch order for #{@student_order.student.name}"
 %h3#month_year= @student_order.first_date_of_month.strftime("%B %Y")
 
-%table#student_order{ :cellpadding => '0', :cellspacing => '0' }
-  %tr
-    - DayOfWeek.weekdays.each do |day|
-      %th= day.name
+= simple_form_for(@student_order) do |f|
+  %table#student_order{ :cellpadding => '0', :cellspacing => '0' }
+    %tr
+      - DayOfWeek.weekdays.each do |day|
+        %th= day.name
 
+    - order_index = 0
+    - @student_order.orders_by_weekday.each do |week|
+      %tr
+        - week.each do |order|
+          - if order
+            - day = order.served_on.day
+            %td{:id => day.to_s}
+              %span.mday= day
+              = simple_fields_for("student_order[orders[#{order_index}]]", order) do |order_fields|
+                = order_fields.association(:menu_items,
+                  :as => :check_boxes,
+                  :label => false,
+                  :collection => order.available_menu_items)
+
+                = order_fields.input(:served_on, 
+                  :as => :string, 
+                  :label => false,
+                  :input_html => { :style => 'display:none' })
+
+                = order_fields.input(:student_id, :as => :hidden)
+              - order_index += 1
+          - else
+            %td.empty
+              != '&nbsp;'
+  = f.submit
