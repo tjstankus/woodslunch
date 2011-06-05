@@ -10,7 +10,11 @@
 - Parent landing page
 - Accounts
 - Figure out email validation errors when running specs. I suspect uniqueness, but not sure.
-- Preseter gem
+- Presenter gem
 Student Orders:
-	- Get current failing specs (left on purpose) passing. @next
-	- Setup student seed data so that I can test orders manually in the browser.
+	- Get current failing specs (left on purpose) passing. @done
+	- Setup student seed data so that I can test orders manually in the browser. @done
+	- Get query parameter url working.
+Admin:
+	- Define holidays
+	- Define date ranges like Summer Vacation, Winter Vacation, or Fall Break. Perhaps a day off is a range with the same starts_on and ends_on date.

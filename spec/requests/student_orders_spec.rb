@@ -38,35 +38,35 @@ describe 'Student orders' do
     describe 'GET /students/:student_id/:year/:month' do
 
       it 'redirects to sign in page' do
-        visit student_orders_path(student, :year => '2011', :month => '4') 
+        visit edit_student_order_path(student, :year => '2011', :month => '4') 
         current_path.should == new_user_session_path
       end
     end
   end
 
-  describe 'GET /students/:student_id/:year/:month' do
+  describe 'GET /students/:student_id/orders/:year/:month' do
 
     let(:month) { '5' }
     let(:year) { '2011' }
 
     it 'displays month' do
-      visit student_orders_path(student, :year => year, :month => month)
+      visit edit_student_order_path(student, :year => year, :month => month)
       page.should have_xpath("//h3[@id='month_year'][text()[contains(.,'May')]]")
     end
 
     it 'displays year' do
-      visit student_orders_path(student, :year => year, :month => month)
+      visit edit_student_order_path(student, :year => year, :month => month)
       page.should have_xpath("//h3[@id='month_year'][text()[contains(.,'#{year}')]]")
     end
 
     it 'displays student name' do
-      visit student_orders_path(student, :year => year, :month => month)
+      visit edit_student_order_path(student, :year => year, :month => month)
       page.should have_xpath("//*[@id='student_name']" + 
         "[text()[contains(.,'#{student.name}')]]")
     end
 
     it 'displays weekdays' do
-      visit student_orders_path(student, :year => year, :month => month)
+      visit edit_student_order_path(student, :year => year, :month => month)
       DayOfWeek.weekdays.collect(&:name).each do |day|
         page.should have_content(day)
       end
@@ -78,10 +78,38 @@ describe 'Student orders' do
           :day_of_week => DayOfWeek.find_by_name('Monday'))
       }
 
-      it 'displays the menu item on each Monday'  do
-        
+      it 'displays the menu item on each Monday'
+    end
+  end
+
+  describe 'POST /students/:student_id/orders' do
+ 
+    let(:month) { '6' }
+    let(:year) { '2011' }   
+
+    it 'creates an order' do
+      pending
+
+      # Given a menu item Hamburger served on Mondays
+      menu_item = FactoryGirl.create(:menu_item, :name => 'Hamburger')
+      FactoryGirl.create(:daily_menu_item, 
+        :menu_item => menu_item,
+        :day_of_week => DayOfWeek.find_by_name('Monday'))
+
+      # When I go to the student order form
+      visit edit_student_order_path(student, :year => year, :month => month)
+
+      # And I check Hamburger for the first Monday
+      within('td#6') do
+        check 'Hamburger'
       end
 
+      # And I click Place Order
+      click_button 'Place Order'
+
+      # Then I should see a successful order message
+      
+            
     end
   end
 end

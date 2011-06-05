@@ -4,10 +4,7 @@ Woodslunch::Application.routes.draw do
 
   devise_for :users
 
-  match '/students/:student_id/orders/:year/:month' => 'student_orders#edit',
-    :as => :student_orders
-
-  # Sample of regular route:
+    # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
@@ -35,6 +32,12 @@ Woodslunch::Application.routes.draw do
   #     resources :comments, :sales
   #     resource :seller
   #   end
+  
+  match '/students/:student_id/orders/:year/:month' => 'student_orders#edit',
+    :via => :get, :as => :edit_student_order
+  resources :students do
+    resources :orders, :controller => 'student_orders', :only => [:create]
+  end
 
   # Sample resource route with more complex sub-resources
   #   resources :products do
