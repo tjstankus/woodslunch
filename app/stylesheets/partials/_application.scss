@@ -151,4 +151,36 @@ h2 {
   border: 1px solid #b20000;
 }
 
+/* monthly order form */
+
+h2#student_name {
+  margin: 0 0 10px 0;
+}
+h3#month_year {
+  margin: 0 0 10px 0;
+}
+table#monthly_order {
+  border-collapse: collapse;
+}
+table#monthly_order th {
+  padding: 10px;
+  text-align: center;
+}
+table#monthly_order td {
+  border: 1px solid black;
+  font-size: 12px;
+  padding: 5px;
+  vertical-align: top;
+  width: 20%;
+  div.mday {
+    text-align: right;
+  }
+  div.check_boxes {
+    margin: 0;
+  }
+  label.collection_check_boxes {
+    display: block;
+    margin: 7px 0 0 0;
+  }
+}
 

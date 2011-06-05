@@ -2,7 +2,7 @@
 %h3#month_year= @student_order.first_date_of_month.strftime("%B %Y")
 
 = simple_form_for(@student_order) do |f|
-  %table#student_order{ :cellpadding => '0', :cellspacing => '0' }
+  %table#monthly_order{ :cellpadding => '0', :cellspacing => '0' }
     %tr
       - DayOfWeek.weekdays.each do |day|
         %th= day.name
@@ -14,7 +14,7 @@
           - if order
             - day = order.served_on.day
             %td{:id => day.to_s}
-              %span.mday= day
+              .mday= day
               = simple_fields_for("student_order[orders[#{order_index}]]", order) do |order_fields|
                 = order_fields.association(:menu_items,
                   :as => :check_boxes,
