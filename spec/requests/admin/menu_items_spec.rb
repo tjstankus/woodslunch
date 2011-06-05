@@ -4,11 +4,10 @@ describe 'Menu items' do
 
   let!(:daily_menu_item) { FactoryGirl.create(:daily_menu_item) }
   let(:menu_item) { daily_menu_item.menu_item }
-  let(:admin) { FactoryGirl.create(:admin) }
-  let(:user) { FactoryGirl.create(:user) }
 
   before(:each) do
-    sign_in_as(admin)
+    @admin = FactoryGirl.create(:admin)
+    sign_in_as(@admin)
   end
 
   describe 'GET index listing' do
@@ -23,7 +22,8 @@ describe 'Menu items' do
     context 'when logged in as a regular user' do
       before(:each) do
         sign_out
-        sign_in_as(user)
+        @user = FactoryGirl.create(:user)
+        sign_in_as(@user)
       end
 
       it 'redirects to the home page' do

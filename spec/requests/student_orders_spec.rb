@@ -61,7 +61,7 @@ describe 'Student orders' do
 
     it 'displays student name' do
       visit student_orders_path(student, :year => year, :month => month)
-      page.should have_xpath("//h2[@id='student_name']" + 
+      page.should have_xpath("//*[@id='student_name']" + 
         "[text()[contains(.,'#{student.name}')]]")
     end
 
