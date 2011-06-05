@@ -11,14 +11,14 @@ class StudentOrder
   validates :student_id, :presence => true
 
   def initialize(params)
-    @student_id = params['student_id'] || nil 
-    @year = params['year'] || Date.today.year
-    @month = params['month'] || Date.today.month
-    @orders = params['orders'] || nil
+    @orders = params['orders']
+    @student_id = params['student_id'] || student_id_from_orders
+    @year = params['year']
+    @month = params['month']
   end
 
   def student
-    @student ||= Student.find(student_id)
+    @student ||= Student.find(student_id || student_id_from_orders)
   end
 
     # Returns an array of arrays. Each nested array contains order objects for
@@ -90,4 +90,24 @@ class StudentOrder
     arr.last << Order.new(:student_id => student_id, :served_on => date)
   end
 
+  def save
+    return false unless orders
+    orders.each {|order| create_order(order)}
+  end
+
+  def student_id_from_orders
+    orders.first.last['student_id'] if orders
+  end
+
+  def create_order(order)
+    order_attributes = order.last
+    if order_has_selected_menu_items?(order_attributes)
+      Order.create!(order_attributes)
+    end
+  end
+
+  def order_has_selected_menu_items?(order_attributes)
+    order_attributes['menu_item_ids'] && 
+      order_attributes['menu_item_ids'].select{ |id| !id.empty? }.any?
+  end
 end

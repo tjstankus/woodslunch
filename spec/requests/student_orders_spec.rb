@@ -88,8 +88,6 @@ describe 'Student orders' do
     let(:year) { '2011' }   
 
     it 'creates an order' do
-      pending
-
       # Given a menu item Hamburger served on Mondays
       menu_item = FactoryGirl.create(:menu_item, :name => 'Hamburger')
       FactoryGirl.create(:daily_menu_item, 
@@ -107,8 +105,9 @@ describe 'Student orders' do
       # And I click Place Order
       click_button 'Place Order'
 
-      # Then I should see a successful order message
-      
+      # Then I should see a successful order flash message displayed
+      page.should have_xpath("//div[@id='notice']", 
+        :text => "Successfully placed order for #{student.name}")
             
     end
   end

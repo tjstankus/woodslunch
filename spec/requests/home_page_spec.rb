@@ -4,10 +4,9 @@ feature 'home page' do
 
   context 'given a logged in user' do
 
-    let(:user) { FactoryGirl.create(:user) }
-
     before(:each) do
-      sign_in_as(user)
+      @user = FactoryGirl.create(:user)
+      sign_in_as(@user)
     end
 
     it 'displays a logged in message' do
@@ -16,7 +15,7 @@ feature 'home page' do
     end
 
     it 'displays user account info' do
-      page.should have_xpath("//span[@id='signed_in_as']", :text => user.email)
+      page.should have_xpath("//span[@id='signed_in_as']", :text => @user.email)
     end
 
   end

@@ -46,8 +46,8 @@ describe StudentOrder do
 
     context 'without year in params' do
       
-      it 'returns current year' do
-        student_order.year.should == Date.today.year
+      it 'returns nil' do
+        student_order.year.should be_nil
       end
     end
   end
@@ -68,8 +68,8 @@ describe StudentOrder do
 
     context 'without month in params' do
       
-      it 'returns current month' do
-        student_order.month.should == Date.today.month
+      it 'returns nil' do
+        student_order.month.should be_nil
       end
     end
   end
@@ -91,6 +91,16 @@ describe StudentOrder do
   end
 
   describe '#orders_by_weekday' do
+
+    let(:month) { '4' }
+    let(:year) { '2011' }
+    let(:params) { {'student_id' => student.id, 
+                    'year' => year, 
+                    'month' => month} }
+    let(:student_order) { 
+      StudentOrder.new(params)
+    }
+
     it 'returns an array of arrays' do
       orders_by_weekday = student_order.orders_by_weekday
       orders_by_weekday.should be_an(Array)
@@ -98,16 +108,7 @@ describe StudentOrder do
     end
 
     context 'given a Friday as the first day of the month' do
-      let(:month) { '4' }
-      let(:year) { '2011' }
-      let(:params) { {'student_id' => student.id, 
-                      'year' => year, 
-                      'month' => month} }
-      let(:student_order) { 
-        StudentOrder.new(params)
-      }
-
-      context 'the array representing the first week of the month' do
+            context 'the array representing the first week of the month' do
 
         let(:week) { student_order.orders_by_weekday.first }
 
