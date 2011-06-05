@@ -13,7 +13,7 @@ FactoryGirl.define do
   end
 
   factory :menu_item do
-  	name 'Grilled cheese'
+    sequence(:name) {|n| "Menu item #{n}"}
     price { MenuItem::DEFAULT_PRICE }
   end
 
