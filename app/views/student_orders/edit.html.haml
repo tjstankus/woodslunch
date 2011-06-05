@@ -1,4 +1,4 @@
-%h2#student_name= "Lunch order for #{@student_order.student.name}"
+%h1#student_name= "Lunch order for #{@student_order.student.name}"
 %h3#month_year= @student_order.first_date_of_month.strftime("%B %Y")
 
 = simple_form_for(@student_order) do |f|
@@ -31,4 +31,5 @@
           - else
             %td.empty
               != '&nbsp;'
-  = f.submit
+  #monthly_order_info_actions
+    = f.submit "Place Order"

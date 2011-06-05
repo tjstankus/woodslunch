@@ -8,14 +8,17 @@
 }
 
 form.simple_form {
-  input[type="submit"], a {
-    margin: 0 20px 0 0;
-  }
   input[type="submit"] {
     @include fancy-button(#9E5B28, 13px);
   }
   a.delete {
     @include fancy-button(#ff0000, 13px);
+  }
+}
+
+form.simple_form.menu_item {
+  input[type="submit"], a {
+    margin: 0 15px 0 0;
   }
 }
 
@@ -29,7 +32,7 @@ form.simple_form {
     span.actions {
       float: right;
       a {
-        color: #425b49;
+        color: $soft_green;
         margin: 0 8px 0 0;
       }
     }
