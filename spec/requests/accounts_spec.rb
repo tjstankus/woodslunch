@@ -29,7 +29,8 @@ describe 'Accounts' do
       account.save!
 
       # When I go to the lunch order form
-      visit edit_student_order_path
+      # visit edit_student_order_path
+
       # And I place a lunch order for one item
       # Then my account balance should increment the cost of the item
     end

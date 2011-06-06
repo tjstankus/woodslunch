@@ -49,15 +49,15 @@ class StudentOrder
   def orders_by_weekday
     [].tap do |arr|
       first_date_of_month.upto(last_date_of_month) do |date|
+        if date.weekday?
+          arr << [] if start_new_array_for_week?(arr, date)
 
-        arr << [] if start_new_array_for_week?(arr, date)
+          prepend_nils_for_weekdays_before_first_of_month(arr, date)
+          
+          push_order(arr, date) 
 
-        prepend_nils_for_weekdays_before_first_of_month(arr, date)
-        
-        push_order(arr, date) if date.weekday?
-
-        append_nils_for_weekdays_after_last_of_month(arr, date)
-
+          append_nils_for_weekdays_after_last_of_month(arr, date)
+        end
       end
     end
   end

@@ -94,12 +94,8 @@ describe StudentOrder do
 
     let(:month) { '4' }
     let(:year) { '2011' }
-    let(:params) { {'student_id' => student.id, 
-                    'year' => year, 
-                    'month' => month} }
-    let(:student_order) { 
-      StudentOrder.new(params)
-    }
+    let(:params) {{'student_id' => student.id, 'year' => year, 'month' => month}}
+    let(:student_order) { StudentOrder.new(params) }
 
     it 'returns an array of arrays' do
       orders_by_weekday = student_order.orders_by_weekday
@@ -108,7 +104,8 @@ describe StudentOrder do
     end
 
     context 'given a Friday as the first day of the month' do
-            context 'the array representing the first week of the month' do
+
+      context 'the array representing the first week of the month' do
 
         let(:week) { student_order.orders_by_weekday.first }
 
@@ -118,6 +115,19 @@ describe StudentOrder do
 
         it 'has an Order as its last item' do
           week.last.should be_an(Order)
+        end
+      end
+    end
+
+    context 'given the first weekday starts in second week of month' do
+
+      let!(:month) {'5'}
+
+      context 'the array representing the first week of the month' do
+        
+        it 'should not contain all nils' do
+          orders_by_weekday = student_order.orders_by_weekday
+          orders_by_weekday.first.compact.should_not be_empty
         end
       end
     end

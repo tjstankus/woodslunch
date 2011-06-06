@@ -1,14 +1,5 @@
-- Style title bar area in admin. @done
-- Seed menu items data from current menu @done
-- Prettify menu items listing @done
-- Finish menu items @done
-	- Form button should be styled with fancy buttons. @done
-	- Delete should be available from the edit menu item page only. It should be a button styled with red. @done
-- Style better flash messages. They shouldn't exist in DOM unless there's a flash message for that type. @done(2011-05-30)
-- Home page
 - Admin landing page
-- Parent landing page
-- Accounts
+- Parent landing page (home page)
 - Figure out email validation errors when running specs. I suspect uniqueness, but not sure.
 - Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
 - Presenter gem
@@ -19,12 +10,21 @@ Accounts:
 		- Admin records a payment for this account.
 		- Payment model. Belongs to account with presence validation.
 Student Orders:
-	- Get current failing specs (left on purpose) passing. @done
-	- Setup student seed data so that I can test orders manually in the browser. @done
-	- Should not be able to duplicate an order, e.g., order a hamburger on Monday two times. @done
-	- Also need to be able to delete items by unchecking from existing order. @done
-	- Show ordered items as checked. @done
+	- @next Fix May display issue. Probably occurs due to the first week not including any weekdays.
 Admin:
 	- Define holidays
 	- Define date ranges like Summer Vacation, Winter Vacation, or Fall Break. Perhaps a day off is a range with the same starts_on and ends_on date.
 	- Order reports (by day)
+Archive:
+	- Style title bar area in admin. @done
+	- Seed menu items data from current menu @done
+	- Prettify menu items listing @done
+	- Finish menu items @done
+		- Form button should be styled with fancy buttons. @done
+		- Delete should be available from the edit menu item page only. It should be a button styled with red. @done
+	- Style better flash messages. They shouldn't exist in DOM unless there's a flash message for that type. @done(2011-05-30)
+	- Get current failing specs (left on purpose) passing. @done @project(Student Orders)
+	- Setup student seed data so that I can test orders manually in the browser. @done @project(Student Orders)
+	- Should not be able to duplicate an order, e.g., order a hamburger on Monday two times. @done @project(Student Orders)
+	- Also need to be able to delete items by unchecking from existing order. @done @project(Student Orders)
+	- Show ordered items as checked. @done @project(Student Orders)

@@ -94,11 +94,22 @@ describe 'Student orders' do
     context 'given an ordered menu item' do
       
       it 'should be checked'
+
+    end
+
+    context 'given a month with first weekday in second week' do
+ 
+      let(:month) { '5' }
+      let(:year) { '2011' }     
+
+      it 'does not display the first week' do
+
+      end
     end
   end
 
   describe 'POST /students/:student_id/orders' do
- 
+
     let(:month) { '6' }
     let(:year) { '2011' }   
 
@@ -122,8 +133,8 @@ describe 'Student orders' do
 
       # Then I should see a successful order flash message displayed
       page.should have_xpath("//div[@id='notice']", 
-        :text => "Successfully placed order for #{student.name}")
-            
+                             :text => "Successfully placed order for #{student.name}")
+
     end
   end
 end
