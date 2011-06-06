@@ -73,12 +73,22 @@ describe 'Student orders' do
     end
 
     context 'given a menu item served on Mondays' do
-      let(:daily_menu_item) { 
-        FactoryGirl.create(:daily_menu_item, 
-          :day_of_week => DayOfWeek.find_by_name('Monday'))
-      }
 
-      it 'displays the menu item on each Monday'
+      before(:each) do
+        @daily_menu_item = create_menu_item_served_on_day('Monday')
+        @menu_item = @daily_menu_item.menu_item
+      end
+
+      it 'displays the menu item on each Monday' do
+        visit edit_student_order_path(student, :year => year, :month => month)
+
+        ids_for_mondays = %w(2 9 16 23 30)
+        ids_for_mondays.each do |id|
+          within("td##{id}") do
+            page.should have_content(@menu_item.name)
+          end
+        end
+      end
     end
 
     context 'given an ordered menu item' do

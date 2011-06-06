@@ -28,6 +28,7 @@ RSpec.configure do |config|
   # config.use_transactional_fixtures = true
 
   config.include(SessionHelpers)
+  config.include(OrderHelpers)
 
   config.before(:all) do
     DayOfWeek::NAMES.each do |day_name|
