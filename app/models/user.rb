@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   include RoleModel
   roles :admin
 
+  belongs_to :account
   has_many :students
 
   # Include default devise modules. Others available are:

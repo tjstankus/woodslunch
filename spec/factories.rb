@@ -33,4 +33,8 @@ FactoryGirl.define do
     association :student
     served_on { Date.civil(2011, 4, 1) }
   end
+
+  factory :account do
+    balance 0
+  end
 end

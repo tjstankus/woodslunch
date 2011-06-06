@@ -12,13 +12,19 @@
 - Figure out email validation errors when running specs. I suspect uniqueness, but not sure.
 - Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
 - Presenter gem
+Accounts:
+	- Balance
+	- Live update balance on order form.
+	- Payment history (a separate model most likely).
+		- Admin records a payment for this account.
+		- Payment model. Belongs to account with presence validation.
 Student Orders:
 	- Get current failing specs (left on purpose) passing. @done
 	- Setup student seed data so that I can test orders manually in the browser. @done
-	- Get query parameter url working.
-	- Should not be able to duplicate an order, e.g., order a hamburger on Monday two times. Will need to check ordered_menu_item for student, menu_item, served_on
-	- Also need to be able to delete items by unchecking from existing order.
-	- Show ordered items as checked.
+	- Should not be able to duplicate an order, e.g., order a hamburger on Monday two times. @done
+	- Also need to be able to delete items by unchecking from existing order. @done
+	- Show ordered items as checked. @done
 Admin:
 	- Define holidays
 	- Define date ranges like Summer Vacation, Winter Vacation, or Fall Break. Perhaps a day off is a range with the same starts_on and ends_on date.
+	- Order reports (by day)

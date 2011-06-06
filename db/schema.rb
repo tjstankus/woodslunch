@@ -10,7 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110531121058) do
+ActiveRecord::Schema.define(:version => 20110606110845) do
+
+  create_table "accounts", :force => true do |t|
+    t.decimal  "balance",    :precision => 5, :scale => 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "daily_menu_items", :force => true do |t|
     t.integer  "day_of_week_id"
@@ -70,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20110531121058) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.integer  "roles_mask"
+    t.integer  "account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
