@@ -21,7 +21,7 @@ class StudentOrder
     @student ||= Student.find(student_id || student_id_from_orders)
   end
 
-    # Returns an array of arrays. Each nested array contains order objects for
+  # Returns an array of arrays. Each nested array contains order objects for
   # weekdays in the month. For example:
   #
   # [ [ mon_date_order, 
@@ -87,26 +87,37 @@ class StudentOrder
   end
 
   def push_order(arr, date)
-    arr.last << Order.new(:student_id => student_id, :served_on => date)
+    order = Order.find_by_student_id_and_served_on(student_id, date)
+    order_to_push = order || Order.new(:student_id => student_id,  
+      :served_on => date)
+    arr.last << order_to_push
   end
 
   def save
     return false unless orders
-    orders.each {|order| create_order(order)}
+    orders.each {|order| create_or_update_order(order)}
   end
 
   def student_id_from_orders
     orders.first.last['student_id'] if orders
   end
 
-  def create_order(order)
-    order_attributes = order.last
-    if order_has_selected_menu_items?(order_attributes)
-      Order.create!(order_attributes)
+  def create_or_update_order(order_params)
+    order_attributes = order_params.last
+    if order = existing_order(order_attributes)
+      order.update_attributes!(order_attributes)
+    elsif order_params_include_menu_items?(order_attributes)
+      Order.create!(order_attributes) # if order_attributes['menu_item_ids'].any?
     end
   end
 
-  def order_has_selected_menu_items?(order_attributes)
+  def existing_order(order_atts)
+    student_id = order_atts['student_id']
+    served_on = order_atts['served_on']
+    Order.find_by_student_id_and_served_on(student_id, served_on)
+  end
+
+  def order_params_include_menu_items?(order_attributes)
     order_attributes['menu_item_ids'] && 
       order_attributes['menu_item_ids'].select{ |id| !id.empty? }.any?
   end

@@ -52,4 +52,42 @@ describe Order do
       end
     end
   end
+
+  describe '#delete_if_no_menu_items' do
+
+    let!(:order) { FactoryGirl.create(:order) }    
+    let!(:id) { order.id }
+
+    before(:each) do
+      order.menu_items << FactoryGirl.create(:menu_item)
+      order.save!
+    end
+
+    context 'given no menu_items' do
+      
+      it 'destroys record' do
+        order.should have(1).menu_items
+        lambda {
+          order.update_attributes!(:menu_item_ids => [])
+        }.should change {Order.count}.by(-1)
+        lambda {
+          Order.find(id)
+        }.should raise_error(ActiveRecord::RecordNotFound)
+      end  
+    end
+    
+    context 'given menu items' do
+
+      it 'preserves record' do
+        menu_item = FactoryGirl.create(:menu_item)
+        ids = order.menu_item_ids << menu_item.id
+        lambda {
+          order.update_attributes!(:menu_item_ids => ids)
+        }.should_not change {Order.count}
+        lambda {
+          Order.find(id)
+        }.should_not raise_error
+      end
+    end
+  end
 end

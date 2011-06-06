@@ -80,6 +80,11 @@ describe 'Student orders' do
 
       it 'displays the menu item on each Monday'
     end
+
+    context 'given an ordered menu item' do
+      
+      it 'should be checked'
+    end
   end
 
   describe 'POST /students/:student_id/orders' do
