@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rake', '0.8.7'
 gem 'rails', '3.0.7'
+gem 'heroku', '2.2.4'
 
 gem 'sqlite3', '1.3.3'
 gem 'devise', '1.3.4'
