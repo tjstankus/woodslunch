@@ -8,11 +8,6 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-user = User.find_or_create_by_email("user@example.com", :password => 'secret')
-student = Student.find_or_create_by_first_name_and_last_name_and_grade('John', 'Doe', 'K')
-student.user = user
-student.save!
-
 admin_email = "admin@example.com"
 unless User.find_by_email(admin_email)
   User.new(:email => admin_email, :password => 'secret').tap do |u|
@@ -20,6 +15,11 @@ unless User.find_by_email(admin_email)
     u.save!
   end
 end
+
+user = User.find_or_create_by_email("user@example.com", :password => 'secret')
+student = Student.find_or_create_by_first_name_and_last_name_and_grade('John', 'Doe', 'K')
+student.user = user
+student.save!
 
 (1..5).each do |i|
   user_email = "user#{i}@example.com"
