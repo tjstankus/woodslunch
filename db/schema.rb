@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20110606110845) do
   create_table "orders", :force => true do |t|
     t.date     "served_on"
     t.integer  "student_id"
+    t.decimal  "total",      :precision => 5, :scale => 2, :default => 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

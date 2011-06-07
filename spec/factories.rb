@@ -37,4 +37,9 @@ FactoryGirl.define do
   factory :account do
     balance 0
   end
+
+  factory :ordered_menu_item do
+    association :order
+    association :menu_item
+  end
 end

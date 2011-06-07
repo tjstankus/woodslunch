@@ -90,4 +90,34 @@ describe Order do
       end
     end
   end
+
+  describe '#total' do
+    
+    let(:menu_item) { FactoryGirl.create(:menu_item) }
+    let(:order) { FactoryGirl.build(:order) }
+
+    it 'defaults to 0' do
+      order.total.should == 0  
+    end
+
+    context 'given one associated menu item' do
+
+      it 'equals associated menu item price' do
+        order.menu_items << menu_item
+        order.save!
+        order.total.should == menu_item.price
+      end
+    end
+
+    context 'given several associated menu items' do
+      
+      it 'equals sum of associated menu item prices' do
+        menu_items = [].tap { |a| a << FactoryGirl.create(:menu_item) }
+        menu_items_total = menu_items.collect(&:price).inject { |sum, n| sum + n }
+        menu_items.each { |menu_item| order.menu_items << menu_item }
+        order.save!
+        order.total.should == menu_items_total
+      end
+    end
+  end
 end

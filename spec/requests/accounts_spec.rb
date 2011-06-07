@@ -29,10 +29,17 @@ describe 'Accounts' do
       account.save!
 
       # When I go to the lunch order form
-      # visit edit_student_order_path
+      daily_menu_item = create_menu_item_served_on_day('Monday')
+      menu_item = daily_menu_item.menu_item
+      path_params = {:year => '2011', :month => '5'}
+      visit edit_student_order_path(student, path_params)
 
       # And I place a lunch order for one item
+      check menu_item.name
+      click_button 'Place Order'
+
       # Then my account balance should increment the cost of the item
+      account.reload.balance.should == menu_item.price
     end
   end
 

@@ -3,6 +3,10 @@
 - Figure out email validation errors when running specs. I suspect uniqueness, but not sure.
 - Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
 - Presenter gem
+Menu Items:
+	- Handle items on non-daily schedules.
+		https://github.com/seejohnrun/ice_cube
+		http://ruby-toolbox.com/categories/recurring_events.html
 Accounts:
 	- Balance
 	- Live update balance on order form.
@@ -10,7 +14,8 @@ Accounts:
 		- Admin records a payment for this account.
 		- Payment model. Belongs to account with presence validation.
 Student Orders:
-	- @next Fix May display issue. Probably occurs due to the first week not including any weekdays.
+	- Fix May display issue. Probably occurs due to the first week not including any weekdays. @done
+	- 
 Admin:
 	- Define holidays
 	- Define date ranges like Summer Vacation, Winter Vacation, or Fall Break. Perhaps a day off is a range with the same starts_on and ends_on date.
