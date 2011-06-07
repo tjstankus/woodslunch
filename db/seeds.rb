@@ -8,20 +8,33 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-if Rails.env.development?
-  user = User.find_or_create_by_email('user@example.com', :password => 'secret')
+user = User.find_or_create_by_email("user@example.com", :password => 'secret')
+student = Student.find_or_create_by_first_name_and_last_name_and_grade('John', 'Doe', 'K')
+student.user = user
+student.save!
 
-  admin_email = 'admin@example.com'
-  unless User.find_by_email(admin_email)
-    User.new(:email => admin_email, :password => 'secret').tap do |u|
-      u.roles = [:admin]
-      u.save!
-    end
+admin_email = "admin@example.com"
+unless User.find_by_email(admin_email)
+  User.new(:email => admin_email, :password => 'secret').tap do |u|
+    u.roles = [:admin]
+    u.save!
   end
+end
 
-  student = Student.find_or_create_by_first_name_and_last_name_and_grade('John', 'Doe', 'K')
-  student.user = user
-  student.save!
+(1..5).each do |i|
+  user_email = "user#{i}@example.com"
+
+  unless User.find_by_email(user_email)
+    user = User.new(:email => user_email, :password => "secret#{i}")
+    user.roles = [:admin]
+    user.save!
+    
+    first_name = Faker::Name.first_name
+    last_name = Faker::Name.last_name
+    student = Student.find_or_create_by_first_name_and_last_name_and_grade(first_name, last_name, 'K')
+    student.user = user
+    student.save!
+  end
 end
 
 DayOfWeek::NAMES.each do |day_name|
