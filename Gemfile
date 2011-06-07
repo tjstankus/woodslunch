@@ -29,3 +29,7 @@ group :development, :test do
   gem 'factory_girl_rails', '1.1.beta1'
   gem 'shoulda', '2.11.3'
 end
+
+group :production do
+  gem 'pg'
+end
