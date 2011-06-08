@@ -2,12 +2,15 @@
 - Parent landing page (home page)
 - Figure out email validation errors when running specs. I suspect uniqueness, but not sure.
 - Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
+- Payments
 - Presenter gem
 Menu Items:
 	- @q Handle items on non-daily schedules?
 		https://github.com/seejohnrun/ice_cube
 		http://ruby-toolbox.com/categories/recurring_events.html
 Accounts:
+	- User requires account. @done
+	- Seed users so that they are associated with accounts. @next
 	- Balance displayed on dashboard.
 	- Live update balance on order form.
 	- @q Besides links to order form, account balance, link to pay, what else should go on user/parent dashboard?

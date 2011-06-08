@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'Accounts' do
+  include ActionView::Helpers::NumberHelper
 
   it 'displays balance on home page' do
     pending
@@ -38,8 +39,9 @@ describe 'Accounts' do
       check menu_item.name
       click_button 'Place Order'
 
-      # Then my account balance should increment the cost of the item
-      account.reload.balance.should == menu_item.price
+      # Then I should see my account balance as the cost of the item
+      page.should have_xpath("//div[@id='balance']", 
+          :text => number_to_currency(menu_item.price))
     end
   end
 

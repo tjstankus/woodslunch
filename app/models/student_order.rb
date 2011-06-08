@@ -89,7 +89,7 @@ class StudentOrder
   def push_order(arr, date)
     order = Order.find_by_student_id_and_served_on(student_id, date)
     order_to_push = order || Order.new(:student_id => student_id,  
-      :served_on => date)
+        :served_on => date)
     arr.last << order_to_push
   end
 

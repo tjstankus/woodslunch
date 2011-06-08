@@ -1,6 +1,10 @@
 - if user_signed_in?
   - current_user.students.each do |student|
     = link_to_current_student_order(student)
+
+  #balance
+    = number_to_currency(current_user.account.balance)
+
 - else
   :markdown
     Welcome to the [Woods Charter School](http://woodscharter.org/) lunch ordering

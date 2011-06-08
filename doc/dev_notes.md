@@ -1,6 +1,24 @@
 Dev Notes
 =========
 
+Talk to Emily about daiy menu items, do we need anything more complex?
+
+5pm on Friday you cannot order for the following week.
+
+After an order is placed redirect to pay options screen, where they can link
+to Paypal or check a box that they plan to pay by check.
+
+Payments need: amount, check #, comments, credit.
+
+Think about this: what if parents got an invitation, then created student 
+profiles.
+
+UI suggestion: order cheese pizza every Friday.
+
+Setup a project management tool.
+
+Tuesday the 21st.
+
 Account balance
 ---------------
 

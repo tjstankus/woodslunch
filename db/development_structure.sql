@@ -1,4 +1,4 @@
-CREATE TABLE "accounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "balance" decimal(5,2), "created_at" datetime, "updated_at" datetime);
+CREATE TABLE "accounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "balance" decimal(5,2) DEFAULT 0, "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "daily_menu_items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "day_of_week_id" integer, "menu_item_id" integer, "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "days_of_week" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255));
 CREATE TABLE "menu_items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "price" decimal(5,2), "created_at" datetime, "updated_at" datetime);

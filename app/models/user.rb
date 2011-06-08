@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   belongs_to :account
   has_many :students
 
+  validates :account_id, :presence => true
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, 
   # :registerable, :timeoutable, and :omniauthable

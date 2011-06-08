@@ -12,6 +12,12 @@ describe Order do
     it 'should be valid' do
       FactoryGirl.create(:order).should be_valid
     end
+
+    it 'should save without error' do
+      lambda {
+        FactoryGirl.build(:order).save!
+      }.should_not raise_error
+    end
   end
 
   describe '#day_of_week_served_on' do
@@ -117,6 +123,20 @@ describe Order do
         menu_items.each { |menu_item| order.menu_items << menu_item }
         order.save!
         order.total.should == menu_items_total
+      end
+    end
+  end
+
+  describe 'associated account balance' do
+
+    let(:menu_item) { FactoryGirl.create(:menu_item) }
+    let(:order) { FactoryGirl.build(:order) }
+
+    context 'given an order for one menu item' do
+      it 'equals menu item price' do
+        order.menu_items << menu_item
+        order.save!
+        order.student.user.account.balance.should == menu_item.price
       end
     end
   end

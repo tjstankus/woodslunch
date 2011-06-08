@@ -1,6 +1,11 @@
 FactoryGirl.define do
 
+  factory :account do
+    balance 0
+  end
+
   factory :user do
+    association :account
     sequence(:email) {|n|
       "#{Faker::Name.first_name}.#{Faker::Name.last_name}#{n}@example.com".
         downcase
@@ -32,13 +37,10 @@ FactoryGirl.define do
   factory :order do
     association :student
     served_on { Date.civil(2011, 4, 1) }
+    total 0
   end
 
-  factory :account do
-    balance 0
-  end
-
-  factory :ordered_menu_item do
+    factory :ordered_menu_item do
     association :order
     association :menu_item
   end
