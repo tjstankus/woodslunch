@@ -127,16 +127,27 @@ describe Order do
     end
   end
 
-  describe 'associated account balance' do
+  describe '#update_account_balance_if_total_changed' do
 
     let(:menu_item) { FactoryGirl.create(:menu_item) }
     let(:order) { FactoryGirl.build(:order) }
 
-    context 'given an order for one menu item' do
-      it 'equals menu item price' do
+    context 'when the order total has changed' do
+
+      it 'updates the account balance' do
         order.menu_items << menu_item
         order.save!
         order.student.user.account.balance.should == menu_item.price
+      end
+    end
+
+    context 'when the order total has not changed' do
+      
+      it 'does not update the account balance' do
+        account = order.student.user.account
+        account.should_not_receive(:change_balance_by)
+        order.save
+        account.reload.balance.should == 0
       end
     end
   end

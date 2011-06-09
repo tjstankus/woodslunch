@@ -1,6 +1,6 @@
 class Order < ActiveRecord::Base
   before_save :calculate_total
-  before_save :update_account_balance
+  before_save :update_account_balance_if_total_changed
   after_update :destroy_unless_menu_items
 
   belongs_to :student
@@ -22,10 +22,12 @@ class Order < ActiveRecord::Base
     self.total = self.menu_items.collect(&:price).inject(0) { |sum, n| sum + n } 
   end
 
-  def update_account_balance
-    account = self.student.user.account
-    account.balance += self.total  
-    account.save!
+  def update_account_balance_if_total_changed
+    if total_changed?
+      diff = total - total_was  
+      account = self.student.user.account
+      account.change_balance_by(diff)
+    end
   end
 
   def destroy_unless_menu_items
