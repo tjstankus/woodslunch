@@ -5,11 +5,9 @@
 - Payments
 - Presenter gem
 Accounts:
-	- @next On a branch, flatten users and students under accounts. This should work, but do it on a branch just to be safe. First, change the model specs and work out from there. The changes should propagate all the way out.
-		- Redo seed data accordingly.
+	- Redo seed data for flattened users/students. @next
 	- One thing that comes up is multiple users per account. If we do that then we'll need a join between student and user, probably Guardianship or something like that. I can think of a way to calculate the account balance each time, taking total of each order and subtracting all payments, but it does seem like there's a more elegant way to do that. If setting up Student/User/Guardianship. The multiple users per account also makes it impossible for the user to *always* be the ones setting up students.
 		I figured out a way to do this. First, yes to the many-to-many relationship between users and students. Secondly, the initial user account can create student profiles. Then, after that, the admin has the option to associate an account invitation with an existing account. Then student relationships, etc. can be setup.
-
 	- @priority Test scenario of adding a user to an account.
 	- @priority @q Should a student be able to exist without an account? and that account must have a user?
 	- Balance displayed on dashboard.
@@ -31,6 +29,7 @@ Admin:
 	- Define date ranges like Summer Vacation, Winter Vacation, or Fall Break. Perhaps a day off is a range with the same starts_on and ends_on date.
 	- Order reports (by day)
 Archive:
+	- On a branch, flatten users and students under accounts. This should work, but do it on a branch just to be safe. First, change the model specs and work out from there. The changes should propagate all the way out. @done @project(Accounts)
 	- User requires account. @done @project(Accounts)
 	- Think about a more elegant way to update account balance. It should be the responsibility of the account to know how to update itself, or perhaps an observer. @done @project(Accounts)
 	- Test that removing an item from an order decrements the account balance. @done @project(Accounts)

@@ -18,4 +18,18 @@ describe User do
     end
   end
 
+  describe '#students' do
+    
+    let!(:user) { FactoryGirl.create(:user) }
+    let(:account) { user.account }
+
+    it 'returns empty array with no students' do
+      user.students.should be_empty
+    end
+
+    it 'includes associated student' do
+      student = FactoryGirl.create(:student, :account => account)
+      user.students.should include(student)
+    end
+  end
 end
