@@ -28,7 +28,7 @@ FactoryGirl.define do
   end
 
   factory :student do
-    association :user
+    association :account
     first_name Faker::Name.first_name
     last_name Faker::Name.last_name
     grade Student::GRADES.sample

@@ -7,7 +7,8 @@ describe 'Accounts' do
     pending
     
     # Given I am signed in
-    user = FactoryGirl.create(:user)
+    account = FactoryGirl.create(:account)
+    user = FactoryGirl.create(:user, :account => account)
     sign_in_as(user)
 
     # When I visit the home page
@@ -20,14 +21,10 @@ describe 'Accounts' do
     
     it 'updates with lunch order' do
       # Given I am a signed in user with a student
-      student = FactoryGirl.create(:student)
-      user = student.user
-      sign_in_as(user)
-
-      # And I have an account
       account = FactoryGirl.create(:account)
-      account.users << user
-      account.save!
+      user = FactoryGirl.create(:user, :account => account)
+      student = FactoryGirl.create(:student, :account => account)
+      sign_in_as(user)
 
       # When I go to the lunch order form
       daily_menu_item = create_menu_item_served_on_day('Monday')

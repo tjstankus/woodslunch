@@ -25,7 +25,7 @@ class Order < ActiveRecord::Base
   def update_account_balance_if_total_changed
     if total_changed?
       diff = total - total_was  
-      account = self.student.user.account
+      account = self.student.account
       account.change_balance_by(diff)
     end
   end

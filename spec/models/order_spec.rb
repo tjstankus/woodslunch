@@ -132,12 +132,13 @@ describe Order do
     let(:menu_item) { FactoryGirl.create(:menu_item) }
     let(:order) { FactoryGirl.build(:order) }
 
+
     context 'when the order total has increased' do
 
       it 'updates the account balance' do
         order.menu_items << menu_item
         order.save!
-        order.student.user.account.balance.should == menu_item.price
+        order.student.account.balance.should == menu_item.price
       end
     end
 
@@ -148,19 +149,19 @@ describe Order do
         order.menu_items << menu_item
         order.menu_items << menu_item2
         order.save!
-        order.student.user.account.balance.should == menu_item.price + 
+        order.student.account.balance.should == menu_item.price + 
             menu_item2.price
         order.menu_item_ids = [menu_item.id]
         order.save!
         order.reload
-        order.student.user.account.balance.should == menu_item.price
+        order.student.account.balance.should == menu_item.price
       end
     end
 
     context 'when the order total has not changed' do
       
       it 'does not update the account balance' do
-        account = order.student.user.account
+        account = order.student.account
         account.should_not_receive(:change_balance_by)
         order.save
         account.reload.balance.should == 0

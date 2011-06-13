@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe User do
-  it { should have_many(:students) }
   it { should belong_to(:account) }
   it { should validate_presence_of(:account_id) }
 

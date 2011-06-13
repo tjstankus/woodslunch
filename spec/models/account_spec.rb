@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Account do
   it { should have_many(:users) }
+  it { should have_many(:students) }
 
   describe '#change_balance_by' do
     

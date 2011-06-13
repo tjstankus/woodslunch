@@ -9,6 +9,9 @@ Accounts:
 		- Redo seed data accordingly.
 	- One thing that comes up is multiple users per account. If we do that then we'll need a join between student and user, probably Guardianship or something like that. I can think of a way to calculate the account balance each time, taking total of each order and subtracting all payments, but it does seem like there's a more elegant way to do that. If setting up Student/User/Guardianship. The multiple users per account also makes it impossible for the user to *always* be the ones setting up students.
 		I figured out a way to do this. First, yes to the many-to-many relationship between users and students. Secondly, the initial user account can create student profiles. Then, after that, the admin has the option to associate an account invitation with an existing account. Then student relationships, etc. can be setup.
+
+	- @priority Test scenario of adding a user to an account.
+	- @priority @q Should a student be able to exist without an account? and that account must have a user?
 	- Balance displayed on dashboard.
 	- Live update balance on order form.
 	- @q Besides links to order form, account balance, link to pay, what else should go on user/parent dashboard?

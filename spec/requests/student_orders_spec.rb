@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe 'Student orders' do
 
-  let(:student) { FactoryGirl.create(:student) }
-  let(:user) { student.user }
+  let!(:account) { FactoryGirl.create(:account) }
+  let!(:student) { FactoryGirl.create(:student, :account => account) }
+  let!(:user) { FactoryGirl.create(:user, :account => account) }
 
   before(:each) do
     # Given I am signed in

@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   roles :admin
 
   belongs_to :account
-  has_many :students
 
   validates :account_id, :presence => true
 
@@ -17,4 +16,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
+  def students
+    self.account.students
+  end
 end
