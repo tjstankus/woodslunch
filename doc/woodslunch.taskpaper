@@ -4,30 +4,35 @@
 - Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
 - Payments
 - Presenter gem
-Menu Items:
-	- @q Handle items on non-daily schedules?
-		https://github.com/seejohnrun/ice_cube
-		http://ruby-toolbox.com/categories/recurring_events.html
 Accounts:
-	- User requires account. @done
-	- @next Think about a more elegant way to update account balance. It should be the responsibility of the account to know how to update itself, or perhaps an observer.
+	- @next On a branch, flatten users and students under accounts. This should work, but do it on a branch just to be safe. First, change the model specs and work out from there. The changes should propagate all the way out.
+		- Redo seed data accordingly.
 	- One thing that comes up is multiple users per account. If we do that then we'll need a join between student and user, probably Guardianship or something like that. I can think of a way to calculate the account balance each time, taking total of each order and subtracting all payments, but it does seem like there's a more elegant way to do that. If setting up Student/User/Guardianship. The multiple users per account also makes it impossible for the user to *always* be the ones setting up students.
 		I figured out a way to do this. First, yes to the many-to-many relationship between users and students. Secondly, the initial user account can create student profiles. Then, after that, the admin has the option to associate an account invitation with an existing account. Then student relationships, etc. can be setup.
-	- Seed users so that they are associated with accounts. @done
 	- Balance displayed on dashboard.
 	- Live update balance on order form.
 	- @q Besides links to order form, account balance, link to pay, what else should go on user/parent dashboard?
 	- Payment history (a separate model most likely).
 		- Admin records a payment for this account.
 		- Payment model. Belongs to account with presence validation.
+Orders:
+	- An order must have a unique combination of student id and served_on date. In other words, there can only be one order per student per day. Enforce this in a validation. @priority
+Menu Items:
+	- @q Handle items on non-daily schedules?
+		https://github.com/seejohnrun/ice_cube
+		http://ruby-toolbox.com/categories/recurring_events.html
 Student Orders:
-	- Fix May display issue. Probably occurs due to the first week not including any weekdays. @done
 	- 
 Admin:
 	- Define holidays
 	- Define date ranges like Summer Vacation, Winter Vacation, or Fall Break. Perhaps a day off is a range with the same starts_on and ends_on date.
 	- Order reports (by day)
 Archive:
+	- User requires account. @done @project(Accounts)
+	- Think about a more elegant way to update account balance. It should be the responsibility of the account to know how to update itself, or perhaps an observer. @done @project(Accounts)
+	- Test that removing an item from an order decrements the account balance. @done @project(Accounts)
+	- Seed users so that they are associated with accounts. @done @project(Accounts)
+	- Fix May display issue. Probably occurs due to the first week not including any weekdays. @done @project(Student Orders)
 	- Style title bar area in admin. @done
 	- Seed menu items data from current menu @done
 	- Prettify menu items listing @done
