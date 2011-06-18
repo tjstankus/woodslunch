@@ -4,8 +4,6 @@ describe 'Accounts' do
   include ActionView::Helpers::NumberHelper
 
   it 'displays balance on home page' do
-    pending
-    
     # Given I am signed in
     account = FactoryGirl.create(:account)
     user = FactoryGirl.create(:user, :account => account)
@@ -14,7 +12,8 @@ describe 'Accounts' do
     # When I visit the home page
     current_path.should == root_path
 
-    # TODO: Then I should see my account balance
+    # Then I should see my account balance
+    page.should have_xpath("//div[@id='balance']")
   end
 
   describe 'balance' do
