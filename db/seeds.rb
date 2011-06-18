@@ -19,10 +19,12 @@ end
 email = 'user@example.com'
 user = User.find_by_email(email)
 unless user                        
+  account = Account.create!
   user = User.new(:email => email, :password => 'secret')
-  user.account = Account.create
-  student = Student.find_or_create_by_first_name_and_last_name_and_grade('John', 'Doe', 'K')
-  student.user = user
+  user.account = account
+  user.save!
+  student = Student.find_or_create_by_first_name_and_last_name_and_grade(
+      'John', 'Doe', 'K', :account_id => account.id)
   student.save!
 end
 
@@ -30,15 +32,16 @@ end
   user_email = "user#{i}@example.com"
 
   unless User.find_by_email(user_email)
+    account = Account.create
     user = User.new(:email => user_email, :password => "secret#{i}")
-    user.account = Account.create
+    user.account = account
     user.roles = [:admin]
     user.save!
     
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
-    student = Student.find_or_create_by_first_name_and_last_name_and_grade(first_name, last_name, 'K')
-    student.user = user
+    student = Student.find_or_create_by_first_name_and_last_name_and_grade(
+        first_name, last_name, 'K', :account_id => account.id)
     student.save!
   end
 end
