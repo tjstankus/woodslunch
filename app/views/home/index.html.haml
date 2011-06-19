@@ -2,8 +2,9 @@
   - current_user.students.each do |student|
     = link_to_current_student_order(student)
 
-  #balance
-    = number_to_currency(current_user.account.balance)
+  - if current_user.students.any?
+    #balance
+      = number_to_currency(current_user.account.balance)
 
 - else
   :markdown

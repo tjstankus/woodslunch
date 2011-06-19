@@ -3,19 +3,47 @@ require 'spec_helper'
 describe 'Accounts' do
   include ActionView::Helpers::NumberHelper
 
-  it 'displays balance on home page' do
-    # Given I am signed in
-    account = FactoryGirl.create(:account)
-    user = FactoryGirl.create(:user, :account => account)
-    sign_in_as(user)
+  describe 'balance' do
 
-    # When I visit the home page
-    current_path.should == root_path
+    before(:each) do
+      @account = FactoryGirl.create(:account)
+      @user = FactoryGirl.create(:user, :account => @account)
+    end
 
-    # Then I should see my account balance
-    page.should have_xpath("//div[@id='balance']")
+    context 'given an account with students' do
+
+      before(:each) do
+        @student = FactoryGirl.create(:student, :account => @account)
+      end
+
+      it 'displays balance on dashboard' do
+        # Given I am signed in
+        sign_in_as(@user)
+
+        # When I visit the home page
+        current_path.should == root_path
+
+        # Then I should see my account balance
+        page.should have_xpath("//div[@id='balance']")
+      end
+    end
+
+    context 'given an account with no students' do
+
+      it 'does not display balance on dashboard' do
+        # Given I am signed in
+        sign_in_as(@user)
+
+        # When I visit the home page
+        current_path.should == root_path
+
+        # Then I should see my account balance
+        page.should have_no_xpath("//div[@id='balance']")
+      end
+    end
+ 
   end
-
+    
   describe 'balance' do
     
     it 'updates with lunch order' do
