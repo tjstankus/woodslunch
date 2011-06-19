@@ -2,9 +2,11 @@ Also, see Basecamp project
 - Figure out email validation errors when running specs. I suspect uniqueness, but not sure.
 - Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
 - Presenter gem
-- Make tasks from phone call notes @priority
 - Staging app for Heroku.
 Accounts/Users/Students:
+	- Start driving towards an account request flow while working on inherited_resources, generators for accounts/users/students with nested structure, e.g., accounts/:account_id/users
+		- Add first name, last name to users. @next
+		- Setup sendgrid.
 	- Test scenario of adding a user to an account.
 	- @maybe Live update balance on order form.
 	- Payment history (a separate model most likely).
@@ -17,6 +19,7 @@ Menu Items:
 		https://github.com/seejohnrun/ice_cube
 		http://ruby-toolbox.com/categories/recurring_events.html
 Archive:
+	- Make tasks from phone call notes @done(2011-06-19)
 	- Spec balance displayed on dashboard. @done(2011-06-18) @project(Accounts)
 	- Redo seed data for flattened users/students. @done(2011-06-18) @project(Accounts)
 	- On a branch, flatten users and students under accounts. This should work, but do it on a branch just to be safe. First, change the model specs and work out from there. The changes should propagate all the way out. @done @project(Accounts)

@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
 
   belongs_to :account
 
+  validates :email, :presence => true, 
+      :uniqueness => { :case_sensitive => false }
+  validates :first_name, :presence => true
+  validates :last_name, :presence => true
   validates :account_id, :presence => true
 
   # Include default devise modules. Others available are:

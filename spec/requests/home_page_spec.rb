@@ -5,7 +5,7 @@ feature 'home page' do
   context 'given a logged in user' do
 
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = Factory(:user)
       sign_in_as(@user)
     end
 

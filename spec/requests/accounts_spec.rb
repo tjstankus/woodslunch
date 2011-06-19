@@ -6,14 +6,14 @@ describe 'Accounts' do
   describe 'balance' do
 
     before(:each) do
-      @account = FactoryGirl.create(:account)
-      @user = FactoryGirl.create(:user, :account => @account)
+      @account = Factory(:account)
+      @user = Factory(:user, :account => @account)
     end
 
     context 'given an account with students' do
 
       before(:each) do
-        @student = FactoryGirl.create(:student, :account => @account)
+        @student = Factory(:student, :account => @account)
       end
 
       it 'displays balance on dashboard' do
@@ -48,9 +48,9 @@ describe 'Accounts' do
     
     it 'updates with lunch order' do
       # Given I am a signed in user with a student
-      account = FactoryGirl.create(:account)
-      user = FactoryGirl.create(:user, :account => account)
-      student = FactoryGirl.create(:student, :account => account)
+      account = Factory(:account)
+      user = Factory(:user, :account => account)
+      student = Factory(:student, :account => account)
       sign_in_as(user)
 
       # When I go to the lunch order form

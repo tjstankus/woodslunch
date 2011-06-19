@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe 'Menu items' do
 
-  let!(:daily_menu_item) { FactoryGirl.create(:daily_menu_item) }
+  let!(:daily_menu_item) { Factory(:daily_menu_item) }
   let(:menu_item) { daily_menu_item.menu_item }
 
   before(:each) do
-    @admin = FactoryGirl.create(:admin)
+    @admin = Factory(:admin)
     sign_in_as(@admin)
   end
 
@@ -22,7 +22,7 @@ describe 'Menu items' do
     context 'when logged in as a regular user' do
       before(:each) do
         sign_out
-        @user = FactoryGirl.create(:user)
+        @user = Factory(:user)
         sign_in_as(@user)
       end
 
@@ -157,7 +157,7 @@ describe 'Menu items' do
       # Given a menu item served on Monday and Tuesday
       daily_menu_item.day_of_week.name.should == 'Monday'
       tuesday = DayOfWeek.find_by_name('Tuesday')
-      FactoryGirl.create(:daily_menu_item, :menu_item => menu_item, 
+      Factory(:daily_menu_item, :menu_item => menu_item, 
         :day_of_week => tuesday)
 
       # When I go to the edit menu item page

@@ -8,7 +8,7 @@ describe MenuItem do
   it { should have_many(:days_of_week).through(:daily_menu_items) }
 
   context 'given a saved menu item' do
-    let!(:menu_item) { FactoryGirl.create(:menu_item) }
+    let!(:menu_item) { Factory(:menu_item) }
     it { should validate_uniqueness_of(:name).case_insensitive }
   end
 
@@ -17,7 +17,7 @@ describe MenuItem do
   end
 
   it 'builds a valid factory' do
-    FactoryGirl.build(:menu_item).should be_valid
+    Factory.build(:menu_item).should be_valid
   end
 
   describe '.unassigned_to_day' do
@@ -27,7 +27,7 @@ describe MenuItem do
       before(:each) do
         @menu_items = [].tap do |a| 
           3.times do |i|
-            a << FactoryGirl.create(:menu_item, :name => "Food Item #{i}")
+            a << Factory(:menu_item, :name => "Food Item #{i}")
           end
         end
       end

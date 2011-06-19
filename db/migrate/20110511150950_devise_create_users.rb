@@ -1,6 +1,8 @@
 class DeviseCreateUsers < ActiveRecord::Migration
   def self.up
     create_table(:users) do |t|
+      t.string :first_name
+      t.string :last_name
       t.database_authenticatable :null => false
       t.recoverable
       t.rememberable
@@ -21,6 +23,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
     # add_index :users, :confirmation_token,   :unique => true
     # add_index :users, :unlock_token,         :unique => true
     # add_index :users, :authentication_token, :unique => true
+    add_index :users, :first_name
+    add_index :users, :last_name
   end
 
   def self.down

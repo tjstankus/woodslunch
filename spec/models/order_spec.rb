@@ -10,12 +10,12 @@ describe Order do
   describe 'minimal factory' do
     
     it 'should be valid' do
-      FactoryGirl.create(:order).should be_valid
+      Factory(:order).should be_valid
     end
 
     it 'should save without error' do
       lambda {
-        FactoryGirl.build(:order).save!
+        Factory.build(:order).save!
       }.should_not raise_error
     end
   end
@@ -31,7 +31,7 @@ describe Order do
       date = Date.civil(year, month, first_weekday)
       day_name = date.strftime('%A')
       day_of_week = DayOfWeek.find_by_name(day_name)
-      order = FactoryGirl.build(:order, :served_on => date)
+      order = Factory.build(:order, :served_on => date)
       order.day_of_week_served_on.should == day_of_week
     end
   end
@@ -42,12 +42,10 @@ describe Order do
       day_of_week = DayOfWeek.find_or_create_by_name(today.strftime('%A'))
       @daily_menu_items = [].tap do |arr|
         3.times do
-          arr << FactoryGirl.create(
-            :daily_menu_item,
-            :day_of_week => day_of_week)
+          arr << Factory(:daily_menu_item, :day_of_week => day_of_week)
         end
       end
-      @order = FactoryGirl.create(:order, :served_on => today)
+      @order = Factory(:order, :served_on => today)
     end
 
     it 'returns all menu items available on served_on date' do
@@ -61,11 +59,11 @@ describe Order do
 
   describe '#delete_if_no_menu_items' do
 
-    let!(:order) { FactoryGirl.create(:order) }    
+    let!(:order) { Factory(:order) }    
     let!(:id) { order.id }
 
     before(:each) do
-      order.menu_items << FactoryGirl.create(:menu_item)
+      order.menu_items << Factory(:menu_item)
       order.save!
     end
 
@@ -85,7 +83,7 @@ describe Order do
     context 'given menu items' do
 
       it 'preserves record' do
-        menu_item = FactoryGirl.create(:menu_item)
+        menu_item = Factory(:menu_item)
         ids = order.menu_item_ids << menu_item.id
         lambda {
           order.update_attributes!(:menu_item_ids => ids)
@@ -99,8 +97,8 @@ describe Order do
 
   describe '#total' do
     
-    let(:menu_item) { FactoryGirl.create(:menu_item) }
-    let(:order) { FactoryGirl.build(:order) }
+    let(:menu_item) { Factory(:menu_item) }
+    let(:order) { Factory.build(:order) }
 
     it 'defaults to 0' do
       order.total.should == 0  
@@ -118,7 +116,7 @@ describe Order do
     context 'given several associated menu items' do
       
       it 'equals sum of associated menu item prices' do
-        menu_items = [].tap { |a| a << FactoryGirl.create(:menu_item) }
+        menu_items = [].tap { |a| a << Factory(:menu_item) }
         menu_items_total = menu_items.collect(&:price).inject { |sum, n| sum + n }
         menu_items.each { |menu_item| order.menu_items << menu_item }
         order.save!
@@ -129,8 +127,8 @@ describe Order do
 
   describe '#update_account_balance_if_total_changed' do
 
-    let(:menu_item) { FactoryGirl.create(:menu_item) }
-    let(:order) { FactoryGirl.build(:order) }
+    let(:menu_item) { Factory(:menu_item) }
+    let(:order) { Factory.build(:order) }
 
 
     context 'when the order total has increased' do
@@ -145,7 +143,7 @@ describe Order do
     context 'when the order total has decreased' do
 
       it 'updates the account balance' do
-        menu_item2 = FactoryGirl.create(:menu_item)
+        menu_item2 = Factory(:menu_item)
         order.menu_items << menu_item
         order.menu_items << menu_item2
         order.save!

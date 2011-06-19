@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe 'Student orders' do
 
-  let!(:account) { FactoryGirl.create(:account) }
-  let!(:student) { FactoryGirl.create(:student, :account => account) }
-  let!(:user) { FactoryGirl.create(:user, :account => account) }
+  let!(:account) { Factory(:account) }
+  let!(:student) { Factory(:student, :account => account) }
+  let!(:user) { Factory(:user, :account => account) }
 
   before(:each) do
     # Given I am signed in
@@ -116,8 +116,8 @@ describe 'Student orders' do
 
     it 'creates an order' do
       # Given a menu item Hamburger served on Mondays
-      menu_item = FactoryGirl.create(:menu_item, :name => 'Hamburger')
-      FactoryGirl.create(:daily_menu_item, 
+      menu_item = Factory(:menu_item, :name => 'Hamburger')
+      Factory(:daily_menu_item, 
         :menu_item => menu_item,
         :day_of_week => DayOfWeek.find_by_name('Monday'))
 

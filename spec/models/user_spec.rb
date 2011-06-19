@@ -2,25 +2,43 @@ require 'spec_helper'
 
 describe User do
   it { should belong_to(:account) }
+  it { should validate_presence_of(:email) }
+  it { should validate_presence_of(:first_name) }
+  it { should validate_presence_of(:last_name) }
   it { should validate_presence_of(:account_id) }
+
+  describe '#email' do
+
+    context 'given a persisted record' do
+
+      before(:all) do
+        User.destroy_all
+        Factory(:user)
+      end
+
+      it { should validate_uniqueness_of(:email).case_insensitive }
+
+    end
+
+  end
 
   describe '#admin?' do
   	context 'given admin role' do
   		it 'returns true' do
-        FactoryGirl.build(:admin).has_role?(:admin).should be_true
+        Factory.build(:admin).has_role?(:admin).should be_true
   		end
   	end
 
     context 'for non-admin' do
       it 'returns false' do
-        FactoryGirl.build(:user).has_role?(:admin).should be_false
+        Factory.build(:user).has_role?(:admin).should be_false
       end
     end
   end
 
   describe '#students' do
     
-    let!(:user) { FactoryGirl.create(:user) }
+    let!(:user) { Factory(:user) }
     let(:account) { user.account }
 
     it 'returns empty array with no students' do
@@ -28,7 +46,7 @@ describe User do
     end
 
     it 'includes associated student' do
-      student = FactoryGirl.create(:student, :account => account)
+      student = Factory(:student, :account => account)
       user.students.should include(student)
     end
   end

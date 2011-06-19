@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe StudentOrder do
   
-  let(:student) { FactoryGirl.create(:student) }
+  let(:student) { Factory(:student) }
   let(:valid_params) { {'student_id' => student.id} }
   let(:student_order) { StudentOrder.new(valid_params) }
 

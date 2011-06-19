@@ -1,41 +1,42 @@
 Dev Notes
 =========
 
-Talk to Emily about daiy menu items, do we need anything more complex?
+Account Request
+---------------
 
-5pm on Friday you cannot order for the following week.
+Flow for creating an approved account:
 
-After an order is placed redirect to pay options screen, where they can link
-to Paypal or check a box that they plan to pay by check.
+1) Fill out account request form with email, first name, last name, then an
+entry for each student. Submit creates an AccountRequest, 
 
-Payments need: amount, check #, comments, credit.
+2) Admin gets notified somehow of pending account requests.
 
-Think about this: what if parents got an invitation, then created student 
-profiles.
+3) Admin approves AccountRequest. An AccountInvitation is created. An email
+gets sent with invitation token url.
 
-UI suggestion: order cheese pizza every Friday.
+4) User follows invitation link, sets up their account. The form should be 
+pre-filled with user and students information, which can be edited. On 
+successful submit, Account, User, Student(s) are created, the user is logged
+in and redirected to the dashboard.
 
-Setup a project management tool.
+Flow for denying an AccountRequest:
 
-Tuesday the 21st.
+Notes:
+
+AccountRequests
+  - new
+  - create
+  - approve, deny (are these individual actions?)
+
+Probably want to hang onto denied account requests.
+
+Probably want to destroy approved request and its dependent user and students.
+Only after creating Account, User, and Student successfully.
+
+AccountRequest has a status that can be: pending, approved, denied.
 
 Account balance
 ---------------
-
-The sum of all unpaid orders.
-
-What happens when an order that has been paid for is edited, either to add or
-remove items?
-
-Can I or should I decouple order totals from account balances? When does the
-account balance get updated? When an order is placed. If I decouple the account
-balance, that means I have to calculate it on demand. I don't know how to
-define that calculation. So, I'll need to update the account balance as orders
-come in.
-
-Use callbacks on Order, or an observer. If use callbacks, first call
-calculate_total to update the total attribute. Or, a callback class.
-  - Just do it all in callbacks, refactor to observer if that make sense.
 
 Handle the following situations
   - Create a new order should increment the balance by order.total.
@@ -43,6 +44,3 @@ Handle the following situations
   - Edit order to add items should increment the balance the diff.
   - Edit order to remove items should decrement the balance the diff.
  
-- User should see account balance on dashboard.
-
-- Account balance should be displayed and updated as orders are CUD'ed.

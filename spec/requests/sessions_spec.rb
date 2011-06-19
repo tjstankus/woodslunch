@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'sessions' do
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { Factory(:user) }
   
   scenario 'signing in' do
     sign_in_as(user)
