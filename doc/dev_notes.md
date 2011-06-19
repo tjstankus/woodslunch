@@ -24,8 +24,9 @@ Flow for denying an AccountRequest:
 Notes:
 
 AccountRequests
-  - new
-  - create
+  - new (public, does not require login)
+  - create (public, does not require login). Should check if there's an 
+    existing account or account request for the provided email.
   - approve, deny (are these individual actions?)
 
 Probably want to hang onto denied account requests.

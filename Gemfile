@@ -5,7 +5,7 @@ gem 'rails', '3.0.9'
 gem 'heroku', '2.2.4'
 
 gem 'devise', '1.3.4'
-gem 'simple_form', '1.3.1'
+gem 'simple_form', '1.4.1'
 gem 'haml', '3.1.2'
 gem 'compass', '0.11.1'
 gem 'fancy-buttons', '1.1.1'
