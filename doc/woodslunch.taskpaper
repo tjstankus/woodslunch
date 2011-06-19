@@ -1,19 +1,12 @@
-- Admin landing page
+Also, see Basecamp project
 - Figure out email validation errors when running specs. I suspect uniqueness, but not sure.
 - Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
-- Payments
 - Presenter gem
 - Make tasks from phone call notes @priority
 - Staging app for Heroku.
-Accounts:
-	- Spec balance displayed on dashboard. @done(2011-06-18)
-	- Prettify the parent/user dashboard.
-		- List students similar to menu items listing.
-		- Account balance should show as a sum.
-	- Invitations (how to get users into the system).
+Accounts/Users/Students:
 	- Test scenario of adding a user to an account.
 	- @maybe Live update balance on order form.
-	- @q Besides links to order form, account balance, link to pay, what else should go on user/parent dashboard?
 	- Payment history (a separate model most likely).
 		- Admin records a payment for this account.
 		- Payment model. Belongs to account with presence validation.
@@ -23,12 +16,8 @@ Menu Items:
 	- @q Handle items on non-daily schedules?
 		https://github.com/seejohnrun/ice_cube
 		http://ruby-toolbox.com/categories/recurring_events.html
-Student Orders:
-Admin:
-	- Define holidays
-	- Define date ranges like Summer Vacation, Winter Vacation, or Fall Break. Perhaps a day off is a range with the same starts_on and ends_on date.
-	- Order reports (by day)
 Archive:
+	- Spec balance displayed on dashboard. @done(2011-06-18) @project(Accounts)
 	- Redo seed data for flattened users/students. @done(2011-06-18) @project(Accounts)
 	- On a branch, flatten users and students under accounts. This should work, but do it on a branch just to be safe. First, change the model specs and work out from there. The changes should propagate all the way out. @done @project(Accounts)
 	- User requires account. @done @project(Accounts)
