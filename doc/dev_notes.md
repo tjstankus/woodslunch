@@ -23,11 +23,15 @@ Flow for denying an AccountRequest:
 
 Notes:
 
+Maybe better names:
+- AccountRequest (email, first name, last name)
+- RequestedStudent
+
 AccountRequests
-  - new (public, does not require login)
-  - create (public, does not require login). Should check if there's an 
-    existing account or account request for the provided email.
-  - approve, deny (are these individual actions?)
+- new (public, does not require login)
+- create (public, does not require login). Should check if there's an existing
+  account or account request for the provided email.
+- approve, deny (are these individual actions?)
 
 Probably want to hang onto denied account requests.
 
