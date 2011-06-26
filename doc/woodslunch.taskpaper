@@ -4,8 +4,8 @@ Also, see Basecamp project
 - Presenter gem
 - Staging app for Heroku.
 AccountRequests:
-	- Remove unused specs @next
-	- Convert form to simple_form @next
+	- Remove unused specs @done(2011-06-26)
+	- Convert form to simple_form @wip
 	- Request specs for new
 Accounts/Users/Students:
 	- Start driving towards an account request flow while working on inherited_resources, generators for accounts/users/students with nested structure, e.g., accounts/:account_id/users
