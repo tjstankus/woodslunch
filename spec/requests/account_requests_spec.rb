@@ -49,9 +49,15 @@ describe "AccountRequests" do
       page.should have_xpath("//input[@id='#{id}'][@required='required']")
     end
 
-    it 'displays required student last name'
+    it 'displays required student last name' do
+      id = 'account_request_requested_students_attributes_0_last_name'
+      page.should have_xpath("//input[@id='#{id}'][@required='required']")
+    end
 
-    it 'displays required student grade'
+    it 'displays required student grade' do
+      id = 'account_request_requested_students_attributes_0_grade'
+      page.should have_xpath("//select[@id='#{id}'][contains(@class, 'required')]")
+    end
 
     it 'allows for multiple students'
   end
