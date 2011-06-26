@@ -15,7 +15,7 @@
 
   %fieldset
     %legend Students
-    = f.simple_fields_for :requested_students do |requested_students_form|
+    = f.simple_fields_for :requested_students, @account_request.requested_students.build do |requested_students_form|
       = requested_students_form.input :first_name
       = requested_students_form.input :last_name
       = requested_students_form.input :grade, :collection => Student::GRADES
