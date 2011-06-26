@@ -1,4 +1,5 @@
 Woodslunch::Application.routes.draw do
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -14,6 +15,8 @@ Woodslunch::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+
+  resources :account_requests
 
   # Sample resource route with options:
   #   resources :products do
@@ -34,7 +37,7 @@ Woodslunch::Application.routes.draw do
   #   end
   
   match '/students/:student_id/orders/:year/:month' => 'student_orders#edit',
-    :via => :get, :as => :edit_student_order
+      :via => :get, :as => :edit_student_order
   resources :students do
     resources :orders, :controller => 'student_orders', :only => [:create]
   end

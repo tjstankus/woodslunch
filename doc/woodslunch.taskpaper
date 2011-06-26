@@ -3,9 +3,13 @@ Also, see Basecamp project
 - Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
 - Presenter gem
 - Staging app for Heroku.
+AccountRequests:
+	- Remove unused specs @next
+	- Convert form to simple_form @next
+	- Request specs for new
 Accounts/Users/Students:
 	- Start driving towards an account request flow while working on inherited_resources, generators for accounts/users/students with nested structure, e.g., accounts/:account_id/users
-		- Add first name, last name to users. @next
+		- Add first name, last name to users. @done(2011-06-20)
 		- Setup sendgrid.
 	- Test scenario of adding a user to an account.
 	- @maybe Live update balance on order form.

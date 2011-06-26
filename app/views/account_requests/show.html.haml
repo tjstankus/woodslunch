@@ -1,0 +1,11 @@
+%p
+  %strong t('activerecord.attributes.account_request.email')
+  = @account_request.email
+%p
+  %strong t('activerecord.attributes.account_request.first_name')
+  = @account_request.first_name
+%p
+  %strong t('activerecord.attributes.account_request.last_name')
+  = @account_request.last_name
+
+== #{ link_to t('edit'), edit_account_request_path(@account_request) } | #{ link_to t('back'), account_requests_path }
