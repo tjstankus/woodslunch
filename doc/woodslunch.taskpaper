@@ -4,12 +4,11 @@ Also, see Basecamp project
 - Presenter gem
 - Staging app for Heroku.
 AccountRequests:
-	- Remove unused specs @done(2011-06-26)
-	- Convert form to simple_form @wip
-	- Request specs for new
+	- Initial input for adding a student @wip
+	- Limit routes and actions
+	- Admin-protect actions
 Accounts/Users/Students:
 	- Start driving towards an account request flow while working on inherited_resources, generators for accounts/users/students with nested structure, e.g., accounts/:account_id/users
-		- Add first name, last name to users. @done(2011-06-20)
 		- Setup sendgrid.
 	- Test scenario of adding a user to an account.
 	- @maybe Live update balance on order form.
@@ -23,6 +22,10 @@ Menu Items:
 		https://github.com/seejohnrun/ice_cube
 		http://ruby-toolbox.com/categories/recurring_events.html
 Archive:
+	- Request specs for new @done(2011-06-26) @project(AccountRequests)
+	- Remove unused specs @done(2011-06-26) @project(AccountRequests)
+	- Convert form to simple_form @done(2011-06-26) @project(AccountRequests)
+	- Add first name, last name to users. @done(2011-06-20) @project(Accounts/Users/Students)
 	- Make tasks from phone call notes @done(2011-06-19)
 	- Spec balance displayed on dashboard. @done(2011-06-18) @project(Accounts)
 	- Redo seed data for flattened users/students. @done(2011-06-18) @project(Accounts)

@@ -32,19 +32,26 @@ describe "AccountRequests" do
       page.should have_xpath("//form[@action='/account_requests']")
     end
     
-    it 'requires email'  do
+    it 'displayes required email'  do
       page.should have_xpath("//input[@id='account_request_email'][@required='required']")
     end
 
-    it 'requires first name' do
+    it 'displays required first name' do
       page.should have_xpath("//input[@id='account_request_first_name'][@required='required']")
     end
 
-    it 'requires last name' do
+    it 'displays required last name' do
       page.should have_xpath("//input[@id='account_request_last_name'][@required='required']")
     end
 
-    it 'requires at least one student name and grade'
+    it 'displays required student first name' do
+      id = 'account_request_requested_students_attributes_0_first_name'
+      page.should have_xpath("//input[@id='#{id}'][@required='required']")
+    end
+
+    it 'displays required student last name'
+
+    it 'displays required student grade'
 
     it 'allows for multiple students'
   end
@@ -61,22 +68,26 @@ describe "AccountRequests" do
     context 'given no email parameter' do
       it 'displays error message' do
         post_via_redirect account_requests_path, params['account_request'].except('email')
-        assert_select 'div#errorExplanation'
+        assert_select 'div#error_explanation'
       end
     end
   
     context 'given no first_name parameter' do
       it 'displays error message' do
         post_via_redirect account_requests_path, params['account_request'].except('first_name')
-        assert_select 'div#errorExplanation'
+        assert_select 'div#error_explanation'
       end
     end
 
     context 'given no last_name parameter' do
       it 'displays error message' do
         post_via_redirect account_requests_path, params['account_request'].except('last_name')
-        assert_select 'div#errorExplanation'
+        assert_select 'div#error_explanation'
       end
+    end
+
+    context 'given an email for an existing account' do
+      it 'redirects to sign in page with flash message'
     end
 
   end

@@ -5,6 +5,7 @@ CREATE TABLE "days_of_week" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "n
 CREATE TABLE "menu_items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "price" decimal(5,2), "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "ordered_menu_items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "menu_item_id" integer, "order_id" integer, "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "orders" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "served_on" date, "student_id" integer, "total" decimal(5,2) DEFAULT 0, "created_at" datetime, "updated_at" datetime);
+CREATE TABLE "requested_students" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "account_request_id" integer, "first_name" varchar(255), "last_name" varchar(255), "grade" varchar(255));
 CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL);
 CREATE TABLE "students" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "account_id" integer, "first_name" varchar(255), "last_name" varchar(255), "grade" varchar(255), "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "roles_mask" integer, "account_id" integer, "created_at" datetime, "updated_at" datetime);
@@ -32,3 +33,5 @@ INSERT INTO schema_migrations (version) VALUES ('20110531121058');
 INSERT INTO schema_migrations (version) VALUES ('20110606110845');
 
 INSERT INTO schema_migrations (version) VALUES ('20110620051649');
+
+INSERT INTO schema_migrations (version) VALUES ('20110626185835');

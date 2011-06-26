@@ -9,7 +9,7 @@ Flow for creating an approved account:
 1) Fill out account request form with email, first name, last name, then an
 entry for each student. Submit creates an AccountRequest, 
 
-2) Admin gets notified somehow of pending account requests.
+2) Admin gets notified somehow of pending account requests. (Maybe.)
 
 3) Admin approves AccountRequest. An AccountInvitation is created. An email
 gets sent with invitation token url.
