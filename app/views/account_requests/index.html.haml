@@ -8,28 +8,3 @@
         %div[student]{:class => 'sub_listing_item'}
           = "#{student.full_name}, Grade: #{student.grade}"
 
-
--#
-  %table
-    %thead
-      %tr
-        %th 
-          =t('activerecord.attributes.account_request.email')
-        %th 
-          =t('activerecord.attributes.account_request.first_name')
-        %th 
-          =t('activerecord.attributes.account_request.last_name')
-        %th{ :colspan => 3 }
-    
-    %tbody
-      - for account_request in @account_requests
-        %tr{ :class => cycle(:odd, :even) }
-          %td= account_request.email
-          %td= account_request.first_name
-          %td= account_request.last_name
-          %td= link_to t('show'), account_request
-          %td= link_to t('edit'), edit_account_request_path(account_request)
-          %td= link_to t('destroy'), account_request, :confirm => I18n.t('confirm_delete'), :method => :delete
-
-  %br
-  = link_to t('account_request.new'), new_account_request_path
