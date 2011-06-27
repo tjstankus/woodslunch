@@ -4,9 +4,18 @@ Also, see Basecamp project
 - Presenter gem
 - Staging app for Heroku.
 AccountRequests:
-	- Initial input for adding a student @wip
+	- Initial input for adding a student. @done(2011-06-26)
+	- After account requested redirect to home page with message "Account request successfully submitted. Your request will be reviewed within 3 days. Upon approval, you will receive an account activation email."
 	- Limit routes and actions
 	- Admin-protect actions
+	- AccountRequest submitted for pending AccountRequest#email request displays "There is a pending account request for #{email}."
+	- AccountRequest submitted for denied AccountRequest#email creates a new AccountRequest in pending state.
+	- Email must be unique for pending AccountRequests.
+	- State machine for AccountRequest#state: pending, approved, denied
+		pending -> approved, then account gets created and AccountRequest is destroyed
+		pending -> denied
+		denied -> pending
+	- Email must be unique for accounts, so when 
 Accounts/Users/Students:
 	- Start driving towards an account request flow while working on inherited_resources, generators for accounts/users/students with nested structure, e.g., accounts/:account_id/users
 		- Setup sendgrid.
