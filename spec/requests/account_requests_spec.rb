@@ -158,5 +158,38 @@ describe "AccountRequests" do
         current_path.should == root_path
       end
     end
+
+    context 'given I am logged in as a user' do
+
+      before(:each) do
+        user = Factory(:user)
+        sign_in_as(user)
+      end
+
+      it 'redirects to the home page' do
+        # When I go to the account requests index page
+        visit account_requests_path
+
+        # Then I should be redirected to the home page
+        current_path.should == root_path
+      end
+    end
+
+    context 'given I am logged in as an admin' do
+
+      before(:each) do
+        admin = Factory(:admin)
+        sign_in_as(admin)
+      end
+
+      it 'permits access' do
+        # When I go to the account requests index page
+        visit account_requests_path
+
+        # Then I should be redirected to the home page
+        current_path.should == account_requests_path
+      end
+    end
+
   end
 end
