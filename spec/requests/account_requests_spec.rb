@@ -12,13 +12,24 @@ describe "AccountRequests" do
 
   context 'given I am not logged in' do
 
+    # Given I am not logged in
+
     it 'displays new account request link on home page' do
-      # Given I am not logged in
       # When I go to the home page
       visit '/'
 
       # And I follow the account request link
       click_link 'request an account'
+    end
+
+    context 'index listing' do
+      it 'redirects to the home page' do
+        # When I go to the account requests index page
+        visit account_requests_path
+
+        # Then I should be redirected to the home page
+        current_path.should == root_path
+      end
     end
   end
 
