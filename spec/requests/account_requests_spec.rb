@@ -64,30 +64,76 @@ describe "AccountRequests" do
 
   describe 'create account request' do
 
-    let(:params) { 
+    let(:valid_params) { 
       { 'account_request' => {
           'email'=>'john.doe@example.com', 
           'first_name'=>'John', 
-          'last_name'=>'Doe' } }
+          'last_name'=>'Doe',
+          'requested_students_attributes' => {
+            '0' => { 'first_name' => 'Bart', 
+                     'last_name' => 'Simpson', 
+                     'grade' => '4' } } } }
     }
+
+    context 'given valid params' do
+      it 'redirects to home page with flash message' do
+        # post_via_redirect account_requests_path, valid_params
+
+        # Given I go to the new account request page
+        visit new_account_request_path
+
+        # And I fill in 'Email' with 'marge.simpson@example.com'
+        fill_in 'Email', :with => 'marge.simpson@example.com'
+
+        # And I fill in 'First name' with 'Marge'
+        fill_in 'First name', :with => 'Marge'
+
+        # And I fill in 'Last name' with 'Simpson'
+        fill_in 'Last name', :with => 'Simpson'
+
+        # And I fill in 'Student first name' with 'Bart'
+        fill_in 'account_request_requested_students_attributes_0_first_name',
+            :with => 'Bart'
+
+        # And I fill in 'Student last name' with 'Simpson'
+        fill_in 'account_request_requested_students_attributes_0_last_name',
+            :with => 'Simpson'
+
+        # And I select '4' from 'Student grade'
+        select '4', 
+            :from => 'account_request_requested_students_attributes_0_grade'
+
+        # And I click 'Submit Request'
+        click_button 'Submit Request'
+
+        # Then I should be redirected to the home page
+        current_path.should == root_path
+
+        # And I should see a flash message stating 
+        #     'Account request successfully submitted'
+        partial_flash = 'Account request successfully submitted'
+        page.should have_xpath(
+            "//div[@class='flash'][@id='notice'][text()[contains(.,'#{partial_flash}')]]")
+      end
+    end
     
     context 'given no email parameter' do
       it 'displays error message' do
-        post_via_redirect account_requests_path, params['account_request'].except('email')
+        post_via_redirect account_requests_path, valid_params['account_request'].except('email')
         assert_select 'div#error_explanation'
       end
     end
   
     context 'given no first_name parameter' do
       it 'displays error message' do
-        post_via_redirect account_requests_path, params['account_request'].except('first_name')
+        post_via_redirect account_requests_path, valid_params['account_request'].except('first_name')
         assert_select 'div#error_explanation'
       end
     end
 
     context 'given no last_name parameter' do
       it 'displays error message' do
-        post_via_redirect account_requests_path, params['account_request'].except('last_name')
+        post_via_redirect account_requests_path, valid_params['account_request'].except('last_name')
         assert_select 'div#error_explanation'
       end
     end

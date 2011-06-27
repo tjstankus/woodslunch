@@ -5,9 +5,10 @@ Also, see Basecamp project
 - Staging app for Heroku.
 AccountRequests:
 	- Initial input for adding a student. @done(2011-06-26)
-	- After account requested redirect to home page with message "Account request successfully submitted. Your request will be reviewed within 3 days. Upon approval, you will receive an account activation email."
+	- After account requested redirect to home page with message "Account request successfully submitted. Your request will be reviewed within 3 days. Upon approval, you will receive an account activation email." @done(2011-06-27)
 	- Limit routes and actions
-	- Admin-protect actions
+		new, create, index
+	- Admin-protect index action
 	- AccountRequest submitted for pending AccountRequest#email request displays "There is a pending account request for #{email}."
 	- AccountRequest submitted for denied AccountRequest#email creates a new AccountRequest in pending state.
 	- Email must be unique for pending AccountRequests.
