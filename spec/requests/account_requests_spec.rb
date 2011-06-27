@@ -10,29 +10,20 @@ describe "AccountRequests" do
   #   end
   # end
 
-  context 'given I am not logged in' do
+  describe 'home page' do
 
-    # Given I am not logged in
+    context 'given I am not logged in' do
 
-    it 'displays new account request link on home page' do
-      # When I go to the home page
-      visit '/'
+      it 'displays new account request link on home page' do
+        # When I go to the home page
+        visit '/'
 
-      # And I follow the account request link
-      click_link 'request an account'
-    end
-
-    context 'index listing' do
-      it 'redirects to the home page' do
-        # When I go to the account requests index page
-        visit account_requests_path
-
-        # Then I should be redirected to the home page
-        current_path.should == root_path
+        # And I follow the account request link
+        click_link 'request an account'
       end
-    end
+    end 
   end
-
+  
   describe 'new account request' do
 
     before(:each) do
@@ -156,6 +147,16 @@ describe "AccountRequests" do
   end
 
   describe 'index listing' do
-    it 'requires admin permissions'
+    
+    context 'given I am not logged in' do
+
+      it 'redirects to the home page' do
+        # When I go to the account requests index page
+        visit account_requests_path
+
+        # Then I should be redirected to the home page
+        current_path.should == root_path
+      end
+    end
   end
 end
