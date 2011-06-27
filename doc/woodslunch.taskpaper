@@ -5,7 +5,7 @@ Also, see Basecamp project
 - Setup sendgrid.
 - Refactor menu_items stuff so it's not it admin namespace. There are going to be a number of controllers that have actions accessible by both admins and non-admins. So, everything's not sequestered off into the admin namespace necessarily. @priority
 AccountRequests:
-	- Account requests listing page @next
+	- Account requests listing page @wip
 	- AccountRequest submitted for pending AccountRequest#email request displays "There is a pending account request for #{email}."
 	- AccountRequest submitted for denied AccountRequest#email creates a new AccountRequest in pending state.
 	- Email must be unique for pending AccountRequests.

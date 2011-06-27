@@ -102,3 +102,9 @@ menu_items_by_day.each do |day_name, item_names|
   end
 end
 
+acc_req = AccountRequest.find_or_create_by_email('marge.simpson@example.com',
+    :first_name => 'Marge', :last_name => 'Simpson')
+RequestedStudent.find_or_create_by_first_name_and_last_name(
+    'Bart', 'Simpson', :grade => '4', :account_request => acc_req)
+RequestedStudent.find_or_create_by_first_name_and_last_name(
+    'Lisa', 'Simpson', :grade => '2', :account_request => acc_req)

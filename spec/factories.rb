@@ -49,52 +49,18 @@ Factory.define :ordered_menu_item do |f|
   f.association :menu_item, :factory => :menu_item
 end
 
-# FactoryGirl.define do
-# 
-#   factory :account do
-#     balance 0
-#   end
-# 
-#   factory :user do
-#     association :account
-#     first_name Faker::Name.first_name
-#     last_name Faker::Name.last_name
-#     sequence(:email) {|n| "#{first_name}.#{last_name}#{n}@example.com".downcase}
-#     password 'secret'
-#     after_build do |user|
-#       
-#     end
-#   end
-# 
-#   factory :admin, :parent => :user do
-#     roles { [:admin] }
-#   end
-# 
-#   factory :menu_item do
-#     sequence(:name) {|n| "Menu item #{n}"}
-#     price { MenuItem::DEFAULT_PRICE }
-#   end
-# 
-#   factory :daily_menu_item do
-#     association :menu_item
-#     day_of_week { DayOfWeek.first }
-#   end
-# 
-#   factory :student do
-#     association :account
-#     first_name Faker::Name.first_name
-#     last_name Faker::Name.last_name
-#     grade Student::GRADES.sample
-#   end
-# 
-#   factory :order do
-#     association :student
-#     served_on { Date.civil(2011, 4, 1) }
-#     total 0
-#   end
-# 
-#   factory :ordered_menu_item do
-#     association :order
-#     association :menu_item
-#   end
-# end
+Factory.define :account_request do |f|
+  f.first_name  Faker::Name.first_name
+  f.last_name Faker::Name.last_name
+  f.after_build do |acc_req|
+    suffix = Factory.next :email_suffix
+    acc_req.email = "#{acc_req.first_name}.#{acc_req.last_name}#{suffix}"
+  end
+end
+
+Factory.define :requested_student do |f|
+  f.association :account_request, :factory => :account_request
+  f.first_name  Faker::Name.first_name
+  f.last_name Faker::Name.last_name
+  f.grade 'K'
+end

@@ -189,6 +189,25 @@ describe "AccountRequests" do
         # Then I should be redirected to the home page
         current_path.should == account_requests_path
       end
+
+      context 'given an account request with two associated students' do
+        
+        let(:account_request) { Factory(:account_request) }
+        let(:students) {
+          [].tap do |a|
+            a << Factory(:requested_student, 
+                :account_request => account_request)
+          end
+        }
+
+        it 'displays user and student info' do
+          # When I go to the account requests index page
+          visit account_requests_path 
+
+          # Then I should see user info
+          # And I should see students info
+        end
+      end
     end
 
   end

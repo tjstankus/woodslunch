@@ -12,6 +12,7 @@ $content_padding_lr: 100px;
 $nav_link_padding_tb: 16px;
 $nav_link_padding_lr: 20px;
 $soft_green: #425b49;
+$listing_even_bg: #f3ebe0;
 
 * {
   margin: 0;
@@ -120,6 +121,8 @@ footer, .push {
   }
 }
 
+/* headers */
+
 h1, h2 {
   color: #9e5b28;
   font: {
@@ -145,6 +148,8 @@ h3 {
   }
 }
 
+/* flash */
+
 .flash {
   padding: 5px;
   margin: 0 0 8px 0;
@@ -158,42 +163,42 @@ h3 {
   border: 1px solid #b20000;
 }
 
-/* monthly order form */
+/* listings */
 
-h1#student_name {
-  margin: 0 0 10px 0;
-  text-align: center;
+.listing_header {
+  margin: 0 0 30px 0;
 }
-h3#month_year {
-  margin: 0 0 10px 0;
-  text-align: center;
-}
-table#monthly_order {
-  border-collapse: collapse;
-  width: 100%;
-}
-table#monthly_order th {
+.listing_item {
   padding: 10px;
-  text-align: center;
-}
-table#monthly_order td {
-  border: 1px solid black;
-  font-size: 12px;
-  padding: 5px;
-  vertical-align: top;
-  width: 20%;
-  div.mday {
-    text-align: right;
-  }
-  div.check_boxes {
-    margin: 0;
-  }
-  label.collection_check_boxes {
-    display: block;
-    margin: 7px 0 0 0;
+  .sub_listing {
+    margin: 5px 0 0 20px;
+    .sub_listing_item {
+      padding: 2px 0;
+    }
   }
 }
-div#monthly_order_info_actions {
-  padding: 20px 0 0 0;
-  text-align: right;
+.listing_item.even {
+  background-color: $listing_even_bg;
 }
+
+/*
+.menu_item_day {
+  margin: 0 0 25px 0;
+  .day_name {
+    margin: 0 0 5px 0;
+  }
+  .menu_item {
+    padding: 3px;
+    span.actions {
+      float: right;
+      a {
+        color: $soft_green;
+        margin: 0 8px 0 0;
+      }
+    }
+  }
+  .menu_item.odd {
+    background-color: #f3ebe0;
+  }
+}
+*/
