@@ -1,14 +1,11 @@
 Also, see Basecamp project
-- Figure out email validation errors when running specs. I suspect uniqueness, but not sure.
 - Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
 - Presenter gem
 - Staging app for Heroku.
+- Setup sendgrid.
+- Refactor menu_items stuff so it's not it admin namespace. There are going to be a number of controllers that have actions accessible by both admins and non-admins. So, everything's not sequestered off into the admin namespace necessarily. @priority
 AccountRequests:
-	- Initial input for adding a student. @done(2011-06-26)
-	- After account requested redirect to home page with message "Account request successfully submitted. Your request will be reviewed within 3 days. Upon approval, you will receive an account activation email." @done(2011-06-27)
-	- Limit routes and actions
-		new, create, index
-	- Admin-protect index action
+	- Account requests listing page @next
 	- AccountRequest submitted for pending AccountRequest#email request displays "There is a pending account request for #{email}."
 	- AccountRequest submitted for denied AccountRequest#email creates a new AccountRequest in pending state.
 	- Email must be unique for pending AccountRequests.
@@ -18,8 +15,7 @@ AccountRequests:
 		denied -> pending
 	- Email must be unique for accounts, so when 
 Accounts/Users/Students:
-	- Start driving towards an account request flow while working on inherited_resources, generators for accounts/users/students with nested structure, e.g., accounts/:account_id/users
-		- Setup sendgrid.
+	- inherited_resources, generators for accounts/users/students with nested structure, e.g., accounts/:account_id/users
 	- Test scenario of adding a user to an account.
 	- @maybe Live update balance on order form.
 	- Payment history (a separate model most likely).
@@ -32,6 +28,11 @@ Menu Items:
 		https://github.com/seejohnrun/ice_cube
 		http://ruby-toolbox.com/categories/recurring_events.html
 Archive:
+	- Figure out email validation errors when running specs. I suspect uniqueness, but not sure. @done(2011-06-27)
+	- Initial input for adding a student. @done(2011-06-26) @project(AccountRequests)
+	- After account requested redirect to home page with message "Account request successfully submitted. Your request will be reviewed within 3 days. Upon approval, you will receive an account activation email." @done(2011-06-27) @project(AccountRequests)
+	- Limit routes and actions @done(2011-06-27) @project(AccountRequests)
+	- Admin-protect index action @done(2011-06-27) @project(AccountRequests)
 	- Request specs for new @done(2011-06-26) @project(AccountRequests)
 	- Remove unused specs @done(2011-06-26) @project(AccountRequests)
 	- Convert form to simple_form @done(2011-06-26) @project(AccountRequests)

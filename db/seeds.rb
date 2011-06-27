@@ -13,6 +13,8 @@ unless User.find_by_email(admin_email)
   u = User.new(:email => admin_email, :password => 'secret')
   u.account = Account.create
   u.roles = [:admin]
+  u.first_name = 'Admin'
+  u.last_name = 'Example'
   u.save!
 end
 
@@ -22,6 +24,8 @@ unless user
   account = Account.create!
   user = User.new(:email => email, :password => 'secret')
   user.account = account
+  user.first_name = 'User'
+  user.last_name = 'Example'
   user.save!
   student = Student.find_or_create_by_first_name_and_last_name_and_grade(
       'John', 'Doe', 'K', :account_id => account.id)
@@ -34,6 +38,8 @@ end
   unless User.find_by_email(user_email)
     account = Account.create
     user = User.new(:email => user_email, :password => "secret#{i}")
+    user.first_name = Faker::Name.first_name
+    user.last_name = Faker::Name.last_name
     user.account = account
     user.roles = [:admin]
     user.save!
