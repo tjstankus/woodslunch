@@ -16,8 +16,12 @@ Woodslunch::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  resources :account_requests, :only => [:index, :new, :create]
-  resources :account_invitations, :only => [:create]
+  resources :account_requests, :only => [:index, :new, :create] do
+    member do
+      post 'approve'
+      post 'decline'
+    end
+  end
 
   # Sample resource route with options:
   #   resources :products do

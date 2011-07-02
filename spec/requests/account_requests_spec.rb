@@ -226,7 +226,7 @@ describe "AccountRequests" do
       visit account_requests_path
 
       # And I clock on the "Approve" button
-      within("div#account_request_#{@account_request.id}") do
+      within("div#pending div#account_request_#{@account_request.id}") do
         click_button 'Approve'
       end
 
@@ -234,10 +234,13 @@ describe "AccountRequests" do
       current_path.should == account_requests_path
 
       # And I should see a flash notice 'Account invitation has been sent'
-      flash_notice = "An account invitation has been sent to #{@account_request.email}"
+      flash_notice = "An account invitation has been sent to " +
+          "#{@account_request.email}"
       page.should have_css('div#notice', :text => flash_notice)
 
       # And I should see the account request listed under 'Approved'
+      page.should have_css('div#approved span.user_info',
+          :text => "#{@account_request.full_name}")
 
       # TODO: Sets approved_at timestamp on account?
       # TODO: Also, activated_at timestamp on account?

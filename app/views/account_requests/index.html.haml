@@ -1,24 +1,24 @@
 %h1{:class => 'listing_header'} Account Requests
 
-%h2 Pending
-- @account_requests.pending.each do |acc_req|
-  %div[acc_req]{:class => 'listing_item pending' + cycle('even', 'odd')}
-    %span.actions
-      %span.create_action
-        = form_for AccountInvitation.new do |f|
-          = f.hidden_field :account_request_id, :value => acc_req.id
-          = f.submit 'Approve'
-      %span.destroy_action
-        = link_to 'Deny'
-    = "#{acc_req.full_name} (#{acc_req.email})"
-    .sub_listing
-      - acc_req.requested_students.each do |student|
-        %div[student]{:class => 'sub_listing_item'}
-          = "#{student.full_name}, Grade: #{student.grade}"
+%h2.listing_subheader Pending
+#pending
+  - @account_requests.pending.each do |acc_req|
+    %div[acc_req]{:class => 'listing_item pending' + cycle('even', 'odd')}
+      %span.actions
+        %span.create_action
+          = form_tag approve_account_request_path(acc_req) do
+            = hidden_field_tag 'id', acc_req.id
+            = submit_tag 'Approve'
+        %span.destroy_action
+          = link_to 'Deny'
+      %span.user_info= "#{acc_req.full_name} (#{acc_req.email})"
+      .sub_listing
+        - acc_req.requested_students.each do |student|
+          %div[student]{:class => 'sub_listing_item'}
+            = "#{student.full_name}, Grade: #{student.grade}"
 
-%h2 Approved
-- @account_requests.approved.each do |acc_req|
-  %div[acc_req]{:class => 'listing_item approved' + cycle('even', 'odd')}
-    = "#{acc_req.full_name} (#{acc_req.email})"
-    %span.create_action
-      = form_for @account_request.account_invitation
+%h2.listing_subheader Approved
+#approved
+  - @account_requests.approved.each do |acc_req|
+    %div[acc_req]{:class => 'listing_item approved' + cycle('even', 'odd')}
+      %span.user_info= "#{acc_req.full_name} (#{acc_req.email})"

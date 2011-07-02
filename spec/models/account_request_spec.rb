@@ -21,7 +21,6 @@ describe AccountRequest do
   end
 
   describe '.pending' do
-
     context 'given two account requests in pending state' do
 
       before(:each) do
@@ -32,8 +31,37 @@ describe AccountRequest do
 
       it 'returns those two account requests' do
         @account_requests.each do |acc_req|
-          AccountRequest.all.pending.should include(acc_req)
+          AccountRequest.pending.should include(acc_req)
         end
+      end
+    end
+  end
+
+  describe '.approved' do
+    context 'given two account requests in approved state' do
+
+      before(:each) do
+        @account_requests = [].tap do |a|
+          2.times { a << Factory(:account_request, :state => 'approved') }
+        end
+      end
+
+      it 'returns those two account requests' do
+        @account_requests.each do |acc_req|
+          AccountRequest.approved.should include(acc_req)
+        end
+      end
+    end
+  end
+
+  describe '#approve!' do
+    context 'given a pending account request' do
+
+      let(:account_request) { Factory(:account_request) }
+
+      it 'sets state to approved' do
+        account_request.approve!
+        account_request.approved?.should be_true
       end
     end
   end

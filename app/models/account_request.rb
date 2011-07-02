@@ -9,7 +9,17 @@ class AccountRequest < ActiveRecord::Base
   accepts_nested_attributes_for :requested_students
 
   state_machine :state, :initial => :pending do
+    event :approve do
+      transition [:pending] => :approved
+    end
+  end
 
+  def self.pending
+    where("state = 'pending'")
+  end
+
+  def self.approved
+    where("state = 'approved'")
   end
 
   def full_name
