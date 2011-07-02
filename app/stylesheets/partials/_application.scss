@@ -170,6 +170,13 @@ h3 {
 }
 .listing_item {
   padding: 10px;
+  span.actions {
+    float: right;
+    a {
+      color: $soft_green;
+      margin: 0 8px 0 0;
+    }
+  }
   .sub_listing {
     margin: 5px 0 0 20px;
     .sub_listing_item {

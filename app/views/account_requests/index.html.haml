@@ -2,6 +2,9 @@
 
 - @account_requests.each do |acc_req|
   %div[acc_req]{:class => 'listing_item ' + cycle('even', 'odd')}
+    %span.actions
+      = link_to 'Approve'
+      = link_to 'Deny'
     = "#{acc_req.full_name} (#{acc_req.email})"
     .sub_listing
       - acc_req.requested_students.each do |student|
