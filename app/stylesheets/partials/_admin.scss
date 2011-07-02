@@ -1,24 +1,9 @@
 #admin_menu_bar {
   margin: 0 0 30px 0;
-  a.button { 
+  a.button {
     @include fancy-button(#9E5B28, 13px);
     float: right;
     margin: 6px 6px 0 0;
-  }
-}
-
-form.simple_form {
-  input[type="submit"] {
-    @include fancy-button(#9E5B28, 13px);
-  }
-  a.delete {
-    @include fancy-button(#ff0000, 13px);
-  }
-}
-
-form.simple_form.menu_item {
-  input[type="submit"], a {
-    margin: 0 15px 0 0;
   }
 }
 

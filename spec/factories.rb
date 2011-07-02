@@ -22,7 +22,7 @@ Factory.define :admin, :parent => :user do |f|
 end
 
 Factory.define :menu_item do |f|
-  f.sequence(:name) { |n| "Menu item #{n}" } 
+  f.sequence(:name) { |n| "Menu item #{n}" }
   f.price { MenuItem::DEFAULT_PRICE }
 end
 
@@ -50,8 +50,8 @@ Factory.define :ordered_menu_item do |f|
 end
 
 Factory.define :account_request do |f|
-  f.first_name  Faker::Name.first_name
-  f.last_name Faker::Name.last_name
+  f.first_name  Faker::Name.first_name.downcase
+  f.last_name Faker::Name.last_name.downcase
   f.after_build do |acc_req|
     suffix = Factory.next :email_suffix
     acc_req.email = "#{acc_req.first_name}.#{acc_req.last_name}#{suffix}"

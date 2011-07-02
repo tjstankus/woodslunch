@@ -21,19 +21,19 @@ describe "AccountRequests" do
         # And I follow the account request link
         click_link 'request an account'
       end
-    end 
+    end
   end
-  
+
   describe 'new account request' do
 
     before(:each) do
       visit new_account_request_path
     end
-    
+
     it 'displays form' do
       page.should have_xpath("//form[@action='/account_requests']")
     end
-    
+
     it 'displayes required email'  do
       page.should have_xpath("//input[@id='account_request_email'][@required='required']")
     end
@@ -66,14 +66,14 @@ describe "AccountRequests" do
 
   describe 'create account request' do
 
-    let(:valid_params) { 
+    let(:valid_params) {
       { 'account_request' => {
-          'email'=>'john.doe@example.com', 
-          'first_name'=>'John', 
+          'email'=>'john.doe@example.com',
+          'first_name'=>'John',
           'last_name'=>'Doe',
           'requested_students_attributes' => {
-            '0' => { 'first_name' => 'Bart', 
-                     'last_name' => 'Simpson', 
+            '0' => { 'first_name' => 'Bart',
+                     'last_name' => 'Simpson',
                      'grade' => '4' } } } }
     }
 
@@ -102,7 +102,7 @@ describe "AccountRequests" do
             :with => 'Simpson'
 
         # And I select '4' from 'Student grade'
-        select '4', 
+        select '4',
             :from => 'account_request_requested_students_attributes_0_grade'
 
         # And I click 'Submit Request'
@@ -111,21 +111,21 @@ describe "AccountRequests" do
         # Then I should be redirected to the home page
         current_path.should == root_path
 
-        # And I should see a flash message stating 
+        # And I should see a flash message stating
         #     'Account request successfully submitted'
         partial_flash = 'Account request successfully submitted'
         page.should have_xpath(
             "//div[@class='flash'][@id='notice'][text()[contains(.,'#{partial_flash}')]]")
       end
     end
-    
+
     context 'given no email parameter' do
       it 'displays error message' do
         post_via_redirect account_requests_path, valid_params['account_request'].except('email')
         assert_select 'div#error_explanation'
       end
     end
-  
+
     context 'given no first_name parameter' do
       it 'displays error message' do
         post_via_redirect account_requests_path, valid_params['account_request'].except('first_name')
@@ -147,7 +147,7 @@ describe "AccountRequests" do
   end
 
   describe 'index listing' do
-    
+
     context 'given I am not logged in' do
 
       it 'redirects to the home page' do
@@ -191,23 +191,56 @@ describe "AccountRequests" do
       end
 
       context 'given an account request with two associated students' do
-        
+
         let(:account_request) { Factory(:account_request) }
         let(:students) {
           [].tap do |a|
-            a << Factory(:requested_student, 
+            a << Factory(:requested_student,
                 :account_request => account_request)
           end
         }
 
         it 'displays user and student info' do
           # When I go to the account requests index page
-          visit account_requests_path 
+          visit account_requests_path
 
           # Then I should see user info
           # And I should see students info
         end
       end
+    end
+  end
+
+  describe 'approval' do
+
+    before(:each) do
+      # Given an account request
+      @account_request = Factory(:account_request)
+      # And I am logged in as an admin
+      @admin = Factory(:admin)
+      sign_in_as(@admin)
+    end
+
+    it 'sends email with activation token' do
+      # When I go to the account requests listing
+      visit account_requests_path
+
+      # And I clock on the "Approve" button
+      within("div#account_request_#{@account_request.id}") do
+        click_button 'Approve'
+      end
+
+      # Then I should be back on the account requests listing page
+      current_path.should == account_requests_path
+
+      # And I should see a flash notice 'Account invitation has been sent'
+      flash_notice = "An account invitation has been sent to #{@account_request.email}"
+      page.should have_css('div#notice', :text => flash_notice)
+
+      # And I should see the account request listed under 'Approved'
+
+      # TODO: Sets approved_at timestamp on account?
+      # TODO: Also, activated_at timestamp on account?
     end
 
   end

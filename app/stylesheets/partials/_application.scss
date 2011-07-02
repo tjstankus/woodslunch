@@ -1,4 +1,4 @@
-/* 
+/*
 Some styles culled from:
 http://www.endigodesign.com/2010/07/html5-sticky-footer/
 */
@@ -91,7 +91,7 @@ body {
   background: {
     image: url('/images/bg_content.jpg');
     repeat: no-repeat;
-  }  
+  }
   font: {
     family: 'Droid Serif';
     size: 16px;
@@ -175,6 +175,15 @@ h3 {
     a {
       color: $soft_green;
       margin: 0 8px 0 0;
+    }
+    form {
+      display: inline;
+      div {
+        display: inline;
+      }
+      input[type=submit] {
+        @include fancy-button($soft_green, 12px);
+      }
     }
   }
   .sub_listing {

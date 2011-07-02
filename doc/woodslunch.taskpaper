@@ -4,9 +4,14 @@ Also, see Basecamp project
 - Staging app for Heroku.
 - Setup sendgrid.
 - Refactor menu_items stuff so it's not it admin namespace. There are going to be a number of controllers that have actions accessible by both admins and non-admins. So, everything's not sequestered off into the admin namespace necessarily. @priority
+	- Also convert menu_items listing to use .listing_item classes in _application.scss and remove the .menu_item item stuff in _admin.scss
+- 
 AccountRequests:
-	- Account requests listing page @wip
-		- Actions links
+	Email:
+		- Does sendgrid have a web ui that shows account activity, like when an email was last sent, etc. @q If so, then we don't need to worry about tracking when an email was last sent.
+	- Account requests listing page
+		- Approve action @next
+		- Deny action
 	- AccountRequest submitted for pending AccountRequest#email request displays "There is a pending account request for #{email}."
 	- AccountRequest submitted for denied AccountRequest#email creates a new AccountRequest in pending state.
 	- Email must be unique for pending AccountRequests.
@@ -14,11 +19,11 @@ AccountRequests:
 		pending -> approved, then account gets created and AccountRequest is destroyed
 		pending -> denied
 		denied -> pending
+		state_machine gem (from pluginaweek) is recommended
 	- Email must be unique for accounts, so when 
 Accounts/Users/Students:
 	- inherited_resources, generators for accounts/users/students with nested structure, e.g., accounts/:account_id/users
 	- Test scenario of adding a user to an account.
-	- @maybe Live update balance on order form.
 	- Payment history (a separate model most likely).
 		- Admin records a payment for this account.
 		- Payment model. Belongs to account with presence validation.
@@ -29,6 +34,7 @@ Menu Items:
 		https://github.com/seejohnrun/ice_cube
 		http://ruby-toolbox.com/categories/recurring_events.html
 Archive:
+	- Create Basecamp tasks for new dev notes @done(2011-07-02)
 	- Figure out email validation errors when running specs. I suspect uniqueness, but not sure. @done(2011-06-27)
 	- Initial input for adding a student. @done(2011-06-26) @project(AccountRequests)
 	- After account requested redirect to home page with message "Account request successfully submitted. Your request will be reviewed within 3 days. Upon approval, you will receive an account activation email." @done(2011-06-27) @project(AccountRequests)

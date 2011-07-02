@@ -4,6 +4,7 @@ class CreateAccountRequests < ActiveRecord::Migration
       t.string :email
       t.string :first_name
       t.string :last_name
+      t.string :state
 
       t.timestamps
     end

@@ -17,6 +17,7 @@ Woodslunch::Application.routes.draw do
   #   resources :products
 
   resources :account_requests, :only => [:index, :new, :create]
+  resources :account_invitations, :only => [:create]
 
   # Sample resource route with options:
   #   resources :products do
@@ -35,7 +36,7 @@ Woodslunch::Application.routes.draw do
   #     resources :comments, :sales
   #     resource :seller
   #   end
-  
+
   match '/students/:student_id/orders/:year/:month' => 'student_orders#edit',
       :via => :get, :as => :edit_student_order
   resources :students do

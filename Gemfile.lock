@@ -154,6 +154,7 @@ GEM
     shoulda (2.11.3)
     simple_form (1.4.1)
     sqlite3 (1.3.3)
+    state_machine (1.0.1)
     term-ansicolor (1.0.5)
     thin (1.2.11)
       daemons (>= 1.0.9)
@@ -194,4 +195,5 @@ DEPENDENCIES
   shoulda (= 2.11.3)
   simple_form (= 1.4.1)
   sqlite3 (= 1.3.3)
+  state_machine (= 1.0.1)
   thin

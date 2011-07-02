@@ -3,7 +3,7 @@ form.simple_form {
     border: 1px solid #1e0e02;
     margin: 20px 0;
     padding: 0 20px 10px 20px;
-  } 
+  }
   div.input {
     margin: 24px 0;
   }
@@ -21,4 +21,23 @@ form.simple_form {
       }
     }
   }
+}
+
+form.simple_form {
+  input[type="submit"] {
+    @include fancy-button(#9E5B28, 13px);
+  }
+  a.delete {
+    @include fancy-button(#ff0000, 13px);
+  }
+}
+
+form.simple_form.menu_item {
+  input[type="submit"], a {
+    margin: 0 15px 0 0;
+  }
+}
+
+form.button_to {
+
 }
