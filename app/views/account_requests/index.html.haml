@@ -17,7 +17,7 @@
           %div[student]{:class => 'sub_listing_item'}
             = "#{student.full_name}, Grade: #{student.grade}"
 
-%h2.listing_subheader Approved
+%h2.listing_subheader Approved (Awaiting Activation)
 #approved
   - @account_requests.approved.each do |acc_req|
     %div[acc_req]{:class => 'listing_item approved' + cycle('even', 'odd')}

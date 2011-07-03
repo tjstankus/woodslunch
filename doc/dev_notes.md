@@ -1,6 +1,11 @@
 Dev Notes
 =========
 
+When account requests get approved, they are awaiting activation. At that
+point, they should show up on the account_requests index listing as
+"Approved (Awaiting Activation)". An admin should be able to resend the
+AccountInvitationMailer.invitation. So, I
+
 Account Request
 ---------------
 

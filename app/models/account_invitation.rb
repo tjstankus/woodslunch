@@ -7,7 +7,7 @@ class AccountInvitation < ActiveRecord::Base
   after_create :deliver_email
 
   def set_token
-    self.token = SecureRandom.hex(16) unless self.token
+    self.token ||= SecureRandom.hex(16)
   end
 
   def deliver_email

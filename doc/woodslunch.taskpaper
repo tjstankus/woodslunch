@@ -2,7 +2,7 @@ Also, see Basecamp project
 - Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
 - Presenter gem
 - Staging app for Heroku.
-- Setup sendgrid.
+- Setup sendgrid
 - Refactor menu_items stuff so it's not it admin namespace. There are going to be a number of controllers that have actions accessible by both admins and non-admins. So, everything's not sequestered off into the admin namespace necessarily. @priority
 	- Also convert menu_items listing to use .listing_item classes in _application.scss and remove the .menu_item item stuff in _admin.scss
 - 
@@ -10,8 +10,17 @@ AccountRequests:
 	Email:
 		- Does sendgrid have a web ui that shows account activity, like when an email was last sent, etc. @q If so, then we don't need to worry about tracking when an email was last sent.
 	- Account requests listing page
-		- Approve action @next
-		- Deny action
+		- Approve action @done(2011-07-03)
+			- Move AccountInvitation#token to AccountRequest#activation_token @next
+			- Assert that mailer contains the activation token @priority
+			- Deploy and use sendgrid. What does sendgrid give us in the way of UI to resend emails, etc. @priority
+			Then do we need AccountInvitation at all? Instead, just the mailer, which will receive the account_request object as a parameter. What if we want to track how long it's been since the last invitation email was sent. last_sent_at, send_count, etc. Okay, so probably keep AccountInvitation as an object, but I *do* think it makes sense to move the token field to the AccountRequest.
+			- Once activated the account request gets destroyed.
+			- Email gets sent upon successful activation. Actually, after activation, need to redirect to screen to setup password (with confirmation), then automatically log in.
+		- Deny action @priority
+		- Activate
+			GET account_requests/activate/:token
+			Matches token against account requests in the pending 
 	- AccountRequest submitted for pending AccountRequest#email request displays "There is a pending account request for #{email}."
 	- AccountRequest submitted for denied AccountRequest#email creates a new AccountRequest in pending state.
 	- Email must be unique for pending AccountRequests.

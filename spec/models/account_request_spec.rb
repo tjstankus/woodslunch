@@ -9,12 +9,9 @@ describe AccountRequest do
 
   it 'destroys dependent students'
 
-  it 'requires one associated student'
-
   it 'validates format of email'
 
   describe '#state' do
-
     it 'initializes to pending' do
       AccountRequest.new.state.should == 'pending'
     end

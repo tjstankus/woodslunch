@@ -211,7 +211,7 @@ describe "AccountRequests" do
     end
   end
 
-  describe 'approval' do
+  describe 'approve!' do
 
     before(:each) do
       # Given an account request
