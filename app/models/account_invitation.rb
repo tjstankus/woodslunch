@@ -6,6 +6,6 @@ class AccountInvitation < ActiveRecord::Base
   after_create :deliver_email
 
   def deliver_email
-    AccountInvitationMailer.invitation(self).deliver
+    AccountInvitationMailer.invitation(account_request).deliver
   end
 end

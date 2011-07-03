@@ -11,8 +11,11 @@ AccountRequests:
 		- Does sendgrid have a web ui that shows account activity, like when an email was last sent, etc. @q If so, then we don't need to worry about tracking when an email was last sent.
 	- Account requests listing page
 		- Approve action @done(2011-07-03)
-			- Move AccountInvitation#token to AccountRequest#activation_token @next
-			- Assert that mailer contains the activation token @priority
+			- Move AccountInvitation#token to AccountRequest#activation_token @done(2011-07-03)
+			- Assert that mailer body contains the activation token @next
+				- Get activation url into body
+					- A route for activation
+					- Url helpers in mailer
 			- Deploy and use sendgrid. What does sendgrid give us in the way of UI to resend emails, etc. @priority
 			Then do we need AccountInvitation at all? Instead, just the mailer, which will receive the account_request object as a parameter. What if we want to track how long it's been since the last invitation email was sent. last_sent_at, send_count, etc. Okay, so probably keep AccountInvitation as an object, but I *do* think it makes sense to move the token field to the AccountRequest.
 			- Once activated the account request gets destroyed.

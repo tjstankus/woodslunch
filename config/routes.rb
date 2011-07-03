@@ -22,6 +22,8 @@ Woodslunch::Application.routes.draw do
       post 'decline'
     end
   end
+  match '/account_requests/:id/activate/:token' => 'account_requests#activate',
+      :as => 'account_activation'
 
   # Sample resource route with options:
   #   resources :products do
