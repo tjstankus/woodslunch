@@ -1,5 +1,5 @@
-CREATE TABLE "account_invitations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "account_request_id" integer, "token" varchar(255));
-CREATE TABLE "account_requests" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "first_name" varchar(255), "last_name" varchar(255), "state" varchar(255), "approved_at" datetime, "declined_at" datetime, "created_at" datetime, "updated_at" datetime);
+CREATE TABLE "account_invitations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "account_request_id" integer);
+CREATE TABLE "account_requests" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "first_name" varchar(255), "last_name" varchar(255), "state" varchar(255), "activation_token" varchar(255), "approved_at" datetime, "declined_at" datetime, "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "accounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "balance" decimal(5,2) DEFAULT 0, "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "daily_menu_items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "day_of_week_id" integer, "menu_item_id" integer, "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "days_of_week" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255));

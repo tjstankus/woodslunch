@@ -6,6 +6,8 @@ class AccountRequest < ActiveRecord::Base
   validates :first_name, :presence => true
   validates :last_name, :presence => true
 
+  before_validation :set_activation_token
+
   accepts_nested_attributes_for :requested_students
 
   state_machine :state, :initial => :pending do
@@ -41,5 +43,9 @@ class AccountRequest < ActiveRecord::Base
 
   def full_name
     [first_name, last_name].join(' ')
+  end
+
+  def set_activation_token
+    self.activation_token ||= SecureRandom.hex(16)
   end
 end

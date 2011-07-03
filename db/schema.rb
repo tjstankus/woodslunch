@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(:version => 20110702172052) do
 
   create_table "account_invitations", :force => true do |t|
     t.integer "account_request_id"
-    t.string  "token"
   end
 
   create_table "account_requests", :force => true do |t|
@@ -22,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20110702172052) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "state"
+    t.string   "activation_token"
     t.datetime "approved_at"
     t.datetime "declined_at"
     t.datetime "created_at"
