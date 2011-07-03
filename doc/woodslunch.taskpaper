@@ -1,29 +1,15 @@
-Also, see Basecamp project
-- Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
-- Presenter gem
 - Staging app for Heroku.
-- Setup sendgrid
+- Deploy and use sendgrid. What does sendgrid give us in the way of UI to resend emails, etc. @priority
 - Refactor menu_items stuff so it's not it admin namespace. There are going to be a number of controllers that have actions accessible by both admins and non-admins. So, everything's not sequestered off into the admin namespace necessarily. @priority
 	- Also convert menu_items listing to use .listing_item classes in _application.scss and remove the .menu_item item stuff in _admin.scss
-- 
 AccountRequests:
-	Email:
-		- Does sendgrid have a web ui that shows account activity, like when an email was last sent, etc. @q If so, then we don't need to worry about tracking when an email was last sent.
-	- Account requests listing page
-		- Approve action @done(2011-07-03)
-			- Move AccountInvitation#token to AccountRequest#activation_token @done(2011-07-03)
-			- Assert that mailer body contains the activation token @next
-				- Get activation url into body
-					- A route for activation
-					- Url helpers in mailer
-			- Deploy and use sendgrid. What does sendgrid give us in the way of UI to resend emails, etc. @priority
-			Then do we need AccountInvitation at all? Instead, just the mailer, which will receive the account_request object as a parameter. What if we want to track how long it's been since the last invitation email was sent. last_sent_at, send_count, etc. Okay, so probably keep AccountInvitation as an object, but I *do* think it makes sense to move the token field to the AccountRequest.
-			- Once activated the account request gets destroyed.
-			- Email gets sent upon successful activation. Actually, after activation, need to redirect to screen to setup password (with confirmation), then automatically log in.
-		- Deny action @priority
-		- Activate
-			GET account_requests/activate/:token
-			Matches token against account requests in the pending 
+	- Does sendgrid have a web ui that shows account activity, like when an email was last sent, etc. @q If so, then we don't need to worry about tracking when an email was last sent.
+	- Once activated the account request gets destroyed.
+	- Email gets sent upon successful activation. Actually, after activation, need to redirect to screen to setup password (with confirmation), then automatically log in.
+	- Deny action @priority
+	- Activate
+		GET account_requests/activate/:token
+		Matches token against account requests in the pending 
 	- AccountRequest submitted for pending AccountRequest#email request displays "There is a pending account request for #{email}."
 	- AccountRequest submitted for denied AccountRequest#email creates a new AccountRequest in pending state.
 	- Email must be unique for pending AccountRequests.
@@ -33,6 +19,8 @@ AccountRequests:
 		denied -> pending
 		state_machine gem (from pluginaweek) is recommended
 	- Email must be unique for accounts, so when 
+AccountInvitation:
+@maybe What if we want to track how long it's been since the last invitation email was sent. last_sent_at, send_count, etc. Unless sendgrid gives us a way to do this stuff.
 Accounts/Users/Students:
 	- inherited_resources, generators for accounts/users/students with nested structure, e.g., accounts/:account_id/users
 	- Test scenario of adding a user to an account.
@@ -45,35 +33,7 @@ Menu Items:
 	- @q Handle items on non-daily schedules?
 		https://github.com/seejohnrun/ice_cube
 		http://ruby-toolbox.com/categories/recurring_events.html
+Later:
+	- Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
+	- Presenter gem
 Archive:
-	- Create Basecamp tasks for new dev notes @done(2011-07-02)
-	- Figure out email validation errors when running specs. I suspect uniqueness, but not sure. @done(2011-06-27)
-	- Initial input for adding a student. @done(2011-06-26) @project(AccountRequests)
-	- After account requested redirect to home page with message "Account request successfully submitted. Your request will be reviewed within 3 days. Upon approval, you will receive an account activation email." @done(2011-06-27) @project(AccountRequests)
-	- Limit routes and actions @done(2011-06-27) @project(AccountRequests)
-	- Admin-protect index action @done(2011-06-27) @project(AccountRequests)
-	- Request specs for new @done(2011-06-26) @project(AccountRequests)
-	- Remove unused specs @done(2011-06-26) @project(AccountRequests)
-	- Convert form to simple_form @done(2011-06-26) @project(AccountRequests)
-	- Add first name, last name to users. @done(2011-06-20) @project(Accounts/Users/Students)
-	- Make tasks from phone call notes @done(2011-06-19)
-	- Spec balance displayed on dashboard. @done(2011-06-18) @project(Accounts)
-	- Redo seed data for flattened users/students. @done(2011-06-18) @project(Accounts)
-	- On a branch, flatten users and students under accounts. This should work, but do it on a branch just to be safe. First, change the model specs and work out from there. The changes should propagate all the way out. @done @project(Accounts)
-	- User requires account. @done @project(Accounts)
-	- Think about a more elegant way to update account balance. It should be the responsibility of the account to know how to update itself, or perhaps an observer. @done @project(Accounts)
-	- Test that removing an item from an order decrements the account balance. @done @project(Accounts)
-	- Seed users so that they are associated with accounts. @done @project(Accounts)
-	- Fix May display issue. Probably occurs due to the first week not including any weekdays. @done @project(Student Orders)
-	- Style title bar area in admin. @done
-	- Seed menu items data from current menu @done
-	- Prettify menu items listing @done
-	- Finish menu items @done
-		- Form button should be styled with fancy buttons. @done
-		- Delete should be available from the edit menu item page only. It should be a button styled with red. @done
-	- Style better flash messages. They shouldn't exist in DOM unless there's a flash message for that type. @done(2011-05-30)
-	- Get current failing specs (left on purpose) passing. @done @project(Student Orders)
-	- Setup student seed data so that I can test orders manually in the browser. @done @project(Student Orders)
-	- Should not be able to duplicate an order, e.g., order a hamburger on Monday two times. @done @project(Student Orders)
-	- Also need to be able to delete items by unchecking from existing order. @done @project(Student Orders)
-	- Show ordered items as checked. @done @project(Student Orders)
