@@ -32,6 +32,7 @@ group :development, :test do
   gem 'launchy', '0.4.0'
   gem 'factory_girl_rails', '1.0.1'
   gem 'shoulda', '2.11.3'
+  gem 'email_spec', '1.2.1'
 end
 
 group :production do

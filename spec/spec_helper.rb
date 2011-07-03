@@ -29,6 +29,8 @@ RSpec.configure do |config|
 
   config.include(SessionHelpers)
   config.include(OrderHelpers)
+  config.include(EmailSpec::Helpers)
+  config.include(EmailSpec::Matchers)
 
   config.before(:all) do
     DayOfWeek::NAMES.each do |day_name|
@@ -48,5 +50,5 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
-  
+
 end

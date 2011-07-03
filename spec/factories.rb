@@ -58,6 +58,10 @@ Factory.define :account_request do |f|
   end
 end
 
+Factory.define :account_invitation do |f|
+  f.association :account_request, :factory => :account_request
+end
+
 Factory.define :requested_student do |f|
   f.association :account_request, :factory => :account_request
   f.first_name  Faker::Name.first_name

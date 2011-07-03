@@ -5,6 +5,8 @@ class CreateAccountRequests < ActiveRecord::Migration
       t.string :first_name
       t.string :last_name
       t.string :state
+      t.timestamp :approved_at
+      t.timestamp :declined_at
 
       t.timestamps
     end

@@ -61,7 +61,21 @@ describe AccountRequest do
 
       it 'sets state to approved' do
         account_request.approve!
-        account_request.approved?.should be_true
+        account_request.state.should == 'approved'
+      end
+
+      it 'sets approved_at timestamp to now' do
+        account_request.approved_at.should be_nil
+        account_request.approve!
+        account_request.approved_at.should be_a(ActiveSupport::TimeWithZone)
+        account_request.approved_at.should be_within(1).of(Time.now)
+      end
+
+      it 'creates an associated AccountInvitation', :wip => true do
+        lambda {
+          account_request.approve!
+        }.should change {account_request.account_invitation}.from(nil)
+        account_request.account_invitation.should be_an(AccountInvitation)
       end
     end
   end
