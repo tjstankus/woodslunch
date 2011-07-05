@@ -22,22 +22,24 @@ describe User do
 
   end
 
-  describe '#admin?' do
-  	context 'given admin role' do
-  		it 'returns true' do
-        Factory.build(:admin).has_role?(:admin).should be_true
-  		end
-  	end
+  describe '#has_role?' do
+    context 'admin' do
+      context 'given admin role' do
+        it 'returns true' do
+          Factory.build(:admin).has_role?(:admin).should be_true
+        end
+      end
 
-    context 'for non-admin' do
-      it 'returns false' do
-        Factory.build(:user).has_role?(:admin).should be_false
+      context 'for non-admin' do
+        it 'returns false' do
+          Factory.build(:user).has_role?(:admin).should be_false
+        end
       end
     end
   end
 
   describe '#students' do
-    
+
     let!(:user) { Factory(:user) }
     let(:account) { user.account }
 
