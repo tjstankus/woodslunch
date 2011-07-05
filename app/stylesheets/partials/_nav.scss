@@ -1,0 +1,33 @@
+ul#nav {
+  background: {
+    color: #1e0e02;
+  }
+  height: $nav_height - $nav_link_padding_tb;
+  list-style: none;
+  margin: 0;
+  padding: $nav_link_padding_tb $content_padding_lr 0 $content_padding_lr - $nav_link_padding_lr;
+  li {
+    float: left;
+    position: relative;
+    a {
+      color: #f0c397;
+      font: {
+        family: Georgia, "Times New Roman", Times, serif;
+        size: 18px;
+      }
+      padding: $nav_link_padding_tb $nav_link_padding_lr;
+      text-decoration: none;
+    }
+    a:hover {
+      background: {
+        image: url('/images/nav_hover.png');
+        repeat: repeat-x;
+      }
+    }
+    ul {
+      left: 0;
+      list-style: none;
+      position: absolute;
+    }
+  }
+}

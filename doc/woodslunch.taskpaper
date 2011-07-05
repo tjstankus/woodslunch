@@ -1,3 +1,22 @@
+Nav:
+	http://www.queness.com/post/1047/easy-to-style-jquery-drop-down-menu-tutorial doesn't seem to handle submenu widths that are greater than parent menu item. So, trying this method http://www.cssnewbie.com/easy-css-dropdown-menus/ which seems a little cleaner withouth the clears and such, and more flexible. @next
+Goals for next meeting:
+	Have Emily and Susan request accounts
+	See their account requests
+	Activate their account requests
+	Promote their user accounts (not actual accounts) to admin
+	This will involve:
+		Setup a staging environment
+		Users listing (part of accounts listing)?
+		...
+Misc:
+- Nav menu @next
+	Admin
+		Reports
+		Menu Items
+		Account Requests
+- Users listing
+	- Ability to make someone an admin
 - Staging app for Heroku.
 - Deploy and use sendgrid. What does sendgrid give us in the way of UI to resend emails, etc. @priority
 - Refactor menu_items stuff so it's not it admin namespace. There are going to be a number of controllers that have actions accessible by both admins and non-admins. So, everything's not sequestered off into the admin namespace necessarily. @priority
