@@ -1,10 +1,10 @@
-%ul#nav
+%ul#nav.dropdown
   %li= link_to('Home', root_path)
   - if user_signed_in?
     - if current_user.has_role?(:admin)
       %li
         = link_to('Admin', root_path)
-        %ul
+        %ul.submenu#admin
           %li= link_to('Menu', admin_menu_items_path)
           %li= link_to('Account Requests', account_requests_path)
     %li= link_to('Sign out', destroy_user_session_path)

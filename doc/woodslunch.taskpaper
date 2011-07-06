@@ -1,5 +1,6 @@
 Nav:
-	http://www.queness.com/post/1047/easy-to-style-jquery-drop-down-menu-tutorial doesn't seem to handle submenu widths that are greater than parent menu item. So, trying this method http://www.cssnewbie.com/easy-css-dropdown-menus/ which seems a little cleaner withouth the clears and such, and more flexible. @next
+	- http://css-tricks.com/2282-simple-jquery-dropdowns/ @wip
+	http://www.queness.com/post/1047/easy-to-style-jquery-drop-down-menu-tutorial doesn't seem to handle submenu widths that are greater than parent menu item. So, trying this method http://www.cssnewbie.com/easy-css-dropdown-menus/ which seems a little cleaner withouth the clears and such, and more flexible.
 Goals for next meeting:
 	Have Emily and Susan request accounts
 	See their account requests

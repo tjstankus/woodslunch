@@ -9,9 +9,8 @@ $footer_height: $nav_height;
 $neg_footer_height: -53px;
 $content_padding_tb: 16px;
 $content_padding_lr: 100px;
-$nav_link_padding_tb: 16px;
-$nav_link_padding_lr: 20px;
 $soft_green: #425b49;
+$dark_brown: #1e0e02;
 $listing_even_bg: #f3ebe0;
 
 * {
@@ -24,7 +23,7 @@ html, body {
 
 body {
   background: {
-    color: #1e0e02;
+    color: $dark_brown;
   }
 }
 

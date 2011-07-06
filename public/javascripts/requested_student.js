@@ -6,16 +6,16 @@ var RequestedStudent = (function() {
   var index = 0;
 
   // Output html:
-  // 
+  //
   // <div class="input string required">
   //   <label class="string required" for="account_request_requested_students_attributes_0_first_name">
   //     <abbr title="required">*</abbr>
   //     First name
   //   </label>
-  //   <input class="string required" 
-  //       id="account_request_requested_students_attributes_0_first_name" 
-  //       maxlength="255" 
-  //       name="account_request[requested_students_attributes][0][first_name]" 
+  //   <input class="string required"
+  //       id="account_request_requested_students_attributes_0_first_name"
+  //       maxlength="255"
+  //       name="account_request[requested_students_attributes][0][first_name]"
   //       required="required" size="50" type="text" />
   // </div>
   function nameField(idx, part) {
@@ -39,7 +39,7 @@ var RequestedStudent = (function() {
       class: 'string required',
       id: id_attr,
       maxlength: '255',
-      name: 'account_request[requested_students_attributes][' + idx + 
+      name: 'account_request[requested_students_attributes][' + idx +
           '][' + part + '_name]',
       size: '50',
       type: 'text'
@@ -55,8 +55,8 @@ var RequestedStudent = (function() {
   //     <abbr title="required">*</abbr>
   //     Grade
   //   </label>
-  //   <select class="select required" 
-  //       id="account_request_requested_students_attributes_0_grade" 
+  //   <select class="select required"
+  //       id="account_request_requested_students_attributes_0_grade"
   //       name="account_request[requested_students_attributes][0][grade]"><option value=""></option>
   //     <option value="K">K</option>
   //     <option value="1">1</option>
@@ -93,7 +93,7 @@ var RequestedStudent = (function() {
       id: 'account_request_requested_students_attributes_' + idx + '_grade',
       name: 'account_request[requested_students_attributes][' + idx + '][grade]'
     });
-    var optionValues = ['', 'K', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
+    var optionValues = ['', 'K', '1', '2', '3', '4', '5', '6', '7', '8', '9',
         '10', '11', '12'];
     for(var i = 0; i < optionValues.length; i++) {
       var $option = $('<option>', {
@@ -109,7 +109,7 @@ var RequestedStudent = (function() {
   function capitalizeFirstLetter(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
   }
-  
+
   function wrapped($elem) {
     var $container = $('<div>', {});
     $container.append($elem);
@@ -118,7 +118,7 @@ var RequestedStudent = (function() {
 
   //
   // public interface
-  // 
+  //
   return {
     addFields: function () {
       index++;
@@ -137,4 +137,3 @@ $(document).ready(function() {
     RequestedStudent.addFields();
   });
 });
-
