@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rake', '0.8.7'
 gem 'rails', '3.0.9'
-gem 'heroku', '2.2.4'
+gem 'heroku', '2.3.6'
 
 gem 'devise', '1.3.4'
 gem 'simple_form', '1.4.1'

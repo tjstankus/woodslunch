@@ -7,5 +7,6 @@ $(document).ready(function() {
     }, function() {
 
       $('ul:first', this).css('visibility', 'hidden');
+
   });
 });
