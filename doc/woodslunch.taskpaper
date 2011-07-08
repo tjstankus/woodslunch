@@ -1,26 +1,22 @@
-Nav:
-	- http://css-tricks.com/2282-simple-jquery-dropdowns/ @wip
-	http://www.queness.com/post/1047/easy-to-style-jquery-drop-down-menu-tutorial doesn't seem to handle submenu widths that are greater than parent menu item. So, trying this method http://www.cssnewbie.com/easy-css-dropdown-menus/ which seems a little cleaner withouth the clears and such, and more flexible.
 Goals for next meeting:
 	Have Emily and Susan request accounts
 	See their account requests
 	Activate their account requests
 	Promote their user accounts (not actual accounts) to admin
 	This will involve:
-		Setup a staging environment
+		Setup a staging environment. Could do this later.
 		Users listing (part of accounts listing)?
 		...
 Misc:
-- Nav menu @next
 	Admin
 		Reports
 		Menu Items
 		Account Requests
-- Users listing
-	- Ability to make someone an admin
-- Staging app for Heroku.
-- Deploy and use sendgrid. What does sendgrid give us in the way of UI to resend emails, etc. @priority
-- Refactor menu_items stuff so it's not it admin namespace. There are going to be a number of controllers that have actions accessible by both admins and non-admins. So, everything's not sequestered off into the admin namespace necessarily. @priority
+	- Users listing
+		- Ability to make someone an admin
+	- Staging app for Heroku.
+	- Deploy and use sendgrid. What does sendgrid give us in the way of UI to resend emails, etc. @priority
+	- Refactor menu_items stuff so it's not it admin namespace. There are going to be a number of controllers that have actions accessible by both admins and non-admins. So, everything's not sequestered off into the admin namespace necessarily. @priority
 	- Also convert menu_items listing to use .listing_item classes in _application.scss and remove the .menu_item item stuff in _admin.scss
 AccountRequests:
 	- Does sendgrid have a web ui that shows account activity, like when an email was last sent, etc. @q If so, then we don't need to worry about tracking when an email was last sent.
@@ -57,3 +53,4 @@ Later:
 	- Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
 	- Presenter gem
 Archive:
+	- Nav menu @done(2011-07-08) @project(Misc)
