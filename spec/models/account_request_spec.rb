@@ -60,6 +60,9 @@ describe AccountRequest do
     end
   end
 
+  # TODO: Sets approved_at timestamp on account?
+  # TODO: Also, activated_at timestamp on account?
+
   describe '#approve!' do
     context 'given a pending account request' do
 

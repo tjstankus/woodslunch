@@ -15,4 +15,8 @@ class AccountRequestsController < InheritedResources::Base
         :notice => "An account invitation has been sent to " +
         "#{@account_request.email}"
   end
+
+  def activate
+
+  end
 end

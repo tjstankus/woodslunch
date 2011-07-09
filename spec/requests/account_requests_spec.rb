@@ -2,19 +2,11 @@ require 'spec_helper'
 
 describe "AccountRequests" do
 
-  # describe "GET /account_requests" do
-  #   it "works! (now write some real specs)" do
-  #     # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-  #     get account_requests_path
-  #     response.status.should be(200)
-  #   end
-  # end
-
   describe 'home page' do
 
     context 'given I am not logged in' do
 
-      it 'displays new account request link on home page' do
+      it 'displays new account request link' do
         # When I go to the home page
         visit '/'
 
@@ -24,7 +16,7 @@ describe "AccountRequests" do
     end
   end
 
-  describe 'new account request' do
+  describe 'new' do
 
     before(:each) do
       visit new_account_request_path
@@ -64,7 +56,7 @@ describe "AccountRequests" do
     it 'allows for multiple students'
   end
 
-  describe 'create account request' do
+  describe 'create' do
 
     let(:valid_params) {
       { 'account_request' => {
@@ -211,7 +203,7 @@ describe "AccountRequests" do
     end
   end
 
-  describe 'approve!' do
+  describe 'approve' do
 
     before(:each) do
       # Given an account request
@@ -241,10 +233,59 @@ describe "AccountRequests" do
       # And I should see the account request listed under 'Approved'
       page.should have_css('div#approved span.user_info',
           :text => "#{@account_request.full_name}")
-
-      # TODO: Sets approved_at timestamp on account?
-      # TODO: Also, activated_at timestamp on account?
     end
+  end
 
+  describe 'activate' do
+    context 'given an approved request' do
+
+      context 'and valid data' do
+        before(:each) do
+          @account_request = Factory(:account_request)
+          @students = 2.times do
+            [].tap do |a|
+              a << Factory(:requested_student,
+                  :account_request => @account_request)
+            end
+          end
+          @account_request.approve!
+        end
+
+        it 'redirects to new account page' do
+
+          # Sanity checks
+          @account_request.approved?.should be_true
+          @account_request.requested_students.size.should == 2
+
+          # When I visit the account activation path
+          visit account_activation_path(@account_request,
+              :token => @account_request.activation_token)
+
+          # Then I should be redirected to the new account page
+          current_path.should == new_account_path
+
+          # And my email should be displayed as read-only
+
+          # And there should be a hidden field containing my email
+
+          # And I fill in the password field
+
+          # And I fill in the password confirmation field
+
+          # And I click Submit
+
+          # Then I should be on my account dashboard page
+
+          # And I should be logged in
+
+          # And I should see link to order for each student
+        end
+      end
+
+      context 'and an invalid activation token' do
+        it 'displays an error message'
+        it 'displays a link to contact email'
+      end
+    end
   end
 end
