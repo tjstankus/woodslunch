@@ -21,7 +21,7 @@ describe AccountInvitationMailer do
 
     it "includes activation url in body" do
       url = "http://example.com/account_requests/#{account_request.id}" +
-          "/activate/#{token}"
+          "/activations/new?token=#{token}"
       mail.body.encoded.should include(url)
     end
   end

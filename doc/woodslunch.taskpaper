@@ -25,9 +25,11 @@ AccountRequests:
 	- Once activated the account request gets destroyed.
 	- Email gets sent upon successful activation. Actually, after activation, need to redirect to screen to setup password (with confirmation), then automatically log in.
 	- Deny action @priority
-	- Activate @next
+	- Activate
+		- Need to get info from AccountRequestsController#activate to AccountsController#new @wip
 		GET account_requests/activate/:token
 		Matches token against account requests in the pending 
+		- activation_token should not be generated until the account request has been approved
 	- AccountRequest submitted for pending AccountRequest#email request displays "There is a pending account request for #{email}."
 	- AccountRequest submitted for denied AccountRequest#email creates a new AccountRequest in pending state.
 	- Email must be unique for pending AccountRequests.

@@ -8,7 +8,7 @@ class AccountInvitationMailer < ActionMailer::Base
   #
   def invitation(account_request, options={})
     options.reverse_merge!(:host => 'woodslunch.dev')
-    @url = account_activation_url(:id => account_request.id,
+    @url = new_account_request_activation_url(account_request,
         :token => account_request.activation_token, :host => options[:host])
 
     mail(:to => account_request.email,

@@ -10,7 +10,7 @@ feature 'home page' do
     end
 
     it 'displays a logged in message' do
-      page.should have_xpath("//div[@id='notice']", 
+      page.should have_xpath("//div[@id='notice']",
         :text => 'Signed in successfully.')
     end
 
@@ -27,12 +27,14 @@ feature 'home page' do
       # When I go to the home page
       visit root_path
     end
-    
+
     it 'displays a link to the sign in page' do
-      page.should have_xpath("//a[contains(@href, '/users/sign_in')]")  
+      page.should have_xpath("//a[contains(@href, '/users/sign_in')]")
     end
 
-    it 'displays a link to the account request page'
+    it 'displays a link to the account request page' do
+      page.should have_xpath("//a[@href=\"#{new_account_request_path}\"]")
+    end
 
   end
 

@@ -16,7 +16,15 @@ class AccountRequestsController < InheritedResources::Base
         "#{@account_request.email}"
   end
 
-  def activate
-
-  end
+  # def activate
+  #   token = resource.activation_token
+  #   if params[:token] == token
+  #     session[:activation_token] = token
+  #     redirect_to new_account_request_activation_path(resource,
+  #         :token => token)
+  #   else
+  #     flash[:alert] = 'There was an issue activating your account. Please ' +
+  #         'email lunch@woodscharter.org for assistance.'
+  #   end
+  # end
 end

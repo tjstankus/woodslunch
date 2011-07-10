@@ -1,20 +1,6 @@
 require 'spec_helper'
 
-describe "AccountRequests" do
-
-  describe 'home page' do
-
-    context 'given I am not logged in' do
-
-      it 'displays new account request link' do
-        # When I go to the home page
-        visit '/'
-
-        # And I follow the account request link
-        click_link 'request an account'
-      end
-    end
-  end
+describe "Account requests" do
 
   describe 'new' do
 
@@ -233,59 +219,6 @@ describe "AccountRequests" do
       # And I should see the account request listed under 'Approved'
       page.should have_css('div#approved span.user_info',
           :text => "#{@account_request.full_name}")
-    end
-  end
-
-  describe 'activate' do
-    context 'given an approved request' do
-
-      context 'and valid data' do
-        before(:each) do
-          @account_request = Factory(:account_request)
-          @students = 2.times do
-            [].tap do |a|
-              a << Factory(:requested_student,
-                  :account_request => @account_request)
-            end
-          end
-          @account_request.approve!
-        end
-
-        it 'redirects to new account page' do
-
-          # Sanity checks
-          @account_request.approved?.should be_true
-          @account_request.requested_students.size.should == 2
-
-          # When I visit the account activation path
-          visit account_activation_path(@account_request,
-              :token => @account_request.activation_token)
-
-          # Then I should be redirected to the new account page
-          current_path.should == new_account_path
-
-          # And my email should be displayed as read-only
-
-          # And there should be a hidden field containing my email
-
-          # And I fill in the password field
-
-          # And I fill in the password confirmation field
-
-          # And I click Submit
-
-          # Then I should be on my account dashboard page
-
-          # And I should be logged in
-
-          # And I should see link to order for each student
-        end
-      end
-
-      context 'and an invalid activation token' do
-        it 'displays an error message'
-        it 'displays a link to contact email'
-      end
     end
   end
 end

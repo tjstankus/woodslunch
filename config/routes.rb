@@ -16,14 +16,15 @@ Woodslunch::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
+  resources :accounts
+
   resources :account_requests, :only => [:index, :new, :create] do
     member do
       post 'approve'
       post 'decline'
     end
+    resources :activations, :controller => 'account_activations', :only => [:new, :create]
   end
-  match '/account_requests/:id/activate/:token' => 'account_requests#activate',
-      :as => 'account_activation'
 
   # Sample resource route with options:
   #   resources :products do

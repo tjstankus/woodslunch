@@ -6,21 +6,51 @@ point, they should show up on the account_requests index listing as
 "Approved (Awaiting Activation)". An admin should be able to resend the
 AccountInvitationMailer.invitation. So, I
 
+Accounts, Users, Orders
+---------------------------
+
+Does an order belong to an account. Probably not because we need to know the
+name and the grade. That's why we also need to know, when a user wants to
+order lunch, what grade they will be eating with.
+
+So, for now just go with a similar approach for UserOrder that I have in place
+for StudentOrder. I'm still not 100% sure how I want to steer users toward the
+ordering process; I'll have to discover that.
+
 Account Request
 ---------------
 
 Flow for creating an approved account:
 
 1) Fill out account request form with email, first name, last name, then an
-entry for each student. Submit creates an AccountRequest,
+entry for each student. Submit creates an AccountRequest.
 
 2) Admin gets notified somehow of pending account requests. (Maybe.)
 
-3) Admin approves AccountRequest. An AccountInvitation is created. An email
+3) Admin approves AccountRequest. AccountRequest goes into approved state and
+an activation_token is created. An email
 gets sent with invitation token url.
 
-4) User follows invitation link, sets up their account. The form should be
-pre-filled with user and students information, which can be edited. On
+  ??? Do we really need an AccountInvitation or can the AccountRequest just
+  send out the email on approval. We already have the mailer class. All
+  AccountInvitation does is deliver email on create, which we can just as
+  easily handle from AccountRequest on approval. NOTE: It can also create the
+  activation token on approval.
+
+4) User follows account request activation link. Here's what we need from the
+user at this point: password and password confirmation. That's it. We already
+have the user and student info we need. From that point editing any of that
+info should be handled by specific User/Account/Student controllers and views.
+I think the confusion here about which controller to go to indicates that we
+have a feature that cuts across the various models. I think what we need is
+another presenter called AccountActivation. It's new action will collect the
+password and on create the user will be logged in. This is going to be like
+StudentOrder. It will also be responsible for creating the account, the user,
+and any associated students. But the AccountActivation itself does not need
+to be persisted.
+
+
+On
 successful submit, Account, User, Student(s) are created, the user is logged
 in and redirected to the dashboard.
 
