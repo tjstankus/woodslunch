@@ -7,7 +7,7 @@ describe AccountInvitationMailer do
     Factory(:account_request, :activation_token => token)
   }
   let(:mail) {
-    AccountInvitationMailer.invitation(account_request, :host => 'example.com')
+    AccountInvitationMailer.invitation(account_request)
   }
 
   describe "invitation" do

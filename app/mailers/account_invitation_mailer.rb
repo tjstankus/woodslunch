@@ -6,10 +6,9 @@ class AccountInvitationMailer < ActionMailer::Base
   #
   #   en.account_invitation_mailer.invitation.subject
   #
-  def invitation(account_request, options={})
-    options.reverse_merge!(:host => 'woodslunch.dev')
+  def invitation(account_request)
     @url = new_account_request_activation_url(account_request,
-        :token => account_request.activation_token, :host => options[:host])
+        :token => account_request.activation_token)
 
     mail(:to => account_request.email,
         :subject => 'Woods Charter School Lunch Program -- Account Activation')
