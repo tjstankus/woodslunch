@@ -5,14 +5,9 @@ describe 'Account activations' do
   describe 'create' do
 
     before(:each) do
-      @account_request = Factory(:account_request)
-      @students = [].tap do |a|
-        2.times do
-          a << Factory(:requested_student,
-              :account_request => @account_request)
-        end
-      end
+      @account_request = create_account_request(:students => 2)
       @account_request.approve!
+      @student_names = @account_request.requested_students.collect(&:full_name)
     end
 
     it 'logs user in and redirects to dashboard' do
@@ -29,18 +24,28 @@ describe 'Account activations' do
       page.should have_css('div#email', :text => @account_request.email)
 
       # And there should be a hidden field containing my email
+      # page.should have_xpath("//input[@type='hidden'][@id='account_request_email']")
 
       # And I fill in the password field
+      # fill_in 'Password', :with => 'secret'
 
       # And I fill in the password confirmation field
+      # fill_in 'Password Confirmation', :with => 'secret'
 
       # And I click Submit
+      # click_button 'Submit'
 
       # Then I should be on my account dashboard page
+      # current_path.should == root_path
 
       # And I should be logged in
+      # current_user.should_not be_nil
+      # current_user.email.should == @account_request.email
 
       # And I should see link to order for each student
+      # @student_names.each do |name|
+      #   "//a[@class='student_order'][text()[contains(.,'#{name}')]]")
+      # end
     end
   end
 

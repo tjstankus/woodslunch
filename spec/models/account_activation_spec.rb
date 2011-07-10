@@ -17,4 +17,14 @@ describe AccountActivation do
     end
   end
 
+  context 'given an account request with two students' do
+    before(:each) do
+      @account_request = create_account_request(:students => 2)
+    end
+
+    it 'creates an account'
+    it 'creates a user for the account'
+    it 'creates two students for the account'
+  end
+
 end

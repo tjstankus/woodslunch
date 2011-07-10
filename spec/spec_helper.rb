@@ -29,6 +29,7 @@ RSpec.configure do |config|
 
   config.include(SessionHelpers)
   config.include(OrderHelpers)
+  config.include(AccountHelpers)
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
 

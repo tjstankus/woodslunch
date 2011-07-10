@@ -20,6 +20,7 @@ Misc:
 	- Also convert menu_items listing to use .listing_item classes in _application.scss and remove the .menu_item item stuff in _admin.scss
 Accounts:
 AccountRequests:
+	- AccountActivation @wip
 	- Does sendgrid have a web ui that shows account activity, like when an email was last sent, etc. @q If so, then we don't need to worry about tracking when an email was last sent.
 	- Once activated the account request gets destroyed.
 	- Email gets sent upon successful activation. Actually, after activation, need to redirect to screen to setup password (with confirmation), then automatically log in.
@@ -27,7 +28,6 @@ AccountRequests:
 	- Activate
 		GET account_requests/activate/:token
 		Matches token against account requests in the pending 
-	- Get rid of AccountInvitation model. Send the mail upon account request approval.
 	- AccountRequest submitted for pending AccountRequest#email request displays "There is a pending account request for #{email}."
 	- AccountRequest submitted for denied AccountRequest#email creates a new AccountRequest in pending state.
 	- Email must be unique for pending AccountRequests.
@@ -55,5 +55,6 @@ Later:
 	- Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
 	- Presenter gem
 Archive:
+	- Get rid of AccountInvitation model. Send the mail upon account request approval. @done(2011-07-10) @project(AccountRequests)
 	- activation_token should not be generated until the account request has been approved @done(2011-07-10) @project(AccountRequests)
 	- Nav menu @done(2011-07-08) @project(Misc)
