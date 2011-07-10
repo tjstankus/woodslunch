@@ -25,20 +25,40 @@ class AccountActivation
   end
 
   def account
-    @account ||= Account.create
+    @account ||= Account.create!
   end
+  alias_method :find_or_create_account, :account
 
-  def save
-    # TODO: Must return true or false
-    # TODO: Add to error unless password == password_confirmation
-    # TODO: account_request must be approved
-    User.create(:account_id => account.id, :email => email, :password => password,
+  def user
+    @user ||= User.create!(:account_id => account.id, :email => email,
+        :password => password,
         :first_name => account_request.first_name,
         :last_name => account_request.last_name)
-    account_request.requested_students.each do |student|
-      Student.create(:account_id => account.id,
-          :first_name => student.first_name, :last_name => student.last_name,
-          :grade => student.grade)
+  end
+  alias_method :find_or_create_user, :user
+
+  def students
+    [].tap do |a|
+      account_request.requested_students.each do |student|
+        a << Student.create!(:account_id => account.id,
+            :first_name => student.first_name,
+            :last_name => student.last_name,
+            :grade => student.grade)
+      end
     end
+  end
+  alias_method :find_or_create_students, :students
+
+  def save
+    # TODO: Add to error unless password == password_confirmation
+    # TODO: account_request must be approved
+    unless password == password_confirmation
+      self.errors.add(:password, 'must match password confirmation')
+      return false
+    end
+    find_or_create_account
+    find_or_create_user
+    find_or_create_students
+    return true
   end
 end

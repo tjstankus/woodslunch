@@ -12,9 +12,10 @@ class AccountActivationsController < ApplicationController
   def create
     @account_activation = AccountActivation.new(params['account_activation'])
     if @account_activation.save
+      sign_in(@account_activation.user)
       redirect_to root_path
     else
-      # render new with error messages
+      render :action => 'new'
     end
   end
 

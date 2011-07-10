@@ -4,9 +4,9 @@
 #email= "Email: #{@account_activation.email}"
 
 = simple_form_for(@account_activation, :url => account_request_activations_path(@account_request)) do |f|
-
+  = error_messages_for(@account_activation)
   = f.input :email, :as => :hidden
   = f.input :account_request_id, :as => :hidden, :input_html => {:value => @account_request.id}
-  = f.input :password
-  = f.input :password_confirmation
+  = f.input :password, :input_html => {:value => ''}
+  = f.input :password_confirmation, :input_html => {:value => ''}
   = f.submit 'Submit'

@@ -2,14 +2,9 @@
   = javascript_include_tag 'requested_student.js'
 
 = simple_form_for(@account_request) do |f|
-  
-  - if @account_request.errors.any?
-    #error_explanation
-      %h2 Errors
-      %ul
-      - @account_request.errors.full_messages.each do |msg|
-        %li= msg
-        
+
+  = error_messages_for(@account_request)
+
   %fieldset
     %legend Parent/Guardian
     = f.input :email

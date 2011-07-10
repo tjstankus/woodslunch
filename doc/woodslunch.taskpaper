@@ -20,7 +20,13 @@ Misc:
 	- Also convert menu_items listing to use .listing_item classes in _application.scss and remove the .menu_item item stuff in _admin.scss
 Accounts:
 AccountRequests:
-	- AccountActivation @wip
+	- AccountActivation 
+		- Log user in after activating account @done(2011-07-10)
+			- Implemented but need spec for this
+		- AccountActivation save method needs to handle failures.
+			- If passwords don't match, redirect to form with error messages. @done(2011-07-10)
+			- Any other problems should generate an exception, and I should get a notification
+				- Integrate http://rubygems.org/gems/exception_notification
 	- Does sendgrid have a web ui that shows account activity, like when an email was last sent, etc. @q If so, then we don't need to worry about tracking when an email was last sent.
 	- Once activated the account request gets destroyed.
 	- Email gets sent upon successful activation. Actually, after activation, need to redirect to screen to setup password (with confirmation), then automatically log in.
