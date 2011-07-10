@@ -1,1 +1,12 @@
-#email= @account_request.email
+%h2 Account activation
+%h3.activation Please set your password to activate your account
+
+#email= "Email: #{@account_activation.email}"
+
+= simple_form_for(@account_activation, :url => account_request_activations_path(@account_request)) do |f|
+
+  = f.input :email, :as => :hidden
+  = f.input :account_request_id, :as => :hidden, :input_html => {:value => @account_request.id}
+  = f.input :password
+  = f.input :password_confirmation
+  = f.submit 'Submit'

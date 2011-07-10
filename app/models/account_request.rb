@@ -45,5 +45,6 @@ class AccountRequest < ActiveRecord::Base
 
   def set_activation_token
     self.activation_token ||= SecureRandom.hex(16)
+    self.save!
   end
 end

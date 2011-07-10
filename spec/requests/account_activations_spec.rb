@@ -24,16 +24,16 @@ describe 'Account activations' do
       page.should have_css('div#email', :text => @account_request.email)
 
       # And there should be a hidden field containing my email
-      # page.should have_xpath("//input[@type='hidden'][@id='account_request_email']")
+      page.should have_xpath("//input[@type='hidden'][@id='account_activation_email']")
 
       # And I fill in the password field
-      # fill_in 'Password', :with => 'secret'
+      fill_in 'Password', :with => 'secret'
 
       # And I fill in the password confirmation field
-      # fill_in 'Password Confirmation', :with => 'secret'
+      fill_in 'Password confirmation', :with => 'secret'
 
       # And I click Submit
-      # click_button 'Submit'
+      click_button 'Submit'
 
       # Then I should be on my account dashboard page
       # current_path.should == root_path

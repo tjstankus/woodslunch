@@ -20,7 +20,6 @@ new_account_request_activation GET    /account_requests/:account_request_id/acti
               account_requests GET    /account_requests(.:format)                                     {:action=>"index", :controller=>"account_requests"}
                                POST   /account_requests(.:format)                                     {:action=>"create", :controller=>"account_requests"}
            new_account_request GET    /account_requests/new(.:format)                                 {:action=>"new", :controller=>"account_requests"}
-            account_activation        /account_requests/:id/activate/:token(.:format)                 {:controller=>"account_requests", :action=>"activate"}
             edit_student_order GET    /students/:student_id/orders/:year/:month(.:format)             {:controller=>"student_orders", :action=>"edit"}
                 student_orders POST   /students/:student_id/orders(.:format)                          {:action=>"create", :controller=>"student_orders"}
                       students GET    /students(.:format)                                             {:action=>"index", :controller=>"students"}
