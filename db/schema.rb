@@ -10,11 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110702172052) do
-
-  create_table "account_invitations", :force => true do |t|
-    t.integer "account_request_id"
-  end
+ActiveRecord::Schema.define(:version => 20110626185835) do
 
   create_table "account_requests", :force => true do |t|
     t.string   "email"

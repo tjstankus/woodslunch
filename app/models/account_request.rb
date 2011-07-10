@@ -1,6 +1,5 @@
 class AccountRequest < ActiveRecord::Base
   has_many :requested_students, :dependent => :destroy
-  has_one :account_invitation
 
   validates :email, :presence => true
   validates :first_name, :presence => true
@@ -29,15 +28,15 @@ class AccountRequest < ActiveRecord::Base
   def approve_actions
     approve_now
     set_activation_token
-    create_invitation
+    deliver_invitation_email
   end
 
   def approve_now
     update_attribute(:approved_at, Time.now)
   end
 
-  def create_invitation
-    create_account_invitation
+  def deliver_invitation_email
+    AccountInvitationMailer.invitation(self).deliver
   end
 
   def full_name

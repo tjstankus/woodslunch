@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe AccountRequest do
   it { should have_many(:requested_students) }
-  it { should have_one(:account_invitation) }
   it { should validate_presence_of(:email) }
   it { should validate_presence_of(:first_name) }
   it { should validate_presence_of(:last_name) }
@@ -71,17 +70,16 @@ describe AccountRequest do
         account_request.approved_at.should be_within(1).of(Time.now)
       end
 
-      it 'creates an associated AccountInvitation', :wip => true do
-        lambda {
-          account_request.approve!
-        }.should change {account_request.account_invitation}.from(nil)
-        account_request.account_invitation.should be_an(AccountInvitation)
-      end
-
       it 'sets the activation_token' do
         lambda {
           account_request.approve!
         }.should change {account_request.activation_token}.from(nil)
+      end
+
+      it 'sends invitation email' do
+        lambda {
+          account_request.approve!
+        }.should change {ActionMailer::Base.deliveries.size}.by(1)
       end
     end
   end
