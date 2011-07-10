@@ -26,8 +26,12 @@ AccountRequests:
 		- AccountActivation save method needs to handle failures.
 			- If passwords don't match, redirect to form with error messages. @done(2011-07-10)
 			- Any other problems should generate an exception, and I should get a notification
+				- Setup newrelic
+					- @q Does new relic provide exception notifications
 				- Integrate http://rubygems.org/gems/exception_notification
-	- Does sendgrid have a web ui that shows account activity, like when an email was last sent, etc. @q If so, then we don't need to worry about tracking when an email was last sent.
+	- Deploy and setup sendgrid
+		- Test manually with account request
+		- Does sendgrid have a web ui that shows account activity, like when an email was last sent, etc. @q If so, then we don't need to worry about tracking when an email was last sent.
 	- Once activated the account request gets destroyed.
 	- Email gets sent upon successful activation. Actually, after activation, need to redirect to screen to setup password (with confirmation), then automatically log in.
 	- Deny action @priority
