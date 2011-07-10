@@ -11,15 +11,6 @@ describe AccountRequest do
 
   it 'validates format of email'
 
-  describe '#activation_token' do
-    it 'gets set before validation' do
-      acc_req = AccountRequest.new
-      lambda {
-        acc_req.valid?
-      }.should change {acc_req.activation_token}.from(nil)
-    end
-  end
-
   describe '#state' do
     it 'initializes to pending' do
       AccountRequest.new.state.should == 'pending'
@@ -85,6 +76,12 @@ describe AccountRequest do
           account_request.approve!
         }.should change {account_request.account_invitation}.from(nil)
         account_request.account_invitation.should be_an(AccountInvitation)
+      end
+
+      it 'sets the activation_token' do
+        lambda {
+          account_request.approve!
+        }.should change {account_request.activation_token}.from(nil)
       end
     end
   end

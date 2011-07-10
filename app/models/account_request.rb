@@ -6,8 +6,6 @@ class AccountRequest < ActiveRecord::Base
   validates :first_name, :presence => true
   validates :last_name, :presence => true
 
-  before_validation :set_activation_token
-
   accepts_nested_attributes_for :requested_students
 
   state_machine :state, :initial => :pending do
@@ -30,6 +28,7 @@ class AccountRequest < ActiveRecord::Base
 
   def approve_actions
     approve_now
+    set_activation_token
     create_invitation
   end
 
