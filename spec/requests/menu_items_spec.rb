@@ -14,10 +14,10 @@ describe 'Menu items' do
 
     context 'when logged in as an admin' do
       it 'displays menu items' do
-        visit admin_menu_items_path 
+        visit menu_items_path
         page.should have_content(menu_item.name)
-      end	
-    end  
+      end
+    end
 
     context 'when logged in as a regular user' do
       before(:each) do
@@ -27,7 +27,7 @@ describe 'Menu items' do
       end
 
       it 'redirects to the home page' do
-        visit admin_menu_items_path
+        visit menu_items_path
         current_path.should == root_path
       end
     end
@@ -37,14 +37,14 @@ describe 'Menu items' do
 
     before(:each) do
       # When I go to the new menu item page
-      visit new_admin_menu_item_path
+      visit new_menu_item_path
     end
 
     it 'prefills price field with default price presented as text/string ' do
       # Then the price field should be filled in
-      page.should have_selector(:xpath, 
-          "//input[@type='text']" + 
-          "[@id='menu_item_price']" + 
+      page.should have_selector(:xpath,
+          "//input[@type='text']" +
+          "[@id='menu_item_price']" +
           "[@value='4.00']")
     end
 
@@ -67,7 +67,7 @@ describe 'Menu items' do
 
     before(:each) do
       # When I go to the new menu item page
-      visit new_admin_menu_item_path
+      visit new_menu_item_path
     end
 
     it 'creates a menu item' do
@@ -81,7 +81,7 @@ describe 'Menu items' do
       click_button 'menu_item_submit'
 
       # Then I should see the menu item listed under Monday
-      page.should have_xpath("//div[@id='monday']" + 
+      page.should have_xpath("//div[@id='monday']" +
         "//span[@class='menu_item_name']", :text => 'Tacos')
     end
 
@@ -99,11 +99,11 @@ describe 'Menu items' do
       click_button 'menu_item_submit'
 
       # Then I should see the menu item listed under Monday
-      page.should have_xpath("//div[@id='monday']" + 
+      page.should have_xpath("//div[@id='monday']" +
         "//span[@class='menu_item_name']", :text => 'Chicken fajitas')
-      
+
       # And I should see the menu item listed under Thursday
-      page.should have_xpath("//div[@id='thursday']" + 
+      page.should have_xpath("//div[@id='thursday']" +
         "//span[@class='menu_item_name']", :text => 'Chicken fajitas')
     end
 
@@ -140,7 +140,7 @@ describe 'Menu items' do
       # Given a daily menu item
 
       # When I go to the edit menu item page
-      visit edit_admin_menu_item_path(menu_item)
+      visit edit_menu_item_path(menu_item)
 
       # And I change the menu item name to "Banana split"
       fill_in 'menu_item_name', :with => 'Banana split'
@@ -149,7 +149,7 @@ describe 'Menu items' do
       click_button 'menu_item_submit'
 
       # Then I should see a menu item named "Banana split"
-      page.should have_xpath("//span[@class='menu_item_name']", 
+      page.should have_xpath("//span[@class='menu_item_name']",
                              :text => 'Banana split')
     end
 
@@ -157,11 +157,11 @@ describe 'Menu items' do
       # Given a menu item served on Monday and Tuesday
       daily_menu_item.day_of_week.name.should == 'Monday'
       tuesday = DayOfWeek.find_by_name('Tuesday')
-      Factory(:daily_menu_item, :menu_item => menu_item, 
+      Factory(:daily_menu_item, :menu_item => menu_item,
         :day_of_week => tuesday)
 
       # When I go to the edit menu item page
-      visit edit_admin_menu_item_path(menu_item)
+      visit edit_menu_item_path(menu_item)
 
       # And I uncheck Monday
       uncheck 'Monday'
@@ -170,13 +170,13 @@ describe 'Menu items' do
       click_button 'menu_item_submit'
 
       # Then the menu item should not be listed under Monday
-      page.should have_no_xpath("//div[@id='monday']" + 
+      page.should have_no_xpath("//div[@id='monday']" +
         "//span[@class='menu_item_name']", :text => menu_item.name)
 
       page.should_not have_xpath("//div[@id='monday']//a[text()='#{menu_item.name}']")
 
       # And the menu item should be listed under Tuesday
-      page.should have_xpath("//div[@id='tuesday']" + 
+      page.should have_xpath("//div[@id='tuesday']" +
         "//span[@class='menu_item_name']", :text => menu_item.name)
     end
   end
@@ -188,30 +188,30 @@ describe 'Menu items' do
       # Given a daily menu item
 
       # When I go to the edit menu item page
-      visit edit_admin_menu_item_path(menu_item)
+      visit edit_menu_item_path(menu_item)
     end
 
     it 'redirects to index' do
-      # And I click the 'Delete' link 
+      # And I click the 'Delete' link
       click_link 'Delete'
 
       # Then I should be back on the admin menu items index page
-      current_path.should == admin_menu_items_path
+      current_path.should == menu_items_path
     end
 
     it 'displays flash notice' do
       name = menu_item.name
 
-      # And I click the 'Delete' link 
+      # And I click the 'Delete' link
       click_link 'Delete'
 
       # Then I should see a flash message displayed
-      page.should have_xpath("//div[@id='notice']", 
+      page.should have_xpath("//div[@id='notice']",
                              :text => "Successfully deleted #{name}.")
     end
 
     it 'destroys record' do
-      # And I click the 'Delete' link 
+      # And I click the 'Delete' link
       # Then the menu item should be destroyed
       lambda {
         click_link 'Delete'
