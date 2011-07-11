@@ -79,7 +79,7 @@ describe AccountRequest do
         }.should change {account_request.activation_token}.from(nil)
       end
 
-      it 'sends invitation email' do
+      it 'sends activation email' do
         lambda {
           account_request.approve!
         }.should change {ActionMailer::Base.deliveries.size}.by(1)

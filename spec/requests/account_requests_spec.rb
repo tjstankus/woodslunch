@@ -211,8 +211,8 @@ describe "Account requests" do
       # Then I should be back on the account requests listing page
       current_path.should == account_requests_path
 
-      # And I should see a flash notice 'Account invitation has been sent'
-      flash_notice = "An account invitation has been sent to " +
+      # And I should see a flash notice 'Account activation has been sent'
+      flash_notice = "An account activation email has been sent to " +
           "#{@account_request.email}"
       page.should have_css('div#notice', :text => flash_notice)
 

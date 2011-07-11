@@ -43,15 +43,15 @@ class AccountRequest < ActiveRecord::Base
   def approve_actions
     approve_now
     set_activation_token
-    deliver_invitation_email
+    deliver_activation_email
   end
 
   def approve_now
     update_attribute(:approved_at, Time.now)
   end
 
-  def deliver_invitation_email
-    AccountInvitationMailer.invitation(self).deliver
+  def deliver_activation_email
+    AccountMailer.activation(self).deliver
   end
 
   def full_name

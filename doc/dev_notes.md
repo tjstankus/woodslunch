@@ -1,13 +1,17 @@
 Dev Notes
 =========
 
-When account requests get approved, they are awaiting activation. At that
-point, they should show up on the account_requests index listing as
-"Approved (Awaiting Activation)". An admin should be able to resend the
-AccountInvitationMailer.invitation. So, I
+Users
+-----
+
+CRUD
+
+Create
+  - Typically created as part of account.
+
 
 Accounts, Users, Orders
----------------------------
+-----------------------
 
 Does an order belong to an account. Probably not because we need to know the
 name and the grade. That's why we also need to know, when a user wants to
@@ -29,7 +33,7 @@ entry for each student. Submit creates an AccountRequest.
 
 3) Admin approves AccountRequest. AccountRequest goes into approved state and
 an activation_token is created. An email
-gets sent with invitation token url.
+gets sent with activation token url.
 
   ??? Do we really need an AccountInvitation or can the AccountRequest just
   send out the email on approval. We already have the mailer class. All

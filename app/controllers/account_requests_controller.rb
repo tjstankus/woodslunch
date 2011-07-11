@@ -12,19 +12,6 @@ class AccountRequestsController < InheritedResources::Base
   def approve
     resource.approve!
     redirect_to account_requests_path,
-        :notice => "An account invitation has been sent to " +
-        "#{@account_request.email}"
+        :notice => "An account activation email has been sent to #{@account_request.email}"
   end
-
-  # def activate
-  #   token = resource.activation_token
-  #   if params[:token] == token
-  #     session[:activation_token] = token
-  #     redirect_to new_account_request_activation_path(resource,
-  #         :token => token)
-  #   else
-  #     flash[:alert] = 'There was an issue activating your account. Please ' +
-  #         'email lunch@woodscharter.org for assistance.'
-  #   end
-  # end
 end
