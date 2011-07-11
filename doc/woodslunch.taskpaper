@@ -21,10 +21,9 @@ Misc:
 		Menu Items
 		Account Requests
 	- Users listing
-		- Ability to make someone an admin
+		- Ability to make someone an admin @wip
 	- Staging app for Heroku.
 	- Deploy and use sendgrid. What does sendgrid give us in the way of UI to resend emails, etc. @priority @done(2011-07-10)
-	- Refactor menu_items stuff so it's not it admin namespace. There are going to be a number of controllers that have actions accessible by both admins and non-admins. So, everything's not sequestered off into the admin namespace necessarily. @priority
 	- Also convert menu_items listing to use .listing_item classes in _application.scss and remove the .menu_item item stuff in _admin.scss
 Users:
 	- User#can_login? set to true by default, but will be false for those user accounts created through accounts/new
@@ -85,3 +84,4 @@ Archive:
 		@maybe Perhaps account_request.acvitate! should be handling creating the account, user, and students? @done(2011-07-10)
 		- Once activated the account request gets destroyed. @done(2011-07-10)
 	- Change AccountInvitationMailer.invitation to AccountMailer.activation @done(2011-07-11)
+	- Refactor menu_items stuff so it's not it admin namespace. There are going to be a number of controllers that have actions accessible by both admins and non-admins. So, everything's not sequestered off into the admin namespace necessarily. @priority @done(2011-07-11)

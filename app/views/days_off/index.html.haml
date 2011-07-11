@@ -1,0 +1,26 @@
+%h1
+  =t('days_off.index.title')
+
+%table
+  %thead
+    %tr
+      %th
+        =t('activerecord.attributes.day_off.starts_on')
+      %th
+        =t('activerecord.attributes.day_off.ends_on')
+      %th
+        =t('activerecord.attributes.day_off.name')
+      %th{ :colspan => 3 }
+
+  %tbody
+    - for day_off in @days_off
+      %tr{ :class => cycle(:odd, :even) }
+        %td= day_off.starts_on
+        %td= day_off.ends_on
+        %td= day_off.name
+        %td= link_to t('show'), day_off
+        %td= link_to t('edit'), edit_day_off_path(day_off)
+        %td= link_to t('destroy'), day_off, :confirm => I18n.t('confirm_delete'), :method => :delete
+
+%br
+= link_to t('day_off.new'), new_day_off_path
