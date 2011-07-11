@@ -26,9 +26,12 @@ Misc:
 	- Deploy and use sendgrid. What does sendgrid give us in the way of UI to resend emails, etc. @priority @done(2011-07-10)
 	- Refactor menu_items stuff so it's not it admin namespace. There are going to be a number of controllers that have actions accessible by both admins and non-admins. So, everything's not sequestered off into the admin namespace necessarily. @priority
 	- Also convert menu_items listing to use .listing_item classes in _application.scss and remove the .menu_item item stuff in _admin.scss
+Users:
+	- User#can_login? set to true by default, but will be false for those user accounts created through accounts/new
+		- Email, password, password_confirmation validations should only run when can_login is true
+		- can_login should default to true in db if possible
 Accounts:
 AccountRequests:
-	- @wip Change AccountInvitationMailer.invitation to AccountMailer.activation
 	- AccountActivation 
 		- Log user in after activating account @done(2011-07-10)
 			- Implemented but need spec for this. Controller spec.
@@ -81,3 +84,4 @@ Archive:
 	- activate! state transition @done(2011-07-10)
 		@maybe Perhaps account_request.acvitate! should be handling creating the account, user, and students? @done(2011-07-10)
 		- Once activated the account request gets destroyed. @done(2011-07-10)
+	- Change AccountInvitationMailer.invitation to AccountMailer.activation @done(2011-07-11)

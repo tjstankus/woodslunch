@@ -7,8 +7,14 @@ Users
 CRUD
 
 Create
-  - Typically created as part of account.
+  - Created as part of account.
 
+Update
+
+Delete
+
+Read
+  - Listing
 
 Accounts, Users, Orders
 -----------------------
