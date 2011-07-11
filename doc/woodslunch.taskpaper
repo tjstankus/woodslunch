@@ -8,6 +8,14 @@ Goals for next meeting:
 		Users listing (part of accounts listing)?
 		...
 Misc:
+	- Identify big picture tasks
+		- Go through Basecamp
+			Quantity field for student orders
+			Order for account users
+			Payments
+			Holidays and days off
+			Better styles
+		- Go through Dev notes
 	Admin
 		Reports
 		Menu Items
@@ -15,24 +23,27 @@ Misc:
 	- Users listing
 		- Ability to make someone an admin
 	- Staging app for Heroku.
-	- Deploy and use sendgrid. What does sendgrid give us in the way of UI to resend emails, etc. @priority
+	- Deploy and use sendgrid. What does sendgrid give us in the way of UI to resend emails, etc. @priority @done(2011-07-10)
 	- Refactor menu_items stuff so it's not it admin namespace. There are going to be a number of controllers that have actions accessible by both admins and non-admins. So, everything's not sequestered off into the admin namespace necessarily. @priority
 	- Also convert menu_items listing to use .listing_item classes in _application.scss and remove the .menu_item item stuff in _admin.scss
 Accounts:
 AccountRequests:
+	- Finish golden path account activation request spec @done(2011-07-10)
+	- activate! state transition
+		@maybe Perhaps account_request.acvitate! should be handling creating the account, user, and students?
+		- Once activated the account request gets destroyed.
 	- AccountActivation 
 		- Log user in after activating account @done(2011-07-10)
-			- Implemented but need spec for this
+			- Implemented but need spec for this. Controller spec.
 		- AccountActivation save method needs to handle failures.
 			- If passwords don't match, redirect to form with error messages. @done(2011-07-10)
 			- Any other problems should generate an exception, and I should get a notification
 				- Setup newrelic
 					- @q Does new relic provide exception notifications
 				- Integrate http://rubygems.org/gems/exception_notification
-	- Deploy and setup sendgrid
-		- Test manually with account request
-		- Does sendgrid have a web ui that shows account activity, like when an email was last sent, etc. @q If so, then we don't need to worry about tracking when an email was last sent.
-	- Once activated the account request gets destroyed.
+	- Deploy and setup sendgrid @done(2011-07-10)
+		- Test manually with account request @done(2011-07-10)
+		- Does sendgrid have a web ui that shows account activity, like when an email was last sent, etc. @q If so, then we don't need to worry about tracking when an email was last sent. YES! @done(2011-07-10)
 	- Email gets sent upon successful activation. Actually, after activation, need to redirect to screen to setup password (with confirmation), then automatically log in.
 	- Deny action @priority
 	- Activate
@@ -47,6 +58,7 @@ AccountRequests:
 		denied -> pending
 		state_machine gem (from pluginaweek) is recommended
 	- Email must be unique for accounts, so when 
+	- Resend email. Can we do this with sendgrid?
 AccountInvitation:
 @maybe What if we want to track how long it's been since the last invitation email was sent. last_sent_at, send_count, etc. Unless sendgrid gives us a way to do this stuff.
 Accounts/Users/Students:

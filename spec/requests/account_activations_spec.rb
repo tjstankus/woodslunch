@@ -10,7 +10,7 @@ describe 'Account activations' do
       @student_names = @account_request.requested_students.collect(&:full_name)
     end
 
-    it 'logs user in and redirects to dashboard' do
+    it 'activates the account' do
 
       # Sanity checks
       @account_request.approved?.should be_true
@@ -36,16 +36,16 @@ describe 'Account activations' do
       click_button 'Submit'
 
       # Then I should be on my account dashboard page
-      # current_path.should == root_path
+      current_path.should == root_path
 
-      # And I should be logged in
-      # current_user.should_not be_nil
-      # current_user.email.should == @account_request.email
+      # And I should see a flash message stating that my account has been activated
+      partial_flash = 'Your account has been activated.'
+      page.should have_xpath(
+        "//div[@class='flash'][@id='notice'][text()[contains(.,'#{partial_flash}')]]")
+    end
 
-      # And I should see link to order for each student
-      # @student_names.each do |name|
-      #   "//a[@class='student_order'][text()[contains(.,'#{name}')]]")
-      # end
+    context 'given mismatched passwords' do
+      it 'displays an error message'
     end
   end
 

@@ -13,6 +13,8 @@ class AccountActivationsController < ApplicationController
     @account_activation = AccountActivation.new(params['account_activation'])
     if @account_activation.save
       sign_in(@account_activation.user)
+      flash[:notice] = 'Your account has been activated.'
+      @account_request.activate!
       redirect_to root_path
     else
       render :action => 'new'

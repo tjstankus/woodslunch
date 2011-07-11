@@ -6,7 +6,13 @@ describe AccountRequest do
   it { should validate_presence_of(:first_name) }
   it { should validate_presence_of(:last_name) }
 
-  it 'destroys dependent students'
+  it 'destroys dependent students' do
+    account_request = create_account_request(:students => 2)
+    account_request.requested_students.size.should == 2
+    lambda {
+      account_request.destroy
+    }.should change{ RequestedStudent.count }.by(-2)
+  end
 
   it 'validates format of email'
 
@@ -50,9 +56,6 @@ describe AccountRequest do
     end
   end
 
-  # TODO: Sets approved_at timestamp on account?
-  # TODO: Also, activated_at timestamp on account?
-
   describe '#approve!' do
     context 'given a pending account request' do
 
@@ -80,6 +83,22 @@ describe AccountRequest do
         lambda {
           account_request.approve!
         }.should change {ActionMailer::Base.deliveries.size}.by(1)
+      end
+    end
+  end
+
+  describe '#activate!' do
+    context 'given an approved account request' do
+
+      before(:each) do
+        @account_request = Factory(:account_request)
+        @account_request.approve!
+      end
+
+      it 'destroys the account request' do
+        lambda {
+          @account_request.activate!
+        }.should change {AccountRequest.count}.by(-1)
       end
     end
   end

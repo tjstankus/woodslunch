@@ -50,8 +50,6 @@ class AccountActivation
   alias_method :find_or_create_students, :students
 
   def save
-    # TODO: Add to error unless password == password_confirmation
-    # TODO: account_request must be approved
     unless password == password_confirmation
       self.errors.add(:password, 'must match password confirmation')
       return false

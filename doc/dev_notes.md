@@ -84,7 +84,6 @@ Handle the following situations
   - Edit order to add items should increment the balance the diff.
   - Edit order to remove items should decrement the balance the diff.
 
-
 Edge cases, etc.
 ----------------
 

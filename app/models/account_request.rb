@@ -11,10 +11,25 @@ class AccountRequest < ActiveRecord::Base
 
     after_transition :on => :approve, :do => :approve_actions
 
+    # TODO: Spec and implement
+    # after_transition :on => :decline, :do => :decline_actions
+
+    after_transition :on => :activate do |account_request, transition|
+      account_request.destroy
+    end
+
     event :approve do
       transition [:pending] => :approved
     end
 
+    # TODO: Spec and implement
+    # event :decline do
+    #   transition [:pending] => :declined
+    # end
+
+    event :activate do
+      transition [:approved] => :activated
+    end
   end
 
   def self.pending
