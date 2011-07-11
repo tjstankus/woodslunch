@@ -10,11 +10,9 @@
       = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
     = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Droid+Serif'
     = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Droid+Sans'
-    = javascript_include_tag 'jquery-1.6.1.min.js'
-    = javascript_include_tag 'rails.js'
-    = javascript_include_tag 'application.js'
-    = yield :javascripts
+    = yield :stylesheets
   %body
+
     #wrapper
       #header
         = header_link
@@ -25,8 +23,13 @@
           = yield
       .push
         <!-- sticky footer push -->
+
     %footer
       #footer_content
         - if user_signed_in?
           %span#signed_in_as= "Signed in as #{current_user.email}"
 
+    = javascript_include_tag 'jquery-1.6.1.min.js'
+    = javascript_include_tag 'rails.js'
+    = javascript_include_tag 'application.js'
+    = yield :javascripts

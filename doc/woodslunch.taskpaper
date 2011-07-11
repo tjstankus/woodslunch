@@ -15,16 +15,14 @@ Misc:
 			Payments
 			Holidays and days off
 			Better styles
+			Reports
 		- Go through Dev notes
-	Admin
-		Reports
-		Menu Items
-		Account Requests
 	- Users listing
-		- Ability to make someone an admin @wip
+		- Ability to make someone an admin @priority
 	- Staging app for Heroku.
 	- Deploy and use sendgrid. What does sendgrid give us in the way of UI to resend emails, etc. @priority @done(2011-07-10)
 	- Also convert menu_items listing to use .listing_item classes in _application.scss and remove the .menu_item item stuff in _admin.scss
+	- Change error_messages_for to error_notification. The html should be such that the browser catches the errors if possible.
 Users:
 	- User#can_login? set to true by default, but will be false for those user accounts created through accounts/new
 		- Email, password, password_confirmation validations should only run when can_login is true
