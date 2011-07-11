@@ -1,5 +1,5 @@
 #admin_menu_bar
-  = link_to 'New Menu Item', new_admin_menu_item_path, :class => 'button'
+  = link_to 'New Menu Item', new_menu_item_path, :class => 'button'
   %h1 Menu Items
 
 - @days.each do |day|
@@ -10,9 +10,9 @@
       %div[menu_item]{:class => cycle('odd', 'even')}
         %span.menu_item_name= menu_item.name
         %span.actions
-          = link_to('Edit', edit_admin_menu_item_path(menu_item))
+          = link_to('Edit', edit_menu_item_path(menu_item))
 
 %h2 Not assigned to a day
 - @unassigned_menu_items.each do |menu_item|
   .menu_item.unassigned
-    = link_to(menu_item.name, edit_admin_menu_item_path(menu_item))
+    = link_to(menu_item.name, edit_menu_item_path(menu_item))
