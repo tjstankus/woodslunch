@@ -64,3 +64,9 @@ Factory.define :requested_student do |f|
   f.last_name Faker::Name.last_name
   f.grade 'K'
 end
+
+Factory.define :day_off do |f|
+  f.name 'Fall Break'
+  f.starts_on '2011-11-22'
+  f.ends_on '2011-11-25'
+end

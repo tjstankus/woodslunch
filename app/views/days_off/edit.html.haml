@@ -1,6 +1,6 @@
-%h1
-  = t('day_off.edit.title')
+%h1 Edit days off
 
 = render 'form'
 
-== #{ link_to t('show'), @day_off } | #{ link_to t('back'), days_off_path }
+.nav_links
+  = link_to 'Days off listing', days_off_path

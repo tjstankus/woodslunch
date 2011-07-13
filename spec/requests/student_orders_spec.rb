@@ -23,7 +23,7 @@ describe 'Student orders' do
       # Then I should see the order form for that student
       page.should have_content(student.name)
     end
-    
+
     it 'cannot view student order form for unassociated student' do
       pending
       # TODO: Implement similar to verify_admin
@@ -31,7 +31,7 @@ describe 'Student orders' do
   end
 
   describe 'when not signed in' do
-    
+
     before(:each) do
       sign_out
     end
@@ -39,7 +39,7 @@ describe 'Student orders' do
     describe 'GET /students/:student_id/:year/:month' do
 
       it 'redirects to sign in page' do
-        visit edit_student_order_path(student, :year => '2011', :month => '4') 
+        visit edit_student_order_path(student, :year => '2011', :month => '4')
         current_path.should == new_user_session_path
       end
     end
@@ -62,7 +62,7 @@ describe 'Student orders' do
 
     it 'displays student name' do
       visit edit_student_order_path(student, :year => year, :month => month)
-      page.should have_xpath("//*[@id='student_name']" + 
+      page.should have_xpath("//*[@id='student_name']" +
         "[text()[contains(.,'#{student.name}')]]")
     end
 
@@ -93,31 +93,32 @@ describe 'Student orders' do
     end
 
     context 'given an ordered menu item' do
-      
       it 'should be checked'
-
     end
 
     context 'given a month with first weekday in second week' do
- 
+
       let(:month) { '5' }
-      let(:year) { '2011' }     
+      let(:year) { '2011' }
 
-      it 'does not display the first week' do
+      it 'does not display the first week'
+    end
 
-      end
+    context 'given a range of days off' do
+      it 'displays the name of the day off for each affected day'
+      it 'does not display menu items on days off'
     end
   end
 
   describe 'POST /students/:student_id/orders' do
 
     let(:month) { '6' }
-    let(:year) { '2011' }   
+    let(:year) { '2011' }
 
     it 'creates an order' do
       # Given a menu item Hamburger served on Mondays
       menu_item = Factory(:menu_item, :name => 'Hamburger')
-      Factory(:daily_menu_item, 
+      Factory(:daily_menu_item,
         :menu_item => menu_item,
         :day_of_week => DayOfWeek.find_by_name('Monday'))
 
@@ -133,7 +134,7 @@ describe 'Student orders' do
       click_button 'Place Order'
 
       # Then I should see a successful order flash message displayed
-      page.should have_xpath("//div[@id='notice']", 
+      page.should have_xpath("//div[@id='notice']",
                              :text => "Successfully placed order for #{student.name}")
 
     end

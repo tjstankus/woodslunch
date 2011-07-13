@@ -5,11 +5,11 @@
   = javascript_include_tag 'jquery-ui-1.8.14.custom.min.js'
   = javascript_include_tag 'days_off.js'
 
-- simple_form_for(@day_off) do |f|
+= simple_form_for(@day_off) do |f|
 
   = f.error_notification
 
   = f.input :name
-  = f.input :starts_on, :as => :string, :input_html => {:size => 10}
-  = f.input :ends_on, :as => :string, :input_html => {:size => 10}
-  = f.submit 'Submit'
+  = f.input :starts_on, :as => :string, :input_html => {:size => 12}
+  = f.input :ends_on, :as => :string, :input_html => {:size => 12}
+  = render 'form_actions', :f => f

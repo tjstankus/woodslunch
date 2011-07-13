@@ -51,6 +51,9 @@ ActiveRecord::Schema.define(:version => 20110711120635) do
     t.datetime "updated_at"
   end
 
+  add_index "days_off", ["ends_on"], :name => "index_days_off_on_ends_on", :unique => true
+  add_index "days_off", ["starts_on"], :name => "index_days_off_on_starts_on", :unique => true
+
   create_table "menu_items", :force => true do |t|
     t.string   "name"
     t.text     "description"

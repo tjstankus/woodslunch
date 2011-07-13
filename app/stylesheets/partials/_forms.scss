@@ -21,23 +21,21 @@ form.simple_form {
       }
     }
   }
-}
-
-form.simple_form {
   input[type="submit"] {
     @include fancy-button(#9E5B28, 13px);
+    margin: 0 15px 0 0;
   }
   a.delete {
     @include fancy-button(#ff0000, 13px);
   }
 }
 
+div.nav_links {
+  margin: 20px 0 0 0;
+}
+
 form.simple_form.menu_item {
   input[type="submit"], a {
     margin: 0 15px 0 0;
   }
-}
-
-form.button_to {
-
 }

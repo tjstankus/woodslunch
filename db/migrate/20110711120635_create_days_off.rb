@@ -4,9 +4,11 @@ class CreateDaysOff < ActiveRecord::Migration
       t.date :starts_on
       t.date :ends_on
       t.string :name
-
       t.timestamps
     end
+
+    add_index :days_off, :starts_on, :unique => true
+    add_index :days_off, :ends_on, :unique => true
   end
 
   def self.down

@@ -1,0 +1,5 @@
+.actions
+  = f.submit('Submit')
+  - unless @day_off.new_record?
+    = link_to('Delete', day_off_path(@day_off), :class => :delete,
+      :confirm => 'Are you sure?', :method => :delete)

@@ -7,8 +7,12 @@ Goals for next meeting:
 		Setup a staging environment. Could do this later.
 		Users listing (part of accounts listing)?
 		...
+Days off:
+	- Clean up listing similar to menu items with only Edit links on the right and delete links on the edit page. @done(2011-07-13)
+	- Get rid of show page. @done(2011-07-13)
+	- Specs in student order spec
+	- Split index view into Upcoming & Past ??
 Misc:
-	- Finish days off @wip
 	- Identify big picture tasks
 		- Go through Basecamp
 			Quantity field for student orders
@@ -24,6 +28,8 @@ Misc:
 	- Deploy and use sendgrid. What does sendgrid give us in the way of UI to resend emails, etc. @priority @done(2011-07-10)
 	- Also convert menu_items listing to use .listing_item classes in _application.scss and remove the .menu_item item stuff in _admin.scss
 	- Change error_messages_for to error_notification. The html should be such that the browser catches the errors if possible.
+	Styles:
+		- Convert menu item styles to use basic listing styles.
 Users:
 	- User#can_login? set to true by default, but will be false for those user accounts created through accounts/new
 		- Email, password, password_confirmation validations should only run when can_login is true

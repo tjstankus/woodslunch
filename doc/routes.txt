@@ -13,6 +13,20 @@
                        account GET    /accounts/:id(.:format)                                         {:action=>"show", :controller=>"accounts"}
                                PUT    /accounts/:id(.:format)                                         {:action=>"update", :controller=>"accounts"}
                                DELETE /accounts/:id(.:format)                                         {:action=>"destroy", :controller=>"accounts"}
+                    menu_items GET    /menu_items(.:format)                                           {:action=>"index", :controller=>"menu_items"}
+                               POST   /menu_items(.:format)                                           {:action=>"create", :controller=>"menu_items"}
+                 new_menu_item GET    /menu_items/new(.:format)                                       {:action=>"new", :controller=>"menu_items"}
+                edit_menu_item GET    /menu_items/:id/edit(.:format)                                  {:action=>"edit", :controller=>"menu_items"}
+                     menu_item GET    /menu_items/:id(.:format)                                       {:action=>"show", :controller=>"menu_items"}
+                               PUT    /menu_items/:id(.:format)                                       {:action=>"update", :controller=>"menu_items"}
+                               DELETE /menu_items/:id(.:format)                                       {:action=>"destroy", :controller=>"menu_items"}
+                      days_off GET    /days_off(.:format)                                             {:action=>"index", :controller=>"days_off"}
+                               POST   /days_off(.:format)                                             {:action=>"create", :controller=>"days_off"}
+                   new_day_off GET    /days_off/new(.:format)                                         {:action=>"new", :controller=>"days_off"}
+                  edit_day_off GET    /days_off/:id/edit(.:format)                                    {:action=>"edit", :controller=>"days_off"}
+                       day_off GET    /days_off/:id(.:format)                                         {:action=>"show", :controller=>"days_off"}
+                               PUT    /days_off/:id(.:format)                                         {:action=>"update", :controller=>"days_off"}
+                               DELETE /days_off/:id(.:format)                                         {:action=>"destroy", :controller=>"days_off"}
        approve_account_request POST   /account_requests/:id/approve(.:format)                         {:action=>"approve", :controller=>"account_requests"}
        decline_account_request POST   /account_requests/:id/decline(.:format)                         {:action=>"decline", :controller=>"account_requests"}
    account_request_activations POST   /account_requests/:account_request_id/activations(.:format)     {:action=>"create", :controller=>"account_activations"}
@@ -29,11 +43,4 @@ new_account_request_activation GET    /account_requests/:account_request_id/acti
                        student GET    /students/:id(.:format)                                         {:action=>"show", :controller=>"students"}
                                PUT    /students/:id(.:format)                                         {:action=>"update", :controller=>"students"}
                                DELETE /students/:id(.:format)                                         {:action=>"destroy", :controller=>"students"}
-              admin_menu_items GET    /admin/menu_items(.:format)                                     {:action=>"index", :controller=>"admin/menu_items"}
-                               POST   /admin/menu_items(.:format)                                     {:action=>"create", :controller=>"admin/menu_items"}
-           new_admin_menu_item GET    /admin/menu_items/new(.:format)                                 {:action=>"new", :controller=>"admin/menu_items"}
-          edit_admin_menu_item GET    /admin/menu_items/:id/edit(.:format)                            {:action=>"edit", :controller=>"admin/menu_items"}
-               admin_menu_item GET    /admin/menu_items/:id(.:format)                                 {:action=>"show", :controller=>"admin/menu_items"}
-                               PUT    /admin/menu_items/:id(.:format)                                 {:action=>"update", :controller=>"admin/menu_items"}
-                               DELETE /admin/menu_items/:id(.:format)                                 {:action=>"destroy", :controller=>"admin/menu_items"}
                           root        /(.:format)                                                     {:controller=>"home", :action=>"index"}
