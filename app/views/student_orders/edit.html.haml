@@ -11,7 +11,7 @@
     - @student_order.orders_by_weekday.each do |week|
       %tr
         - week.each do |order|
-          - if order
+          - if order.is_a?(Order)
             - day = order.served_on.day
             %td{:id => day.to_s, :class => order.served_on.strftime('%A').downcase}
               .mday= day
@@ -29,6 +29,10 @@
 
                 = order_fields.input(:student_id, :as => :hidden)
               - order_index += 1
+          - elsif order.is_a?(DayOff)
+            %td{:id => day.to_s}
+
+              %div.day_off= order.name
           - else
             %td.empty
               != '&nbsp;'

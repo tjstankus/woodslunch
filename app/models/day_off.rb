@@ -6,7 +6,7 @@ class DayOff < ActiveRecord::Base
   validate :start_must_be_on_or_before_end
 
   def self.for_date(date)
-    where("starts_on >= :date OR ends_on <= :date", {:date => date.to_s}).first
+    where(":date >= starts_on AND :date <= ends_on", {:date => date.to_s}).first
   end
 
   def start_must_be_on_or_before_end

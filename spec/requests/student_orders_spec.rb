@@ -104,8 +104,24 @@ describe 'Student orders' do
       it 'does not display the first week'
     end
 
-    context 'given a range of days off' do
-      it 'displays the name of the day off for each affected day'
+    context 'given a range of days off within the month' do
+
+      let!(:days_off) do
+        Factory(:day_off, :name => 'Memorial Day Break', :starts_on => "#{year}-#{month}-26",
+            :ends_on => "#{year}-#{month}-31")
+      end
+
+      it 'displays the name of the day off for each affected day' do
+        pending
+        visit edit_student_order_path(student, :year => year, :month => month)
+        affected_days = %w(26 27 30 31)
+        affected_days.each do |day|
+          within "td##{day}" do
+            page.should have_css('div.day_off', :text => days_off.name)
+          end
+        end
+      end
+
       it 'does not display menu items on days off'
     end
   end

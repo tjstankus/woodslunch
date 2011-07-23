@@ -1,17 +1,16 @@
-Goals for next meeting:
-	Have Emily and Susan request accounts
-	See their account requests
-	Activate their account requests
-	Promote their user accounts (not actual accounts) to admin
-	This will involve:
-		Setup a staging environment. Could do this later.
-		Users listing (part of accounts listing)?
-		...
 Days off:
 	- Clean up listing similar to menu items with only Edit links on the right and delete links on the edit page. @done(2011-07-13)
 	- Get rid of show page. @done(2011-07-13)
 	- Specs in student order spec
-	- Split index view into Upcoming & Past ??
+		Now that each day is not necessarily mapped to an Order object, it doesn't make sense to return order instances. Instead probably want to give back some sort of wrapper. Not sure what to call it, something like DayWrapper or simply Day, maybe DayOfMonth. It could also be a simple struct that holds data for the day (with the day of the month so we don't have to keep querying order.served_on.day), the day of week name (for the html class attribute), and a method that responds to what kind of thing it is, sort of the way a Mime::Type works, perhaps partial_name, that way we can drive the partial that's rendered based on that method day_of_month.name_for_partial and we can hide the messy type checking in there. Actually we can avoid type checking by just querying, e.g., day.order? which calls day.order, returns true/false based on whether that object is nil. Do the same thing for day_off. Also, should provide a method that returns the object needed for the partial, object_for_partial.
+			Day is most generic/correct name I can think of.
+				Day.wrapped_object. View can use this to drive which partial to use, etc., by using .class
+				Day.name => 'monday'
+			When we implement UserOrder, in addition to StudentOrder, it may be the case that
+			OrderPresenter
+			StudentOrder < OrderPresenter
+			UserOrder < OrderPresenter
+	- Split index view into Upcoming & Past
 Misc:
 	- Identify big picture tasks
 		- Go through Basecamp
