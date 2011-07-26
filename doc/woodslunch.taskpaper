@@ -7,9 +7,6 @@ Days off:
 				Day.wrapped_object. View can use this to drive which partial to use, etc., by using .class
 				Day.name => 'monday'
 			When we implement UserOrder, in addition to StudentOrder, it may be the case that
-			OrderPresenter
-			StudentOrder < OrderPresenter
-			UserOrder < OrderPresenter
 	- Split index view into Upcoming & Past
 Misc:
 	- Identify big picture tasks

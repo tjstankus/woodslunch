@@ -112,7 +112,7 @@ describe 'Student orders' do
       end
 
       it 'displays the name of the day off for each affected day' do
-        pending
+        pending 'Implementation of OrderPresenter'
         visit edit_student_order_path(student, :year => year, :month => month)
         affected_days = %w(26 27 30 31)
         affected_days.each do |day|
