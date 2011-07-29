@@ -1,3 +1,8 @@
+Cutoff for first month of year, then open it up.
+A la carte card. Buy in denominations. Marked off on per-use. Something down the line.
+	When you pay have option to add money for a la carte, purchase grocery card.
+Paypal Basic account has shopping cart
+8/15 launch date
 Days off:
 	- Clean up listing similar to menu items with only Edit links on the right and delete links on the edit page. @done(2011-07-13)
 	- Get rid of show page. @done(2011-07-13)
@@ -71,6 +76,7 @@ Orders:
 	- An order must have a unique combination of student id and served_on date. In other words, there can only be one order per student per day. Enforce this in a validation. @priority
 Menu Items:
 	- @q Handle items on non-daily schedules?
+		YES
 		https://github.com/seejohnrun/ice_cube
 		http://ruby-toolbox.com/categories/recurring_events.html
 Later:

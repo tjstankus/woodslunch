@@ -21,31 +21,30 @@ class StudentOrder
     @student ||= Student.find(student_id || student_id_from_orders)
   end
 
-  # Returns an array of arrays. Each nested array contains order objects for
-  # weekdays in the month. For example:
+  def display_month_and_year
+    month_helper.first_date.strftime('%B %Y')
+  end
+
+  # Returns an array of arrays. Each nested array contains Day objects that serve as wrappers for
+  # an Order or a DayOff.
   #
-  # [ [ mon_date_order,
-  #     tue_date_order,
-  #     wed_date_order,
-  #     thu_date_order,
-  #     fri_date_order ],
-  #   [ mon_date_order,
-  #     tue_date_order,
-  #     wed_date_order,
-  #     thu_date_order,
-  #     fri_date_order ]
+  # Missing weekdays at the beginning and end of the month are padded out with nils. So, if the
+  # first day of the month is a Wednesday, for example, the returned object might look like this:
+  #
+  # [ [ nil,
+  #     nil,
+  #     day (wrapping an order for Wednesday),
+  #     day (wrapping an order for Thursday),
+  #     day (wrapping a day off) ],
+  #   [ day (wrapping an order for Monday),
+  #     day (wrapping an order for Tuesday),
+  #     day (wrapping an order for Wednesday),
+  #     day (wrapping an order for Thursday),
+  #     day (wrapping an order for Friday), ],
+  #   [ # remaining week arrays... ],
+  #   [ # the last array (for last week of month) may have nils on the end ]
   # ]
   #
-  # Missing weekdays are padded out with nils. So, if the first day of the
-  # month is a Wednesday, for example, the first embedded array will look like
-  # this:
-  #
-  # [nil, nil, wed_date_order, thu_date_order, fri_date_order]
-  #
-  # If the last day of the month is a Thursday, the last embedded array will
-  # look like this:
-  #
-  # [mon_date_order, tue_date_order, wed_date_order, thu_date_order, nil]
   def days_grouped_by_weekdays
     m = month_helper
     [].tap do |arr|
@@ -56,9 +55,9 @@ class StudentOrder
           m.prepend_nils_for_weekdays_before_first_of_month(arr, date)
 
           if day_off = DayOff.for_date(date)
-            arr.last << day_off
+            arr.last << Day.new(date, day_off)
           else
-            push_order(arr, date)
+            push_order(arr.last, date)
           end
 
           m.append_nils_for_weekdays_after_last_of_month(arr, date)
@@ -68,9 +67,9 @@ class StudentOrder
   end
 
   def push_order(arr, date)
-    order = Order.find_by_student_id_and_served_on(student_id, date)
-    order_to_push = order || Order.new(:student_id => student_id, :served_on => date)
-    arr.last << Day.new(order_to_push)
+    order = Order.find_by_student_id_and_served_on(student_id, date) ||
+            Order.new(:student_id => student_id, :served_on => date)
+    arr << Day.new(date, order)
   end
 
   def save

@@ -75,6 +75,17 @@ describe StudentOrder, :wip => true do
     end
 
     # TODO: Day that should wrap a DayOff
+    context 'given a day off for the first weekday' do
+
+      let(:day_off) {
+        Factory(:day_off, :starts_on => "#{year}-#{month}-1", :ends_on => "#{year}-#{month}-1")
+      }
+
+      context 'the day object for the first weekday' do
+        it 'should wrap a DayOff'
+      end
+    end
+
     # TODO: Day that should wrap an Order
   end
 
@@ -109,6 +120,18 @@ describe StudentOrder, :wip => true do
 
     it 'returns the year as an integer' do
       student_order.year.should == year.to_i
+    end
+  end
+
+  describe '#display_month_and_year' do
+
+    let(:month) { '4' }
+    let(:year) { '2011' }
+    let(:params) {{'student_id' => student.id, 'year' => year, 'month' => month}}
+    let(:student_order) { StudentOrder.new(params) }
+
+    it 'returns long form string for month and year' do
+      student_order.display_month_and_year.should == 'April 2011'
     end
   end
 end
