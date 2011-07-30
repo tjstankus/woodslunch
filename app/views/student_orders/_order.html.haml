@@ -10,4 +10,4 @@
     :label => false,
     :input_html => { :style => 'display:none' })
 
-  = order_fields.input(:student_id, :as => :hidden)
+  = order_fields.input("#{order.for}_id".to_sym, :as => :hidden)

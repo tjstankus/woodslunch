@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def verify_account_resource(resource)
+    resource.account == current_user.account
+  end
+
 end

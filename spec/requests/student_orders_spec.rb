@@ -24,9 +24,21 @@ describe 'Student orders' do
       page.should have_content(student.name)
     end
 
-    it 'cannot view student order form for unassociated student' do
-      pending
-      # TODO: Implement similar to verify_admin
+    context 'that attempts to edit an order for an unassociated student' do
+
+      let(:account2) { Factory(:account) }
+      let(:unassociated_student) { Factory(:student, :account => account2) }
+
+      it 'gets redirected to the root path' do
+        visit edit_student_order_path(unassociated_student, :year => '2011', :month => '4')
+        current_path.should == root_path
+      end
+
+      it 'sees a flash alert message' do
+        visit edit_student_order_path(unassociated_student, :year => '2011', :month => '4')
+        alert = 'Cannot place orders for students not associated with your account.'
+        page.should have_css('.flash#alert', :text => alert)
+      end
     end
   end
 
@@ -93,15 +105,7 @@ describe 'Student orders' do
     end
 
     context 'given an ordered menu item' do
-      it 'should be checked'
-    end
-
-    context 'given a month with first weekday in second week' do
-
-      let(:month) { '5' }
-      let(:year) { '2011' }
-
-      it 'does not display the first week'
+      it 'should be have a quantity selected'
     end
 
     context 'given a range of days off within the month' do
@@ -110,11 +114,10 @@ describe 'Student orders' do
         Factory(:day_off, :name => 'Memorial Day Break', :starts_on => "#{year}-#{month}-26",
             :ends_on => "#{year}-#{month}-31")
       end
+      let(:affected_days) { %w(26 27 30 31) }
 
       it 'displays the name of the day off for each affected day' do
-        pending 'Implementation of OrderPresenter'
         visit edit_student_order_path(student, :year => year, :month => month)
-        affected_days = %w(26 27 30 31)
         affected_days.each do |day|
           within "td##{day}" do
             page.should have_css('div.day_off', :text => days_off.name)
@@ -122,7 +125,14 @@ describe 'Student orders' do
         end
       end
 
-      it 'does not display menu items on days off'
+      it 'does not display menu items on days off' do
+        visit edit_student_order_path(student, :year => year, :month => month)
+        affected_days.each do |day|
+          within "td##{day}" do
+            page.should_not have_css('input')
+          end
+        end
+      end
     end
   end
 
