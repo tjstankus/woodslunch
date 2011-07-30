@@ -14,6 +14,7 @@
           - if day
             %td{:id => day.month_day, :class => day.day_name.downcase}
               .mday= day.month_day
+              = render day.name_for_partial, :object => day.wrapped_object, :index => order_index += 1
           - else
             %td.empty
             != '&nbsp;'

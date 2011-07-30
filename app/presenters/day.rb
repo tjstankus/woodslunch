@@ -14,4 +14,8 @@ class Day
   def day_name
     date.strftime('%A')
   end
+
+  def name_for_partial
+    wrapped_object.class.to_s.underscore
+  end
 end

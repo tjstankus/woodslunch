@@ -4,11 +4,12 @@ class Order < ActiveRecord::Base
   after_update :destroy_unless_menu_items
 
   belongs_to :student
+  belongs_to :user
   has_many :ordered_menu_items
   has_many :menu_items, :through => :ordered_menu_items
 
-  validates :student_id, :presence => true
   validates :served_on, :presence => true
+  validate :associated_with_student_or_user
 
   def available_menu_items
     @available_menu_items ||= self.day_of_week_served_on.menu_items
@@ -19,12 +20,12 @@ class Order < ActiveRecord::Base
   end
 
   def calculate_total
-    self.total = self.menu_items.collect(&:price).inject(0) { |sum, n| sum + n } 
+    self.total = self.menu_items.collect(&:price).inject(0) { |sum, n| sum + n }
   end
 
   def update_account_balance_if_total_changed
     if total_changed?
-      diff = total - total_was  
+      diff = total - total_was
       account = self.student.account
       account.change_balance_by(diff)
     end
@@ -32,5 +33,19 @@ class Order < ActiveRecord::Base
 
   def destroy_unless_menu_items
     self.destroy unless self.menu_items.any?
+  end
+
+  def for
+    if self.student
+      'student'
+    elsif self.user
+      'user'
+    end
+  end
+
+  def associated_with_student_or_user
+    unless (self.student || self.user) && !(self.student && self.user)
+      errors.add(:base, 'Order must be associated with a student or a user, but not both.')
+    end
   end
 end

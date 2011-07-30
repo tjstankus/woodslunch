@@ -3,6 +3,7 @@ class CreateOrders < ActiveRecord::Migration
     create_table :orders do |t|
       t.date :served_on
       t.integer :student_id
+      t.integer :user_id
       t.decimal :total, :precision => 5, :scale => 2, :default => 0
       t.timestamps
     end

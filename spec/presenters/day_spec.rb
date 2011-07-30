@@ -22,6 +22,16 @@ describe Day do
     end
   end
 
+  describe '#name_for_partial' do
+    let(:date) { Date.today }
+    let(:obj) { build_student_order }
+    let(:day) { Day.new(date, obj) }
+
+    it 'returns the lowercase underscored class name as naming convention for partial' do
+      day.name_for_partial.should == 'student_order'
+    end
+  end
+
   describe '#month_day' do
 
     let(:date) { Date.parse('2011-07-01') }

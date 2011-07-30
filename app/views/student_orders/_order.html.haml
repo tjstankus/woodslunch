@@ -1,0 +1,13 @@
+= simple_fields_for("#{order.for}_order[orders[#{index}]]", order) do |order_fields|
+
+  = order_fields.association(:menu_items,
+    :as => :check_boxes,
+    :label => false,
+    :collection => order.available_menu_items)
+
+  = order_fields.input(:served_on,
+    :as => :string,
+    :label => false,
+    :input_html => { :style => 'display:none' })
+
+  = order_fields.input(:student_id, :as => :hidden)

@@ -1,14 +1,12 @@
 require 'spec_helper'
 
 describe Order do
-  it { should belong_to(:student) }
   it { should have_many(:menu_items).through(:ordered_menu_items) }
 
   it { should validate_presence_of(:served_on) }
-  it { should validate_presence_of(:student_id) }
 
   describe 'minimal factory' do
-    
+
     it 'should be valid' do
       Factory(:order).should be_valid
     end
@@ -21,7 +19,7 @@ describe Order do
   end
 
   describe '#day_of_week_served_on' do
-    
+
     it 'returns correct day of week' do
       year = Date.today.year.to_i
       month = Date.today.month.to_i
@@ -59,7 +57,7 @@ describe Order do
 
   describe '#delete_if_no_menu_items' do
 
-    let!(:order) { Factory(:order) }    
+    let!(:order) { Factory(:order) }
     let!(:id) { order.id }
 
     before(:each) do
@@ -68,7 +66,7 @@ describe Order do
     end
 
     context 'given no menu_items' do
-      
+
       it 'destroys record' do
         order.should have(1).menu_items
         lambda {
@@ -77,9 +75,9 @@ describe Order do
         lambda {
           Order.find(id)
         }.should raise_error(ActiveRecord::RecordNotFound)
-      end  
+      end
     end
-    
+
     context 'given menu items' do
 
       it 'preserves record' do
@@ -96,12 +94,12 @@ describe Order do
   end
 
   describe '#total' do
-    
+
     let(:menu_item) { Factory(:menu_item) }
     let(:order) { Factory.build(:order) }
 
     it 'defaults to 0' do
-      order.total.should == 0  
+      order.total.should == 0
     end
 
     context 'given one associated menu item' do
@@ -114,7 +112,7 @@ describe Order do
     end
 
     context 'given several associated menu items' do
-      
+
       it 'equals sum of associated menu item prices' do
         menu_items = [].tap { |a| a << Factory(:menu_item) }
         menu_items_total = menu_items.collect(&:price).inject { |sum, n| sum + n }
@@ -147,7 +145,7 @@ describe Order do
         order.menu_items << menu_item
         order.menu_items << menu_item2
         order.save!
-        order.student.account.balance.should == menu_item.price + 
+        order.student.account.balance.should == menu_item.price +
             menu_item2.price
         order.menu_item_ids = [menu_item.id]
         order.save!
@@ -157,13 +155,71 @@ describe Order do
     end
 
     context 'when the order total has not changed' do
-      
+
       it 'does not update the account balance' do
         account = order.student.account
         account.should_not_receive(:change_balance_by)
         order.save
         account.reload.balance.should == 0
       end
+    end
+  end
+
+  describe 'when associated with student' do
+
+    let(:student) { Factory(:student) }
+    let(:order) { Factory(:order, :student => student) }
+
+    it 'belongs to student' do
+      order.student.should == student
+    end
+
+    it 'should not be associated with a user' do
+      order.user.should be_nil
+    end
+  end
+
+  describe 'when associated with user' do
+
+    let(:user) { Factory(:user) }
+    let(:order) { Factory(:order, :user => user) }
+
+    it 'belongs to user' do
+      order.user.should == user
+    end
+
+    it 'should not be associated with a student' do
+      order.student.should be_nil
+    end
+  end
+
+  it 'requires either a student or a user' do
+    order = Factory.build(:order, :student => nil, :user => nil)
+    order.student.should be_nil
+    order.user.should be_nil
+    order.should_not be_valid
+    order.errors[:base].should include('Order must be associated with a student or a user, but not both.')
+  end
+
+  it 'invalidates with both a student and a user' do
+    student = Factory(:student)
+    user = Factory(:user)
+    order = Factory.build(:order, :student => student, :user => user)
+    order.should_not be_valid
+    order.errors[:base].should include('Order must be associated with a student or a user, but not both.')
+  end
+
+  describe '#for' do
+    it 'returns "student" when associated with a student' do
+      student = Factory(:student)
+      order = Factory(:order, :student => student)
+      order.for.should == 'student'
+    end
+
+    it 'returns "user" when associated with a user' do
+      user = Factory(:user)
+      order = Factory(:order, :user => user, :student => nil)
+      order.for.should == 'user'
     end
   end
 end

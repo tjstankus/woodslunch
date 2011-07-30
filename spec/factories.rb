@@ -39,9 +39,9 @@ Factory.define :student do |f|
 end
 
 Factory.define :order do |f|
-  f.association :student, :factory => :student
   f.served_on { Date.civil(2011, 4, 1) }
   f.total 0
+  f.student_id { |f| f.user_id ? nil : Factory(:student).id }
 end
 
 Factory.define :ordered_menu_item do |f|
