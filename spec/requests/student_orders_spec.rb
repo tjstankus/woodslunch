@@ -92,13 +92,23 @@ describe 'Student orders' do
         @menu_item = @daily_menu_item.menu_item
       end
 
+      let(:ids_for_mondays) { %w(2 9 16 23 30) }
+
       it 'displays the menu item on each Monday' do
         visit edit_student_order_path(student, :year => year, :month => month)
-
-        ids_for_mondays = %w(2 9 16 23 30)
         ids_for_mondays.each do |id|
           within("td##{id}") do
             page.should have_content(@menu_item.name)
+          end
+        end
+      end
+
+      it 'displays a quantity select for the menu item' do
+        pending
+        visit edit_student_order_path(student, :year => year, :month => month)
+        ids_for_mondays.each do |id|
+          within("td##{id}") do
+            page.should have_css('select')
           end
         end
       end

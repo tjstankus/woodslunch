@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20110711120635) do
   create_table "ordered_menu_items", :force => true do |t|
     t.integer  "menu_item_id"
     t.integer  "order_id"
+    t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,9 +1,16 @@
 = simple_fields_for("#{order.for}_order[orders[#{index}]]", order) do |order_fields|
 
-  = order_fields.association(:menu_items,
-    :as => :check_boxes,
-    :label => false,
-    :collection => order.available_menu_items)
+  - menu_item_index = 0
+  - order.available_menu_items.each do |menu_item|
+    .menu_item
+      = order_fields.simple_fields_for("ordered_menu_items[#{menu_item_index += 1}]") do |ordered_menu_item_fields|
+
+        = ordered_menu_item_fields.select(:quantity, (1..OrderedMenuItem::MAX_DISPLAYED_QUANTITY),
+          :include_blank => true)
+
+        = ordered_menu_item_fields.hidden_field(:menu_item_id, :value => menu_item.id)
+
+        = menu_item.name
 
   = order_fields.input(:served_on,
     :as => :string,

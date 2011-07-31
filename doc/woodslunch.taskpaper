@@ -1,4 +1,3 @@
-- @next Get all student_orders request specs passing, even the pending ones.
 7/26 Meeting Notes:
 Cutoff for first month of year, then open it up.
 A la carte card. Buy in denominations. Marked off on per-use. Something down the line.
@@ -6,8 +5,6 @@ A la carte card. Buy in denominations. Marked off on per-use. Something down the
 Paypal Basic account has shopping cart
 8/15 launch date
 Days off:
-	- Clean up listing similar to menu items with only Edit links on the right and delete links on the edit page. @done(2011-07-13)
-	- Get rid of show page. @done(2011-07-13)
 	- Specs in student order spec
 		Now that each day is not necessarily mapped to an Order object, it doesn't make sense to return order instances. Instead probably want to give back some sort of wrapper. Not sure what to call it, something like DayWrapper or simply Day, maybe DayOfMonth. It could also be a simple struct that holds data for the day (with the day of the month so we don't have to keep querying order.served_on.day), the day of week name (for the html class attribute), and a method that responds to what kind of thing it is, sort of the way a Mime::Type works, perhaps partial_name, that way we can drive the partial that's rendered based on that method day_of_month.name_for_partial and we can hide the messy type checking in there. Actually we can avoid type checking by just querying, e.g., day.order? which calls day.order, returns true/false based on whether that object is nil. Do the same thing for day_off. Also, should provide a method that returns the object needed for the partial, object_for_partial.
 			Day is most generic/correct name I can think of.
@@ -28,7 +25,6 @@ Misc:
 	- Users listing
 		- Ability to make someone an admin @priority @wip
 	- Staging app for Heroku.
-	- Deploy and use sendgrid. What does sendgrid give us in the way of UI to resend emails, etc. @priority @done(2011-07-10)
 	- Also convert menu_items listing to use .listing_item classes in _application.scss and remove the .menu_item item stuff in _admin.scss
 	- Change error_messages_for to error_notification. The html should be such that the browser catches the errors if possible.
 	Styles:
@@ -40,17 +36,12 @@ Users:
 Accounts:
 AccountRequests:
 	- AccountActivation 
-		- Log user in after activating account @done(2011-07-10)
-			- Implemented but need spec for this. Controller spec.
+		- Need spec for logging in a user after activating account, perhaps a controller spec.
 		- AccountActivation save method needs to handle failures.
-			- If passwords don't match, redirect to form with error messages. @done(2011-07-10)
 			- Any other problems should generate an exception, and I should get a notification
 				- Setup newrelic
 					- @q Does new relic provide exception notifications
 				- Integrate http://rubygems.org/gems/exception_notification
-	- Deploy and setup sendgrid @done(2011-07-10)
-		- Test manually with account request @done(2011-07-10)
-		- Does sendgrid have a web ui that shows account activity, like when an email was last sent, etc. @q If so, then we don't need to worry about tracking when an email was last sent. YES! @done(2011-07-10)
 	- Email gets sent upon successful activation. Actually, after activation, need to redirect to screen to setup password (with confirmation), then automatically log in.
 	- Deny action @priority
 	- Activate
@@ -75,7 +66,14 @@ Accounts/Users/Students:
 		- Admin records a payment for this account.
 		- Payment model. Belongs to account with presence validation.
 Orders:
-	- An order must have a unique combination of student id and served_on date. In other words, there can only be one order per student per day. Enforce this in a validation. @priority
+	- Quantity of ordered menu item @wip
+		- quantity added to database @done(2011-07-31)
+		- quantity validated for presence and numericality @done(2011-07-31)
+		- Max quantity for display @done(2011-07-31)
+		- Must display a select on the form for each menu item
+		- Account balance must take in to account the quantity
+		- The proper quantity must be selected if an order has already been placed for the month
+	- An order must have a unique combination of student id and served_on date. In other words, there can only be one order per student per day. Enforce this in a validation.
 Menu Items:
 	- @q Handle items on non-daily schedules?
 		YES
@@ -85,6 +83,16 @@ Later:
 	- Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
 	- Presenter gem
 Archive:
+	- Go through notes to pick the next task. I think quantities would be a good next step, but verify that. @done(2011-07-31)
+	- Get all student_orders request specs passing, even the pending ones. @done(2011-07-30)
+	- Clean up listing similar to menu items with only Edit links on the right and delete links on the edit page. @done(2011-07-13) @project(Days off)
+	- Get rid of show page. @done(2011-07-13) @project(Days off)
+	- Deploy and use sendgrid. What does sendgrid give us in the way of UI to resend emails, etc. @done(2011-07-10) @project(Misc)
+	- Log user in after activating account @done(2011-07-10) @project(AccountRequests)
+	- If passwords don't match, redirect to form with error messages. @done(2011-07-10) @project(AccountRequests)
+	- Deploy and setup sendgrid @done(2011-07-10) @project(AccountRequests)
+		- Test manually with account request @done(2011-07-10)
+		- Does sendgrid have a web ui that shows account activity, like when an email was last sent, etc. @q If so, then we don't need to worry about tracking when an email was last sent. YES! @done(2011-07-10)
 	- Get rid of AccountInvitation model. Send the mail upon account request approval. @done(2011-07-10) @project(AccountRequests)
 	- activation_token should not be generated until the account request has been approved @done(2011-07-10) @project(AccountRequests)
 	- Nav menu @done(2011-07-08) @project(Misc)

@@ -3,7 +3,7 @@ class CreateOrderedMenuItems < ActiveRecord::Migration
     create_table :ordered_menu_items do |t|
       t.integer :menu_item_id
       t.integer :order_id
-
+      t.integer :quantity
       t.timestamps
     end
   end

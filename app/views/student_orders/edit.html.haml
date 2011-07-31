@@ -22,30 +22,3 @@
 
   #monthly_order_info_actions
     = f.submit "Place Order"
-
--#
-  - if order.is_a?(Order)
-    - day = order.served_on.day
-    %td{:id => day.to_s, :class => order.served_on.strftime('%A').downcase}
-      .mday= day
-      = simple_fields_for("student_order[orders[#{order_index}]]", order) do |order_fields|
-
-        = order_fields.association(:menu_items,
-          :as => :check_boxes,
-          :label => false,
-          :collection => order.available_menu_items)
-
-        = order_fields.input(:served_on,
-          :as => :string,
-          :label => false,
-          :input_html => { :style => 'display:none' })
-
-        = order_fields.input(:student_id, :as => :hidden)
-      - order_index += 1
-  - elsif order.is_a?(DayOff)
-    %td{:id => day.to_s}
-
-      %div.day_off= order.name
-  - else
-    %td.empty
-      != '&nbsp;'
