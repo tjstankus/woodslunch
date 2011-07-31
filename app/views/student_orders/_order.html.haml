@@ -2,10 +2,12 @@
 
   - menu_item_index = 0
   - order.available_menu_items.each do |menu_item|
+    - quantity = order.new_record? ? nil : order.quantity_for_menu_item(menu_item)
     .menu_item
       = order_fields.simple_fields_for("ordered_menu_items[#{menu_item_index += 1}]") do |ordered_menu_item_fields|
 
-        = ordered_menu_item_fields.select(:quantity, (1..OrderedMenuItem::MAX_DISPLAYED_QUANTITY),
+        = ordered_menu_item_fields.select(:quantity,
+          options_for_select((1..OrderedMenuItem::MAX_DISPLAYED_QUANTITY), quantity),
           :include_blank => true)
 
         = ordered_menu_item_fields.hidden_field(:menu_item_id, :value => menu_item.id)

@@ -86,6 +86,7 @@ class StudentOrder
     ordered_menu_items_atts = ordered_menu_items_with_quantity(order_atts.delete('ordered_menu_items'))
     if order = existing_order(order_atts)
       update_order(order, ordered_menu_items_atts)
+      order.destroy_unless_ordered_menu_items
     elsif ordered_menu_items_atts.any?
       order = Order.create!(order_atts)
       create_ordered_menu_items_for_order(order, ordered_menu_items_atts)
