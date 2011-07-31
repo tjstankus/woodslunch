@@ -82,11 +82,13 @@ class StudentOrder
   end
 
   def create_or_update_order(order_params)
-    order_attributes = order_params.last
-    if order = existing_order(order_attributes)
-      order.update_attributes!(order_attributes)
-    elsif order_params_include_menu_items?(order_attributes)
-      Order.create!(order_attributes) # if order_attributes['menu_item_ids'].any?
+    order_atts = order_params.last
+    ordered_menu_items_atts = ordered_menu_items_with_quantity(order_atts.delete('ordered_menu_items'))
+    if order = existing_order(order_atts)
+      update_order(order, ordered_menu_items_atts)
+    elsif ordered_menu_items_atts.any?
+      order = Order.create!(order_atts)
+      create_ordered_menu_items_for_order(order, ordered_menu_items_atts)
     end
   end
 
@@ -96,8 +98,22 @@ class StudentOrder
     Order.find_by_student_id_and_served_on(student_id, served_on)
   end
 
-  def order_params_include_menu_items?(order_attributes)
-    order_attributes['menu_item_ids'] &&
-      order_attributes['menu_item_ids'].select{ |id| !id.empty? }.any?
+  def update_order(order, ordered_menu_items_atts)
+    order.ordered_menu_items.clear
+    create_ordered_menu_items_for_order(order, ordered_menu_items_atts)
+  end
+
+  def create_ordered_menu_items_for_order(order, ordered_menu_items_atts)
+    ordered_menu_items_atts.each do |k, v|
+      order.ordered_menu_items.create(v)
+    end
+  end
+
+  def ordered_menu_items_with_quantity(atts)
+    atts.tap do |h|
+      h.each do |k,v|
+        h.delete(k) if v['quantity'].empty?
+      end
+    end
   end
 end

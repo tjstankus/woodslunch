@@ -134,4 +134,81 @@ describe StudentOrder, :wip => true do
       student_order.display_month_and_year.should == 'April 2011'
     end
   end
+
+  describe '#save' do
+    context 'given I have an existing order for the month and want to delete it' do
+      pending
+      # This will test that if we submit a form with the all the quantities blank it deletes an
+      # existing order
+    end
+  end
+
+  describe '#create_or_update_order' do
+    let(:month) { '7' }
+    let(:year) { '2011' }
+    let(:params) {{'student_id' => student.id, 'year' => year, 'month' => month}}
+    let(:student_order) { StudentOrder.new(params) }
+    let(:order_params) {
+      [ '1',
+        { "ordered_menu_items"=>
+          { "1"=>{"quantity"=>"2", "menu_item_id"=>"20"},
+            "2"=>{"quantity"=>"", "menu_item_id"=>"21"},
+            "3"=>{"quantity"=>"1", "menu_item_id"=>"5"} },
+          "served_on"=>"2011-07-01",
+          "student_id"=>"#{student.id}"} ]
+    }
+
+    context 'given an existing order for the month' do
+      it 'updates the order' do
+        student_order.create_or_update_order(order_params)
+      end
+    end
+
+    context 'given no orders for the the month' do
+      it 'creates the order'
+    end
+  end
+
+  describe '#existing_order' do
+    let(:month) { '7' }
+    let(:year) { '2011' }
+    let(:params) {{'student_id' => student.id, 'year' => year, 'month' => month}}
+    let(:student_order) { StudentOrder.new(params) }
+    let(:order_atts) { {"served_on"=>"2011-07-01", "student_id"=>"#{student.id}"} }
+
+    context 'given an existing order for the student and served_on date' do
+      let!(:order) {
+        Factory(:order, :served_on => Date.civil(2011, 7, 1), :student_id => student.id)
+      }
+
+      it 'returns true' do
+        student_order.existing_order(order_atts).should == order
+      end
+    end
+
+    context 'given no order for the student and served_on date' do
+      it 'returns false' do
+        student_order.existing_order(order_atts).should be_nil
+      end
+    end
+  end
+
+  describe '#ordered_menu_items_with_quantity' do
+
+    let(:month) { '4' }
+    let(:year) { '2011' }
+    let(:params) {{'student_id' => student.id, 'year' => year, 'month' => month}}
+    let(:student_order) { StudentOrder.new(params) }
+    let(:atts) {
+      { "1"=>{"quantity"=>"2", "menu_item_id"=>"20"},
+        "2"=>{"quantity"=>"", "menu_item_id"=>"21"},
+        "3"=>{"quantity"=>"1", "menu_item_id"=>"5"} }
+    }
+
+    it 'filters out blank quantities' do |variable|
+      student_order.ordered_menu_items_with_quantity(atts).should ==
+          { "1"=>{"quantity"=>"2", "menu_item_id"=>"20"},
+            "3"=>{"quantity"=>"1", "menu_item_id"=>"5"} }
+    end
+  end
 end

@@ -70,9 +70,12 @@ Orders:
 		- quantity added to database @done(2011-07-31)
 		- quantity validated for presence and numericality @done(2011-07-31)
 		- Max quantity for display @done(2011-07-31)
-		- Must display a select on the form for each menu item
+		- Must display a select on the form for each menu item @done(2011-07-31)
+		- Save orders @done(2011-07-31)
+			- Don't know if order.update_attributes!(order_attributes) on line 88 of StudentOrder is going to work. Might need to test that manually. @done(2011-07-31)
+			- Test Order.create! manually using params copied from log. @done(2011-07-31)
+		- @next The proper quantity must be selected if an order has already been placed for the month
 		- Account balance must take in to account the quantity
-		- The proper quantity must be selected if an order has already been placed for the month
 	- An order must have a unique combination of student id and served_on date. In other words, there can only be one order per student per day. Enforce this in a validation.
 Menu Items:
 	- @q Handle items on non-daily schedules?

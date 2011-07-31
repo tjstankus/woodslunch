@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe 'Student orders' do
 
+  # For number_to_currency
+  include ActionView::Helpers::NumberHelper
+
   let!(:account) { Factory(:account) }
   let!(:student) { Factory(:student, :account => account) }
   let!(:user) { Factory(:user, :account => account) }
@@ -151,19 +154,23 @@ describe 'Student orders' do
     let(:month) { '6' }
     let(:year) { '2011' }
 
-    it 'creates an order' do
-      # Given a menu item Hamburger served on Mondays
-      menu_item = Factory(:menu_item, :name => 'Hamburger')
+    # Given a menu item Hamburger served on Mondays
+    let!(:menu_item) { Factory(:menu_item, :name => 'Hamburger') }
+    let!(:daily_menu_item) {
       Factory(:daily_menu_item,
-        :menu_item => menu_item,
-        :day_of_week => DayOfWeek.find_by_name('Monday'))
+              :menu_item => menu_item,
+              :day_of_week => DayOfWeek.find_by_name('Monday'))
+    }
 
+    it 'creates an order' do
       # When I go to the student order form
       visit edit_student_order_path(student, :year => year, :month => month)
 
-      # And I check Hamburger for the first Monday
+      # And select a quantity of 1 Hamburger for the first Monday
       within('td#6') do
-        check 'Hamburger'
+        within('div.menu_item') do
+          select '1'
+        end
       end
 
       # And I click Place Order
@@ -172,7 +179,30 @@ describe 'Student orders' do
       # Then I should see a successful order flash message displayed
       page.should have_xpath("//div[@id='notice']",
                              :text => "Successfully placed order for #{student.name}")
+    end
 
+    it 'changes the account balance' do
+      # And given a 0 account balance
+      account.balance.should == 0
+
+      # When I go to the student order form
+      visit edit_student_order_path(student, :year => year, :month => month)
+
+      # And select a quantity of 1 Hamburger for the first Monday
+      within('td#6') do
+        within('div.menu_item') do
+          select '1'
+        end
+      end
+
+      # And I click Place Order
+      click_button 'Place Order'
+
+      # Then I should be back on my dashboard page
+      current_path.should == root_path
+
+      # And I should see my updated account balance
+      page.should have_css('#balance', :text => number_to_currency(menu_item.price))
     end
   end
 end

@@ -1,11 +1,11 @@
 class Order < ActiveRecord::Base
   before_save :calculate_total
   before_save :update_account_balance_if_total_changed
-  after_update :destroy_unless_menu_items
+  after_update :destroy_unless_ordered_menu_items
 
   belongs_to :student
   belongs_to :user
-  has_many :ordered_menu_items
+  has_many :ordered_menu_items, :dependent => :destroy
   has_many :menu_items, :through => :ordered_menu_items
 
   validates :served_on, :presence => true
@@ -31,8 +31,8 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def destroy_unless_menu_items
-    self.destroy unless self.menu_items.any?
+  def destroy_unless_ordered_menu_items
+    self.destroy unless self.ordered_menu_items.any?
   end
 
   def for
