@@ -4,6 +4,7 @@ class CreateOrderedMenuItems < ActiveRecord::Migration
       t.integer :menu_item_id
       t.integer :order_id
       t.integer :quantity
+      t.decimal :total, :precision => 5, :scale => 2, :default => 0
       t.timestamps
     end
   end

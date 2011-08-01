@@ -23,7 +23,7 @@ Misc:
 			Reports
 		- Go through Dev notes
 	- Users listing
-		- Ability to make someone an admin @priority @wip
+		- Ability to make someone an admin @priority
 	- Staging app for Heroku.
 	- Also convert menu_items listing to use .listing_item classes in _application.scss and remove the .menu_item item stuff in _admin.scss
 	- Change error_messages_for to error_notification. The html should be such that the browser catches the errors if possible.
@@ -66,16 +66,7 @@ Accounts/Users/Students:
 		- Admin records a payment for this account.
 		- Payment model. Belongs to account with presence validation.
 Orders:
-	- Quantity of ordered menu item @wip
-		- quantity added to database @done(2011-07-31)
-		- quantity validated for presence and numericality @done(2011-07-31)
-		- Max quantity for display @done(2011-07-31)
-		- Must display a select on the form for each menu item @done(2011-07-31)
-		- Save orders @done(2011-07-31)
-			- Don't know if order.update_attributes!(order_attributes) on line 88 of StudentOrder is going to work. Might need to test that manually. @done(2011-07-31)
-			- Test Order.create! manually using params copied from log. @done(2011-07-31)
-		- @next The proper quantity must be selected if an order has already been placed for the month
-		- Account balance must take in to account the quantity
+	- @wip New student order form
 	- An order must have a unique combination of student id and served_on date. In other words, there can only be one order per student per day. Enforce this in a validation.
 Menu Items:
 	- @q Handle items on non-daily schedules?
@@ -86,6 +77,17 @@ Later:
 	- Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
 	- Presenter gem
 Archive:
+	- Quantity of ordered menu item @done(2011-07-31) @project(Orders)
+		- quantity added to database @done(2011-07-31)
+		- quantity validated for presence and numericality @done(2011-07-31)
+		- Max quantity for display @done(2011-07-31)
+		- Must display a select on the form for each menu item @done(2011-07-31)
+		- Save orders @done(2011-07-31)
+			- Don't know if order.update_attributes!(order_attributes) on line 88 of StudentOrder is going to work. Might need to test that manually. @done(2011-07-31)
+			- Test Order.create! manually using params copied from log. @done(2011-07-31)
+		- The proper quantity must be selected if an order has already been placed for the month @done(2011-07-31)
+		- Order should be destroyed if no ordered menu items. @done(2011-07-31)
+		- Account balance must take in to account the quantity @done(2011-07-31)
 	- Go through notes to pick the next task. I think quantities would be a good next step, but verify that. @done(2011-07-31)
 	- Get all student_orders request specs passing, even the pending ones. @done(2011-07-30)
 	- Clean up listing similar to menu items with only Edit links on the right and delete links on the edit page. @done(2011-07-13) @project(Days off)

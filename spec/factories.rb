@@ -38,6 +38,10 @@ Factory.define :student do |f|
   f.grade Student::GRADES.sample
 end
 
+Factory.define :student_order do |f|
+  f.association :student, :factory => :student
+end
+
 Factory.define :order do |f|
   f.served_on { Date.civil(2011, 4, 1) }
   f.total 0
@@ -47,6 +51,7 @@ end
 Factory.define :ordered_menu_item do |f|
   f.association :order, :factory => :order
   f.association :menu_item, :factory => :menu_item
+  f.quantity 1
 end
 
 Factory.define :account_request do |f|

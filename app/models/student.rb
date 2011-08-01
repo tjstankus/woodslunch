@@ -3,6 +3,7 @@ class Student < ActiveRecord::Base
 
   belongs_to :account
   has_many :orders
+  has_many :student_orders
 
   validates :first_name, :presence => true
   validates :last_name, :presence => true

@@ -2,8 +2,8 @@ class CreateOrders < ActiveRecord::Migration
   def self.up
     create_table :orders do |t|
       t.date :served_on
-      t.integer :student_id
-      t.integer :user_id
+      t.integer :student_order_id
+      t.integer :user_order_id
       t.decimal :total, :precision => 5, :scale => 2, :default => 0
       t.timestamps
     end

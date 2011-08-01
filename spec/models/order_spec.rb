@@ -55,102 +55,72 @@ describe Order do
     end
   end
 
-  describe '#delete_if_no_menu_items' do
+  describe '#destroy_unless_ordered_menu_items' do
 
-    let!(:order) { Factory(:order) }
-    let!(:id) { order.id }
+    let!(:ordered_menu_item) { Factory(:ordered_menu_item) }
+    let!(:order) { ordered_menu_item.order.reload }
 
-    before(:each) do
-      order.menu_items << Factory(:menu_item)
-      order.save!
+    context 'given associated ordered_menu_items' do
+
+      it 'preserves record' do
+        lambda {
+          order.destroy_unless_ordered_menu_items
+        }.should_not change {Order.count}
+      end
     end
 
-    context 'given no menu_items' do
+    context 'given no ordered_menu_items' do
 
       it 'destroys record' do
-        order.should have(1).menu_items
+        id = order.id
+        order.ordered_menu_items.clear
         lambda {
-          order.update_attributes!(:menu_item_ids => [])
+          order.destroy_unless_ordered_menu_items
         }.should change {Order.count}.by(-1)
         lambda {
           Order.find(id)
         }.should raise_error(ActiveRecord::RecordNotFound)
       end
     end
-
-    context 'given menu items' do
-
-      it 'preserves record' do
-        menu_item = Factory(:menu_item)
-        ids = order.menu_item_ids << menu_item.id
-        lambda {
-          order.update_attributes!(:menu_item_ids => ids)
-        }.should_not change {Order.count}
-        lambda {
-          Order.find(id)
-        }.should_not raise_error
-      end
-    end
   end
 
   describe '#total' do
-
-    let(:menu_item) { Factory(:menu_item) }
-    let(:order) { Factory.build(:order) }
-
     it 'defaults to 0' do
-      order.total.should == 0
-    end
-
-    context 'given one associated menu item' do
-
-      it 'equals associated menu item price' do
-        order.menu_items << menu_item
-        order.save!
-        order.total.should == menu_item.price
-      end
-    end
-
-    context 'given several associated menu items' do
-
-      it 'equals sum of associated menu item prices' do
-        menu_items = [].tap { |a| a << Factory(:menu_item) }
-        menu_items_total = menu_items.collect(&:price).inject { |sum, n| sum + n }
-        menu_items.each { |menu_item| order.menu_items << menu_item }
-        order.save!
-        order.total.should == menu_items_total
-      end
+      Factory(:order).total.should == 0
     end
   end
 
-  describe '#update_account_balance_if_total_changed' do
+  describe '#update_total_and_account_balance' do
+    let(:price) { 4.00 }
+    let(:order) { Factory(:order) }
+    let(:menu_item) { Factory(:menu_item, :price => price) }
+    let(:ordered_menu_item) { Factory(:ordered_menu_item, :menu_item => menu_item, :order => order) }
 
-    let(:menu_item) { Factory(:menu_item) }
-    let(:order) { Factory.build(:order) }
+    it 'updates the account balance' do
+      lambda {
+        order.update_total_and_account_balance
+      }.should change { order.student.account.balance }.from(0).to(ordered_menu_item.menu_item.price)
+    end
 
-
-    context 'when the order total has increased' do
-
-      it 'updates the account balance' do
-        order.menu_items << menu_item
-        order.save!
-        order.student.account.balance.should == menu_item.price
+    context 'given quantity > 1 for associated ordered_menu_item' do
+      it 'equals associated ordered menu item quantity * menu item price' do
+        quantity = 2
+        ordered_menu_item.quantity = quantity
+        ordered_menu_item.save
+        order.update_total_and_account_balance
+        order.total.should == menu_item.price * quantity
       end
     end
 
     context 'when the order total has decreased' do
-
       it 'updates the account balance' do
-        menu_item2 = Factory(:menu_item)
-        order.menu_items << menu_item
-        order.menu_items << menu_item2
-        order.save!
-        order.student.account.balance.should == menu_item.price +
-            menu_item2.price
-        order.menu_item_ids = [menu_item.id]
-        order.save!
-        order.reload
-        order.student.account.balance.should == menu_item.price
+        ordered_menu_item2 = Factory(:ordered_menu_item, :menu_item => menu_item, :order => order, :quantity => 2)
+        order.update_total_and_account_balance
+        ordered_menu_item2.quantity = 1
+        ordered_menu_item2.save!
+        order.update_total_and_account_balance
+        order.total.should == price * 2
+        order.student.account.balance.should == price * 2
       end
     end
 
@@ -220,6 +190,24 @@ describe Order do
       user = Factory(:user)
       order = Factory(:order, :user => user, :student => nil)
       order.for.should == 'user'
+    end
+  end
+
+  describe '#update_account_balance_if_total_changed' do
+
+    let(:order) { Factory.build(:order) }
+
+    it 'gets called on save' do
+      order.should_receive(:update_account_balance_if_total_changed).once
+      order.save
+    end
+
+    it 'calls account.change_balance_by on save when total changed' do
+      order.total.should == 0
+      order.total += 1
+      account = order.get_account
+      account.should_receive(:change_balance_by).once
+      order.save
     end
   end
 end

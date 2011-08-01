@@ -13,4 +13,45 @@ describe OrderedMenuItem do
       OrderedMenuItem::MAX_DISPLAYED_QUANTITY.should be_an(Integer)
     end
   end
+
+  # describe '#total' do
+  #   it 'defaults to 0' do
+  #     Factory.build(:ordered_menu_item).total.should == 0
+  #   end
+  # end
+
+  # describe '#calculate_total' do
+  #   it 'gets called on save' do
+  #     omi = Factory.build(:ordered_menu_item)
+  #     omi.should_receive(:calculate_total).once
+  #     omi.save
+  #   end
+  # end
+
+  # describe '#update_order_total_if_total_changed' do
+  #   it 'gets called once on save' do
+  #     omi = Factory.build(:ordered_menu_item)
+  #     omi.should_receive(:update_order_total_if_total_changed).once
+  #     omi.save
+  #   end
+
+  #   it 'calls order.change_total_by' do
+  #     omi = Factory.build(:ordered_menu_item)
+  #     omi.order.should_receive(:change_total_by).once.with(omi.menu_item.price)
+  #     omi.save
+  #   end
+  # end
+
+  describe '#total' do
+    let(:price) { 4.00 }
+    let(:menu_item) { Factory(:menu_item, :price => price) }
+    let(:quantity) { 2 }
+    let(:ordered_menu_item) {
+      Factory(:ordered_menu_item, :menu_item => menu_item, :quantity => quantity)
+    }
+
+    it 'calculates menu_item.price * self.quantity' do
+      ordered_menu_item.total.should == price * quantity
+    end
+  end
 end

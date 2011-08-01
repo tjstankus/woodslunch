@@ -3,12 +3,13 @@ require 'spec_helper'
 describe Student do
   it { should belong_to(:account) }
   it { should have_many(:orders) }
+  it { should have_many(:student_orders) }
   it { should validate_presence_of(:first_name) }
   it { should validate_presence_of(:last_name) }
   it { should validate_presence_of(:grade) }
 
   it 'ensures grade has proper value' do
-    
+
     valid_grades = %w(K 1 2 3 4 5 6 7 8 9 10 11 12)
     valid_grades.each do |grade|
       Factory.build(:student, :grade => grade).should be_valid
@@ -23,7 +24,7 @@ describe Student do
 
   describe '#name' do
     it 'returns first and last name' do
-      student = Factory.build(:student, :first_name => 'Jane', 
+      student = Factory.build(:student, :first_name => 'Jane',
           :last_name => 'Doe')
       student.name.should == 'Jane Doe'
     end
