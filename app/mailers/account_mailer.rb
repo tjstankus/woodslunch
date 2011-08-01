@@ -1,5 +1,5 @@
 class AccountMailer < ActionMailer::Base
-  default :from => "Lunch@woodscharter.org"
+  default :from => "lunchprogram@woodscharter.org"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
