@@ -29,13 +29,17 @@ describe StudentOrder do
     end
 
     context 'given the first available order date is next month' do
-      it 'sets starts_on to the first date of next month' do
 
+      it 'sets starts_on to the first date of next month' do
+        Date.stub(:today).and_return(Date.parse('2011-09-26'))
+        StudentOrder.new.starts_on.should == Date.parse('2011-10-01')
       end
 
-      it 'sets ends_on to the last date of next month'
+      it 'sets ends_on to the last date of next month' do
+        Date.stub(:today).and_return(Date.parse('2011-09-26'))
+        StudentOrder.new.ends_on.should == Date.parse('2011-10-31')
+      end
     end
-
   end
 
   describe '.new_via_params' do

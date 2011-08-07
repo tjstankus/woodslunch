@@ -1,7 +1,7 @@
 module Orderable
   extend ActiveSupport::Concern
 
-  module ClassMethods
+  module InstanceMethods
 
     def first_available_order_date
       today = Date.today

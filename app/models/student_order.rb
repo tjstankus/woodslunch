@@ -1,5 +1,7 @@
 class StudentOrder < ActiveRecord::Base
 
+  include Orderable
+
   belongs_to :student
   has_many :orders
 
@@ -68,8 +70,8 @@ class StudentOrder < ActiveRecord::Base
 
   def init_starts_on_and_ends_on
     date = first_available_order_date
-    self.starts_on ||= Date.civil(today.year, today.month, 1)
-    self.ends_on ||= Date.civil(today.year, today.month, -1)
+    self.starts_on ||= Date.civil(date.year, date.month, 1)
+    self.ends_on ||= Date.civil(date.year, date.month, -1)
   end
 end
 
