@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe MonthHelper, :wip => true do
+describe MonthHelper do
 
   describe '#month' do
     context 'when initialized with number' do

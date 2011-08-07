@@ -67,6 +67,7 @@ Accounts/Users/Students:
 		- Payment model. Belongs to account with presence validation.
 Orders:
 	- @wip New student order form
+	- Route to new or edit student_order_path as appropriate, perhaps in helper method link_to_current_student_order(student), but route as well to be sure.
 	- An order must have a unique combination of student id and served_on date. In other words, there can only be one order per student per day. Enforce this in a validation.
 Menu Items:
 	- @q Handle items on non-daily schedules?

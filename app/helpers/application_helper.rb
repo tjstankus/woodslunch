@@ -9,7 +9,7 @@ module ApplicationHelper
   def link_to_current_student_order(student)
     month = Date.today.month
     year = Date.today.year
-    link_to("Lunch order for #{student.name}", edit_student_order_path(student,
+    link_to("Lunch order for #{student.name}", new_student_order_path(student,
       :year => year, :month => month))
   end
 

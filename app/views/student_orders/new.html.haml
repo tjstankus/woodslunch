@@ -6,3 +6,9 @@
     %tr
       - DayOfWeek.weekdays.each do |day|
         %th= day.name
+    - @student_order.days_by_weekday.each do |week|
+      %tr
+        - week.each do |day|
+          %td{:id => day.month_day, :class => day.day_name.downcase}
+            .mday= day.month_day
+            = render day.name_for_partial, :object => day.object_for_display

@@ -4,10 +4,10 @@ class StudentOrdersController < InheritedResources::Base
 
   belongs_to :student
 
-  def new
-    @student_order = StudentOrder.new_via_params(filtered_params)
-    new!
-  end
+  # def new
+  #   @student_order = StudentOrder.new
+  #   new!
+  # end
 
   # def edit
   #   @student_order = StudentOrder.new
