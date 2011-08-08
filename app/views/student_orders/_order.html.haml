@@ -1,7 +1,14 @@
-= f.hidden_field :served_on
-= fields_for :ordered_menu_items do |builder|
-  - order.available_menu_items.each do |menu_item|
-    = render 'ordered_menu_items', :f => builder, :menu_item => menu_item
+= hidden_field_tag("[student_order][orders_attributes][#{day.month_day}][served_on]", order.served_on,
+  :id => "student_order_orders_attributes_#{day.month_day}_served_on")
+- order.available_menu_items.each_with_index do |menu_item, i|
+  = render :partial => 'ordered_menu_item', :locals => {:day => day, :i => i, :menu_item => menu_item},
+    :object => order.ordered_menu_items.build(:menu_item => menu_item)
+
+
+
+
+
+
 
 -#= simple_fields_for("#{order.for}_order[orders[#{index}]]", order) do |order_fields|
 

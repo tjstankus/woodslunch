@@ -15,10 +15,17 @@ class StudentOrder < ActiveRecord::Base
     params = filter_params(params)
     year = params[:year].to_i
     month = params[:month].to_i
-    StudentOrder.new(:student_id => params[:student_id]).tap do |student_order|
+    student_order = StudentOrder.new(:student_id => params[:student_id]).tap do |student_order|
       student_order.starts_on = Date.civil(year, month, 1)
       student_order.ends_on = Date.civil(year, month, -1)
+      student_order.days_by_weekday
     end
+    # student_order.starts_on.upto(student_order.ends_on) do |date|
+    #   if date.weekday? && !(DayOff.for_date(date))
+    #     student_order.orders.build(:served_on => date)
+    #   end
+    # end
+    # student_order
   end
 
   def self.filter_params(params)
@@ -53,7 +60,7 @@ class StudentOrder < ActiveRecord::Base
   #   [ # the last array (for last week of month) may have nils on the end ]
   # ]
   def days_by_weekday
-    [].tap do |arr|
+    @days ||= [].tap do |arr|
       starts_on.upto(ends_on) do |date|
         if date.weekday?
           arr << [] if start_new_array_for_week?(arr, date)

@@ -6,14 +6,16 @@
     %tr
       - DayOfWeek.weekdays.each do |day|
         %th= day.name
-    = fields_for :orders do |builder|
-      - @student_order.days_by_weekday.each do |week|
-        %tr
-          - week.each do |day|
-            - if day
-              %td{:id => day.month_day, :class => day.day_name.downcase}
-                .mday= day.month_day
-                = render :partial => day.name_for_partial, :locals => {:f => builder}, :object => day.object_for_display
-            - else
-              %td.empty
-                != '&nbsp;'
+    -#= f.fields_for :orders do |builder|
+    - @student_order.days_by_weekday.each do |week|
+      %tr
+        - week.each do |day|
+          - if day
+            %td{:id => day.month_day, :class => day.day_name.downcase}
+              .mday= day.month_day
+              = render :partial => day.name_for_partial, :locals => {:day => day}, :object => day.object_for_display
+          - else
+            %td.empty
+              != '&nbsp;'
+  #monthly_order_info_actions
+    = f.submit "Place Order"

@@ -1,0 +1,5 @@
+.menu_item
+  = select_tag("[student_order][orders_attributes][#{day.month_day}][ordered_menu_items_attributes][#{i}][quantity]",
+    options_for_select((1..OrderedMenuItem::MAX_DISPLAYED_QUANTITY), ordered_menu_item.quantity),
+    {:id => "student_order_orders_attributes_#{day.month_day}_ordered_menu_items_attributes_#{i}_quantity", :include_blank => true})
+  = menu_item.name
