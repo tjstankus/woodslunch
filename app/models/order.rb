@@ -1,13 +1,14 @@
 class Order < ActiveRecord::Base
-  belongs_to :student
-  belongs_to :user
+  belongs_to :student_order
+  belongs_to :user_order
+
   has_many :ordered_menu_items, :dependent => :destroy
   has_many :menu_items, :through => :ordered_menu_items
 
   validates :served_on, :presence => true
-  validate :associated_with_student_or_user
+  # validate :associated_with_student_or_user
 
-  accepts_nested_attributes_for :ordered_menu_items, :allow_destroy => true
+  accepts_nested_attributes_for :menu_items
 
   # after_save :calculate_total
   # after_save :update_account_balance_if_total_changed
@@ -69,11 +70,11 @@ class Order < ActiveRecord::Base
   #   self.save
   # end
 
-  private
+  # private
 
-  def associated_with_student_or_user
-    unless (self.student || self.user) && !(self.student && self.user)
-      errors.add(:base, 'Order must be associated with a student or a user, but not both.')
-    end
-  end
+  # def associated_with_student_or_user
+  #   unless (self.student || self.user) && !(self.student && self.user)
+  #     errors.add(:base, 'Order must be associated with a student or a user, but not both.')
+  #   end
+  # end
 end

@@ -1,10 +1,10 @@
 class Day
 
-  attr_reader :date, :wrapped_object
+  attr_reader :date, :object_for_display
 
   def initialize(date, obj)
     @date = date
-    @wrapped_object = obj
+    @object_for_display = obj
   end
 
   def month_day
@@ -16,6 +16,6 @@ class Day
   end
 
   def name_for_partial
-    wrapped_object.class.to_s.underscore
+    object_for_display.class.to_s.underscore
   end
 end

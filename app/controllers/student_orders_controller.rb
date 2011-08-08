@@ -4,10 +4,10 @@ class StudentOrdersController < InheritedResources::Base
 
   belongs_to :student
 
-  # def new
-  #   @student_order = StudentOrder.new
-  #   new!
-  # end
+  def new
+    @student_order = StudentOrder.new_from_params(params)
+    new!
+  end
 
   # def edit
   #   @student_order = StudentOrder.new
@@ -32,13 +32,4 @@ class StudentOrdersController < InheritedResources::Base
   #     redirect_to root_url
   #   end
   # end
-
-  def filtered_params
-    HashWithIndifferentAccess.new.tap do |h|
-      [:student_id, :year, :month].each do |att|
-        h[att] = params[att]
-      end
-    end
-  end
-
 end

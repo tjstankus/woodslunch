@@ -7,17 +7,25 @@ class StudentOrder < ActiveRecord::Base
 
   validates :student_id, :presence => true
 
-  # attr_accessor :year, :month
+  # after_initialize :init_starts_on_and_ends_on
 
-  after_initialize :init_starts_on_and_ends_on
+  accepts_nested_attributes_for :orders
 
-
-  def self.new_via_params(params)
+  def self.new_from_params(params)
+    params = filter_params(params)
     year = params[:year].to_i
     month = params[:month].to_i
-    StudentOrder.new(params[:student_id]).tap do |student_order|
+    StudentOrder.new(:student_id => params[:student_id]).tap do |student_order|
       student_order.starts_on = Date.civil(year, month, 1)
       student_order.ends_on = Date.civil(year, month, -1)
+    end
+  end
+
+  def self.filter_params(params)
+    HashWithIndifferentAccess.new.tap do |h|
+      [:student_id, :year, :month].each do |att|
+        h[att] = params[att]
+      end
     end
   end
 
@@ -44,15 +52,13 @@ class StudentOrder < ActiveRecord::Base
   #   [ # remaining week arrays... ],
   #   [ # the last array (for last week of month) may have nils on the end ]
   # ]
-  #
-  def days_grouped_by_weekdays
-    m = month_helper
+  def days_by_weekday
     [].tap do |arr|
-      m.first_date.upto(m.last_date) do |date|
+      starts_on.upto(ends_on) do |date|
         if date.weekday?
-          arr << [] if m.start_new_array_for_week?(arr, date)
+          arr << [] if start_new_array_for_week?(arr, date)
 
-          m.prepend_nils_for_weekdays_before_first_of_month(arr, date)
+          prepend_nils_for_weekdays_before_first_of_month(arr, date)
 
           if day_off = DayOff.for_date(date)
             arr.last << Day.new(date, day_off)
@@ -60,19 +66,28 @@ class StudentOrder < ActiveRecord::Base
             push_order(arr.last, date)
           end
 
-          m.append_nils_for_weekdays_after_last_of_month(arr, date)
+          append_nils_for_weekdays_after_last_of_month(arr, date)
         end
       end
     end
   end
 
-  private
-
-  def init_starts_on_and_ends_on
-    date = first_available_order_date
-    self.starts_on ||= Date.civil(date.year, date.month, 1)
-    self.ends_on ||= Date.civil(date.year, date.month, -1)
+  def push_order(arr, date)
+    order = if self.new_record?
+              orders.build(:served_on => date)
+            else
+              orders.find_by_served_on(date) || orders.build(:served_on => date)
+            end
+    arr << Day.new(date, order)
   end
+
+  # private
+
+  # def init_starts_on_and_ends_on
+  #   date = first_available_order_date
+  #   self.starts_on ||= Date.civil(date.year, date.month, 1)
+  #   self.ends_on ||= Date.civil(date.year, date.month, -1)
+  # end
 end
 
 # # Presenter

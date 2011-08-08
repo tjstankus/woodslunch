@@ -1,6 +1,32 @@
 Dev Notes
 =========
 
+Current
+-------
+
+I'm slightly confused over a decision I made to associate Order with either
+StudentOrder or UserOrder. I'm not sure if I'll need a direct association with
+Student/User, for purposes of faster querying. But, that's easy enough to
+decide later.
+
+* Get the routing correct. Always build a url that includes the month and the
+year, but need to know to route to a new order or an edit order.
+
+As a parent I login and click place order. At this point, I'm not sure what the
+typical expectation will be for that, in terms of what month to land on, so I
+have to guess. I'm going to guess that the parent will want to see the current
+month's order. In the future I might want to add a list of links to the
+dashboard that will allow a parent to go straight to a month that they've
+already ordered for. But for now, we need:
+
+* Ability to determine what the current month is and build a link for that.
+  - Similar to Orderable#first_available_order_date, except must also factor in
+  application config for last_allowed_order_date.
+* When we GET the url with month, do we route to new or edit?
+* Ability to browse between the months.
+  - This will also need to be affected by application configuration for the
+  last allowed order date.
+
 Users
 -----
 

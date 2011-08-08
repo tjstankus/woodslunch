@@ -1,4 +1,9 @@
-= simple_fields_for("#{order.for}_order[orders[#{index}]]", order) do |order_fields|
+= f.hidden_field :served_on
+= fields_for :ordered_menu_items do |builder|
+  - order.available_menu_items.each do |menu_item|
+    = render 'ordered_menu_items', :f => builder, :menu_item => menu_item
+
+-#= simple_fields_for("#{order.for}_order[orders[#{index}]]", order) do |order_fields|
 
   - menu_item_index = 0
   - order.available_menu_items.each do |menu_item|

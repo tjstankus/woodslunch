@@ -15,7 +15,7 @@
           %th= day.name
 
       - order_index = 0
-      - @student_order.days_grouped_by_weekdays.each do |week|
+      - @student_order.days_by_weekday.each do |week|
         %tr
           - week.each do |day|
             - if day
