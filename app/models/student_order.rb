@@ -9,7 +9,9 @@ class StudentOrder < ActiveRecord::Base
 
   # after_initialize :init_starts_on_and_ends_on
 
-  accepts_nested_attributes_for :orders
+  #
+  accepts_nested_attributes_for :orders, :reject_if => :quantities_empty?
+
 
   def self.new_from_params(params)
     params = filter_params(params)
@@ -20,12 +22,6 @@ class StudentOrder < ActiveRecord::Base
       student_order.ends_on = Date.civil(year, month, -1)
       student_order.days_by_weekday
     end
-    # student_order.starts_on.upto(student_order.ends_on) do |date|
-    #   if date.weekday? && !(DayOff.for_date(date))
-    #     student_order.orders.build(:served_on => date)
-    #   end
-    # end
-    # student_order
   end
 
   def self.filter_params(params)
@@ -88,7 +84,13 @@ class StudentOrder < ActiveRecord::Base
     arr << Day.new(date, order)
   end
 
+
+
   # private
+
+  def quantities_empty?(atts)
+    atts['ordered_menu_items_attributes'].values.collect{|h| h['quantity']}.all?{|q| q.empty?}
+  end
 
   # def init_starts_on_and_ends_on
   #   date = first_available_order_date

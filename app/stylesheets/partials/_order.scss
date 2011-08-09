@@ -47,6 +47,10 @@ table#monthly_order td {
 div#monthly_order_info_actions {
   padding: 20px 0 0 0;
   text-align: right;
+  input[type="submit"] {
+    @include fancy-button(#9E5B28, 13px);
+    margin: 0 15px 0 0;
+  }
 }
 div.day_off {
   font-size: 14px;

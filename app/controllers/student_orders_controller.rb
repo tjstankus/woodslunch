@@ -4,9 +4,22 @@ class StudentOrdersController < InheritedResources::Base
 
   belongs_to :student
 
+  defaults :resource_class => StudentOrder, :collection_name => 'student_orders', :instance_name => 'student_order'
+
   def new
     @student_order = StudentOrder.new_from_params(params)
     new!
+  end
+
+  def create
+    # create!(:notice => "Successfully placed order for #{@student_order.student.name}") { root_url }
+    @student_order = StudentOrder.new(params[:student_order])
+    if @student_order.save
+      redirect_to(root_path, :notice => "Successfully placed order for #{@student_order.student.name}")
+    else
+      debugger
+      render :action => 'new'
+    end
   end
 
   # def edit

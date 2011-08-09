@@ -8,7 +8,7 @@ class Order < ActiveRecord::Base
   validates :served_on, :presence => true
   # validate :associated_with_student_or_user
 
-  accepts_nested_attributes_for :menu_items
+  accepts_nested_attributes_for :ordered_menu_items, :reject_if => proc { |a| a['quantity'].blank? }
 
   # after_save :calculate_total
   # after_save :update_account_balance_if_total_changed

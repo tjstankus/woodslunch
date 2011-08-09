@@ -50,6 +50,10 @@ describe 'Student orders' do
       let!(:menu_item) { daily_menu_item.menu_item }
       let(:ids_for_mondays) { %w(5 12 19 26) }
 
+      before(:each) do
+        visit new_student_order_path(student, :year => year, :month => month)
+      end
+
       it 'displays the menu item on each Monday' do
         ids_for_mondays.each do |id|
           within("td##{id}") do
@@ -58,19 +62,36 @@ describe 'Student orders' do
         end
       end
 
-#     it 'displays a quantity select for the menu item' do
-#       pending
-#       visit edit_student_order_path(student, :year => year, :month => month)
-#       ids_for_mondays.each do |id|
-#         within("td##{id}") do
-#           page.should have_css('select')
-#         end
-#       end
-#     end
-#   end
+      it 'displays a quantity select for the menu item' do
+        ids_for_mondays.each do |id|
+          within("td##{id}") do
+            page.should have_css('select')
+          end
+        end
+      end
     end
   end
 
+  describe 'POST create student order' do
+
+    context 'given a menu item for each weekday' do
+
+      before(:each) do
+        DayOfWeek.all.each do |day_of_week|
+          Factory(:daily_menu_item, :day_of_week => day_of_week)
+        end
+      end
+
+      it 'creates only an order for a single item' do
+        visit new_student_order_path(student, :year => year, :month => month)
+        within('td#9') do
+          select '1', :from => 'student_order_orders_attributes_9_ordered_menu_items_attributes_0_quantity'
+        end
+        click_button 'Place Order'
+      end
+    end
+
+  end
 end
 
 # For number_to_currency

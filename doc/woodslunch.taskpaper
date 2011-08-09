@@ -1,4 +1,11 @@
-- Build new orders for each weekday
+- Create order
+	- Figure out how to ensure order_id is set for ordered_menu_item without screwing up accepts_nested_attributes_for. @later
+	- Only save orders that have ordered_menu_items
+	- starts_on and ends_on need to be set on create
+- Edit order.
+	- Add to existing student order
+	- Remove from existing student order
+	- Change items in existing student order
 7/26 Meeting Notes:
 Cutoff for first month of year, then open it up.
 A la carte card. Buy in denominations. Marked off on per-use. Something down the line.
@@ -79,6 +86,7 @@ Later:
 	- Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
 	- Presenter gem
 Archive:
+	- Build new orders for each weekday @done(2011-08-08)
 	- Quantity of ordered menu item @done(2011-07-31) @project(Orders)
 		- quantity added to database @done(2011-07-31)
 		- quantity validated for presence and numericality @done(2011-07-31)
