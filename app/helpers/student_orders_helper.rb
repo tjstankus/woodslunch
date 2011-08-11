@@ -5,7 +5,12 @@ module StudentOrdersHelper
     date = first_available_order_date
     month = date.month
     year = date.year
-    link_to("Lunch order for #{student.name}", new_student_order_path(student,
-      :year => year, :month => month))
+    student_order = student.student_order_for_date(date)
+    path = if student_order
+             edit_student_order_path(student, student_order, :year => year, :month => month)
+           else
+             new_student_order_path(student, :year => year, :month => month)
+           end
+    link_to("Lunch order for #{student.name}", path)
   end
 end

@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Student do
   it { should belong_to(:account) }
-  it { should have_many(:orders) }
   it { should have_many(:student_orders) }
   it { should validate_presence_of(:first_name) }
   it { should validate_presence_of(:last_name) }
@@ -27,6 +26,35 @@ describe Student do
       student = Factory.build(:student, :first_name => 'Jane',
           :last_name => 'Doe')
       student.name.should == 'Jane Doe'
+    end
+  end
+
+  describe '#student_order_for_date' do
+
+    let!(:student) { Factory(:student) }
+
+    context 'given a student order for the requested date' do
+
+      let!(:student_order) do
+        Factory(:student_order,
+                :student => student,
+                :starts_on => '2011-09-01',
+                :ends_on => '2011-09-30')
+      end
+
+      it 'returns true' do
+        student.student_order_for_date(Date.parse('2011-09-20')).should == student_order
+      end
+    end
+
+    context 'given no student order for the requested date' do
+
+      it 'returns false' do
+        # sanity check
+        student.student_orders.should be_empty
+
+        student.student_order_for_date(Date.parse('2011-09-20')).should be_nil
+      end
     end
   end
 end

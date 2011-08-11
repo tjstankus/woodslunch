@@ -96,6 +96,7 @@ describe StudentOrder do
       end
     end
   end
+
 end
 
 # let(:student) { Factory(:student) }

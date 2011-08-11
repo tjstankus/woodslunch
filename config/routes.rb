@@ -46,12 +46,12 @@ Woodslunch::Application.routes.draw do
   #     resource :seller
   #   end
 
-  match '/students/:student_id/orders/:year/:month' => 'student_orders#new',
-      :via => :get, :as => :new_student_order
+  # match '/students/:student_id/orders/:year/:month' => 'student_orders#new',
+  #     :via => :get, :as => :new_student_order
   # match '/students/:student_id/orders/:year/:month' => 'student_orders#edit',
   #     :via => :get, :as => :edit_student_order
   resources :students do
-    resources :orders, :controller => 'student_orders', :only => [:create]
+    resources :orders, :controller => 'student_orders'
   end
 
   # Sample resource route with more complex sub-resources

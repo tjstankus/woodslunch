@@ -74,24 +74,133 @@ describe 'Student orders' do
 
   describe 'POST create student order' do
 
-    context 'given a menu item for each weekday' do
+    before(:each) do
+      # Given a menu item for each day of the week
+      DayOfWeek.all.each do |day_of_week|
+        Factory(:daily_menu_item, :day_of_week => day_of_week)
+      end
+      # And a second menu item for one of the days of the week
+      Factory(:daily_menu_item, :day_of_week => DayOfWeek.first)
+    end
+
+    context 'for a single menu item' do
 
       before(:each) do
-        DayOfWeek.all.each do |day_of_week|
-          Factory(:daily_menu_item, :day_of_week => day_of_week)
-        end
-      end
-
-      it 'creates only an order for a single item' do
+        # When I visit the new student order page
         visit new_student_order_path(student, :year => year, :month => month)
+
+        # And I select a quantity of 1 for a single menu item
         within('td#9') do
           select '1', :from => 'student_order_orders_attributes_9_ordered_menu_items_attributes_0_quantity'
         end
-        click_button 'Place Order'
+      end
+
+      it 'creates one StudentOrder' do
+        expect {
+          # And I click 'Place Order'
+          click_button 'Place Order'
+          # Then one StudentOrder gets created
+        }.to change { StudentOrder.count }.from(0).to(1)
+      end
+
+      it 'creates one Order' do
+        expect {
+          # And I click 'Place Order'
+          click_button 'Place Order'
+          # Then one Order gets created
+        }.to change { Order.count }.from(0).to(1)
+      end
+
+      it 'creates one OrderedMenuItem' do
+        expect {
+          # And I click 'Place Order'
+          click_button 'Place Order'
+          # Then one OrderedMenuItem gets created
+        }.to change { OrderedMenuItem.count }.from(0).to(1)
+      end
+
+      it 'updates account balance by the price of the ordered menu item'
+    end
+
+    context 'for multiple menu items on one day' do
+
+      before(:each) do
+        # When I visit the new student order page
+        visit new_student_order_path(student, :year => year, :month => month)
+
+        # And I select a quantity of 1 for two menu items
+        within('td#12') do
+          select '1', :from => 'student_order_orders_attributes_12_ordered_menu_items_attributes_0_quantity'
+          select '1', :from => 'student_order_orders_attributes_12_ordered_menu_items_attributes_1_quantity'
+        end
+      end
+
+      it 'creates one StudentOrder' do
+        expect {
+          # And I click 'Place Order'
+          click_button 'Place Order'
+          # Then one StudentOrder gets created
+        }.to change { StudentOrder.count }.from(0).to(1)
+      end
+
+      it 'creates one Order'do
+        expect {
+          # And I click 'Place Order'
+          click_button 'Place Order'
+          # Then one Order gets created
+        }.to change { Order.count }.from(0).to(1)
+      end
+
+      it 'creates multiple OrderedMenuItems' do
+        expect {
+          # And I click 'Place Order'
+          click_button 'Place Order'
+          # Then two OrderedMenuItems get created
+        }.to change { OrderedMenuItem.count }.from(0).to(2)
       end
     end
 
+    context 'for menu items on multiple days' do
+      before(:each) do
+        # When I visit the new student order page
+        visit new_student_order_path(student, :year => year, :month => month)
+
+        # And I select a quantity of 1 for a single menu item on two different days
+        within('td#9') do
+          select '1', :from => 'student_order_orders_attributes_9_ordered_menu_items_attributes_0_quantity'
+        end
+
+        within('td#16') do
+          select '1', :from => 'student_order_orders_attributes_16_ordered_menu_items_attributes_0_quantity'
+        end
+      end
+
+      it 'creates one StudentOrder' do
+        expect {
+          # And I click 'Place Order'
+          click_button 'Place Order'
+          # Then one StudentOrder gets created
+        }.to change { StudentOrder.count }.from(0).to(1)
+      end
+
+      it 'creates multipls Orders'do
+        expect {
+          # And I click 'Place Order'
+          click_button 'Place Order'
+          # Then one Order gets created
+        }.to change { Order.count }.from(0).to(2)
+      end
+
+      it 'creates multiple OrderedMenuItems' do
+        expect {
+          # And I click 'Place Order'
+          click_button 'Place Order'
+          # Then two OrderedMenuItems get created
+        }.to change { OrderedMenuItem.count }.from(0).to(2)
+      end
+    end
   end
+
 end
 
 # For number_to_currency

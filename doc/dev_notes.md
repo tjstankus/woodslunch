@@ -1,6 +1,15 @@
 Dev Notes
 =========
 
+Order routes
+------------
+
+I want the urls to be good looking. If the association for student to
+student_order is done with default nested routes, we'd get something like this:
+/students/:student_id/student_orders/new ...
+
+I think we'll want params with protection of course for people mucking around.
+
 Current
 -------
 

@@ -34,8 +34,13 @@ new_account_request_activation GET    /account_requests/:account_request_id/acti
               account_requests GET    /account_requests(.:format)                                     {:action=>"index", :controller=>"account_requests"}
                                POST   /account_requests(.:format)                                     {:action=>"create", :controller=>"account_requests"}
            new_account_request GET    /account_requests/new(.:format)                                 {:action=>"new", :controller=>"account_requests"}
-            edit_student_order GET    /students/:student_id/orders/:year/:month(.:format)             {:controller=>"student_orders", :action=>"edit"}
-                student_orders POST   /students/:student_id/orders(.:format)                          {:action=>"create", :controller=>"student_orders"}
+                student_orders GET    /students/:student_id/orders(.:format)                          {:action=>"index", :controller=>"student_orders"}
+                               POST   /students/:student_id/orders(.:format)                          {:action=>"create", :controller=>"student_orders"}
+             new_student_order GET    /students/:student_id/orders/new(.:format)                      {:action=>"new", :controller=>"student_orders"}
+            edit_student_order GET    /students/:student_id/orders/:id/edit(.:format)                 {:action=>"edit", :controller=>"student_orders"}
+                 student_order GET    /students/:student_id/orders/:id(.:format)                      {:action=>"show", :controller=>"student_orders"}
+                               PUT    /students/:student_id/orders/:id(.:format)                      {:action=>"update", :controller=>"student_orders"}
+                               DELETE /students/:student_id/orders/:id(.:format)                      {:action=>"destroy", :controller=>"student_orders"}
                       students GET    /students(.:format)                                             {:action=>"index", :controller=>"students"}
                                POST   /students(.:format)                                             {:action=>"create", :controller=>"students"}
                    new_student GET    /students/new(.:format)                                         {:action=>"new", :controller=>"students"}

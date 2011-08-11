@@ -1,11 +1,22 @@
-- Create order
-	- Figure out how to ensure order_id is set for ordered_menu_item without screwing up accepts_nested_attributes_for. @later
-	- Only save orders that have ordered_menu_items
-	- starts_on and ends_on need to be set on create
-- Edit order.
+- Specs for new student order that include, use the new URLs with query parameters. @done(2011-08-10)
+- Continue student order request specs. @next
+- Determine the current/default month.
+- Application configuration (database-backed) for setting first and last order dates.
+- Charge 2.5% per transaction, don't worry about the $.30.
+- Screenshots or video needed by Friday the 19th.
+	- Just show them on the 19th. Perhaps allow for account requests if we are online.
+	q1w2e3
+- Back to school checklist that includes setting up your Woods Lunch account.
+- What happens if someone hits the activation URL more than once?
+- Figure out how to ensure order_id is set for ordered_menu_item without screwing up accepts_nested_attributes_for. @later
+- Edit order
+	- The first thing to figure out is whether or not it's a good idea to have the urls like I have them. And it's probably not.
+	- Route to edit when an order exists.
+		Request-based route constraint class
 	- Add to existing student order
 	- Remove from existing student order
 	- Change items in existing student order
+- Figure out what's wrong with sticky footer.
 7/26 Meeting Notes:
 Cutoff for first month of year, then open it up.
 A la carte card. Buy in denominations. Marked off on per-use. Something down the line.
@@ -86,6 +97,8 @@ Later:
 	- Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
 	- Presenter gem
 Archive:
+	- Only save orders that have ordered_menu_items @done(2011-08-09)
+	- starts_on and ends_on need to be set on create @done(2011-08-09)
 	- Build new orders for each weekday @done(2011-08-08)
 	- Quantity of ordered menu item @done(2011-07-31) @project(Orders)
 		- quantity added to database @done(2011-07-31)
