@@ -2,30 +2,23 @@
 %h3#month_year= @student_order.display_month_and_year
 
 = form_for(@student_order) do |f|
+  = hidden_field_tag 'student_order[student_id]', @student_order.student_id
+  = hidden_field_tag 'student_order[starts_on]', @student_order.starts_on
+  = hidden_field_tag 'student_order[ends_on]', @student_order.ends_on
   %table#monthly_order{ :cellpadding => '0', :cellspacing => '0' }
     %tr
       - DayOfWeek.weekdays.each do |day|
         %th= day.name
-
--#
-  = simple_form_for(@student_order) do |f|
-    %table#monthly_order{ :cellpadding => '0', :cellspacing => '0' }
+    - @student_order.days_by_weekday.each do |week|
       %tr
-        - DayOfWeek.weekdays.each do |day|
-          %th= day.name
-
-      - order_index = 0
-      - @student_order.days_by_weekday.each do |week|
-        %tr
-          - week.each do |day|
-            - if day
-              %td{:id => day.month_day, :class => day.day_name.downcase}
-                .mday= day.month_day
-                = render :partial => day.name_for_partial, :object => day.wrapped_object,
-                  :locals => {:index => order_index += 1}
-            - else
-              %td.empty
+        - week.each do |day|
+          - if day
+            %td{:id => day.month_day, :class => day.day_name.downcase}
+              .mday= day.month_day
+              = render :partial => day.name_for_partial, :locals => {:day => day},
+                :object => day.object_for_display
+          - else
+            %td.empty
               != '&nbsp;'
-
-    #monthly_order_info_actions
-      = f.submit "Place Order"
+  #monthly_order_info_actions
+    = f.submit "Place Order"

@@ -2,34 +2,4 @@
   :id => "student_order_orders_attributes_#{day.month_day}_served_on")
 - order.available_menu_items.each_with_index do |menu_item, i|
   = render :partial => 'ordered_menu_item', :locals => {:day => day, :i => i, :menu_item => menu_item},
-    :object => order.ordered_menu_items.build(:menu_item => menu_item)
-
-
-
-
-
-
-
--#= simple_fields_for("#{order.for}_order[orders[#{index}]]", order) do |order_fields|
-
-  - menu_item_index = 0
-  - order.available_menu_items.each do |menu_item|
-    - quantity = order.new_record? ? nil : order.quantity_for_menu_item(menu_item)
-    .menu_item
-      -#= order_fields.simple_fields_for("ordered_menu_items[#{menu_item_index += 1}]") do |ordered_menu_item_fields|
-      = order_fields.fields_for(:ordered_menu_items) do |ordered_menu_item_fields|
-
-        = ordered_menu_item_fields.select(:quantity,
-          options_for_select((1..OrderedMenuItem::MAX_DISPLAYED_QUANTITY), quantity),
-          :include_blank => true)
-
-        = ordered_menu_item_fields.hidden_field(:menu_item_id, :value => menu_item.id)
-
-        = menu_item.name
-
-  = order_fields.input(:served_on,
-    :as => :string,
-    :label => false,
-    :input_html => { :style => 'display:none' })
-
-  = order_fields.input("#{order.for}_id".to_sym, :as => :hidden)
+    :object => order.ordered_menu_item_for_menu_item(menu_item) || order.ordered_menu_items.build(:menu_item => menu_item)

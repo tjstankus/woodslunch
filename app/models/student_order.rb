@@ -76,11 +76,7 @@ class StudentOrder < ActiveRecord::Base
   end
 
   def push_order(arr, date)
-    order = if self.new_record?
-              orders.build(:served_on => date)
-            else
-              orders.find_by_served_on(date) || orders.build(:served_on => date)
-            end
+    order = orders.find_by_served_on(date) || orders.build(:served_on => date)
     arr << Day.new(date, order)
   end
 

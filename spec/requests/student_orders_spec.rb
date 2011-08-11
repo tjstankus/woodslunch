@@ -201,6 +201,28 @@ describe 'Student orders' do
     end
   end
 
+  describe 'GET edit student order' do
+
+    it 'displays quantity for ordered menu item' do
+      pending 'Edit form revamp.'
+
+      daily_menu_item = Factory(:daily_menu_item, :day_of_week => DayOfWeek.first)
+      student_order = Factory(:student_order,
+                              :student => student,
+                              :starts_on => '2011-09-01',
+                              :ends_on => '2011-09-30')
+      order = Factory(:order, :student_order => student_order, :served_on => '2011-09-12')
+      ordered_menu_item = Factory(:ordered_menu_item,
+                                  :order => order,
+                                  :menu_item => daily_menu_item.menu_item)
+      visit edit_student_order_path(student, student_order, :month => month, :year => year)
+      puts page.body
+      # within('#12') do
+      #   :from => 'student_order_orders_attributes_9_ordered_menu_items_attributes_0_quantity'
+      # end
+    end
+  end
+
 end
 
 # For number_to_currency

@@ -23,6 +23,12 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def ordered_menu_item_for_menu_item(menu_item)
+    if menu_items.include?(menu_item)
+      ordered_menu_items.where('menu_item_id = ?', menu_item.id).first
+    end
+  end
+
   def day_of_week_served_on
     DayOfWeek.find_by_name(self.served_on.strftime('%A'))
   end

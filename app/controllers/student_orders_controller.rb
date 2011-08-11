@@ -1,10 +1,10 @@
 class StudentOrdersController < InheritedResources::Base
+  respond_to :html
+
   before_filter :authenticate_user!
-  # before_filter :verify_student_associated_with_current_user
+  before_filter :verify_student_associated_with_current_user
 
   belongs_to :student
-
-  defaults :resource_class => StudentOrder, :collection_name => 'student_orders', :instance_name => 'student_order'
 
   def new
     @student_order = StudentOrder.new_from_params(params)
@@ -12,14 +12,7 @@ class StudentOrdersController < InheritedResources::Base
   end
 
   def create
-    # create!(:notice => "Successfully placed order for #{@student_order.student.name}") { root_url }
-    @student_order = StudentOrder.new(params[:student_order])
-    if @student_order.save
-      redirect_to(root_path, :notice => "Successfully placed order for #{@student_order.student.name}")
-    else
-      debugger
-      render :action => 'new'
-    end
+    create!(:notice => "Successfully placed order.") { root_path }
   end
 
   # def edit
@@ -38,11 +31,11 @@ class StudentOrdersController < InheritedResources::Base
 
   private
 
-  # def verify_student_associated_with_current_user
-  #   student = Student.find(params[:student_id] || params[:student_order][:orders]['1'][:student_id])
-  #   unless current_user.account == student.account
-  #     flash[:alert] = 'Cannot place orders for students not associated with your account.'
-  #     redirect_to root_url
-  #   end
-  # end
+  def verify_student_associated_with_current_user
+    @student = Student.find(params[:student_id])
+    unless current_user.account == @student.account
+      flash[:alert] = 'Cannot place orders for students not associated with your account.'
+      redirect_to root_url
+    end
+  end
 end
