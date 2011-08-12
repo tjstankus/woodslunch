@@ -1,4 +1,8 @@
-.menu_item
+.menu_item{:id => ordered_menu_item.id}
+  - if ordered_menu_item.id
+    = hidden_field_tag("[student_order][orders_attributes][#{day.month_day}][ordered_menu_items_attributes][#{i}][id]",
+      ordered_menu_item.id,
+      :id => "student_order_orders_attributes_#{day.month_day}_ordered_menu_items_attributes_#{i}_id")
   = hidden_field_tag("[student_order][orders_attributes][#{day.month_day}][ordered_menu_items_attributes][#{i}][menu_item_id]",
     menu_item.id,
     :id => "student_order_orders_attributes_#{day.month_day}_ordered_menu_items_attributes_#{i}_menu_item_id")

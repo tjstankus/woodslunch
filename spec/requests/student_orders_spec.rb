@@ -204,8 +204,6 @@ describe 'Student orders' do
   describe 'GET edit student order' do
 
     it 'displays quantity for ordered menu item' do
-      pending 'Edit form revamp.'
-
       daily_menu_item = Factory(:daily_menu_item, :day_of_week => DayOfWeek.first)
       student_order = Factory(:student_order,
                               :student => student,
@@ -216,11 +214,52 @@ describe 'Student orders' do
                                   :order => order,
                                   :menu_item => daily_menu_item.menu_item)
       visit edit_student_order_path(student, student_order, :month => month, :year => year)
-      puts page.body
-      # within('#12') do
-      #   :from => 'student_order_orders_attributes_9_ordered_menu_items_attributes_0_quantity'
-      # end
+      within('#12') do
+        within("div##{ordered_menu_item.id}") do
+          page.should have_css('select option[value="1"][selected="selected"]')
+        end
+      end
     end
+  end
+
+  describe 'PUT update student order' do
+
+    before(:each) do
+      # Given a menu item for each day of the week
+      DayOfWeek.all.each do |day_of_week|
+        Factory(:daily_menu_item, :day_of_week => day_of_week)
+      end
+      # And a second menu item for one of the days of the week
+      Factory(:daily_menu_item, :day_of_week => DayOfWeek.first)
+    end
+
+    context 'given an ordered menu item' do
+
+      let!(:daily_menu_item) { Factory(:daily_menu_item, :day_of_week => DayOfWeek.first) }
+      let!(:student_order) do
+        Factory(:student_order, :student => student,  :starts_on => '2011-09-01',
+            :ends_on => '2011-09-30')
+      end
+      let!(:order) do
+        Factory(:order, :student_order => student_order, :served_on => '2011-09-12')
+      end
+      let!(:ordered_menu_item) do
+        Factory(:ordered_menu_item, :order => order, :menu_item => daily_menu_item.menu_item)
+      end
+
+      it 'updates the quantity' do
+        visit edit_student_order_path(student, student_order, :month => month, :year => year)
+        within('#12') do
+          within("div##{ordered_menu_item.id}") do
+            select '2'
+          end
+        end
+        expect {
+          click_button 'Place Order'
+        }.to change { ordered_menu_item.quantity }.from(1).to(2)
+      end
+    end
+
   end
 
 end

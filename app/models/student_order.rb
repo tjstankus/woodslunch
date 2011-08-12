@@ -7,14 +7,11 @@ class StudentOrder < ActiveRecord::Base
 
   validates :student_id, :presence => true
 
-  # after_initialize :init_starts_on_and_ends_on
-
-  #
   accepts_nested_attributes_for :orders, :reject_if => :quantities_empty?
 
 
   def self.new_from_params(params)
-    params = filter_params(params)
+    params = filtered_params(params)
     year = params[:year].to_i
     month = params[:month].to_i
     student_order = StudentOrder.new(:student_id => params[:student_id]).tap do |student_order|
@@ -24,7 +21,7 @@ class StudentOrder < ActiveRecord::Base
     end
   end
 
-  def self.filter_params(params)
+  def self.filtered_params(params)
     HashWithIndifferentAccess.new.tap do |h|
       [:student_id, :year, :month].each do |att|
         h[att] = params[att]
@@ -79,10 +76,6 @@ class StudentOrder < ActiveRecord::Base
     order = orders.find_by_served_on(date) || orders.build(:served_on => date)
     arr << Day.new(date, order)
   end
-
-
-
-  # private
 
   def quantities_empty?(atts)
     atts['ordered_menu_items_attributes'].values.collect{|h| h['quantity']}.all?{|q| q.empty?}
