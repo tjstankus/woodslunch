@@ -8,10 +8,12 @@ class Order < ActiveRecord::Base
   validates :served_on, :presence => true
   # validate :associated_with_student_or_user
 
-  accepts_nested_attributes_for :ordered_menu_items, :reject_if => proc { |a| a['quantity'].blank? }
+  accepts_nested_attributes_for :ordered_menu_items,
+      :reject_if => proc { |a| a['_destroy'].blank? && a['quantity'].blank? }, :allow_destroy => true
 
   # after_save :calculate_total
   # after_save :update_account_balance_if_total_changed
+  # after_update :destroy_unless_ordered_menu_items
 
   def available_menu_items
     @available_menu_items ||= self.day_of_week_served_on.menu_items
@@ -63,6 +65,13 @@ class Order < ActiveRecord::Base
       self.student.account
     elsif self.user
       self.user.account
+    end
+  end
+
+  def after_destroy
+    if student_order
+      student_order.destroy_unless_orders
+    elsif user_order
     end
   end
 

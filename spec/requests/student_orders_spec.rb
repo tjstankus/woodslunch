@@ -215,7 +215,7 @@ describe 'Student orders' do
                                   :menu_item => daily_menu_item.menu_item)
       visit edit_student_order_path(student, student_order, :month => month, :year => year)
       within('#12') do
-        within("div##{ordered_menu_item.id}") do
+        within("div#ordered_menu_item_#{ordered_menu_item.id}") do
           page.should have_css('select option[value="1"][selected="selected"]')
         end
       end
@@ -250,13 +250,13 @@ describe 'Student orders' do
       it 'updates the quantity' do
         visit edit_student_order_path(student, student_order, :month => month, :year => year)
         within('#12') do
-          within("div##{ordered_menu_item.id}") do
+          within("div#ordered_menu_item_#{ordered_menu_item.id}") do
             select '2'
           end
         end
         expect {
           click_button 'Place Order'
-        }.to change { ordered_menu_item.quantity }.from(1).to(2)
+        }.to change { ordered_menu_item.reload.quantity }.from(1).to(2)
       end
     end
 

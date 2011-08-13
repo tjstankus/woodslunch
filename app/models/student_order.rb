@@ -7,7 +7,8 @@ class StudentOrder < ActiveRecord::Base
 
   validates :student_id, :presence => true
 
-  accepts_nested_attributes_for :orders, :reject_if => :quantities_empty?
+  accepts_nested_attributes_for :orders, :reject_if => :quantities_empty_unless_destroy?,
+      :allow_destroy => true
 
 
   def self.new_from_params(params)
@@ -77,8 +78,17 @@ class StudentOrder < ActiveRecord::Base
     arr << Day.new(date, order)
   end
 
-  def quantities_empty?(atts)
-    atts['ordered_menu_items_attributes'].values.collect{|h| h['quantity']}.all?{|q| q.empty?}
+  def quantities_empty_unless_destroy?(atts)
+    omi_atts = atts['ordered_menu_items_attributes'].values
+    if omi_atts.collect{|h| h['_destroy']}.compact.any?
+      return false
+    else
+      omi_atts.collect{|h| h['quantity']}.all?{|q| q.empty?}
+    end
+  end
+
+  def destroy_unless_orders
+    self.destroy unless self.orders.any?
   end
 
   # def init_starts_on_and_ends_on

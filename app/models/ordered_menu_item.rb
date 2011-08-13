@@ -22,4 +22,8 @@ class OrderedMenuItem < ActiveRecord::Base
       order.change_total_by(diff)
     end
   end
+
+  def after_destroy
+    order.destroy_unless_ordered_menu_items
+  end
 end
