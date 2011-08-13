@@ -1,11 +1,6 @@
 Dev Notes
 =========
 
-Order, StudentOrder, UserOrder STI
-----------------------------------
-
-Get all specs passing, merged back to master, then create feature branch for
-this experiment.
 
 Validations for OrderedMenuItem and Order
 -----------------------------------------
@@ -147,6 +142,23 @@ Handle the following situations
   - Destroy an order should decrement the balance the order.total.
   - Edit order to add items should increment the balance the diff.
   - Edit order to remove items should decrement the balance the diff.
+
+Order, StudentOrder, UserOrder STI
+----------------------------------
+
+Going to give this one more shot...
+
+Had I used STI from the beginning, I might've made it work. It makes sense from
+a model perspective. The forms are a different matter. This Railscast episode
+comes close to addressing the issues: http://bit.ly/pb1M99. But there's one
+significant difference. We're not always dealing with persisted objects, i.e.,
+objects that have a non-nil id. Having a mix of new and existing records all on
+one form without a container object of some sort might've been tough to figure
+out. Rails has an update method for batching a bunch of updates, but nothing
+that directly addresses a mix of new and existing records. There's some
+reference to this issue in a response to this SO question:
+http://bit.ly/oTioCH. Either way (STI or not), the forms here are just gonna be
+complex.
 
 Edge cases, etc.
 ----------------
