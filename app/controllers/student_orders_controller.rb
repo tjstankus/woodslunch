@@ -4,6 +4,11 @@ class StudentOrdersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_student
   before_filter :verify_student_associated_with_current_user
+  before_filter :get_presenter, :only => [:index]
+
+  def index
+    @student_orders = StudentOrder.for_month_and_year_by_weekday(params[:month], params[:year])
+  end
 
   def new
     @student_order = StudentOrder.new_from_params(params)
@@ -36,9 +41,10 @@ class StudentOrdersController < ApplicationController
   private
 
   def get_student
-    student_id_param = %w(new edit).include?(action_name) ?
-        params[:student_id] : params[:student_order][:student_id]
-    @student = Student.find(student_id_param)
+    # student_id_param = %w(new edit).include?(action_name) ?
+    #     params[:student_id] : params[:student_order][:student_id]
+    # @student = Student.find(student_id_param)
+    @student = Student.find(params[:student_id])
   end
 
   def verify_student_associated_with_current_user
@@ -46,6 +52,10 @@ class StudentOrdersController < ApplicationController
       flash[:alert] = 'Cannot place orders for students not associated with your account.'
       redirect_to root_url
     end
+  end
+
+  def get_presenter
+    @presenter = OrderPresenter.new(params[:month], params[:year])
   end
 end
 

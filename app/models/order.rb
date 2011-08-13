@@ -68,17 +68,17 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def start_new_array_for_week?(arr, date)
+  def self.start_new_array_for_week?(arr, date)
     !arr.last || date.monday?
   end
 
-  def prepend_nils_for_weekdays_before_first_of_month(arr, date)
-    if date == starts_on && !date.monday?
+  def self.prepend_nils_for_weekdays_before_first_of_month(arr, date, first_of_month)
+    if date == first_of_month && !date.monday?
       (date.cwday - 1).times { arr.last << nil }
     end
   end
 
-  def append_nils_for_weekdays_after_last_of_month(arr, date)
+  def self.append_nils_for_weekdays_after_last_of_month(arr, date)
     if date == ends_on && !date.friday?
       (5 - date.cwday).times { arr.last << nil }
     end

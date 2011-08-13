@@ -27,10 +27,6 @@ class StudentOrder < Order
     end
   end
 
-  def display_month_and_year
-    starts_on.strftime('%B %Y')
-  end
-
   # Returns an array of arrays. Each nested array contains Day objects that serve as wrappers for
   # an Order or a DayOff.
   #
@@ -70,10 +66,31 @@ class StudentOrder < Order
     end
   end
 
-  def push_order(arr, date)
-    order = orders.find_by_served_on(date) || orders.build(:served_on => date)
-    arr << Day.new(date, order)
+  def self.for_month_and_year_by_weekday(month, year)
+    first_of_month = Date.civil(year.to_i, month.to_i, 1)
+    last_of_month = Date.civil(year.to_i, month.to_i, -1)
+    [].tap do |arr|
+      first_of_month.upto(last_of_month) do |date|
+        if date.weekday?
+          arr << [] if start_new_array_for_week?(arr, date)
+
+          prepend_nils_for_weekdays_before_first_of_month(arr, date, first_of_month)
+
+          if day_off = DayOff.for_date(date)
+            arr.last << Day.new(date, day_off)
+          else
+            order = StudentOrder.find_by_served_on(date) || StudentOrder.new(:served_on => date)
+            arr.last << Day.new(date, order)
+          end
+        end
+      end
+    end
   end
+
+  # def push_order(arr, date)
+  #   order = orders.find_by_served_on(date) || orders.build(:served_on => date)
+  #   arr << Day.new(date, order)
+  # end
 
   def quantities_empty_unless_destroy?(atts)
     omi_atts = atts['ordered_menu_items_attributes'].values
