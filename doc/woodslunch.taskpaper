@@ -1,5 +1,6 @@
-- Continue student order request specs. @next
-- Get specs passing and merge back to master.
+- Continue student order request specs. @done(2011-08-13)
+- Get specs passing
+- Merge back to master.
 - Account balance.
 - Application configuration (database-backed) for setting first and last order dates.
 - Charge 2.5% per transaction, don't worry about the $.30.

@@ -1,6 +1,25 @@
 Dev Notes
 =========
 
+Order, StudentOrder, UserOrder STI
+----------------------------------
+
+Get all specs passing, merged back to master, then create feature branch for
+this experiment.
+
+Validations for OrderedMenuItem and Order
+-----------------------------------------
+
+I think because of the way accepts_nested_attributes_for works, with the nested
+associations saving before the parent, if we validate for the presence of the
+parent_id, we'll get errors. That data will eventually be set. So the question
+becomes how to validate against that, or how to set up the model so that the
+validation only runs at the proper point in the save/update lifecycle.
+
+I'll come back to this for OrderedMenuItem. Start here: http://bit.ly/o2GyOw
+
+See above STI notes for dealing with this issue in Order
+
 Order routes
 ------------
 

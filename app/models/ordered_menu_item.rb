@@ -12,6 +12,7 @@ class OrderedMenuItem < ActiveRecord::Base
 
   # before_save :calculate_total
   # before_save :update_order_total_if_total_changed
+  after_destroy :destroy_order_unless_ordered_menu_items
 
   def calculate_total
     self.total = self.menu_item.price * self.quantity
@@ -24,7 +25,7 @@ class OrderedMenuItem < ActiveRecord::Base
     end
   end
 
-  def after_destroy
+  def destroy_order_unless_ordered_menu_items
     order.destroy_unless_ordered_menu_items
   end
 end

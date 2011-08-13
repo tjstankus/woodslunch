@@ -6,14 +6,14 @@ class Order < ActiveRecord::Base
   has_many :menu_items, :through => :ordered_menu_items
 
   validates :served_on, :presence => true
-  # validate :associated_with_student_or_user
+  # validate :associated_with_student_order_or_user_order
 
   accepts_nested_attributes_for :ordered_menu_items,
       :reject_if => proc { |a| a['_destroy'].blank? && a['quantity'].blank? }, :allow_destroy => true
 
   # after_save :calculate_total
   # after_save :update_account_balance_if_total_changed
-  # after_update :destroy_unless_ordered_menu_items
+  after_destroy :destroy_parent_order_unless_orders
 
   def available_menu_items
     @available_menu_items ||= self.day_of_week_served_on.menu_items
@@ -33,14 +33,6 @@ class Order < ActiveRecord::Base
 
   def day_of_week_served_on
     DayOfWeek.find_by_name(self.served_on.strftime('%A'))
-  end
-
-  def for
-    if self.student
-      'student'
-    elsif self.user
-      'user'
-    end
   end
 
   def destroy_unless_ordered_menu_items
@@ -68,10 +60,11 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def after_destroy
+  def destroy_parent_order_unless_orders
     if student_order
       student_order.destroy_unless_orders
     elsif user_order
+      user_order.destroy_unless_orders
     end
   end
 
@@ -85,11 +78,13 @@ class Order < ActiveRecord::Base
   #   self.save
   # end
 
+  # TODO: This may change with STI experiment.
+
   # private
 
-  # def associated_with_student_or_user
-  #   unless (self.student || self.user) && !(self.student && self.user)
-  #     errors.add(:base, 'Order must be associated with a student or a user, but not both.')
+  # def associated_with_student_order_or_user_order
+  #   unless (self.student_order || self.user_order) && !(self.student_order && self.user_order)
+  #     errors.add(:base, 'Order must be associated with a student_order or a user_order, but not both.')
   #   end
   # end
 end
