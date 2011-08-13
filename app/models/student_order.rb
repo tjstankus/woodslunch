@@ -85,6 +85,8 @@ class StudentOrder < ActiveRecord::Base
     else
       omi_atts.collect{|h| h['quantity']}.all?{|q| q.empty?}
     end
+  rescue NoMethodError
+    return false
   end
 
   def destroy_unless_orders

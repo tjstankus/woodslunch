@@ -5,6 +5,7 @@ class OrderedMenuItem < ActiveRecord::Base
   belongs_to :order
   belongs_to :menu_item
 
+  # We don't have an order id when being created via accepts_nested_attributes_for
   # validates :order_id, :presence => true
   validates :menu_item_id, :presence => true
   validates :quantity, :presence => true, :numericality => true

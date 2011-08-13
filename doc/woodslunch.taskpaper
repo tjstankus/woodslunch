@@ -1,6 +1,6 @@
-- Specs for new student order that include, use the new URLs with query parameters. @done(2011-08-10)
 - Continue student order request specs. @next
-- Determine the current/default month.
+- Get specs passing and merge back to master.
+- Account balance.
 - Application configuration (database-backed) for setting first and last order dates.
 - Charge 2.5% per transaction, don't worry about the $.30.
 - Screenshots or video needed by Friday the 19th.
@@ -85,18 +85,14 @@ Accounts/Users/Students:
 		- Admin records a payment for this account.
 		- Payment model. Belongs to account with presence validation.
 Orders:
-	- New student order form
-	- Route to new or edit student_order_path as appropriate, perhaps in helper method link_to_current_student_order(student), but route as well to be sure.
 	- An order must have a unique combination of student id and served_on date. In other words, there can only be one order per student per day. Enforce this in a validation.
 Menu Items:
-	- @q Handle items on non-daily schedules?
-		YES
-		https://github.com/seejohnrun/ice_cube
-		http://ruby-toolbox.com/categories/recurring_events.html
 Later:
-	- Improve number of sql statements on new order form, although it looks like most of them are coming from the cache.
-	- Presenter gem
+	- Improve number of sql statements on new order form, although it looks like most of them are coming from the cache. @later
 Archive:
+	- Specs for new student order that include, use the new URLs with query parameters. @done(2011-08-10)
+	- Determine the current/default month. @done(2011-08-12)
+	- Route to new or edit student_order_path as appropriate, perhaps in helper method link_to_current_student_order(student), but route as well to be sure. @done(2011-08-12) @project(Orders)
 	- Only save orders that have ordered_menu_items @done(2011-08-09)
 	- starts_on and ends_on need to be set on create @done(2011-08-09)
 	- Build new orders for each weekday @done(2011-08-08)

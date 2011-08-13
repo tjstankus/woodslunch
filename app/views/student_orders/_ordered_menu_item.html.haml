@@ -1,5 +1,8 @@
 - ordered = ordered_menu_item.id ? true : false
-.menu_item{:id => "ordered_menu_item_#{ordered_menu_item.id}", :class => ordered ? 'existing' : '', 'data-index' => "#{i}", 'data-day' => "#{day.month_day}"}
+- menu_item_atts = {'data-index' => "#{i}", 'data-day' => "#{day.month_day}"}
+- menu_item_atts[:id] = "ordered_menu_item_#{ordered_menu_item.id}" if ordered
+- menu_item_atts[:class] = "existing" if ordered
+.menu_item{menu_item_atts}
   -#= hidden_field_tag("[student_order][orders_attributes][#{day.month_day}][ordered_menu_items_attributes][#{i}][_destroy]", '1')
   - if ordered
     = hidden_field_tag("[student_order][orders_attributes][#{day.month_day}][ordered_menu_items_attributes][#{i}][id]",

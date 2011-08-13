@@ -41,12 +41,13 @@ describe 'Accounts' do
         page.should have_no_xpath("//div[@id='balance']")
       end
     end
- 
+
   end
-    
+
   describe 'balance' do
-    
+
     it 'updates with lunch order' do
+      pending 'Account balance work'
       # Given I am a signed in user with a student
       account = Factory(:account)
       user = Factory(:user, :account => account)
@@ -57,14 +58,21 @@ describe 'Accounts' do
       daily_menu_item = create_menu_item_served_on_day('Monday')
       menu_item = daily_menu_item.menu_item
       path_params = {:year => '2011', :month => '5'}
-      visit edit_student_order_path(student, path_params)
+      visit new_student_order_path(student, path_params)
+
+      puts page.body
 
       # And I place a lunch order for one item
-      check menu_item.name
+      within('.monday') do
+        within('div[data-index="0"]') do
+          select '1'
+        end
+      end
+
       click_button 'Place Order'
 
       # Then I should see my account balance as the cost of the item
-      page.should have_xpath("//div[@id='balance']", 
+      page.should have_xpath("//div[@id='balance']",
           :text => number_to_currency(menu_item.price))
     end
   end

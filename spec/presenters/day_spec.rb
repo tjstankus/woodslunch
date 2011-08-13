@@ -11,14 +11,14 @@ describe Day do
     end
   end
 
-  describe '#wrapped_object' do
+  describe '#object_for_display' do
 
     let(:date) { Date.today }
     let(:obj) { 'A test string' }
     let(:day) { Day.new(date, obj) }
 
-    it 'returns the initialized wrapped object' do
-      day.wrapped_object.should == obj
+    it 'returns the wrapped object' do
+      day.object_for_display.should == obj
     end
   end
 

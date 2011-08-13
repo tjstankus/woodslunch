@@ -119,6 +119,8 @@ describe 'Student orders' do
         }.to change { OrderedMenuItem.count }.from(0).to(1)
       end
 
+      it 'sets order_id for OrderedMenuItem'
+
       it 'updates account balance by the price of the ordered menu item'
     end
 
@@ -247,16 +249,44 @@ describe 'Student orders' do
         Factory(:ordered_menu_item, :order => order, :menu_item => daily_menu_item.menu_item)
       end
 
-      it 'updates the quantity' do
-        visit edit_student_order_path(student, student_order, :month => month, :year => year)
-        within('#12') do
-          within("div#ordered_menu_item_#{ordered_menu_item.id}") do
-            select '2'
+      context 'changing quantity from 1 to 2' do
+
+        it 'updates the quantity' do
+          visit edit_student_order_path(student, student_order, :month => month, :year => year)
+          within('#12') do
+            within("div#ordered_menu_item_#{ordered_menu_item.id}") do
+              select '2'
+            end
           end
+          expect {
+            click_button 'Place Order'
+          }.to change { ordered_menu_item.reload.quantity }.from(1).to(2)
         end
-        expect {
-          click_button 'Place Order'
-        }.to change { ordered_menu_item.reload.quantity }.from(1).to(2)
+      end
+
+      context 'changing quantity to blank' do
+
+        it 'destroys the ordered menu item' do
+          pending 'JavaScript driver'
+          visit edit_student_order_path(student, student_order, :month => month, :year => year)
+          within('#12') do
+            within("div#ordered_menu_item_#{ordered_menu_item.id}") do
+              select ''
+            end
+          end
+          expect {
+            click_button 'Place Order'
+          }.to change { OrderedMenuItem.count }.by(-1)
+        end
+
+        it 'destroys the order, since it has no ordered menu items' do
+          pending 'JavaScript driver'
+        end
+
+        it 'destroys the student order, since it has no orders' do
+          pending 'JavaScript driver'
+        end
+
       end
     end
 
