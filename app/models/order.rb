@@ -1,11 +1,11 @@
 class Order < ActiveRecord::Base
-  belongs_to :student_order
-  belongs_to :user_order
 
   has_many :ordered_menu_items, :dependent => :destroy
   has_many :menu_items, :through => :ordered_menu_items
 
   validates :served_on, :presence => true
+  validates :starts_on, :presence => true
+  validates :ends_on, :presence => true
   # validate :associated_with_student_order_or_user_order
 
   accepts_nested_attributes_for :ordered_menu_items,
@@ -65,6 +65,22 @@ class Order < ActiveRecord::Base
       student_order.destroy_unless_orders
     elsif user_order
       user_order.destroy_unless_orders
+    end
+  end
+
+  def start_new_array_for_week?(arr, date)
+    !arr.last || date.monday?
+  end
+
+  def prepend_nils_for_weekdays_before_first_of_month(arr, date)
+    if date == starts_on && !date.monday?
+      (date.cwday - 1).times { arr.last << nil }
+    end
+  end
+
+  def append_nils_for_weekdays_after_last_of_month(arr, date)
+    if date == ends_on && !date.friday?
+      (5 - date.cwday).times { arr.last << nil }
     end
   end
 

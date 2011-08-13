@@ -1,14 +1,11 @@
-class StudentOrder < ActiveRecord::Base
-
-  include Orderable
+class StudentOrder < Order
 
   belongs_to :student
-  has_many :orders
 
   validates :student_id, :presence => true
 
-  accepts_nested_attributes_for :orders, :reject_if => :quantities_empty_unless_destroy?,
-      :allow_destroy => true
+  # accepts_nested_attributes_for :orders, :reject_if => :quantities_empty_unless_destroy?,
+  #     :allow_destroy => true
 
 
   def self.new_from_params(params)
