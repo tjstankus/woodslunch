@@ -78,8 +78,8 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def self.append_nils_for_weekdays_after_last_of_month(arr, date)
-    if date == ends_on && !date.friday?
+  def self.append_nils_for_weekdays_after_last_of_month(arr, date, last_of_month)
+    if date == last_of_month && !date.friday?
       (5 - date.cwday).times { arr.last << nil }
     end
   end

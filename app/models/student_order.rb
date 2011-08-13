@@ -66,7 +66,7 @@ class StudentOrder < Order
     end
   end
 
-  def self.for_month_and_year_by_weekday(month, year)
+  def self.days_for_month_and_year_by_weekday(month, year, student_id)
     first_of_month = Date.civil(year.to_i, month.to_i, 1)
     last_of_month = Date.civil(year.to_i, month.to_i, -1)
     [].tap do |arr|
@@ -79,9 +79,12 @@ class StudentOrder < Order
           if day_off = DayOff.for_date(date)
             arr.last << Day.new(date, day_off)
           else
-            order = StudentOrder.find_by_served_on(date) || StudentOrder.new(:served_on => date)
+            order = StudentOrder.find_by_student_id_and_served_on(student_id, date) ||
+                    StudentOrder.new(:student_id => student_id, :served_on => date)
             arr.last << Day.new(date, order)
           end
+
+          append_nils_for_weekdays_after_last_of_month(arr, date, last_of_month)
         end
       end
     end

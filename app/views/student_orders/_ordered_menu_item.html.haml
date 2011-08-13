@@ -3,15 +3,14 @@
 - menu_item_atts[:id] = "ordered_menu_item_#{ordered_menu_item.id}" if ordered
 - menu_item_atts[:class] = "existing" if ordered
 .menu_item{menu_item_atts}
-  -#= hidden_field_tag("[student_order][orders_attributes][#{day.month_day}][ordered_menu_items_attributes][#{i}][_destroy]", '1')
   - if ordered
-    = hidden_field_tag("[student_order][orders_attributes][#{day.month_day}][ordered_menu_items_attributes][#{i}][id]",
+    = hidden_field_tag("[student_orders][#{day.month_day}][ordered_menu_items_attributes][#{i}][id]",
       ordered_menu_item.id,
-      :id => "student_order_orders_attributes_#{day.month_day}_ordered_menu_items_attributes_#{i}_id")
-  = hidden_field_tag("[student_order][orders_attributes][#{day.month_day}][ordered_menu_items_attributes][#{i}][menu_item_id]",
+      :id => "student_order_#{day.month_day}_ordered_menu_items_attributes_#{i}_id")
+  = hidden_field_tag("[student_orders][#{day.month_day}][ordered_menu_items_attributes][#{i}][menu_item_id]",
     menu_item.id,
-    :id => "student_order_orders_attributes_#{day.month_day}_ordered_menu_items_attributes_#{i}_menu_item_id")
-  = select_tag("[student_order][orders_attributes][#{day.month_day}][ordered_menu_items_attributes][#{i}][quantity]",
+    :id => "student_order_#{day.month_day}_ordered_menu_items_attributes_#{i}_menu_item_id")
+  = select_tag("[student_orders][#{day.month_day}][ordered_menu_items_attributes][#{i}][quantity]",
     options_for_select((1..OrderedMenuItem::MAX_DISPLAYED_QUANTITY), ordered_menu_item.quantity),
-    {:id => "student_order_orders_attributes_#{day.month_day}_ordered_menu_items_attributes_#{i}_quantity", :include_blank => true})
+    {:id => "student_order_#{day.month_day}_ordered_menu_items_attributes_#{i}_quantity", :include_blank => true})
   = menu_item.name

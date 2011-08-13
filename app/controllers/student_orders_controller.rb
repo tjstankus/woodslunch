@@ -7,35 +7,36 @@ class StudentOrdersController < ApplicationController
   before_filter :get_presenter, :only => [:index]
 
   def index
-    @student_orders = StudentOrder.for_month_and_year_by_weekday(params[:month], params[:year])
+    @days_by_week = StudentOrder.days_for_month_and_year_by_weekday(params[:month], params[:year], @student.id)
   end
 
-  def new
-    @student_order = StudentOrder.new_from_params(params)
-  end
+  # def new
+  #   @student_order = StudentOrder.new_from_params(params)
+  # end
 
   def create
-    @student_order = StudentOrder.new(params[:student_order])
+    StudentOrders.create_or_update(params[:student_orders])
+    # @student_order = StudentOrder.new(params[:student_order])
 
-    if @student_order.save
-      redirect_to root_path, :notice => "Successfully placed order for #{@student.name}."
-    else
-      render :action => 'new'
-    end
+    # if @student_order.save
+    #   redirect_to root_path, :notice => "Successfully placed order for #{@student.name}."
+    # else
+    #   render :action => 'new'
+    # end
   end
 
-  def edit
-    @student_order = StudentOrder.find(params[:id])
-  end
+  # def edit
+  #   @student_order = StudentOrder.find(params[:id])
+  # end
 
   def update
-    @student_order = StudentOrder.find(params[:id])
+    # @student_order = StudentOrder.find(params[:id])
 
-    if @student_order.update_attributes(params[:student_order])
-      redirect_to root_path, :notice => "Successfully updated order for #{@student.name}."
-    else
-      render :action => 'edit'
-    end
+    # if @student_order.update_attributes(params[:student_order])
+    #   redirect_to root_path, :notice => "Successfully updated order for #{@student.name}."
+    # else
+    #   render :action => 'edit'
+    # end
   end
 
   private
