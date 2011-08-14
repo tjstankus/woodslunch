@@ -1,2 +1,16 @@
-%h1#student_name= "Lunch order for #{@student.name}"
-%h3#month_year= @presenter.display_month_and_year
+.order_header
+  %h1#student_name= "Lunch order for #{@student.name}"
+  %table#month_display{ :cellpadding => '0', :cellspacing => '0' }
+    %tr
+      %td#previous_month
+        - if @presenter.display_previous_month?
+          = link_to(image_tag('arrow_left_24x24.png'), student_orders_path(@student,
+            :year => @presenter.last_of_previous_month.year,
+            :month => @presenter.last_of_previous_month.month))
+      %td#month_year
+        %h3= @presenter.display_month_and_year
+      %td#next_month
+        - if @presenter.display_next_month?
+          = link_to(image_tag('arrow_right_24x24.png'), student_orders_path(@student,
+            :year => @presenter.first_of_next_month.year,
+            :month => @presenter.first_of_next_month.month))

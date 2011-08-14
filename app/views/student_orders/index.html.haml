@@ -12,10 +12,8 @@
       %tr
         - week.each do |day|
           - if day
-            %td{:id => day.month_day, :class => day.day_name.downcase}
-              .mday= day.month_day
-              = render :partial => day.name_for_partial, :locals => {:day => day},
-                :object => day.object_for_display
+            = render :partial => day.name_for_partial, :locals => {:day => day},
+              :object => day.object_for_display
           - else
             %td.empty
               != '&nbsp;'

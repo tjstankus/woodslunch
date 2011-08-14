@@ -29,4 +29,3 @@ Woodslunch::Application.configure do
   # Set default email host
   config.action_mailer.default_url_options = {:host => 'woodslunch.dev'}
 end
-

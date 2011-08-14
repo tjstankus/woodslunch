@@ -7,7 +7,7 @@ gem 'heroku', '2.3.6'
 gem 'devise', '1.3.4'
 gem 'simple_form', '1.4.1'
 gem 'haml', '3.1.2'
-gem 'compass', '0.11.3'
+gem 'compass', '0.11.5'
 gem 'fancy-buttons', '1.1.1'
 gem 'rdiscount', '1.6.8'
 gem 'role_model', '0.7.0'
@@ -15,6 +15,7 @@ gem 'faker', '0.9.5'
 gem 'escape_utils', '0.2.3'
 gem 'inherited_resources', '1.2.2'
 gem 'state_machine', '1.0.1'
+gem 'configatron', '2.8.2'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
