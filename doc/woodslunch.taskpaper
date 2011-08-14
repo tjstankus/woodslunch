@@ -1,7 +1,8 @@
 - Go through specs carefully and see what's commented out that we might need. @done(2011-08-13)
+- Account balance (see dev notes).
+	- Looks good. Need spec for destroy. @next
 - Day off tests
 - Application configuration (database-backed) for setting first and last order dates.
-- Account balance (see dev notes).
 - Charge 2.5% per transaction, don't worry about the $.30.
 - Screenshots or video needed by Friday the 19th.
 	- Just show them on the 19th. Perhaps allow for account requests if we are online.
