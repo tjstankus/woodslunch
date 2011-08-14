@@ -21,8 +21,8 @@ class OrderedMenuItem < ActiveRecord::Base
     order.destroy_unless_ordered_menu_items
   end
 
-  def get_account
-    if order.student
+  def account
+    @account ||= if order.student
       order.student.account
     elsif order.user
       order.user.account

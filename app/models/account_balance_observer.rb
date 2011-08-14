@@ -4,13 +4,13 @@ class AccountBalanceObserver < ActiveRecord::Observer
   def before_save(model)
     if model.total_changed?
       diff = model.total - model.total_was
-      account = model.get_account
+      account = model.account
       account.change_balance_by(diff)
     end
   end
 
   def before_destroy(model)
-    account = model.get_account
+    account = model.account
     account.change_balance_by(-model.total)
   end
 end
