@@ -1,7 +1,7 @@
-- STI experiment @done(2011-08-13)
-- Get specs passing
+- Clean up student order views @done(2011-08-13)
 - Merge back to master
 - Go through commented specs and uncomment the ones we still need.
+
 - Account balance.
 - Application configuration (database-backed) for setting first and last order dates.
 - Charge 2.5% per transaction, don't worry about the $.30.
@@ -77,6 +77,7 @@ Accounts/Users/Students:
 		- Payment model. Belongs to account with presence validation.
 Orders:
 	- An order must have a unique combination of student id and served_on date. In other words, there can only be one order per student per day. Enforce this in a validation.
+	- Error messages
 Menu Items:
 Later:
 	- Improve number of sql statements on new order form, although it looks like most of them are coming from the cache. @later
@@ -84,6 +85,8 @@ Later:
 		When you pay have option to add money for a la carte, purchase grocery card.
 		Paypal Basic account has shopping cart which might be useful for this stuff.
 Archive:
+	- STI experiment @done(2011-08-13)
+	- Get specs passing @done(2011-08-13)
 	- Edit order @done(2011-08-13)
 		- The first thing to figure out is whether or not it's a good idea to have the urls like I have them. And it's probably not. @done(2011-08-13)
 		- Route to edit when an order exists. @done(2011-08-13)
