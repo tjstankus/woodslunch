@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(:version => 20110711120635) do
     t.integer  "student_id"
     t.integer  "user_id"
     t.string   "type"
-    t.decimal  "total",      :precision => 5, :scale => 2, :default => 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
