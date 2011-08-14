@@ -40,7 +40,6 @@ end
 
 Factory.define :student_order do |f|
   f.served_on { Date.civil(2011, 9, 12) }
-  f.total 0
   f.association :student, :factory => :student
 end
 

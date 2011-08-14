@@ -5,7 +5,6 @@ class CreateOrders < ActiveRecord::Migration
       t.integer :student_id
       t.integer :user_id
       t.string :type
-      t.decimal :total, :precision => 5, :scale => 2, :default => 0
       t.timestamps
     end
   end
