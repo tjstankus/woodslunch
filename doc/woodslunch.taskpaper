@@ -1,4 +1,7 @@
-- STI experiment
+- STI experiment @done(2011-08-13)
+- Get specs passing
+- Merge back to master
+- Go through commented specs and uncomment the ones we still need.
 - Account balance.
 - Application configuration (database-backed) for setting first and last order dates.
 - Charge 2.5% per transaction, don't worry about the $.30.

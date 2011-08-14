@@ -13,8 +13,4 @@ class Student < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def student_order_for_date(date)
-    student_orders.where(":date >= starts_on AND :date <= ends_on", {:date => date.to_s}).first
-  end
-
 end
