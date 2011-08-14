@@ -1,3 +1,4 @@
+# TODO: Get rid of this module if we stick with STI
 module Orderable
   extend ActiveSupport::Concern
 

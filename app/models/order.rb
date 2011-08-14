@@ -1,6 +1,4 @@
 class Order < ActiveRecord::Base
-  belongs_to :student_order
-  belongs_to :user_order
 
   has_many :ordered_menu_items, :dependent => :destroy
   has_many :menu_items, :through => :ordered_menu_items
@@ -13,7 +11,6 @@ class Order < ActiveRecord::Base
 
   # after_save :calculate_total
   # after_save :update_account_balance_if_total_changed
-  after_destroy :destroy_parent_order_unless_orders
 
   def available_menu_items
     @available_menu_items ||= self.day_of_week_served_on.menu_items
@@ -60,11 +57,19 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def destroy_parent_order_unless_orders
-    if student_order
-      student_order.destroy_unless_orders
-    elsif user_order
-      user_order.destroy_unless_orders
+  def self.start_new_array_for_week?(arr, date)
+    !arr.last || date.monday?
+  end
+
+  def self.prepend_nils_for_weekdays_before_first_of_month(arr, date, first_of_month)
+    if date == first_of_month && !date.monday?
+      (date.cwday - 1).times { arr.last << nil }
+    end
+  end
+
+  def self.append_nils_for_weekdays_after_last_of_month(arr, date, last_of_month)
+    if date == last_of_month && !date.friday?
+      (5 - date.cwday).times { arr.last << nil }
     end
   end
 

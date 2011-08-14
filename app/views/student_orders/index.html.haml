@@ -1,14 +1,14 @@
-= error_messages_for(@student_order)
+= content_for :javascripts do
+  = javascript_include_tag 'orders.js'
 
-= form_for(@student_order) do |f|
-  = hidden_field_tag 'student_order[student_id]', @student_order.student_id
-  = hidden_field_tag 'student_order[starts_on]', @student_order.starts_on
-  = hidden_field_tag 'student_order[ends_on]', @student_order.ends_on
+= render 'header'
+
+= form_tag student_orders_path(@student) do
   %table#monthly_order{ :cellpadding => '0', :cellspacing => '0' }
     %tr
       - DayOfWeek.weekdays.each do |day|
         %th= day.name
-    - @student_order.days_by_weekday.each do |week|
+    - @days_by_week.each do |week|
       %tr
         - week.each do |day|
           - if day
@@ -20,4 +20,4 @@
             %td.empty
               != '&nbsp;'
   #monthly_order_info_actions
-    = f.submit "Place Order"
+    = submit_tag "Place Order"
