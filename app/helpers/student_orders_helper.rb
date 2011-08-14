@@ -1,4 +1,5 @@
 module StudentOrdersHelper
+
   include OrdersHelper
 
   def link_to_current_student_order(student)
@@ -8,4 +9,5 @@ module StudentOrdersHelper
     path = student_orders_path(student, :year => year, :month => month)
     link_to("Lunch order for #{student.name}", path)
   end
+
 end
