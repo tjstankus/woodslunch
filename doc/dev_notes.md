@@ -1,39 +1,40 @@
 Dev Notes
 =========
 
+Account balance
+---------------
 
-Validations for OrderedMenuItem and Order
------------------------------------------
+## Events that change account balance
 
-I think because of the way accepts_nested_attributes_for works, with the nested
-associations saving before the parent, if we validate for the presence of the
-parent_id, we'll get errors. That data will eventually be set. So the question
-becomes how to validate against that, or how to set up the model so that the
-validation only runs at the proper point in the save/update lifecycle.
+  - Create a new ordered menu item should increase the account balance by
+    ordered menu item total (price * quantity).
+  - Destroy an ordered menu item should decrease the account balance by
+    ordered menu item total (price * quantity).
+  - Edit quantity of ordered menu item should change the account balance by the
+    difference (positive or negative).
+  - Recording a payment should decrement the account balance by the amount of
+    the payment.
 
-I'll come back to this for OrderedMenuItem. Start here: http://bit.ly/o2GyOw
+### Account balance history
 
-See above STI notes for dealing with this issue in Order
+Would be nice to keep a history of account balance. Each item in the history
+would have an amount changed and the reason for the change. Not sure if I want
+to expose this to the user. It would be nice to batch all the ordered menu
+items changes into one change to account balance on submit of a monthly order.
+Not sure.
 
-Order routes
-------------
+### Observers
 
-I want the urls to be good looking. If the association for student to
-student_order is done with default nested routes, we'd get something like this:
-/students/:student_id/student_orders/new ...
+There are a number of events that trigger a balance update:
 
-I think we'll want params with protection of course for people mucking around.
+  - OrderedMenuItem CRUD
+  - A payment being made
+  - Etc.
+
+Use an AccountBalanceObserver
 
 Current
 -------
-
-I'm slightly confused over a decision I made to associate Order with either
-StudentOrder or UserOrder. I'm not sure if I'll need a direct association with
-Student/User, for purposes of faster querying. But, that's easy enough to
-decide later.
-
-* Get the routing correct. Always build a url that includes the month and the
-year, but need to know to route to a new order or an edit order.
 
 As a parent I login and click place order. At this point, I'm not sure what the
 typical expectation will be for that, in terms of what month to land on, so I
@@ -134,14 +135,6 @@ Only after creating Account, User, and Student successfully.
 
 AccountRequest has a status that can be: pending, approved, denied.
 
-Account balance
----------------
-
-Handle the following situations
-  - Create a new order should increment the balance by order.total.
-  - Destroy an order should decrement the balance the order.total.
-  - Edit order to add items should increment the balance the diff.
-  - Edit order to remove items should decrement the balance the diff.
 
 Order, StudentOrder, UserOrder STI
 ----------------------------------
