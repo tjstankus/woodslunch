@@ -33,12 +33,16 @@ class StudentOrder < Order
 
           prepend_nils_for_weekdays_before_first_of_month(arr, date, first_of_month)
 
-          if day_off = DayOff.for_date(date)
-            arr.last << Day.new(date, day_off)
+          if !AppConfig.orderable_date?(date)
+            arr.last << Day.new(date, nil, 'unorderable_date')
           else
-            order = StudentOrder.find_by_student_id_and_served_on(student_id, date) ||
-                    StudentOrder.new(:student_id => student_id, :served_on => date)
-            arr.last << Day.new(date, order)
+            if day_off = DayOff.for_date(date)
+              arr.last << Day.new(date, day_off)
+            else
+              order = StudentOrder.find_by_student_id_and_served_on(student_id, date) ||
+                      StudentOrder.new(:student_id => student_id, :served_on => date)
+              arr.last << Day.new(date, order)
+            end
           end
 
           append_nils_for_weekdays_after_last_of_month(arr, date, last_of_month)

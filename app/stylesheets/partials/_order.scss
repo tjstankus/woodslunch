@@ -44,6 +44,10 @@ table#monthly_order td {
     text-indent: -42px;
   }
 }
+table#monthly_order td.empty,
+table#monthly_order td.unorderable {
+  background-color: #e8e8e8;
+}
 div#monthly_order_info_actions {
   padding: 20px 0 0 0;
   text-align: right;

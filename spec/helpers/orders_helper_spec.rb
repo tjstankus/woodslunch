@@ -22,4 +22,14 @@ describe OrdersHelper do
       end
     end
   end
+
+  describe '#month_has_available_order_dates?' do
+    context 'given a month with available order dates' do
+      it 'returns true'
+    end
+
+    context 'given a month without available order dates' do
+      it 'returns false'
+    end
+  end
 end

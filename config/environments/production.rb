@@ -59,5 +59,4 @@ Woodslunch::Application.configure do
     :password       => ENV['SENDGRID_PASSWORD'],
     :domain         => ENV['SENDGRID_DOMAIN']
   }
-
 end

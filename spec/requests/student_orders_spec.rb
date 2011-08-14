@@ -293,4 +293,62 @@ describe 'Student orders' do
       end
     end
   end
+
+  describe 'availabilty configuration' do
+
+    let(:month) { 8 }
+    let(:year) { 2011 }
+
+    context 'given unavailable dates in the month' do
+
+      before(:each) do
+        configatron.orders_first_available_on = Date.parse('2011-08-29')
+        configatron.orders_last_available_on = Date.parse('2011-09-30')
+      end
+
+      it 'displays unavailable dates as unorderable' do
+        visit student_orders_path(student, :year => year, :month => month)
+        (1..28).each do |month_day|
+          if Date.parse("#{year}-#{month}-#{month_day}").weekday?
+            page.should have_css("td##{month_day}.unorderable")
+          end
+        end
+      end
+    end
+  end
+
+  describe 'month traversal' do
+    context 'given the previous month has available ordering dates' do
+      it 'displays the previous month link'
+    end
+
+    context 'given the previous month does not have available ordering dates' do
+      it 'does not display the previous month link'
+    end
+
+    context 'given the next month has available ordering dates' do
+      it 'displays the previous month link' do
+
+      end
+    end
+
+    context 'given the previous month does not have available ordering dates' do
+      it 'does not display the previous month link'
+    end
+  end
+
+  describe 'unorderable dates' do
+    it 'display as empty'
+  end
+
+  describe 'orderable dates no longer available' do
+    it 'display available menu items'
+
+    it 'display ordered menu items with quantity'
+
+    it 'display as read-only' do
+      pending
+      # should not have select field
+    end
+  end
 end
