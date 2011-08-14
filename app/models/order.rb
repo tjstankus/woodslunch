@@ -4,8 +4,6 @@ class Order < ActiveRecord::Base
   has_many :menu_items, :through => :ordered_menu_items
 
   validates :served_on, :presence => true
-  validates :starts_on, :presence => true
-  validates :ends_on, :presence => true
   # validate :associated_with_student_order_or_user_order
 
   accepts_nested_attributes_for :ordered_menu_items,
@@ -13,7 +11,6 @@ class Order < ActiveRecord::Base
 
   # after_save :calculate_total
   # after_save :update_account_balance_if_total_changed
-  after_destroy :destroy_parent_order_unless_orders
 
   def available_menu_items
     @available_menu_items ||= self.day_of_week_served_on.menu_items
@@ -57,14 +54,6 @@ class Order < ActiveRecord::Base
       self.student.account
     elsif self.user
       self.user.account
-    end
-  end
-
-  def destroy_parent_order_unless_orders
-    if student_order
-      student_order.destroy_unless_orders
-    elsif user_order
-      user_order.destroy_unless_orders
     end
   end
 

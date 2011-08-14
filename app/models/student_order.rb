@@ -7,25 +7,24 @@ class StudentOrder < Order
   # accepts_nested_attributes_for :orders, :reject_if => :quantities_empty_unless_destroy?,
   #     :allow_destroy => true
 
+  # def self.new_from_params(params)
+  #   params = filtered_params(params)
+  #   year = params[:year].to_i
+  #   month = params[:month].to_i
+  #   student_order = StudentOrder.new(:student_id => params[:student_id]).tap do |student_order|
+  #     student_order.starts_on = Date.civil(year, month, 1)
+  #     student_order.ends_on = Date.civil(year, month, -1)
+  #     student_order.days_by_weekday
+  #   end
+  # end
 
-  def self.new_from_params(params)
-    params = filtered_params(params)
-    year = params[:year].to_i
-    month = params[:month].to_i
-    student_order = StudentOrder.new(:student_id => params[:student_id]).tap do |student_order|
-      student_order.starts_on = Date.civil(year, month, 1)
-      student_order.ends_on = Date.civil(year, month, -1)
-      student_order.days_by_weekday
-    end
-  end
-
-  def self.filtered_params(params)
-    HashWithIndifferentAccess.new.tap do |h|
-      [:student_id, :year, :month].each do |att|
-        h[att] = params[att]
-      end
-    end
-  end
+  # def self.filtered_params(params)
+  #   HashWithIndifferentAccess.new.tap do |h|
+  #     [:student_id, :year, :month].each do |att|
+  #       h[att] = params[att]
+  #     end
+  #   end
+  # end
 
   # Returns an array of arrays. Each nested array contains Day objects that serve as wrappers for
   # an Order or a DayOff.
@@ -46,25 +45,25 @@ class StudentOrder < Order
   #   [ # remaining week arrays... ],
   #   [ # the last array (for last week of month) may have nils on the end ]
   # ]
-  def days_by_weekday
-    @days ||= [].tap do |arr|
-      starts_on.upto(ends_on) do |date|
-        if date.weekday?
-          arr << [] if start_new_array_for_week?(arr, date)
+  # def days_by_weekday
+  #   @days ||= [].tap do |arr|
+  #     starts_on.upto(ends_on) do |date|
+  #       if date.weekday?
+  #         arr << [] if start_new_array_for_week?(arr, date)
 
-          prepend_nils_for_weekdays_before_first_of_month(arr, date)
+  #         prepend_nils_for_weekdays_before_first_of_month(arr, date)
 
-          if day_off = DayOff.for_date(date)
-            arr.last << Day.new(date, day_off)
-          else
-            push_order(arr.last, date)
-          end
+  #         if day_off = DayOff.for_date(date)
+  #           arr.last << Day.new(date, day_off)
+  #         else
+  #           push_order(arr.last, date)
+  #         end
 
-          append_nils_for_weekdays_after_last_of_month(arr, date)
-        end
-      end
-    end
-  end
+  #         append_nils_for_weekdays_after_last_of_month(arr, date)
+  #       end
+  #     end
+  #   end
+  # end
 
   def self.days_for_month_and_year_by_weekday(month, year, student_id)
     first_of_month = Date.civil(year.to_i, month.to_i, 1)
@@ -88,6 +87,22 @@ class StudentOrder < Order
         end
       end
     end
+  end
+
+  def self.create_or_update_via_params(params)
+    params.values.each do |atts|
+      order_id = atts.delete(:id)
+      if order_id.blank?
+        StudentOrder.create!(atts) if create_student_order?(atts[:ordered_menu_items_attributes])
+      else
+        StudentOrder.find(order_id).update_attributes!(atts)
+      end
+    end
+  end
+
+  def self.create_student_order?(ordered_menu_items_attributes)
+    atts = ordered_menu_items_attributes.values
+    !(atts.collect{|h| h['quantity']}.all?{|q| q.empty?})
   end
 
   # def push_order(arr, date)
@@ -115,6 +130,8 @@ class StudentOrder < Order
   #   self.starts_on ||= Date.civil(date.year, date.month, 1)
   #   self.ends_on ||= Date.civil(date.year, date.month, -1)
   # end
+
+
 end
 
 # # Presenter

@@ -75,8 +75,6 @@ ActiveRecord::Schema.define(:version => 20110711120635) do
 
   create_table "orders", :force => true do |t|
     t.date     "served_on"
-    t.date     "starts_on"
-    t.date     "ends_on"
     t.integer  "student_id"
     t.integer  "user_id"
     t.string   "type"

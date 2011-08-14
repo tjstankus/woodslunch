@@ -15,7 +15,8 @@ class StudentOrdersController < ApplicationController
   # end
 
   def create
-    StudentOrders.create_or_update(params[:student_orders])
+    StudentOrder.create_or_update_via_params(params[:student_orders])
+    redirect_to root_path, :notice => "Successfully placed order for #{@student.name}."
     # @student_order = StudentOrder.new(params[:student_order])
 
     # if @student_order.save
