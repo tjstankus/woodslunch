@@ -317,7 +317,12 @@ describe 'Student orders' do
     end
   end
 
+  # TODO: Complete specs. Manually tested this functionality, but needs specs.
   describe 'month traversal' do
+
+    let(:month) { 8 }
+    let(:year) { 2011 }
+
     context 'given the previous month has available ordering dates' do
       it 'displays the previous month link'
     end
@@ -327,8 +332,15 @@ describe 'Student orders' do
     end
 
     context 'given the next month has available ordering dates' do
-      it 'displays the previous month link' do
 
+      before(:each) do
+        configatron.orders_first_available_on = Date.parse('2011-08-29')
+        configatron.orders_last_available_on = Date.parse('2011-09-30')
+      end
+
+      it 'displays the previous month link' do
+        pending
+        visit student_orders_path(student, :year => year, :month => month)
       end
     end
 
