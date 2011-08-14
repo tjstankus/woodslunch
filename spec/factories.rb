@@ -45,7 +45,7 @@ Factory.define :student_order do |f|
 end
 
 Factory.define :ordered_menu_item do |f|
-  f.association :order, :factory => :order
+  f.association :order, :factory => :student_order
   f.association :menu_item, :factory => :menu_item
   f.quantity 1
 end

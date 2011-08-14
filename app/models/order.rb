@@ -4,7 +4,6 @@ class Order < ActiveRecord::Base
   has_many :menu_items, :through => :ordered_menu_items
 
   validates :served_on, :presence => true
-  # validate :associated_with_student_order_or_user_order
 
   accepts_nested_attributes_for :ordered_menu_items,
       :reject_if => proc { |a| a['_destroy'].blank? && a['quantity'].blank? }, :allow_destroy => true
@@ -83,13 +82,4 @@ class Order < ActiveRecord::Base
   #   self.save
   # end
 
-  # TODO: This may change with STI experiment.
-
-  # private
-
-  # def associated_with_student_order_or_user_order
-  #   unless (self.student_order || self.user_order) && !(self.student_order && self.user_order)
-  #     errors.add(:base, 'Order must be associated with a student_order or a user_order, but not both.')
-  #   end
-  # end
 end
