@@ -10,22 +10,22 @@ class OrderedMenuItem < ActiveRecord::Base
   validates :menu_item_id, :presence => true
   validates :quantity, :presence => true, :numericality => true
 
-  # before_save :calculate_total
-  # before_save :update_order_total_if_total_changed
+  before_save :calculate_total
   after_destroy :destroy_order_unless_ordered_menu_items
 
   def calculate_total
     self.total = self.menu_item.price * self.quantity
   end
 
-  def update_order_total_if_total_changed
-    if total_changed?
-      diff = total - total_was
-      order.change_total_by(diff)
-    end
-  end
-
   def destroy_order_unless_ordered_menu_items
     order.destroy_unless_ordered_menu_items
+  end
+
+  def get_account
+    if order.student
+      order.student.account
+    elsif order.user
+      order.user.account
+    end
   end
 end

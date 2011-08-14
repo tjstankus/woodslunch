@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe 'Student orders' do
 
+  # For number_to_currency
+  include ActionView::Helpers::NumberHelper
+
   # Setup an account with a user and associated student
   let!(:account) { Factory(:account) }
   let!(:user) { Factory(:user, :account => account) }
@@ -130,7 +133,13 @@ describe 'Student orders' do
 
       it 'sets order_id for OrderedMenuItem'
 
-      it 'updates account balance by the price of the ordered menu item'
+      it 'updates account balance by the price of the ordered menu item' do
+        click_button 'Place Order'
+        current_path.should == root_path
+        OrderedMenuItem.count.should == 1
+        ordered_menu_item = OrderedMenuItem.first
+        page.should have_css('div#balance', :text => number_to_currency(ordered_menu_item.menu_item.price))
+      end
     end
 
     context 'multiple menu items for one day' do
@@ -231,6 +240,30 @@ describe 'Student orders' do
           expect {
             click_button 'Place Order'
           }.to change { ordered_menu_item.reload.quantity }.from(1).to(2)
+        end
+
+        it 'should update the ordered menu item total' do
+          visit student_orders_path(student, :month => month, :year => year)
+          within('#12') do
+            within("div#ordered_menu_item_#{ordered_menu_item.id}") do
+              select '2'
+            end
+          end
+          expect {
+            click_button 'Place Order'
+          }.to change { ordered_menu_item.reload.total }
+        end
+
+        it 'displays updated the account balance' do
+          visit student_orders_path(student, :month => month, :year => year)
+          within('#12') do
+            within("div#ordered_menu_item_#{ordered_menu_item.id}") do
+              select '2'
+            end
+          end
+          click_button 'Place Order'
+          current_path.should == root_path
+          page.should have_css('#balance', :text => number_to_currency(ordered_menu_item.reload.total))
         end
       end
 
