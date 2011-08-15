@@ -22,7 +22,7 @@ class AccountRequest < ActiveRecord::Base
       transition [:pending] => :approved
     end
 
-    # TODO: Spec and implement
+    # TODO: Spec and implement. For now decline/denied account requests get destroyed.
     # event :decline do
     #   transition [:pending] => :declined
     # end

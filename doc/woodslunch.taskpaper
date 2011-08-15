@@ -1,14 +1,16 @@
+- Seed menu @done(2011-08-15)
+- Add preferred_grade to users.
+- Redeploy from scratch.
 - Days that are not orderable because they are in the past should not be editable, they should be read-only.
-	- Student orders specs for that
 - User ordering
-- Get Emily account for screenshots.
+- Betterify dashboard
+- Payment entering (manually)
 - Paypal integration
 - Charge 2.5% per transaction, don't worry about the $.30.
 - Screenshots or video needed by Friday the 19th.
 	- Just show them on the 19th. Perhaps allow for account requests if we are online.
 	q1w2e3
 - Figure out how to ensure order_id is set for ordered_menu_item without screwing up accepts_nested_attributes_for. @later
-- Figure out what's wrong with sticky footer.
 7/26 Meeting Notes:
 Cutoff for first month of year, then open it up.
 Days off:
@@ -22,7 +24,6 @@ Days off:
 Misc:
 	- Identify big picture tasks
 		- Go through Basecamp
-			Quantity field for student orders
 			Order for account users
 			Payments
 			Holidays and days off
@@ -30,7 +31,7 @@ Misc:
 			Reports
 		- Go through Dev notes
 	- Users listing
-		- Ability to make someone an admin @priority
+		- Ability to make someone an admin
 	- Staging app for Heroku.
 	- Also convert menu_items listing to use .listing_item classes in _application.scss and remove the .menu_item item stuff in _admin.scss
 	- Change error_messages_for to error_notification. The html should be such that the browser catches the errors if possible.
@@ -50,7 +51,6 @@ AccountRequests:
 					- @q Does new relic provide exception notifications
 				- Integrate http://rubygems.org/gems/exception_notification
 	- Email gets sent upon successful activation. Actually, after activation, need to redirect to screen to setup password (with confirmation), then automatically log in.
-	- Deny action @priority
 	- Activate
 		GET account_requests/activate/:token
 		Matches token against account requests in the pending 
@@ -81,6 +81,10 @@ Later:
 		When you pay have option to add money for a la carte, purchase grocery card.
 		Paypal Basic account has shopping cart which might be useful for this stuff.
 Archive:
+	Quantity field for student orders @done(2011-08-15) @project(Misc)
+	- Deny action @priority @done(2011-08-15) @project(AccountRequests)
+	- Figure out what's wrong with sticky footer. @done(2011-08-15)
+	- Get Emily account for screenshots. @done(2011-08-15)
 	- Dashboard placeholder for August 22 if not admin. @done(2011-08-15)
 	- Deny account request destroys it. @done(2011-08-15)
 	- Home page @done(2011-08-14)
