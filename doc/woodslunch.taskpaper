@@ -1,19 +1,14 @@
-- Seed menu @done(2011-08-15)
-- Add preferred_grade to users. @done(2011-08-15)
-- Redeploy from scratch.
-- Send email to Emily.
-- Days that are not orderable because they are in the past should not be editable, they should be read-only.
 - User ordering
 - Betterify dashboard
+- Reports
 - Payment entering (manually)
+- Days that are not orderable because they are in the past should not be editable, they should be read-only.
 - Paypal integration
-- Charge 2.5% per transaction, don't worry about the $.30.
+	- Charge 2.5% per transaction, don't worry about the $.30.
 - Screenshots or video needed by Friday the 19th.
 	- Just show them on the 19th. Perhaps allow for account requests if we are online.
 	q1w2e3
 - Figure out how to ensure order_id is set for ordered_menu_item without screwing up accepts_nested_attributes_for. @later
-7/26 Meeting Notes:
-Cutoff for first month of year, then open it up.
 Days off:
 	- Specs in student order spec
 		Now that each day is not necessarily mapped to an Order object, it doesn't make sense to return order instances. Instead probably want to give back some sort of wrapper. Not sure what to call it, something like DayWrapper or simply Day, maybe DayOfMonth. It could also be a simple struct that holds data for the day (with the day of the month so we don't have to keep querying order.served_on.day), the day of week name (for the html class attribute), and a method that responds to what kind of thing it is, sort of the way a Mime::Type works, perhaps partial_name, that way we can drive the partial that's rendered based on that method day_of_month.name_for_partial and we can hide the messy type checking in there. Actually we can avoid type checking by just querying, e.g., day.order? which calls day.order, returns true/false based on whether that object is nil. Do the same thing for day_off. Also, should provide a method that returns the object needed for the partial, object_for_partial.
@@ -27,7 +22,6 @@ Misc:
 		- Go through Basecamp
 			Order for account users
 			Payments
-			Holidays and days off
 			Better styles
 			Reports
 		- Go through Dev notes
@@ -58,11 +52,6 @@ AccountRequests:
 	- AccountRequest submitted for pending AccountRequest#email request displays "There is a pending account request for #{email}."
 	- AccountRequest submitted for denied AccountRequest#email creates a new AccountRequest in pending state.
 	- Email must be unique for pending AccountRequests.
-	- State machine for AccountRequest#state: pending, approved, denied
-		pending -> approved, then account gets created and AccountRequest is destroyed
-		pending -> denied
-		denied -> pending
-		state_machine gem (from pluginaweek) is recommended
 	- Email must be unique for accounts, so when 
 	- Resend email. Can we do this with sendgrid?
 AccountInvitation:
@@ -82,6 +71,11 @@ Later:
 		When you pay have option to add money for a la carte, purchase grocery card.
 		Paypal Basic account has shopping cart which might be useful for this stuff.
 Archive:
+	- State machine for AccountRequest#state: pending, approved, denied @done(2011-08-15) @project(AccountRequests)
+	- Seed menu @done(2011-08-15)
+	- Add preferred_grade to users. @done(2011-08-15)
+	- Redeploy from scratch. @done(2011-08-15)
+	- Send email to Emily. @done(2011-08-15)
 	Quantity field for student orders @done(2011-08-15) @project(Misc)
 	- Deny action @priority @done(2011-08-15) @project(AccountRequests)
 	- Figure out what's wrong with sticky footer. @done(2011-08-15)
