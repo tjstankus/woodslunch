@@ -37,7 +37,7 @@ class Order < ActiveRecord::Base
           prepend_nils_for_weekdays_before_first_of_month(arr, date, first_of_month)
 
           if !AppConfig.orderable_date?(date)
-            arr.last << Day.new(date, nil, 'unorderable_date')
+            arr.last << Day.new(date, nil, 'orders/unorderable_date')
           else
             if day_off = DayOff.for_date(date)
               arr.last << Day.new(date, day_off)

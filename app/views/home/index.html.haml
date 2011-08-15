@@ -4,7 +4,11 @@
       Online ordering will go live on August 22nd. The first day of full lunch service is August 29th.
   - else
     - current_user.students.each do |student|
-      = link_to_current_student_order(student)
+      .student_order_link
+        = link_to_current_student_order(student)
+    - current_user.account.users.each do |user|
+      .user_order_link
+        = link_to_current_user_order(user)
     - if current_user.students.any?
       #balance
         = number_to_currency(current_user.account.balance)

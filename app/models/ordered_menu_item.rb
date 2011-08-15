@@ -21,10 +21,11 @@ class OrderedMenuItem < ActiveRecord::Base
     order.destroy_unless_ordered_menu_items
   end
 
+  # TODO: respond_to is a code smell
   def account
-    @account ||= if order.student
+    @account ||= if order.respond_to?(:student)
       order.student.account
-    elsif order.user
+    elsif order.respond_to?(:user)
       order.user.account
     end
   end
