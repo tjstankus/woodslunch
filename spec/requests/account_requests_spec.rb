@@ -203,7 +203,7 @@ describe "Account requests" do
       # When I go to the account requests listing
       visit account_requests_path
 
-      # And I clock on the "Approve" button
+      # And I click on the "Approve" button
       within("div#pending div#account_request_#{@account_request.id}") do
         click_button 'Approve'
       end
@@ -219,6 +219,38 @@ describe "Account requests" do
       # And I should see the account request listed under 'Approved'
       page.should have_css('div#approved span.user_info',
           :text => "#{@account_request.full_name}")
+    end
+  end
+
+  describe 'deny' do
+
+    before(:each) do
+      # Given an account request
+      @account_request = Factory(:account_request)
+      # And I am logged in as an admin
+      @admin = Factory(:admin)
+      sign_in_as(@admin)
+    end
+
+    it 'destroys the record' do
+      pending 'need to handle JavaScript confirmation dialog'
+      # When I go to the account requests listing
+      visit account_requests_path
+
+      # And I click on the "Approve" button
+      within("div#pending div#account_request_#{@account_request.id}") do
+        click_link 'Deny'
+      end
+
+      # Then I should be back on the account requests listing page
+      current_path.should == account_requests_path
+
+      # And I should see a flash notice
+      flash_notice = "Account request for #{@account_request.email} has been removed."
+      page.should have_css('div#notice', :text => flash_notice)
+
+      # And I should not see the account request listed
+      page.should_not have_css("div#account_request_#{@account_request.id}")
     end
   end
 end
