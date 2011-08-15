@@ -1,4 +1,3 @@
-- Dashboard placeholder for August 22 if not admin.
 - Days that are not orderable because they are in the past should not be editable, they should be read-only.
 	- Student orders specs for that
 - User ordering
@@ -82,6 +81,7 @@ Later:
 		When you pay have option to add money for a la carte, purchase grocery card.
 		Paypal Basic account has shopping cart which might be useful for this stuff.
 Archive:
+	- Dashboard placeholder for August 22 if not admin. @done(2011-08-15)
 	- Deny account request destroys it. @done(2011-08-15)
 	- Home page @done(2011-08-14)
 	- Account request page @done(2011-08-14)
