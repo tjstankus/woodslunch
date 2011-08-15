@@ -81,10 +81,20 @@ body {
 }
 
 footer, .push {
+  height: $footer_height;
   background: {
     color: #1e0e02;
   }
-  height: $footer_height;
+}
+.push {
+  background: {
+    image: url('/images/bg_wrapper.jpg');
+    repeat: repeat-y;
+  }
+}
+
+footer {
+  display: block;
 }
 
 #footer_content {
@@ -187,7 +197,38 @@ a {
   background-color: $listing_even_bg;
 }
 
+/* home page */
+
+#not_signed_in {
+  padding: 60px 0 0 0;
+  text-align: center;
+  a.button {
+    @include fancy-button(#9E5B28, 30px);
+  }
+  #or {
+    font-size: 18px;
+    margin: 20px 0;
+  }
+  #note {
+    color: #666;
+    font-size: 14px;
+    margin: 40px auto 0 auto;
+    text-align: center;
+    width: 360px;
+  }
+}
+
+/* account request */
+
+#account_request.actions {
+  input[type="submit"] {
+    float: right;
+  }
+}
+
+
 /* account activation */
+
 h3.activation {
   margin: 0 0 30px 0;
 }
