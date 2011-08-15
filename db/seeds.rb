@@ -8,48 +8,58 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-admin_email = "admin@example.com"
-unless User.find_by_email(admin_email)
-  u = User.new(:email => admin_email, :password => 'secret')
-  u.account = Account.create
-  u.roles = [:admin]
-  u.first_name = 'Admin'
-  u.last_name = 'Example'
-  u.save!
-end
+unless Rails.env.production?
 
-email = 'user@example.com'
-user = User.find_by_email(email)
-unless user
-  account = Account.create!
-  user = User.new(:email => email, :password => 'secret')
-  user.account = account
-  user.first_name = 'User'
-  user.last_name = 'Example'
-  user.save!
-  student = Student.find_or_create_by_first_name_and_last_name_and_grade(
-      'John', 'Doe', 'K', :account_id => account.id)
-  student.save!
-end
+  admin_email = "admin@example.com"
+  unless User.find_by_email(admin_email)
+    u = User.new(:email => admin_email, :password => 'secret')
+    u.account = Account.create
+    u.roles = [:admin]
+    u.first_name = 'Admin'
+    u.last_name = 'Example'
+    u.save!
+  end
 
-(1..5).each do |i|
-  user_email = "user#{i}@example.com"
-
-  unless User.find_by_email(user_email)
-    account = Account.create
-    user = User.new(:email => user_email, :password => "secret#{i}")
-    user.first_name = Faker::Name.first_name
-    user.last_name = Faker::Name.last_name
+  email = 'user@example.com'
+  user = User.find_by_email(email)
+  unless user
+    account = Account.create!
+    user = User.new(:email => email, :password => 'secret')
     user.account = account
-    user.roles = [:admin]
+    user.first_name = 'User'
+    user.last_name = 'Example'
     user.save!
-
-    first_name = Faker::Name.first_name
-    last_name = Faker::Name.last_name
     student = Student.find_or_create_by_first_name_and_last_name_and_grade(
-        first_name, last_name, 'K', :account_id => account.id)
+        'John', 'Doe', 'K', :account_id => account.id)
     student.save!
   end
+
+  (1..5).each do |i|
+    user_email = "user#{i}@example.com"
+
+    unless User.find_by_email(user_email)
+      account = Account.create
+      user = User.new(:email => user_email, :password => "secret#{i}")
+      user.first_name = Faker::Name.first_name
+      user.last_name = Faker::Name.last_name
+      user.account = account
+      user.save!
+
+      first_name = Faker::Name.first_name
+      last_name = Faker::Name.last_name
+      student = Student.find_or_create_by_first_name_and_last_name_and_grade(
+          first_name, last_name, 'K', :account_id => account.id)
+      student.save!
+    end
+  end
+
+  acc_req = AccountRequest.find_or_create_by_email('marge.simpson@example.com',
+      :first_name => 'Marge', :last_name => 'Simpson')
+  RequestedStudent.find_or_create_by_first_name_and_last_name(
+      'Bart', 'Simpson', :grade => '4', :account_request => acc_req)
+  RequestedStudent.find_or_create_by_first_name_and_last_name(
+      'Lisa', 'Simpson', :grade => '2', :account_request => acc_req)
+
 end
 
 DayOfWeek::NAMES.each do |day_name|
@@ -101,9 +111,3 @@ menu_items_by_day.each do |day_name, item_names|
   end
 end
 
-acc_req = AccountRequest.find_or_create_by_email('marge.simpson@example.com',
-    :first_name => 'Marge', :last_name => 'Simpson')
-RequestedStudent.find_or_create_by_first_name_and_last_name(
-    'Bart', 'Simpson', :grade => '4', :account_request => acc_req)
-RequestedStudent.find_or_create_by_first_name_and_last_name(
-    'Lisa', 'Simpson', :grade => '2', :account_request => acc_req)
