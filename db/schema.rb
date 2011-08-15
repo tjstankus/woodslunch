@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(:version => 20110711120635) do
     t.string   "last_sign_in_ip"
     t.integer  "roles_mask"
     t.integer  "account_id"
+    t.string   "preferred_grade"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

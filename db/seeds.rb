@@ -20,7 +20,7 @@ end
 
 email = 'user@example.com'
 user = User.find_by_email(email)
-unless user                        
+unless user
   account = Account.create!
   user = User.new(:email => email, :password => 'secret')
   user.account = account
@@ -43,7 +43,7 @@ end
     user.account = account
     user.roles = [:admin]
     user.save!
-    
+
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
     student = Student.find_or_create_by_first_name_and_last_name_and_grade(
@@ -61,34 +61,33 @@ menu_items_by_day = {
     'Hamburger',
     'Cheeseburger',
     'Hot Dog',
-    'Veggie Burger',
-    'Entrée Salad',
-    'Cali Sushi Roll',
-    'Veggie Sushi Roll'
+    'Grilled Cheese',
+    'California Roll',
+    'Veggie Roll'
   ],
   'Tuesday' =>  [
-    'Chicken Fajitas',
-    'Indian Chicken',
     'Indian Veggie',
-    'Grilled Cheese',
-    'Chile con Queso'
+    'Curry Chicken',
+    'Cheese Quesadilla',
+    'Beef Quesadilla',
+    'Chicken Quesadilla',
   ],
   'Wednesday' => [
-    'Chick-fil-A Sandwich',
     'Chick-fil-A Nuggets',
-    'Entrée Salad'
+    'Chick-fil-A Sandwich',
+    'Salad'
   ],
   'Thursday' => [
     'Italian Sub',
     'Club Sub',
     'Turkey Sub',
-    'Veggie Sub',
+    'Pulled BBQ Sandwich',
     'Cheese Burrito'
   ],
   'Friday' => [
     'Cheese Pizza',
     'Pepperoni Pizza',
-    'Entrée Salad'
+    'Salad'
   ]
 }
 

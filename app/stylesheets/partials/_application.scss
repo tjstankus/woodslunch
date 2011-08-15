@@ -155,6 +155,13 @@ a {
   border: 1px solid #b20000;
 }
 
+/* buttons */
+
+a.alert.button {
+  color: #fff;
+  @include fancy-button(#ff0000, 13px);
+}
+
 /* listings */
 
 .listing_header {
