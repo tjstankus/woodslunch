@@ -56,8 +56,6 @@ describe 'Accounts' do
       path_params = {:year => '2011', :month => '5'}
       visit new_student_order_path(student, path_params)
 
-      puts page.body
-
       # And I place a lunch order for one item
       within('.monday') do
         within('div[data-index="0"]') do

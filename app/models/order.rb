@@ -114,6 +114,11 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def self.create_order?(ordered_menu_items_attributes)
+    atts = ordered_menu_items_attributes.values
+    !(atts.collect{|h| h['quantity']}.all?{|q| q.empty?})
+  end
+
   # def update_total_and_account_balance
   #   self.total = self.ordered_menu_items.collect(&:total).inject(0) { |sum, n| sum + n }
   #   if total_changed?

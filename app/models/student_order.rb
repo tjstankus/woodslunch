@@ -13,16 +13,11 @@ class StudentOrder < Order
     params.values.each do |atts|
       order_id = atts.delete(:id)
       if order_id.blank?
-        StudentOrder.create!(atts) if create_student_order?(atts[:ordered_menu_items_attributes])
+        StudentOrder.create!(atts) if create_order?(atts[:ordered_menu_items_attributes])
       else
         StudentOrder.find(order_id).update_attributes!(atts)
       end
     end
-  end
-
-  def self.create_student_order?(ordered_menu_items_attributes)
-    atts = ordered_menu_items_attributes.values
-    !(atts.collect{|h| h['quantity']}.all?{|q| q.empty?})
   end
 
 end
