@@ -10,6 +10,11 @@ class UserOrdersController < ApplicationController
     @days_by_week = UserOrder.days_for_month_and_year_by_weekday(params[:month], params[:year], @user.id)
   end
 
+  def create
+    UserOrder.create_or_update_via_params(params[:user_orders])
+    redirect_to root_path, :notice => "Successfully placed order for #{@user.name}."
+  end
+
   private
 
   def get_user
