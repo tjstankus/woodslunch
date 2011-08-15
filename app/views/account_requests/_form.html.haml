@@ -18,7 +18,6 @@
       = requested_students_form.input :last_name
       = requested_students_form.input :grade, :collection => Student::GRADES
 
-  = link_to 'Add a student', '#', :id => 'add_student'
-
-  .actions
+  #account_request.actions
+    = link_to 'Add another student', '#', :id => 'add_student'
     = f.submit 'Submit Request'
