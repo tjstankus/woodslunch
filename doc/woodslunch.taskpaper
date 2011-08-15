@@ -1,3 +1,4 @@
+- Deny account request destroys it.
 - Clean up all screens that need screenshots per document.
 	- Home page @done(2011-08-14)
 	- Account request page @done(2011-08-14)
