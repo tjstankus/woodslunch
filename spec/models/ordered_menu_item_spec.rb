@@ -14,19 +14,19 @@ describe OrderedMenuItem do
     end
   end
 
-  # describe '#total' do
-  #   it 'defaults to 0' do
-  #     Factory.build(:ordered_menu_item).total.should == 0
-  #   end
-  # end
+  describe '#total' do
+    it 'defaults to 0' do
+      Factory.build(:ordered_menu_item).total.should == 0
+    end
+  end
 
-  # describe '#calculate_total' do
-  #   it 'gets called on save' do
-  #     omi = Factory.build(:ordered_menu_item)
-  #     omi.should_receive(:calculate_total).once
-  #     omi.save
-  #   end
-  # end
+  describe '#calculate_total' do
+    it 'gets called on save' do
+      omi = Factory.build(:ordered_menu_item)
+      omi.should_receive(:calculate_total).once
+      omi.save
+    end
+  end
 
   # describe '#update_order_total_if_total_changed' do
   #   it 'gets called once on save' do

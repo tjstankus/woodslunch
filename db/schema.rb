@@ -75,9 +75,9 @@ ActiveRecord::Schema.define(:version => 20110711120635) do
 
   create_table "orders", :force => true do |t|
     t.date     "served_on"
-    t.integer  "student_order_id"
-    t.integer  "user_order_id"
-    t.decimal  "total",            :precision => 5, :scale => 2, :default => 0.0
+    t.integer  "student_id"
+    t.integer  "user_id"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -87,14 +87,6 @@ ActiveRecord::Schema.define(:version => 20110711120635) do
     t.string  "first_name"
     t.string  "last_name"
     t.string  "grade"
-  end
-
-  create_table "student_orders", :force => true do |t|
-    t.date     "starts_on"
-    t.date     "ends_on"
-    t.integer  "student_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "students", :force => true do |t|

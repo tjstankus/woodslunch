@@ -1,12 +1,15 @@
-- STI experiment
-- Account balance.
-- Application configuration (database-backed) for setting first and last order dates.
+- Clean up all screens that need screenshots per document.
+	- Home page @done(2011-08-14)
+	- Account request page @done(2011-08-14)
+	- Dashboard
+- Get Emily account for screenshots.
+- Days that are not orderable because they are in the past should not be editable, they should be read-only.
+	- Student orders specs for that
+- Paypal integration
 - Charge 2.5% per transaction, don't worry about the $.30.
 - Screenshots or video needed by Friday the 19th.
 	- Just show them on the 19th. Perhaps allow for account requests if we are online.
 	q1w2e3
-- Back to school checklist that includes setting up your Woods Lunch account.
-- What happens if someone hits the activation URL more than once?
 - Figure out how to ensure order_id is set for ordered_menu_item without screwing up accepts_nested_attributes_for. @later
 - Figure out what's wrong with sticky footer.
 7/26 Meeting Notes:
@@ -81,6 +84,17 @@ Later:
 		When you pay have option to add money for a la carte, purchase grocery card.
 		Paypal Basic account has shopping cart which might be useful for this stuff.
 Archive:
+	- Application configuration (database-backed) for setting first and last order dates. @done(2011-08-14)
+	- Previous and next months order form links @done(2011-08-14)
+	- Day off tests @done(2011-08-14)
+	- What happens if someone hits the activation URL more than once? @done(2011-08-14)
+		It will give an error, which is fine at this point @done(2011-08-14)
+	- Go through specs carefully and see what's commented out that we might need. @done(2011-08-13)
+	- Account balance (see dev notes) @done(2011-08-14)
+		- Looks good. Need spec for destroy. @done(2011-08-14)
+		- Peruse through account balance-related specs @done(2011-08-14)
+			- Get rid of total field for Order and remove any specs. Or move them @done(2011-08-14)
+	- STI experiment @done(2011-08-13)
 	- Edit order @done(2011-08-13)
 		- The first thing to figure out is whether or not it's a good idea to have the urls like I have them. And it's probably not. @done(2011-08-13)
 		- Route to edit when an order exists. @done(2011-08-13)

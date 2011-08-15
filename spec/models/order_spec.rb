@@ -4,28 +4,6 @@ describe Order do
   it { should have_many(:menu_items).through(:ordered_menu_items) }
   it { should validate_presence_of(:served_on) }
 
-  describe 'factory' do
-
-    it 'should be valid' do
-      Factory.build(:order).should be_valid
-    end
-
-    it 'should save without error' do
-      lambda {
-        Factory.build(:order).save!
-      }.should_not raise_error
-    end
-  end
-
-  # TODO: This may change with STI experiment
-  # it 'should belong to student_order or user_order' do
-  #   lambda {
-  #     Factory(:order, :student_order => nil, :user_order => nil)
-  #   }.should raise_error
-  # end
-
-  it 'should raise error when associated with student_order and user_order'
-
   describe '#day_of_week_served_on' do
 
     it 'returns correct day of week' do
@@ -37,9 +15,10 @@ describe Order do
       date = Date.civil(year, month, first_weekday)
       day_name = date.strftime('%A')
       day_of_week = DayOfWeek.find_by_name(day_name)
-      order = Factory.build(:order, :served_on => date)
+      order = Order.new(:served_on => date)
       order.day_of_week_served_on.should == day_of_week
     end
+
   end
 
   describe 'available_menu_items' do
@@ -51,7 +30,7 @@ describe Order do
           arr << Factory(:daily_menu_item, :day_of_week => day_of_week)
         end
       end
-      @order = Factory(:order, :served_on => today)
+      @order = Factory(:student_order, :served_on => today)
     end
 
     it 'returns all menu items available on served_on date' do
@@ -73,7 +52,7 @@ describe Order do
       it 'preserves record' do
         lambda {
           order.destroy_unless_ordered_menu_items
-        }.should_not change {Order.count}
+        }.should_not change { Order.count }
       end
 
       it 'destroys order when ordered_menu_items are empty' do
@@ -83,73 +62,4 @@ describe Order do
       end
     end
   end
-
-  # describe '#total' do
-  #   it 'defaults to 0' do
-  #     Factory(:order).total.should == 0
-  #   end
-  # end
-
-  # describe '#update_total_and_account_balance' do
-  #   let(:price) { 4.00 }
-  #   let(:order) { Factory(:order) }
-  #   let(:menu_item) { Factory(:menu_item, :price => price) }
-  #   let(:ordered_menu_item) { Factory(:ordered_menu_item, :menu_item => menu_item, :order => order) }
-
-  #   it 'updates the account balance' do
-  #     lambda {
-  #       order.update_total_and_account_balance
-  #     }.should change { order.student.account.balance }.from(0).to(ordered_menu_item.menu_item.price)
-  #   end
-
-  #   context 'given quantity > 1 for associated ordered_menu_item' do
-  #     it 'equals associated ordered menu item quantity * menu item price' do
-  #       quantity = 2
-  #       ordered_menu_item.quantity = quantity
-  #       ordered_menu_item.save
-  #       order.update_total_and_account_balance
-  #       order.total.should == menu_item.price * quantity
-  #     end
-  #   end
-
-  #   context 'when the order total has decreased' do
-  #     it 'updates the account balance' do
-  #       ordered_menu_item2 = Factory(:ordered_menu_item, :menu_item => menu_item, :order => order, :quantity => 2)
-  #       order.update_total_and_account_balance
-  #       ordered_menu_item2.quantity = 1
-  #       ordered_menu_item2.save!
-  #       order.update_total_and_account_balance
-  #       order.total.should == price * 2
-  #       order.student.account.balance.should == price * 2
-  #     end
-  #   end
-
-  #   context 'when the order total has not changed' do
-
-  #     it 'does not update the account balance' do
-  #       account = order.student.account
-  #       account.should_not_receive(:change_balance_by)
-  #       order.save
-  #       account.reload.balance.should == 0
-  #     end
-  #   end
-  # end
-
-  # describe '#update_account_balance_if_total_changed' do
-
-  #   let(:order) { Factory.build(:order) }
-
-  #   it 'gets called on save' do
-  #     order.should_receive(:update_account_balance_if_total_changed).once
-  #     order.save
-  #   end
-
-  #   it 'calls account.change_balance_by on save when total changed' do
-  #     order.total.should == 0
-  #     order.total += 1
-  #     account = order.get_account
-  #     account.should_receive(:change_balance_by).once
-  #     order.save
-  #   end
-  # end
 end

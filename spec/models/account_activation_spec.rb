@@ -86,5 +86,4 @@ describe AccountActivation do
     end
   end
 
-
 end
