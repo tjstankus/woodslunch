@@ -7,8 +7,13 @@
       = number_to_currency(current_user.account.balance)
 
 - else
-  :markdown
-    Welcome to the [Woods Charter School](http://woodscharter.org/) lunch ordering
-    program. If you already have an account, please [sign in](/users/sign_in). If
-    you have a student at Woods and would like to use this online ordering system,
-    you may [request an account](/account_requests/new).
+  #not_signed_in
+    #sign_in
+      = link_to('Sign in', new_user_session_path, :class => 'button')
+    #or or
+    #request_account
+      = link_to("Request an account", new_account_request_path, :class => 'button')
+    #note
+      This application is for use by parents/guardians and staff of Woods Charter School.
+      Account requests are subject to approval.
+
