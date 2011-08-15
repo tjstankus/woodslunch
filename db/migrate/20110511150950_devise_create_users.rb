@@ -15,6 +15,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       t.integer :roles_mask
       t.integer :account_id
+      t.string :preferred_grade
       t.timestamps
     end
 

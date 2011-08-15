@@ -1,6 +1,7 @@
 - Seed menu @done(2011-08-15)
-- Add preferred_grade to users.
+- Add preferred_grade to users. @done(2011-08-15)
 - Redeploy from scratch.
+- Send email to Emily.
 - Days that are not orderable because they are in the past should not be editable, they should be read-only.
 - User ordering
 - Betterify dashboard
