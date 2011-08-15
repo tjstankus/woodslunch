@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
       :first_name, :last_name, :account_id
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   def students
     self.account.students
   end

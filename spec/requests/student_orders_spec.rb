@@ -39,7 +39,7 @@ describe 'Student orders' do
   describe 'GET form' do
 
     it 'displays the student name' do
-      # When I visit the new student order page
+      # When I visit the student order form
       visit student_orders_path(student, :year => year, :month => month)
 
       # Then I should see the student name

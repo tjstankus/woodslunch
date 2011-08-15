@@ -4,6 +4,9 @@ Woodslunch::Application.routes.draw do
   # first created -> highest priority.
 
   devise_for :users
+  resources :users do
+    resources :orders, :controller => 'user_orders'
+  end
 
     # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
