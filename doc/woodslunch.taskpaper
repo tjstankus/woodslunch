@@ -1,22 +1,15 @@
-- Previous and next months order form links @done(2011-08-14)
-	- StudentOrder pending request specs
-	- OrdersHelper pending specs
-- Day off tests
+- Clean up all screens that need screenshots per document.
+	- Home page @done(2011-08-14)
+	- Account request page @done(2011-08-14)
+	- Dashboard
+- Get Emily account for screenshots.
 - Days that are not orderable because they are in the past should not be editable, they should be read-only.
 	- Student orders specs for that
-- Get Emily account for screenshots.
-- Application configuration (database-backed) for setting first and last order dates.
-	AppConfig class
-	app_config table_name
-	orders_first_available_on (Set to first day lunch served)
-	orders_last_available_on	(Set to end of September for now)
-	Downside is that these are hardcode and will require database migrations every time we need to add a config variable.
 - Paypal integration
 - Charge 2.5% per transaction, don't worry about the $.30.
 - Screenshots or video needed by Friday the 19th.
 	- Just show them on the 19th. Perhaps allow for account requests if we are online.
 	q1w2e3
-- What happens if someone hits the activation URL more than once?
 - Figure out how to ensure order_id is set for ordered_menu_item without screwing up accepts_nested_attributes_for. @later
 - Figure out what's wrong with sticky footer.
 7/26 Meeting Notes:
@@ -91,6 +84,11 @@ Later:
 		When you pay have option to add money for a la carte, purchase grocery card.
 		Paypal Basic account has shopping cart which might be useful for this stuff.
 Archive:
+	- Application configuration (database-backed) for setting first and last order dates. @done(2011-08-14)
+	- Previous and next months order form links @done(2011-08-14)
+	- Day off tests @done(2011-08-14)
+	- What happens if someone hits the activation URL more than once? @done(2011-08-14)
+		It will give an error, which is fine at this point @done(2011-08-14)
 	- Go through specs carefully and see what's commented out that we might need. @done(2011-08-13)
 	- Account balance (see dev notes) @done(2011-08-14)
 		- Looks good. Need spec for destroy. @done(2011-08-14)
