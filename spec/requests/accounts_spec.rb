@@ -42,10 +42,6 @@ describe 'Accounts' do
       end
     end
 
-  end
-
-  describe 'balance' do
-
     it 'updates with lunch order' do
       pending 'Account balance work'
       # Given I am a signed in user with a student
@@ -75,6 +71,6 @@ describe 'Accounts' do
       page.should have_xpath("//div[@id='balance']",
           :text => number_to_currency(menu_item.price))
     end
-  end
 
+  end
 end
