@@ -1,0 +1,16 @@
+- ordered = ordered_menu_item.id ? true : false
+- menu_item_atts = {'data-index' => "#{i}", 'data-day' => "#{day.month_day}"}
+- menu_item_atts[:id] = "ordered_menu_item_#{ordered_menu_item.id}" if ordered
+- menu_item_atts[:class] = "existing" if ordered
+.menu_item{menu_item_atts}
+  - if ordered
+    = hidden_field_tag("[user_orders][#{day.month_day}][ordered_menu_items_attributes][#{i}][id]",
+      ordered_menu_item.id,
+      :id => "user_orders_#{day.month_day}_ordered_menu_items_attributes_#{i}_id")
+  = hidden_field_tag("[user_orders][#{day.month_day}][ordered_menu_items_attributes][#{i}][menu_item_id]",
+    menu_item.id,
+    :id => "user_orders_#{day.month_day}_ordered_menu_items_attributes_#{i}_menu_item_id")
+  = select_tag("[user_orders][#{day.month_day}][ordered_menu_items_attributes][#{i}][quantity]",
+    options_for_select((1..OrderedMenuItem::MAX_DISPLAYED_QUANTITY), ordered_menu_item.quantity),
+    {:id => "user_orders_#{day.month_day}_ordered_menu_items_attributes_#{i}_quantity", :include_blank => true})
+  = menu_item.name

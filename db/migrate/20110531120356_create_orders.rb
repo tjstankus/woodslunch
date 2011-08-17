@@ -5,6 +5,7 @@ class CreateOrders < ActiveRecord::Migration
       t.integer :student_id
       t.integer :user_id
       t.string :type
+      t.string :grade
       t.timestamps
     end
   end

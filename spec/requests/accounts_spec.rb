@@ -16,7 +16,7 @@ describe 'Accounts' do
         @student = Factory(:student, :account => @account)
       end
 
-      it 'displays balance on dashboard' do
+      it 'displays on dashboard' do
         # Given I am signed in
         sign_in_as(@user)
 
@@ -27,24 +27,6 @@ describe 'Accounts' do
         page.should have_xpath("//div[@id='balance']")
       end
     end
-
-    context 'given an account with no students' do
-
-      it 'does not display balance on dashboard' do
-        # Given I am signed in
-        sign_in_as(@user)
-
-        # When I visit the home page
-        current_path.should == root_path
-
-        # Then I should see my account balance
-        page.should have_no_xpath("//div[@id='balance']")
-      end
-    end
-
-  end
-
-  describe 'balance' do
 
     it 'updates with lunch order' do
       pending 'Account balance work'
@@ -60,8 +42,6 @@ describe 'Accounts' do
       path_params = {:year => '2011', :month => '5'}
       visit new_student_order_path(student, path_params)
 
-      puts page.body
-
       # And I place a lunch order for one item
       within('.monday') do
         within('div[data-index="0"]') do
@@ -75,6 +55,6 @@ describe 'Accounts' do
       page.should have_xpath("//div[@id='balance']",
           :text => number_to_currency(menu_item.price))
     end
-  end
 
+  end
 end

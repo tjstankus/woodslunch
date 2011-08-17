@@ -1,0 +1,16 @@
+%td{:id => day.month_day, :class => day.day_name.downcase}
+  .mday= day.month_day
+  = fields_for "user_orders[#{day.month_day}]", user_order do |f|
+    = f.hidden_field :id
+    = f.hidden_field :user_id
+    = f.hidden_field :served_on
+
+    - user_order.available_menu_items.each_with_index do |menu_item, i|
+      = render :partial => 'ordered_menu_item',
+        :locals => {:day => day, :i => i, :menu_item => menu_item},
+        :object => user_order.ordered_menu_item_for_menu_item(menu_item) || user_order.ordered_menu_items.build(:menu_item => menu_item)
+
+    %hr
+    .preferred_grade_select{:style => 'margin-top:8px'}
+      = f.select(:grade, Student::GRADES, :value => @user.preferred_grade)
+      = f.label(:grade, 'Grade')

@@ -43,6 +43,11 @@ Factory.define :student_order do |f|
   f.association :student, :factory => :student
 end
 
+Factory.define :user_order do |f|
+  f.served_on { Date.civil(2011, 9, 12) }
+  f.association :user, :factory => :user
+end
+
 Factory.define :ordered_menu_item do |f|
   f.association :order, :factory => :student_order
   f.association :menu_item, :factory => :menu_item

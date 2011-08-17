@@ -39,7 +39,7 @@ describe 'Student orders' do
   describe 'GET form' do
 
     it 'displays the student name' do
-      # When I visit the new student order page
+      # When I visit the student order form
       visit student_orders_path(student, :year => year, :month => month)
 
       # Then I should see the student name
@@ -68,6 +68,14 @@ describe 'Student orders' do
         ids_for_mondays.each do |id|
           within("td##{id}") do
             page.should have_css('select')
+          end
+        end
+      end
+
+      it 'has the grade in a hidden field' do
+        ids_for_mondays.each do |id|
+          within("td##{id}") do
+            page.should have_css("input#student_orders_#{id}_grade[type='hidden'][value='#{student.grade}']")
           end
         end
       end
