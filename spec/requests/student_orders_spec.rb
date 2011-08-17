@@ -53,6 +53,7 @@ describe 'Student orders' do
       let(:ids_for_mondays) { %w(5 12 19 26) }
 
       before(:each) do
+        configatron.orders_first_available_on = Date.parse('2011-09-01')
         visit student_orders_path(student, :year => year, :month => month)
       end
 

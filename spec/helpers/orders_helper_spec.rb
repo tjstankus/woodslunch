@@ -6,6 +6,10 @@ describe OrdersHelper do
 
     context 'given today is a weekday' do
 
+      before(:each) do
+        configatron.orders_first_available_on = Date.parse('2011-09-01')
+      end
+
       it 'returns next monday' do
         Date.stub(:today).and_return(Date.parse('2011-09-01'))
         expected_date = Date.parse('2011-09-05')
