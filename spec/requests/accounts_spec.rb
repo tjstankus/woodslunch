@@ -16,7 +16,7 @@ describe 'Accounts' do
         @student = Factory(:student, :account => @account)
       end
 
-      it 'displays balance on dashboard' do
+      it 'displays on dashboard' do
         # Given I am signed in
         sign_in_as(@user)
 
@@ -25,20 +25,6 @@ describe 'Accounts' do
 
         # Then I should see my account balance
         page.should have_xpath("//div[@id='balance']")
-      end
-    end
-
-    context 'given an account with no students' do
-
-      it 'does not display balance on dashboard' do
-        # Given I am signed in
-        sign_in_as(@user)
-
-        # When I visit the home page
-        current_path.should == root_path
-
-        # Then I should see my account balance
-        page.should have_no_xpath("//div[@id='balance']")
       end
     end
 
