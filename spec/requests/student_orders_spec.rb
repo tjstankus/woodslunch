@@ -73,7 +73,6 @@ describe 'Student orders' do
       end
 
       it 'has the grade in a hidden field' do
-        p page.body
         ids_for_mondays.each do |id|
           within("td##{id}") do
             page.should have_css("input#student_orders_#{id}_grade[type='hidden'][value='#{student.grade}']")
