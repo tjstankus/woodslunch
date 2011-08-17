@@ -10,8 +10,7 @@ feature 'home page' do
     end
 
     it 'displays a logged in message' do
-      page.should have_xpath("//div[@id='notice']",
-        :text => 'Signed in successfully.')
+      page.should have_xpath("//div[@id='notice']", :text => 'Signed in successfully.')
     end
 
     it 'displays user account info' do

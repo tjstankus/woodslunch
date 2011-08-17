@@ -1,7 +1,16 @@
+Initial launch:
+	- Comment out user order links
+	- Cut a release
+	- Deploy to Heroku
+	- Reset the database
+	- 
+Misc:
 http://www.stypi.com/lysi8bja
 - User ordering
+	- require grade
 - Betterify dashboard
 - Reports
+- Only index, create actions for user and student orders.
 - Payment entering (manually)
 - Days that are not orderable because they are in the past should not be editable, they should be read-only.
 - Paypal integration
@@ -67,6 +76,7 @@ Accounts/Users/Students:
 Orders:
 	- Handle errors, exceptional conditions in StudentOrdersController#create.
 	- An order must have a unique combination of student id and served_on date. In other words, there can only be one order per student per day. Enforce this in a validation.
+	- Edge case to handle. A student's grade changes and that student has yet-to-be-served lunch orders. In that case we'll need to catch that in an after update callback on student and update any orders yet to be served.
 Menu Items:
 Later:
 	- Improve number of sql statements on new order form, although it looks like most of them are coming from the cache. @later
