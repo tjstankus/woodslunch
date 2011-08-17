@@ -1,9 +1,10 @@
 Initial launch:
-	- Comment out user order links
+	- Comment out user order links @done(2011-08-17)
 	- Cut a release
 	- Deploy to Heroku
 	- Reset the database
-	- 
+	- Make myself an admin
+	- Send email to Emily
 Misc:
 http://www.stypi.com/lysi8bja
 - User ordering
