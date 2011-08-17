@@ -1,7 +1,12 @@
 - if user_signed_in?
   - if Rails.env.production? && !current_user.has_role?(:admin)
-    %p{:style => 'padding: 60px;'}
-      Online ordering will go live on August 22nd. The first day of full lunch service is August 29th.
+    %p{:style => 'padding: 30px 60px;'}
+      Lunch orders can be placed beginning 8/22, with hot catered lunches beginning on 9/6.
+      A la carte service will be available starting 8/29.
+    %p{:style => 'padding: 0 60px;'}
+      For more information on the a la carte program please contact Susan Breen at
+      = mail_to('sbreen@woodscharter.org') + '.'
+      A la carte cards are pre-purchased in $25 increments and are paid for separately from hot catered lunches.
   - else
     - current_user.students.each do |student|
       .student_order_link
