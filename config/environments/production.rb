@@ -48,7 +48,7 @@ Woodslunch::Application.configure do
   config.active_support.deprecation = :notify
 
   # Set default email host
-  config.action_mailer.default_url_options = {:host => 'woodslunch.herokuapp.com'}
+  config.action_mailer.default_url_options = {:host => 'woodslunchonline.org'}
 
   # Send email via sendgrid
   ActionMailer::Base.smtp_settings = {
