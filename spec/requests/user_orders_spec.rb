@@ -212,4 +212,93 @@ describe 'User orders' do
       end
     end
   end
+
+  describe 'updating' do
+
+    before(:each) do
+      # Given a menu item for each day of the week
+      DayOfWeek.all.each do |day_of_week|
+        Factory(:daily_menu_item, :day_of_week => day_of_week)
+      end
+      # And a second menu item for one of the days of the week
+      Factory(:daily_menu_item, :day_of_week => DayOfWeek.first)
+    end
+
+    context 'an ordered menu item' do
+
+      let!(:daily_menu_item) { Factory(:daily_menu_item, :day_of_week => DayOfWeek.first) }
+      let!(:user_order) do
+        Factory(:user_order, :user => user, :served_on => '2011-09-12')
+      end
+      let!(:ordered_menu_item) do
+        Factory(:ordered_menu_item,
+                :order => user_order,
+                :menu_item => daily_menu_item.menu_item)
+      end
+
+      context 'changing quantity from 1 to 2' do
+
+        it 'updates the quantity' do
+          visit user_orders_path(user, :month => month, :year => year)
+          within('#12') do
+            within("div#ordered_menu_item_#{ordered_menu_item.id}") do
+              select '2'
+            end
+          end
+          expect {
+            click_button 'Place Order'
+          }.to change { ordered_menu_item.reload.quantity }.from(1).to(2)
+        end
+
+        it 'should update the ordered menu item total' do
+          visit user_orders_path(user, :month => month, :year => year)
+          within('#12') do
+            within("div#ordered_menu_item_#{ordered_menu_item.id}") do
+              select '2'
+            end
+          end
+          expect {
+            click_button 'Place Order'
+          }.to change { ordered_menu_item.reload.total }
+        end
+
+        it 'displays updated the account balance' do
+          visit user_orders_path(user, :month => month, :year => year)
+          within('#12') do
+            within("div#ordered_menu_item_#{ordered_menu_item.id}") do
+              select '2'
+            end
+          end
+          click_button 'Place Order'
+          current_path.should == root_path
+          page.should have_css('#balance', :text => number_to_currency(ordered_menu_item.reload.total))
+        end
+      end
+
+      context 'changing quantity to blank' do
+
+        it 'destroys the ordered menu item' do
+          pending 'JavaScript driver'
+
+          visit user_orders_path(user, :month => month, :year => year)
+          within('#12') do
+            within("div#ordered_menu_item_#{ordered_menu_item.id}") do
+              select ''
+            end
+          end
+          expect {
+            click_button 'Place Order'
+          }.to change { OrderedMenuItem.count }.by(-1)
+        end
+
+        it 'destroys the order, since it has no ordered menu items' do
+          pending 'JavaScript driver'
+        end
+      end
+
+      context "given the order grade was not set to user's preferred grade" do
+        it "displays the order grade, not user's preferred grade"
+      end
+    end
+  end
 end

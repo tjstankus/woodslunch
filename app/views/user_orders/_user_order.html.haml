@@ -12,5 +12,6 @@
 
     %hr
     .preferred_grade_select{:style => 'margin-top:8px'}
-      = f.select(:grade, options_for_select(Student::GRADES, @user.preferred_grade))
+      = f.select(:grade,
+        options_for_select(Student::GRADES, user_order.grade || @user.preferred_grade))
       = f.label(:grade, 'Grade')

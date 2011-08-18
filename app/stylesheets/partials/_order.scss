@@ -1,9 +1,12 @@
-h1#student_name {
+h1#student_name,
+h1#user_name {
   margin: 0 0 10px 0;
   text-align: center;
 }
-h3#month_year {
+table#month_display {
   margin: 0 0 10px 0;
+}
+td#month_year {
   text-align: center;
 }
 table#monthly_order {
