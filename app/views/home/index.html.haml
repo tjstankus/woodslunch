@@ -11,7 +11,7 @@
     - current_user.students.each do |student|
       .student_order_link
         = link_to_current_student_order(student)
-    -# current_user.account.users.each do |user|
+    - current_user.account.users.each do |user|
       .user_order_link
         = link_to_current_user_order(user)
     #balance

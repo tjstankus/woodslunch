@@ -11,6 +11,6 @@ class AccountMailer < ActionMailer::Base
         :token => account_request.activation_token)
 
     mail(:to => account_request.email,
-        :subject => 'Woods Charter School Lunch Program -- Account Activation')
+        :subject => 'Woods Charter School Lunch Online -- Account Activation')
   end
 end

@@ -4,8 +4,6 @@ describe StudentOrder do
   it { should validate_presence_of(:student_id) }
   it { should belong_to(:student) }
 
-  let!(:student) { Factory(:student) }
-
   describe 'factory' do
     context 'given no args' do
       it 'builds a valid StudentOrder' do
@@ -14,34 +12,13 @@ describe StudentOrder do
     end
   end
 
-  describe '.days_for_month_and_year_by_weekday' do
-
-    let(:month) { '4' }
-    let(:year) { '2011' }
-
-    it 'returns an array of arrays' do
-      days_by_weekday = StudentOrder.days_for_month_and_year_by_weekday(month, year, student.id)
-      days_by_weekday.should be_an(Array)
-      days_by_weekday.first.should be_an(Array)
+  describe '.order_for_date' do
+    context 'given a StudentOrder for the provided date' do
+      it 'returns that StudentOrder'
     end
 
-    context 'given a Friday as the first day of the month' do
-
-      context 'the array representing the first week of the month' do
-
-        let(:week) do
-          StudentOrder.days_for_month_and_year_by_weekday(month, year, student.id).first
-        end
-
-        it 'has nils as its first four items' do
-          (0..3).each { |i| week[i].should be_nil }
-        end
-
-        it 'has a Day as its last item' do
-          week.last.should be_a(Day)
-        end
-
-      end
+    context 'given no StudentOrder for the provided date' do
+      it 'returns a new StudentOrder'
     end
   end
 
