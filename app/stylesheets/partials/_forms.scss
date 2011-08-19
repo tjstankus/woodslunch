@@ -28,6 +28,9 @@ form.simple_form {
   a.delete {
     @include fancy-button(#ff0000, 13px);
   }
+  div.actions {
+    margin: 30px 0 0 0;
+  }
 }
 
 div.nav_links {

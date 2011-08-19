@@ -162,6 +162,13 @@ a.alert.button {
   @include fancy-button(#ff0000, 13px);
 }
 
+/* general, shared styles */
+
+.note {
+  color: #666;
+  font-size: 13px;
+}
+
 /* listings */
 
 .listing_header {
@@ -216,14 +223,14 @@ a.alert.button {
     font-size: 18px;
     margin: 20px 0;
   }
-  #note {
-    color: #666;
-    font-size: 14px;
+  .note {
     margin: 40px auto 0 auto;
     text-align: center;
     width: 360px;
   }
 }
+
+
 
 /* account request */
 
