@@ -81,9 +81,18 @@ describe 'User orders' do
         user.save!
       end
 
+      let(:order_path) { user_orders_path(user, :year => year, :month => month) }
+
       it 'redirects to the account user edit page' do
-        visit user_orders_path(user, :year => year, :month => month)
+        visit order_path
         page.current_path.should == edit_account_user_path(account, user)
+      end
+
+      it 'redirects back to lunch order after user sets preferred grade' do
+        visit user_orders_path(user, :year => year, :month => month)
+        select '2', :from => 'user_preferred_grade'
+        click_button 'Submit'
+        page.current_url.should include(order_path)
       end
     end
 
