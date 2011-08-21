@@ -82,6 +82,7 @@ describe 'User orders' do
       end
 
       it 'redirects to the account user edit page' do
+        visit user_orders_path(user, :year => year, :month => month)
         page.current_path.should == edit_account_user_path(account, user)
       end
     end

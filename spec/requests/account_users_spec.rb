@@ -33,7 +33,12 @@ describe 'Account users' do
       }.to change { user.reload.preferred_grade }.from(nil).to('2')
     end
 
-    it 'displays flash notice'
+    it 'displays flash notice' do
+      visit edit_user_path(user)
+      select '2', :from => 'user_preferred_grade'
+      click_button 'Submit'
+      page.should have_css('div.flash#notice')
+    end
   end
 
 end
