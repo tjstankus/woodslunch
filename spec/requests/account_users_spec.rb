@@ -1,8 +1,9 @@
 require 'spec_helper'
 
-describe 'Users' do
+describe 'Account users' do
 
   let!(:user) { Factory(:user) }
+  let!(:account) { user.account }
 
   before(:each) do
     sign_in_as(user)
@@ -16,16 +17,14 @@ describe 'Users' do
   end
 
   describe 'PUT update' do
-    it 'redirects to root (dashboard) path' do
+
+    it 'redirects to account path' do
       visit edit_user_path(user)
       select '2', :from => 'user_preferred_grade'
       click_button 'Submit'
-      page.current_path.should == dashboard_path
+      page.current_path.should == account_path(account)
     end
 
-    it 'displays flash notice' do
-
-    end
     it 'sets preferred_grade' do
       visit edit_user_path(user)
       select '2', :from => 'user_preferred_grade'
@@ -33,11 +32,8 @@ describe 'Users' do
         click_button 'Submit'
       }.to change { user.reload.preferred_grade }.from(nil).to('2')
     end
+
+    it 'displays flash notice'
   end
 
-  describe 'GET edit security' do
-    it 'disallows viewing of other user edit pages'
-
-    it 'allows viewing of other user edit pages by admins'
-  end
 end

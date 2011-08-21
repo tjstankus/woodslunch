@@ -3,12 +3,7 @@ Woodslunch::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  devise_for :users
-  resources :users do
-    resources :orders, :controller => 'user_orders'
-  end
-
-    # Sample of regular route:
+  # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
@@ -19,7 +14,16 @@ Woodslunch::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  resources :accounts
+  devise_for :users
+  resources :users do
+    resources :orders, :controller => 'user_orders'
+  end
+
+  resources :accounts do
+    resources :users
+    resources :students
+  end
+
   resources :menu_items
   resources :days_off
 

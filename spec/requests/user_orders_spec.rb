@@ -75,6 +75,17 @@ describe 'User orders' do
       end
     end
 
+    context 'given the user does not have a preferred grade' do
+      before(:each) do
+        user.preferred_grade = nil
+        user.save!
+      end
+
+      it 'redirects to the account user edit page' do
+        page.current_path.should == edit_account_user_path(account, user)
+      end
+    end
+
     context 'given an existing order' do
 
       it 'displays quantity for ordered menu item' do

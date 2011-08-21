@@ -6,6 +6,34 @@
              new_user_password GET    /users/password/new(.:format)                                   {:action=>"new", :controller=>"devise/passwords"}
             edit_user_password GET    /users/password/edit(.:format)                                  {:action=>"edit", :controller=>"devise/passwords"}
                                PUT    /users/password(.:format)                                       {:action=>"update", :controller=>"devise/passwords"}
+                   user_orders GET    /users/:user_id/orders(.:format)                                {:action=>"index", :controller=>"user_orders"}
+                               POST   /users/:user_id/orders(.:format)                                {:action=>"create", :controller=>"user_orders"}
+                new_user_order GET    /users/:user_id/orders/new(.:format)                            {:action=>"new", :controller=>"user_orders"}
+               edit_user_order GET    /users/:user_id/orders/:id/edit(.:format)                       {:action=>"edit", :controller=>"user_orders"}
+                    user_order GET    /users/:user_id/orders/:id(.:format)                            {:action=>"show", :controller=>"user_orders"}
+                               PUT    /users/:user_id/orders/:id(.:format)                            {:action=>"update", :controller=>"user_orders"}
+                               DELETE /users/:user_id/orders/:id(.:format)                            {:action=>"destroy", :controller=>"user_orders"}
+                         users GET    /users(.:format)                                                {:action=>"index", :controller=>"users"}
+                               POST   /users(.:format)                                                {:action=>"create", :controller=>"users"}
+                      new_user GET    /users/new(.:format)                                            {:action=>"new", :controller=>"users"}
+                     edit_user GET    /users/:id/edit(.:format)                                       {:action=>"edit", :controller=>"users"}
+                          user GET    /users/:id(.:format)                                            {:action=>"show", :controller=>"users"}
+                               PUT    /users/:id(.:format)                                            {:action=>"update", :controller=>"users"}
+                               DELETE /users/:id(.:format)                                            {:action=>"destroy", :controller=>"users"}
+                 account_users GET    /accounts/:account_id/users(.:format)                           {:action=>"index", :controller=>"users"}
+                               POST   /accounts/:account_id/users(.:format)                           {:action=>"create", :controller=>"users"}
+              new_account_user GET    /accounts/:account_id/users/new(.:format)                       {:action=>"new", :controller=>"users"}
+             edit_account_user GET    /accounts/:account_id/users/:id/edit(.:format)                  {:action=>"edit", :controller=>"users"}
+                  account_user GET    /accounts/:account_id/users/:id(.:format)                       {:action=>"show", :controller=>"users"}
+                               PUT    /accounts/:account_id/users/:id(.:format)                       {:action=>"update", :controller=>"users"}
+                               DELETE /accounts/:account_id/users/:id(.:format)                       {:action=>"destroy", :controller=>"users"}
+              account_students GET    /accounts/:account_id/students(.:format)                        {:action=>"index", :controller=>"students"}
+                               POST   /accounts/:account_id/students(.:format)                        {:action=>"create", :controller=>"students"}
+           new_account_student GET    /accounts/:account_id/students/new(.:format)                    {:action=>"new", :controller=>"students"}
+          edit_account_student GET    /accounts/:account_id/students/:id/edit(.:format)               {:action=>"edit", :controller=>"students"}
+               account_student GET    /accounts/:account_id/students/:id(.:format)                    {:action=>"show", :controller=>"students"}
+                               PUT    /accounts/:account_id/students/:id(.:format)                    {:action=>"update", :controller=>"students"}
+                               DELETE /accounts/:account_id/students/:id(.:format)                    {:action=>"destroy", :controller=>"students"}
                       accounts GET    /accounts(.:format)                                             {:action=>"index", :controller=>"accounts"}
                                POST   /accounts(.:format)                                             {:action=>"create", :controller=>"accounts"}
                    new_account GET    /accounts/new(.:format)                                         {:action=>"new", :controller=>"accounts"}
@@ -34,6 +62,7 @@ new_account_request_activation GET    /account_requests/:account_request_id/acti
               account_requests GET    /account_requests(.:format)                                     {:action=>"index", :controller=>"account_requests"}
                                POST   /account_requests(.:format)                                     {:action=>"create", :controller=>"account_requests"}
            new_account_request GET    /account_requests/new(.:format)                                 {:action=>"new", :controller=>"account_requests"}
+               account_request DELETE /account_requests/:id(.:format)                                 {:action=>"destroy", :controller=>"account_requests"}
                 student_orders GET    /students/:student_id/orders(.:format)                          {:action=>"index", :controller=>"student_orders"}
                                POST   /students/:student_id/orders(.:format)                          {:action=>"create", :controller=>"student_orders"}
              new_student_order GET    /students/:student_id/orders/new(.:format)                      {:action=>"new", :controller=>"student_orders"}
@@ -49,3 +78,4 @@ new_account_request_activation GET    /account_requests/:account_request_id/acti
                                PUT    /students/:id(.:format)                                         {:action=>"update", :controller=>"students"}
                                DELETE /students/:id(.:format)                                         {:action=>"destroy", :controller=>"students"}
                           root        /(.:format)                                                     {:controller=>"home", :action=>"index"}
+                     dashboard        /(.:format)                                                     {:controller=>"home", :action=>"index"}

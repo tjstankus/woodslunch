@@ -1,0 +1,1 @@
+require 'woodslunch/security_filters'
