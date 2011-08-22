@@ -213,9 +213,19 @@ a.alert.button {
 
 /* home page */
 
+#balance, #paypal, #pay_cash_check {
+  margin: 20px 0 0 0;
+}
 #balance {
   font-weight: bold;
-  margin: 20px 0 0 0;
+}
+#pay_cash_check {
+  p {
+    padding: 10px 0;
+  }
+  #pay_cash_check_instructions {
+    display: none;
+  }
 }
 #not_signed_in {
   padding: 60px 0 0 0;
