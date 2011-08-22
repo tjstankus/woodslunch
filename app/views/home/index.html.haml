@@ -1,3 +1,6 @@
+= content_for :javascripts do
+  = javascript_include_tag 'index.js'
+
 - if user_signed_in?
   - if Rails.env.production? && !current_user.has_role?(:admin)
     %p{:style => 'padding: 30px 60px;'}
@@ -11,11 +14,23 @@
     - current_user.students.each do |student|
       .student_order_link
         = link_to_current_student_order(student)
-    -# current_user.account.users.each do |user|
+    - current_user.account.users.each do |user|
       .user_order_link
         = link_to_current_user_order(user)
     #balance
+      Account balance:
       = number_to_currency(current_user.account.balance)
+    #paypal
+      %p Paypal payments coming soon!
+    #pay_cash_check
+      = link_to 'Pay with cash or check', '#', :id => 'pay_cash_check_link'
+
+      #pay_cash_check_instructions
+        %p If paying by cash or check (make out to Woods PTSA), please send payment to school with your child in an envelope marked "PTSA Lunch Program". Alternately, you may mail payment to:
+
+        %p Woods Charter School<br />60 Woodland Grove Lane<br />P.O. Box 5008*<br />Chapel Hill, NC 27514<br />
+
+        %p *It is important that the P.O. Box 5008 appear UNDER the 60 Woodland Grove Lane street address to assure that your envelope and payment are received.
 - else
   #not_signed_in
     #sign_in
@@ -23,7 +38,7 @@
     #or or
     #request_account
       = link_to("Request an account", new_account_request_path, :class => 'button')
-    #note
+    .note
       This application is for use by parents/guardians and staff of Woods Charter School.
       Account requests are subject to approval.
 

@@ -24,17 +24,23 @@ describe "Account requests" do
       page.should have_xpath("//input[@id='account_request_last_name'][@required='required']")
     end
 
-    it 'displays required student first name' do
+    it 'displays student first name' do
+      pending 'JavaScript interaction test driver'
+      # When I click 'Add a student'
       id = 'account_request_requested_students_attributes_0_first_name'
       page.should have_xpath("//input[@id='#{id}'][@required='required']")
     end
 
-    it 'displays required student last name' do
+    it 'displays non-required student last name' do
+      pending 'JavaScript interaction test driver'
+      # When I click 'Add a student'
       id = 'account_request_requested_students_attributes_0_last_name'
       page.should have_xpath("//input[@id='#{id}'][@required='required']")
     end
 
-    it 'displays required student grade' do
+    it 'displays non-required student grade' do
+      pending 'JavaScript interaction test driver'
+      # When I click 'Add a student'
       id = 'account_request_requested_students_attributes_0_grade'
       page.should have_xpath("//select[@id='#{id}'][contains(@class, 'required')]")
     end
@@ -57,64 +63,63 @@ describe "Account requests" do
 
     context 'given valid params' do
       it 'redirects to home page with flash message' do
-        # post_via_redirect account_requests_path, valid_params
+        post_via_redirect account_requests_path, valid_params
+
+        # NOTE: The rest of this is pending JavaScript test driver
 
         # Given I go to the new account request page
-        visit new_account_request_path
+        # visit new_account_request_path
 
         # And I fill in 'Email' with 'marge.simpson@example.com'
-        fill_in 'Email', :with => 'marge.simpson@example.com'
+        # fill_in 'Email', :with => 'marge.simpson@example.com'
 
         # And I fill in 'First name' with 'Marge'
-        fill_in 'First name', :with => 'Marge'
+        # fill_in 'account_request_first_name', :with => 'Marge'
 
         # And I fill in 'Last name' with 'Simpson'
-        fill_in 'Last name', :with => 'Simpson'
+        # fill_in 'account_request_last_name', :with => 'Simpson'
 
         # And I fill in 'Student first name' with 'Bart'
-        fill_in 'account_request_requested_students_attributes_0_first_name',
-            :with => 'Bart'
+        # fill_in 'account_request_requested_students_attributes_0_first_name', :with => 'Bart'
 
         # And I fill in 'Student last name' with 'Simpson'
-        fill_in 'account_request_requested_students_attributes_0_last_name',
-            :with => 'Simpson'
+        # fill_in 'account_request_requested_students_attributes_0_last_name', :with => 'Simpson'
 
         # And I select '4' from 'Student grade'
-        select '4',
-            :from => 'account_request_requested_students_attributes_0_grade'
+        # select '4', :from => 'account_request_requested_students_attributes_0_grade'
 
         # And I click 'Submit Request'
-        click_button 'Submit Request'
+        # click_button 'Submit Request'
 
         # Then I should be redirected to the home page
-        current_path.should == root_path
+        # current_path.should == root_path
 
         # And I should see a flash message stating
         #     'Account request successfully submitted'
-        partial_flash = 'Account request successfully submitted'
-        page.should have_xpath(
-            "//div[@class='flash'][@id='notice'][text()[contains(.,'#{partial_flash}')]]")
+        # partial_flash = 'Account request successfully submitted'
+        # page.should have_xpath(
+        #     "//div[@class='flash'][@id='notice'][text()[contains(.,'#{partial_flash}')]]")
       end
     end
 
     context 'given no email parameter' do
       it 'displays error message' do
         post_via_redirect account_requests_path, valid_params['account_request'].except('email')
-        assert_select 'div#error_explanation'
+        assert_select '.error_notification'
       end
     end
 
     context 'given no first_name parameter' do
       it 'displays error message' do
         post_via_redirect account_requests_path, valid_params['account_request'].except('first_name')
-        assert_select 'div#error_explanation'
+        assert_select '.error_notification'
       end
     end
 
     context 'given no last_name parameter' do
       it 'displays error message' do
         post_via_redirect account_requests_path, valid_params['account_request'].except('last_name')
-        assert_select 'div#error_explanation'
+        assert_select '.error_notification'
       end
     end
 

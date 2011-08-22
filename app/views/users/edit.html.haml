@@ -1,0 +1,16 @@
+%h2 Edit user information
+
+= simple_form_for @user do |f|
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :email
+  = f.label :preferred_grade, 'Preferred Grade'
+  .note{:style => 'margin: 10px 0; width: 400px'}
+    %p
+      If you order lunch for yourself, this is the grade you would usually eat with.
+      It can be changed on a per-order basis, but needs to be set here for you to
+      order lunch.
+  = f.select :preferred_grade, Student::GRADES, :include_blank => true
+  .actions
+    = f.submit 'Submit'
+    = link_to 'Cancel', dashboard_path

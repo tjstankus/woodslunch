@@ -34,5 +34,3 @@ class StudentOrdersController < ApplicationController
     @presenter = OrderPresenter.new(params[:month], params[:year])
   end
 end
-
-

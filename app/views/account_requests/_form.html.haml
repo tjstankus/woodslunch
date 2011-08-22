@@ -3,7 +3,7 @@
 
 = simple_form_for(@account_request) do |f|
 
-  = error_messages_for(@account_request)
+  = f.error_notification :message => 'Please fill out all form fields, including added students.'
 
   %fieldset
     %legend Parent/Guardian
@@ -13,11 +13,11 @@
 
   %fieldset{:id => 'students'}
     %legend Students
-    = f.simple_fields_for :requested_students, @account_request.requested_students.build do |requested_students_form|
-      = requested_students_form.input :first_name
-      = requested_students_form.input :last_name
-      = requested_students_form.input :grade, :collection => Student::GRADES
+    -#= f.simple_fields_for :requested_students, @account_request.requested_students.build do |requested_students_form|
+      = requested_students_form.input :first_name, :required => false
+      = requested_students_form.input :last_name, :required => false
+      = requested_students_form.input :grade, :collection => Student::GRADES, :required => false
 
   #account_request.actions
-    = link_to 'Add another student', '#', :id => 'add_student'
     = f.submit 'Submit Request'
+    = link_to 'Add a student', '#', :id => 'add_student'

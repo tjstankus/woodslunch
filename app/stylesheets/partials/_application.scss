@@ -162,6 +162,13 @@ a.alert.button {
   @include fancy-button(#ff0000, 13px);
 }
 
+/* general, shared styles */
+
+.note {
+  color: #666;
+  font-size: 13px;
+}
+
 /* listings */
 
 .listing_header {
@@ -206,6 +213,20 @@ a.alert.button {
 
 /* home page */
 
+#balance, #paypal, #pay_cash_check {
+  margin: 20px 0 0 0;
+}
+#balance {
+  font-weight: bold;
+}
+#pay_cash_check {
+  p {
+    padding: 10px 0;
+  }
+  #pay_cash_check_instructions {
+    display: none;
+  }
+}
 #not_signed_in {
   padding: 60px 0 0 0;
   text-align: center;
@@ -216,20 +237,21 @@ a.alert.button {
     font-size: 18px;
     margin: 20px 0;
   }
-  #note {
-    color: #666;
-    font-size: 14px;
+  .note {
     margin: 40px auto 0 auto;
     text-align: center;
     width: 360px;
   }
 }
 
+
 /* account request */
 
 #account_request.actions {
-  input[type="submit"] {
+  margin: 20px 0;
+  a, input[type="submit"] {
     float: right;
+    margin: 0 0 0 20px;
   }
 }
 
