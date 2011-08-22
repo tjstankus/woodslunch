@@ -49,3 +49,16 @@ form.simple_form.menu_item {
   margin-bottom: 20px;
   background-color: #f0f0f0;
 }
+
+form {
+  input[type="submit"] {
+    @include fancy-button(#9E5B28, 13px);
+    margin: 0 15px 0 0;
+  }
+}
+
+form#user_new {
+  p {
+    margin: 10px 0;
+  }
+}
