@@ -235,8 +235,10 @@ a.alert.button {
 /* account request */
 
 #account_request.actions {
-  input[type="submit"] {
+  margin: 20px 0;
+  a, input[type="submit"] {
     float: right;
+    margin: 0 0 0 20px;
   }
 }
 

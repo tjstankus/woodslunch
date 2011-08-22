@@ -121,12 +121,11 @@ var RequestedStudent = (function() {
   //
   return {
     addFields: function () {
-      index++;
-      var html = '<hr />';
-      html += nameField(index, 'first');
+      var html = nameField(index, 'first');
       html += nameField(index, 'last');
       html += gradeField(index);
       $('fieldset#students').append(html);
+      index++;
     },
   };
 })();
@@ -135,5 +134,6 @@ $(document).ready(function() {
   $('a#add_student').click(function(e) {
     e.preventDefault();
     RequestedStudent.addFields();
+    $('a#add_student').text('Add another student')
   });
 });
