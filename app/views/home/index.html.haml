@@ -15,6 +15,7 @@
       .user_order_link
         = link_to_current_user_order(user)
     #balance
+      Account balance:
       = number_to_currency(current_user.account.balance)
 - else
   #not_signed_in
