@@ -34,8 +34,8 @@ class UserOrdersController < ApplicationController
   def redirect_unless_user_has_preferred_grade
     unless @user.preferred_grade
       session[:redirect_to_after_setting_preferred_grade] = request.fullpath
-      redirect_to edit_account_user_path(@user.account, @user,
-          :alert => "Please set a preferred grade for this user to enable lunch ordering.")
+      redirect_to edit_account_user_path(@user.account, @user),
+          :alert => "Please set a preferred grade for this user to enable lunch ordering."
     end
   end
 
