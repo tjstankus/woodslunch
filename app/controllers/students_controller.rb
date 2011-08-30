@@ -7,4 +7,8 @@ class StudentsController < InheritedResources::Base
   def create
     create!(:notice => "A new student has been successfully added to your account.") { account_path(parent) }
   end
+
+  def update
+    update!(:notice => "Student information has been successfully updated.") { account_path(parent) }
+  end
 end

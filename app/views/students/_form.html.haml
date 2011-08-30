@@ -1,4 +1,4 @@
-= simple_form_for([:account, @student]) do |f|
+= simple_form_for([@account, @student]) do |f|
   = f.input :account_id, :as => :hidden, :input_html => { :value => @account.id }
   = f.input :first_name
   = f.input :last_name
