@@ -46,4 +46,9 @@ describe 'Students' do
     current_path.should == account_path(account)
     page.should have_css("div.student span.student_info", :text => "#{student.name}, grade 2")
   end
+
+  it 'destroys a student' do
+    pending 'Will need to destroy any student orders and update balance properly.'
+  end
+
 end
