@@ -1,4 +1,2 @@
-- @accounts.each do |account|
-  %div[account]
-    - account.users.each do |user|
-      = user.name
+%h1.listing_header Accounts
+= render :partial => 'account', :collection => @accounts

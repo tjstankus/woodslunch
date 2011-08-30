@@ -1,4 +1,3 @@
-(in /Users/tstankus/code/projects/boldfacet/woods/woodslunch)
               new_user_session GET    /users/sign_in(.:format)                                        {:action=>"new", :controller=>"devise/sessions"}
                   user_session POST   /users/sign_in(.:format)                                        {:action=>"create", :controller=>"devise/sessions"}
           destroy_user_session GET    /users/sign_out(.:format)                                       {:action=>"destroy", :controller=>"devise/sessions"}
