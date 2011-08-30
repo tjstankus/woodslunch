@@ -42,20 +42,21 @@ describe 'SecurityFilters' do
       let(:resource) { double('resource') }
 
       before(:each) do
-        test_obj.stub(:resource).and_return(resource)
         current_user.stub(:has_role?).and_return(false)
       end
 
       it 'redirects if the current user is not a member of the account' do
-        current_user.should_receive(:account).and_return(0)
-        resource.should_receive(:account).and_return(1)
+        test_obj.should_receive(:resource).and_raise('some error')
+        test_obj.should_receive(:parent).and_return(nil)
+        current_user.should_receive(:account).and_return(1)
         test_obj.should_receive(:redirect_to)
         test_obj.verify_account_member
       end
 
       it 'does not redirect if the current user is a member of the account' do
-        current_user.should_receive(:account).and_return(0)
-        resource.should_receive(:account).and_return(0)
+        resource.should_receive(:is_a?).and_return(Account)
+        test_obj.should_receive(:resource).at_least(:once).and_return(resource)
+        current_user.should_receive(:account).and_return(resource)
         test_obj.should_not_receive(:redirect_to)
         test_obj.verify_account_member
       end

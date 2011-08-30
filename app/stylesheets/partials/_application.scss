@@ -168,6 +168,9 @@ a.alert.button {
   color: #666;
   font-size: 13px;
 }
+a.cancel {
+  color: #ff0000;
+}
 
 /* listings */
 
@@ -274,6 +277,13 @@ div.account {
     padding: 0 0 0 10px;
   }
   .user, .student {
-    padding: 10px;
+    padding: 10px 0 0 10px;
   }
+  .students {
+    margin: 20px 0 0 0;
+    .add_student {
+      float: right;
+    }
+  }
+
 }

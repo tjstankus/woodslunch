@@ -9,11 +9,14 @@ module Woodslunch
 
     def verify_account_member
       return true if current_user.has_role?(:admin)
-      account = resource.is_a?(Account) ? resource : resource.account
+
+      account = resource if resource && resource.is_a?(Account) rescue nil
+      unless account
+        account = parent if parent && parent.is_a?(Account) rescue nil
+      end
       unless account == current_user.account
         redirect_to root_url(:alert => "Permission denied to the requested resource.")
       end
     end
-
   end
 end
