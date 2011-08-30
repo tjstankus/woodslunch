@@ -1,0 +1,4 @@
+- @accounts.each do |account|
+  %div[account]
+    - account.users.each do |user|
+      = user.name

@@ -3,6 +3,28 @@ require 'spec_helper'
 describe 'Accounts' do
   include ActionView::Helpers::NumberHelper
 
+  describe 'GET index' do
+
+    # Given there is an account with a user
+    let!(:user) { Factory(:user) }
+    let!(:admin) { Factory(:admin) }
+
+    # And I am logged in as an admin
+    before(:each) do
+      sign_in_as(admin)
+    end
+
+    it 'displays account information' do
+
+      # When I go to the accounts index page
+      visit accounts_path
+
+      # Then I should see that account
+      page.should have_css("#account_#{user.account.id}")
+    end
+
+  end
+
   describe 'balance' do
 
     before(:each) do
