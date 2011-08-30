@@ -46,7 +46,7 @@ describe 'Accounts' do
         current_path.should == root_path
 
         # Then I should see my account balance
-        page.should have_xpath("//div[@id='balance']")
+        page.should have_css('#balance')
       end
     end
 

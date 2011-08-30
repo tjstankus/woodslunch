@@ -168,6 +168,12 @@ a.alert.button {
   color: #666;
   font-size: 13px;
 }
+a.cancel {
+  color: #ff0000;
+}
+.even {
+  background-color: $listing_even_bg;
+}
 
 /* listings */
 
@@ -211,6 +217,17 @@ a.alert.button {
   background-color: $listing_even_bg;
 }
 
+.tight_listing_item {
+    padding: 3px;
+    span.actions {
+      float: right;
+      a {
+        color: $soft_green;
+        margin: 0 8px 0 0;
+      }
+    }
+  }
+
 /* home page */
 
 .student_order_link,
@@ -247,6 +264,19 @@ a.alert.button {
     width: 360px;
   }
 }
+#dashboard {
+  h2 {
+    margin: 30px 0 10px 0;
+  }
+  #account_info {
+    .actions {
+      float: right;
+    }
+  }
+  #notes {
+    background-color: $listing_even_bg;
+  }
+}
 
 
 /* account request */
@@ -274,6 +304,13 @@ div.account {
     padding: 0 0 0 10px;
   }
   .user, .student {
-    padding: 10px;
+    padding: 10px 0 0 10px;
   }
+  .students {
+    margin: 20px 0 0 0;
+    .add_student {
+      float: right;
+    }
+  }
+
 }

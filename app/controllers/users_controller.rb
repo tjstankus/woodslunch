@@ -1,4 +1,6 @@
 class UsersController < InheritedResources::Base
+  belongs_to :account
+
   respond_to :html
 
   before_filter :authenticate_user!
@@ -10,7 +12,7 @@ class UsersController < InheritedResources::Base
         session[:redirect_to_after_setting_preferred_grade] = nil
         redir_path
       else
-        account_path(resource)
+        account_path(parent)
       end
     end
   end
