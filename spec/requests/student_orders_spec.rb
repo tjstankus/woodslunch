@@ -147,7 +147,7 @@ describe 'Student orders' do
         current_path.should == root_path
         OrderedMenuItem.count.should == 1
         ordered_menu_item = OrderedMenuItem.first
-        page.should have_css('div#balance', :text => number_to_currency(ordered_menu_item.menu_item.price))
+        page.should have_css('#balance', :text => number_to_currency(ordered_menu_item.menu_item.price))
       end
     end
 

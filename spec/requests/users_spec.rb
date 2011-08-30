@@ -19,8 +19,7 @@ describe 'Account users' do
   describe 'PUT update' do
 
     it 'redirects to account path' do
-      pending
-      visit edit_account_user_path(user)
+      visit edit_account_user_path(account, user)
       select '2', :from => 'user_preferred_grade'
       click_button 'Submit'
       page.current_path.should == account_path(account)
@@ -28,7 +27,7 @@ describe 'Account users' do
 
     it 'sets preferred_grade' do
       pending
-      visit edit_account_user_path(user)
+      visit edit_account_user_path(account, user)
       select '2', :from => 'user_preferred_grade'
       expect {
         click_button 'Submit'
@@ -37,7 +36,7 @@ describe 'Account users' do
 
     it 'displays flash notice' do
       pending
-      visit edit_account_user_path(user)
+      visit edit_account_user_path(account, user)
       select '2', :from => 'user_preferred_grade'
       click_button 'Submit'
       page.should have_css('div.flash#notice')

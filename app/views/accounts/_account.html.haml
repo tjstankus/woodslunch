@@ -1,0 +1,20 @@
+%div[account]{:class => 'listing_item ' + cycle('even', 'odd')}
+  %h2= "Account (id: #{account.id})"
+  %h3 Users
+
+  - account.users.each do |user|
+    %div[user]
+      %span.student_info
+      = "#{user.name} (#{user.email})"
+      %span.actions
+        = link_to 'Edit', edit_account_user_path(account, user)
+  .students
+    .add_student= link_to 'Add a student', new_account_student_path(account)
+    %h3 Students
+    = "No students on this account" if account.students.empty?
+    - account.students.each do |student|
+      %div[student]
+        %span.student_info
+          = "#{student.name}, grade #{student.grade}"
+        %span.actions
+          = link_to 'Edit', edit_account_student_path(account, student)
