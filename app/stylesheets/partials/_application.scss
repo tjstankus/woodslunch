@@ -317,7 +317,7 @@ div.account {
 
 /* reports */
 #reports {
-  h2#date {
+  h2 {
     margin: 20px 0 0 0;
   }
   #date_selector {
@@ -326,6 +326,9 @@ div.account {
       input#date {
         font-size: 22px;
         height: 30px;
+      }
+      input[type=submit] {
+        display: none;
       }
     }
   }

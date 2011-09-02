@@ -1,5 +1,5 @@
 #reports
   %h1 Daily Lunch Order Reports
-  - if @date
-    %h2#date= Date.parse(@date).strftime('%A, %B %e, %Y')
+  - unless @date.blank?
+    %h2= Date.parse(@date).strftime('%A, %B %e, %Y')
   = render 'date_form'
