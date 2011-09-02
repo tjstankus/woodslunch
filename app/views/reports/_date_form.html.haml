@@ -1,0 +1,12 @@
+= content_for :stylesheets do
+  = stylesheet_link_tag'jquery-ui-1.8.14.custom.css'
+
+= content_for :javascripts do
+  = javascript_include_tag 'jquery-ui-1.8.14.custom.min.js'
+  = javascript_include_tag 'reports.js'
+
+#date_selector
+  = form_tag reports_path, :method => :get do
+    - placeholder = @date ? 'Click here to change date' : 'Click here to select date'
+    = text_field_tag 'date', '', :size => 40, :placeholder => placeholder
+    = submit_tag 'View Report'
