@@ -94,4 +94,38 @@ describe Order do
       end
     end
   end
+
+  describe '#destroy' do
+    context 'with associated ordered menu items' do
+
+      let!(:ordered_menu_item) { Factory(:ordered_menu_item) }
+      let(:order) { ordered_menu_item.order }
+      let(:account) { order.student.account }
+      let(:price) { ordered_menu_item.menu_item.price }
+
+      it 'does not raise an error' do
+        lambda {
+          order.destroy
+        }.should_not raise_error
+      end
+
+      it 'destroys order' do
+        expect {
+          order.destroy
+        }.to change { Order.count }.by(-1)
+      end
+
+      it 'destroys ordered menu item' do
+        expect {
+          order.destroy
+        }.to change { OrderedMenuItem.count }.by(-1)
+      end
+
+      it 'should change account balance' do
+        expect {
+          order.destroy
+        }.to change { account.reload.balance }.by(-price)
+      end
+    end
+  end
 end
