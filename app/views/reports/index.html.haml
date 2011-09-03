@@ -1,23 +1,52 @@
 #reports
   %h1 Daily Lunch Order Reports
   - unless @date.blank?
-    %h2= Date.parse(@date).strftime('%A, %B %e, %Y')
+    - longform_date = Date.parse(@date).strftime('%A, %B %e, %Y')
+    %h2= longform_date
   = render 'date_form'
 
   - if @orders
-    %table#orders{:cellpadding => 0, :cellspacing => 0}
-      %tr
-        %th Last
-        %th First
-        %th Gr.
-        - @menu_items.each do |menu_item|
-          %th= menu_item.short_name || menu_item.name
-      - Student::GRADES.each do |grade|
-        - if @orders[grade]
-          - @orders[grade].each do |order|
-            %tr[order]{:class => cycle('even', 'odd')}
-              %td.last_name= order.last_name
-              %td.first_name= order.first_name
-              %td.grade= order.grade
-              - @menu_items.each do |menu_item|
-                %td.menu_item= display_menu_item_for_order(order, menu_item)
+    #elementary.school
+      %h3.school_header
+        Elementary School
+        != '&mdash;'
+        = longform_date
+      %table.orders{:cellpadding => 0, :cellspacing => 0}
+        %tr
+          %th Last
+          %th First
+          %th Gr.
+          - @menu_items.each do |menu_item|
+            %th= menu_item.short_name || menu_item.name
+        - Student::ELEMENTARY_SCHOOL_GRADES.each do |grade|
+          = reports_for_grade(grade)
+
+    #middle.school
+      %h3.school_header
+        Middle School
+        != '&mdash;'
+        = longform_date
+      %table.orders{:cellpadding => 0, :cellspacing => 0}
+        %tr
+          %th Last
+          %th First
+          %th Gr.
+          - @menu_items.each do |menu_item|
+            %th= menu_item.short_name || menu_item.name
+        - Student::MIDDLE_SCHOOL_GRADES.each do |grade|
+          = reports_for_grade(grade)
+
+    #high.school
+      %h3.school_header
+        High School
+        != '&mdash;'
+        = longform_date
+      %table.orders{:cellpadding => 0, :cellspacing => 0}
+        %tr
+          %th Last
+          %th First
+          %th Gr.
+          - @menu_items.each do |menu_item|
+            %th= menu_item.short_name || menu_item.name
+        - Student::HIGH_SCHOOL_GRADES.each do |grade|
+          = reports_for_grade(grade)

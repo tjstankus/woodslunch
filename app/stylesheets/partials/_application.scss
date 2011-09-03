@@ -318,9 +318,11 @@ div.account {
 
 /* reports */
 #reports {
+
   h2 {
     margin: 20px 0 0 0;
   }
+
   #date_selector {
     margin: 20px 0;
     form {
@@ -333,28 +335,35 @@ div.account {
       }
     }
   }
-  table#orders {
 
-    width: 100%;
-    td, th {
-      border: 1px solid $off_white;
-      padding: 5px;
+  .school {
+    margin: 0 0 40px 0;
+    h3.school_header {
+      margin: 10px 0;
     }
-    td {
-      font: {
-        size: 12px;
+    table.orders {
+      width: 100%;
+      td, th {
+        border: 1px solid $off_white;
+        padding: 5px;
       }
-    }
-    td.menu_item {
-      text-align: center;
-    }
-    th {
-      background-color: $dark_brown;
-      font: {
-        size: 14px;
+      td {
+        font: {
+          size: 12px;
+        }
       }
-      color: white;
-      text-align: center;
+      td.menu_item {
+        text-align: center;
+      }
+      th {
+        background-color: $dark_brown;
+        font: {
+          size: 14px;
+        }
+        color: white;
+        text-align: center;
+      }
     }
   }
+
 }
