@@ -31,4 +31,22 @@ module ReportsHelper
     end.html_safe
   end
 
+  def header_row(menu_items, options={})
+    options.reverse_merge!({:menu_items_only => false, :cell_type => :th})
+    cell_type = options[:cell_type]
+    menu_items_only = options[:menu_items_only]
+    ''.tap do |html|
+      html << content_tag(:tr) do
+        content_tag(cell_type, menu_items_only ? '' : 'Last') +
+        content_tag(cell_type, menu_items_only ? '' : 'First') +
+        content_tag(cell_type, menu_items_only ? '' : 'Grade') +
+        ''.tap do |menu_items_html|
+          menu_items.each do |menu_item|
+            menu_items_html << content_tag(cell_type, menu_item.short_name_or_name, :class => ('header' if menu_items_only))
+          end
+        end.html_safe
+      end
+    end.html_safe
+  end
+
 end

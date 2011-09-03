@@ -351,11 +351,12 @@ div.account {
         font: {
           size: 12px;
         }
-      }
-      td.menu_item {
         text-align: center;
       }
-      th {
+      td.last_name, td.first_name {
+        text-align: left;
+      }
+      th, td.header {
         background-color: $dark_brown;
         font: {
           size: 14px;

@@ -12,14 +12,10 @@
         != '&mdash;'
         = longform_date
       %table.orders{:cellpadding => 0, :cellspacing => 0}
-        %tr
-          %th Last
-          %th First
-          %th Gr.
-          - @menu_items.each do |menu_item|
-            %th= menu_item.short_name || menu_item.name
+        = header_row(@menu_items)
         - Student::ELEMENTARY_SCHOOL_GRADES.each do |grade|
           = reports_for_grade(grade)
+        = header_row(@menu_items, :menu_items_only => true, :cell_type => :td)
 
     #middle.school
       %h3.school_header
@@ -27,12 +23,7 @@
         != '&mdash;'
         = longform_date
       %table.orders{:cellpadding => 0, :cellspacing => 0}
-        %tr
-          %th Last
-          %th First
-          %th Gr.
-          - @menu_items.each do |menu_item|
-            %th= menu_item.short_name || menu_item.name
+        = header_row(@menu_items)
         - Student::MIDDLE_SCHOOL_GRADES.each do |grade|
           = reports_for_grade(grade)
 
@@ -42,11 +33,6 @@
         != '&mdash;'
         = longform_date
       %table.orders{:cellpadding => 0, :cellspacing => 0}
-        %tr
-          %th Last
-          %th First
-          %th Gr.
-          - @menu_items.each do |menu_item|
-            %th= menu_item.short_name || menu_item.name
+        = header_row(@menu_items)
         - Student::HIGH_SCHOOL_GRADES.each do |grade|
           = reports_for_grade(grade)
