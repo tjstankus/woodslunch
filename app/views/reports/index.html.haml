@@ -16,6 +16,8 @@
         - Student::ELEMENTARY_SCHOOL_GRADES.each do |grade|
           = reports_for_grade(grade)
         = header_row(@menu_items, :menu_items_only => true, :cell_type => :td)
+        - totals = totals_for(@orders, Student::ELEMENTARY_SCHOOL_GRADES)
+        = totals_row(@menu_items, totals)
 
     #middle.school
       %h3.school_header
@@ -26,6 +28,10 @@
         = header_row(@menu_items)
         - Student::MIDDLE_SCHOOL_GRADES.each do |grade|
           = reports_for_grade(grade)
+        = header_row(@menu_items, :menu_items_only => true, :cell_type => :td)
+        - totals = totals_for(@orders, Student::MIDDLE_SCHOOL_GRADES)
+        = totals_row(@menu_items, totals)
+
 
     #high.school
       %h3.school_header
@@ -36,3 +42,6 @@
         = header_row(@menu_items)
         - Student::HIGH_SCHOOL_GRADES.each do |grade|
           = reports_for_grade(grade)
+        = header_row(@menu_items, :menu_items_only => true, :cell_type => :td)
+        - totals = totals_for(@orders, Student::HIGH_SCHOOL_GRADES)
+        = totals_row(@menu_items, totals)

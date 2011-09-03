@@ -49,4 +49,29 @@ module ReportsHelper
     end.html_safe
   end
 
+  def totals_for(orders, grades)
+    orders_for_grades = []
+    grades.each do |grade|
+      orders_for_grades += orders[grade] if orders[grade]
+    end
+
+    {}.tap do |totals|
+      orders_for_grades.each do |order|
+        totals.merge!(order.quantity_by_menu_item) { |k,o,n| o + n }
+      end
+    end
+  end
+
+  def totals_row(menu_items, totals)
+    ''.tap do |html|
+      html << content_tag(:tr) do
+        content_tag(:td, 'Totals', :colspan => 3) +
+        ''.tap do |totals_html|
+          menu_items.each do |menu_item|
+            totals_html << content_tag(:td, totals[menu_item.id] || 0)
+          end
+        end.html_safe
+      end
+    end.html_safe
+  end
 end
