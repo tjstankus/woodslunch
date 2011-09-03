@@ -4,6 +4,8 @@ class StudentOrder < Order
 
   validates :student_id, :presence => true
 
+  delegate :name, :to => :student
+
   def self.order_for_date(student_id, date)
     find_by_student_id_and_served_on(student_id, date) ||
     StudentOrder.new(:student_id => student_id, :served_on => date)

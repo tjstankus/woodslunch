@@ -4,6 +4,9 @@ class ReportsController < ApplicationController
 
   def index
     @date = params[:date]
-    @orders = @date ? Order.find_all_by_served_on(@date) : []
+    if @date
+      @orders = Order.find_all_by_served_on(@date)
+      @menu_items = DayOfWeek.menu_items_for_date(@date)
+    end
   end
 end
