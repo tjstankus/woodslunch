@@ -135,7 +135,7 @@ describe Order do
     let!(:order) { ordered_menu_item.order }
 
     it 'returns hash keyed by menu_item.id' do
-      order.quantity_by_menu_item.should == {menu_item.id => 1}
+      order.quantity_by_menu_item.should == {menu_item => 1}
     end
   end
 end

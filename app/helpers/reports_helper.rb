@@ -68,7 +68,7 @@ module ReportsHelper
         content_tag(:td, 'Totals', :colspan => 3) +
         ''.tap do |totals_html|
           menu_items.each do |menu_item|
-            totals_html << content_tag(:td, totals[menu_item.id] || 0)
+            totals_html << content_tag(:td, totals[menu_item] || 0)
           end
         end.html_safe
       end

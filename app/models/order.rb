@@ -132,10 +132,10 @@ class Order < ActiveRecord::Base
   def quantity_by_menu_item
     {}.tap do |h|
       ordered_menu_items.each do |omi|
-        if h[omi.menu_item.id]
-          h[omi.menu_item.id] += omi.quantity
+        if h[omi.menu_item]
+          h[omi.menu_item] += omi.quantity
         else
-          h[omi.menu_item.id] = omi.quantity
+          h[omi.menu_item] = omi.quantity
         end
       end
     end

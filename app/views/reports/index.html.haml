@@ -16,8 +16,8 @@
         - Student::ELEMENTARY_SCHOOL_GRADES.each do |grade|
           = reports_for_grade(grade)
         = header_row(@menu_items, :menu_items_only => true, :cell_type => :td)
-        - totals = totals_for(@orders, Student::ELEMENTARY_SCHOOL_GRADES)
-        = totals_row(@menu_items, totals)
+        - elementary_school_totals = totals_for(@orders, Student::ELEMENTARY_SCHOOL_GRADES)
+        = totals_row(@menu_items, elementary_school_totals)
 
     #middle.school
       %h3.school_header
@@ -29,8 +29,8 @@
         - Student::MIDDLE_SCHOOL_GRADES.each do |grade|
           = reports_for_grade(grade)
         = header_row(@menu_items, :menu_items_only => true, :cell_type => :td)
-        - totals = totals_for(@orders, Student::MIDDLE_SCHOOL_GRADES)
-        = totals_row(@menu_items, totals)
+        - middle_school_totals = totals_for(@orders, Student::MIDDLE_SCHOOL_GRADES)
+        = totals_row(@menu_items, middle_school_totals)
 
 
     #high.school
@@ -43,5 +43,25 @@
         - Student::HIGH_SCHOOL_GRADES.each do |grade|
           = reports_for_grade(grade)
         = header_row(@menu_items, :menu_items_only => true, :cell_type => :td)
-        - totals = totals_for(@orders, Student::HIGH_SCHOOL_GRADES)
-        = totals_row(@menu_items, totals)
+        - high_school_totals = totals_for(@orders, Student::HIGH_SCHOOL_GRADES)
+        = totals_row(@menu_items, high_school_totals)
+
+    #summary
+      %h3 Summary
+      .section
+        .name Elementary School
+        %ul
+          - elementary_school_totals.each do |k,v|
+            %li= "#{v} #{k.name}"
+
+      .section
+        .name Middle School
+        %ul
+          - middle_school_totals.each do |k,v|
+            %li= "#{v} #{k.name}"
+
+      .section
+        .name High School
+        %ul
+          - high_school_totals.each do |k,v|
+            %li= "#{v} #{k.name}"
