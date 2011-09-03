@@ -28,4 +28,8 @@ class User < ActiveRecord::Base
   def students
     self.account.students
   end
+
+  def grade
+    preferred_grade
+  end
 end

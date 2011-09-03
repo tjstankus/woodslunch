@@ -14,4 +14,10 @@ class DayOfWeek < ActiveRecord::Base
   def self.weekdays
     self.limit(5)
   end
+
+  def self.menu_items_for_date(date)
+    d = Date.parse(date)
+    day_of_week = find_by_name(NAMES[d.cwday - 1])
+    day_of_week.menu_items
+  end
 end

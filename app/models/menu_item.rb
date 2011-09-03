@@ -6,7 +6,7 @@ class MenuItem < ActiveRecord::Base
 
   validates :name, :presence => true
   validates_uniqueness_of :name, :case_sensitive => false
-  validates :price, :presence => true, 
+  validates :price, :presence => true,
                     :numericality => { :message => 'must be a number' }
 
   after_initialize :set_price_on_new_record
@@ -17,6 +17,10 @@ class MenuItem < ActiveRecord::Base
 
   def self.unassigned_to_day
     where("id not in (select menu_item_id from daily_menu_items)")
+  end
+
+  def short_name_or_name
+    short_name || name
   end
 
 end

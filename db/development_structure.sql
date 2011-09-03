@@ -3,7 +3,7 @@ CREATE TABLE "accounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "balan
 CREATE TABLE "daily_menu_items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "day_of_week_id" integer, "menu_item_id" integer, "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "days_of_week" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255));
 CREATE TABLE "days_off" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "starts_on" date, "ends_on" date, "name" varchar(255), "created_at" datetime, "updated_at" datetime);
-CREATE TABLE "menu_items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "price" decimal(5,2), "created_at" datetime, "updated_at" datetime);
+CREATE TABLE "menu_items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "price" decimal(5,2), "created_at" datetime, "updated_at" datetime, "short_name" varchar(255));
 CREATE TABLE "ordered_menu_items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "menu_item_id" integer, "order_id" integer, "quantity" integer, "total" decimal(5,2) DEFAULT 0.0, "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "orders" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "served_on" date, "student_id" integer, "user_id" integer, "type" varchar(255), "grade" varchar(255), "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "requested_students" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "account_request_id" integer, "first_name" varchar(255), "last_name" varchar(255), "grade" varchar(255));
@@ -40,3 +40,5 @@ INSERT INTO schema_migrations (version) VALUES ('20110606110845');
 INSERT INTO schema_migrations (version) VALUES ('20110620051649');
 
 INSERT INTO schema_migrations (version) VALUES ('20110626185835');
+
+INSERT INTO schema_migrations (version) VALUES ('20110903155101');

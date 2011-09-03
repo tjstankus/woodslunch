@@ -119,6 +119,28 @@ class Order < ActiveRecord::Base
     !(atts.collect{|h| h['quantity']}.all?{|q| q.empty?})
   end
 
+  def self.reports_for(date)
+    student_orders = StudentOrder.reports_for(date)
+    user_orders = UserOrder.reports_for(date)
+    orders = student_orders.merge(user_orders) { |k,o,n| o + n }
+    orders.keys.each do |grade|
+      orders[grade] = orders[grade].sort_by {|o| [o.last_name, o.first_name] }
+    end
+    orders
+  end
+
+  def quantity_by_menu_item
+    {}.tap do |h|
+      ordered_menu_items.each do |omi|
+        if h[omi.menu_item.id]
+          h[omi.menu_item.id] += omi.quantity
+        else
+          h[omi.menu_item.id] = omi.quantity
+        end
+      end
+    end
+  end
+
   # def update_total_and_account_balance
   #   self.total = self.ordered_menu_items.collect(&:total).inject(0) { |sum, n| sum + n }
   #   if total_changed?
