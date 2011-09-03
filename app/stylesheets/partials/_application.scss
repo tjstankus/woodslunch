@@ -11,6 +11,7 @@ $content_padding_tb: 16px;
 $content_padding_lr: 100px;
 $soft_green: #425b49;
 $dark_brown: #1e0e02;
+$off_white: #fbfaf6;
 $listing_even_bg: #f3ebe0;
 
 /* body and layout */
@@ -330,6 +331,30 @@ div.account {
       input[type=submit] {
         display: none;
       }
+    }
+  }
+  table#orders {
+
+    width: 100%;
+    td, th {
+      border: 1px solid $off_white;
+      padding: 5px;
+    }
+    td {
+      font: {
+        size: 12px;
+      }
+    }
+    td.menu_item {
+      text-align: center;
+    }
+    th {
+      background-color: $dark_brown;
+      font: {
+        size: 14px;
+      }
+      color: white;
+      text-align: center;
     }
   }
 }

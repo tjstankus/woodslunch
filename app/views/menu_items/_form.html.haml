@@ -7,6 +7,8 @@
 
   = f.input :name
 
+  = f.input :short_name
+
   = f.input :description, :required => false
 
   = f.input :price, :as => :string, :label => 'Price', :input_html => { :value => sprintf("%0.2f", @menu_item.price), :size => 6 }

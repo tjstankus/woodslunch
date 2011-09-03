@@ -4,7 +4,7 @@ class StudentOrder < Order
 
   validates :student_id, :presence => true
 
-  delegate :name, :to => :student
+  delegate :name, :last_name, :first_name, :grade, :to => :student
 
   def self.order_for_date(student_id, date)
     find_by_student_id_and_served_on(student_id, date) ||
@@ -22,4 +22,7 @@ class StudentOrder < Order
     end
   end
 
+  def self.reports_for(date)
+    self.where('served_on = ?', date).includes(:student).group_by { |o| o.student.grade }
+  end
 end

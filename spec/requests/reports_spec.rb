@@ -32,19 +32,17 @@ describe 'Reports' do
       end
 
       it 'displays student order for date' do
-        page.should have_css("div#student_order_#{order.id}")
+        page.should have_css("#student_order_#{order.id}")
       end
 
       it 'displays name associated with student order' do
-        name = order.student.name
-        within("div#student_order_#{order.id}") do
-          page.should have_content(name)
+        within("#student_order_#{order.id}") do
+          page.should have_css('td.first_name', :text => order.student.first_name)
+          page.should have_css('td.last_name', :text => order.student.last_name)
         end
       end
 
-      it 'displays ordered menu items' do
-        puts order.ordered_menu_items.inspect
-      end
+      it 'displays ordered menu items'
     end
   end
 end

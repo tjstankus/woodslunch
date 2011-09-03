@@ -119,6 +119,21 @@ class Order < ActiveRecord::Base
     !(atts.collect{|h| h['quantity']}.all?{|q| q.empty?})
   end
 
+  def self.reports_for(date)
+    student_orders = StudentOrder.reports_for(date)
+    user_orders = UserOrder.reports_for(date)
+    orders = student_orders.merge(user_orders) { |k,o,n| o + n }
+    orders.keys.each do |grade|
+      orders[grade] = orders[grade].sort_by {|o| [o.last_name, o.first_name] }
+        # if o.is_a?(StudentOrder)
+        #   [o.student.last_name, o.student.first_name]
+        # elsif o.is_a?(UserOrder)
+        #   [o.user.last_name, o.user.preferred_grade]
+        # end
+    end
+    orders
+  end
+
   # def update_total_and_account_balance
   #   self.total = self.ordered_menu_items.collect(&:total).inject(0) { |sum, n| sum + n }
   #   if total_changed?
