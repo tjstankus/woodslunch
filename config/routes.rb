@@ -26,6 +26,7 @@ Woodslunch::Application.routes.draw do
 
   resources :menu_items
   resources :days_off
+  resources :reports, :only => [:index]
 
   resources :account_requests, :only => [:index, :new, :create, :destroy] do
     member do

@@ -128,4 +128,14 @@ describe Order do
       end
     end
   end
+
+  describe '#quantity_by_menu_item' do
+    let!(:ordered_menu_item) { Factory(:ordered_menu_item) }
+    let!(:menu_item) { ordered_menu_item.menu_item }
+    let!(:order) { ordered_menu_item.order }
+
+    it 'returns hash keyed by menu_item.id' do
+      order.quantity_by_menu_item.should == {menu_item.id => 1}
+    end
+  end
 end

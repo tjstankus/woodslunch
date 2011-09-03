@@ -11,6 +11,7 @@ $content_padding_tb: 16px;
 $content_padding_lr: 100px;
 $soft_green: #425b49;
 $dark_brown: #1e0e02;
+$off_white: #fbfaf6;
 $listing_even_bg: #f3ebe0;
 
 /* body and layout */
@@ -310,6 +311,59 @@ div.account {
     margin: 20px 0 0 0;
     .add_student {
       float: right;
+    }
+  }
+
+}
+
+/* reports */
+#reports {
+
+  h2 {
+    margin: 20px 0 0 0;
+  }
+
+  #date_selector {
+    margin: 20px 0;
+    form {
+      input#date {
+        font-size: 22px;
+        height: 30px;
+      }
+      input[type=submit] {
+        display: none;
+      }
+    }
+  }
+
+  .school {
+    margin: 0 0 40px 0;
+    h3.school_header {
+      margin: 10px 0;
+    }
+    table.orders {
+      width: 100%;
+      td, th {
+        border: 1px solid $off_white;
+        padding: 5px;
+      }
+      td {
+        font: {
+          size: 12px;
+        }
+        text-align: center;
+      }
+      td.last_name, td.first_name {
+        text-align: left;
+      }
+      th, td.header {
+        background-color: $dark_brown;
+        font: {
+          size: 14px;
+        }
+        color: white;
+        text-align: center;
+      }
     }
   }
 

@@ -3,6 +3,8 @@ class UserOrder < Order
 
   validates :user_id, :presence => true
 
+  delegate :name, :last_name, :first_name, :grade, :to => :user
+
   def self.order_for_date(user_id, date)
     find_by_user_id_and_served_on(user_id, date) ||
     UserOrder.new(:user_id => user_id, :served_on => date)
@@ -18,4 +20,9 @@ class UserOrder < Order
       end
     end
   end
+
+  def self.reports_for(date)
+    self.where('served_on = ?', date).includes(:user).group_by { |o| o.user.preferred_grade }
+  end
+
 end

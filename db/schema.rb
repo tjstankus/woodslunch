@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110711120635) do
+ActiveRecord::Schema.define(:version => 20110903155101) do
 
   create_table "account_requests", :force => true do |t|
     t.string   "email"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20110711120635) do
     t.decimal  "price",       :precision => 5, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "short_name"
   end
 
   add_index "menu_items", ["name"], :name => "index_menu_items_on_name", :unique => true

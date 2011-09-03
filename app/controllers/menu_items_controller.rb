@@ -1,4 +1,5 @@
 class MenuItemsController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :verify_admin
 
   def index
