@@ -53,6 +53,7 @@ describe 'Student orders' do
       let(:ids_for_mondays) { %w(5 12 19 26) }
 
       before(:each) do
+        Date.stub(:today).and_return(Date.parse('2011-09-01'))
         configatron.orders_first_available_on = Date.parse('2011-09-01')
         visit student_orders_path(student, :year => year, :month => month)
       end
@@ -115,6 +116,8 @@ describe 'Student orders' do
     context 'a single menu item' do
 
       before(:each) do
+        Date.stub(:today).and_return(Date.parse('2011-09-01'))
+
         # When I visit the new student order page
         visit student_orders_path(student, :year => year, :month => month)
 
@@ -182,7 +185,10 @@ describe 'Student orders' do
     end
 
     context 'menu items on multiple days' do
+
       before(:each) do
+        Date.stub(:today).and_return(Date.parse('2011-09-01'))
+
         # When I visit the new student order page
         visit student_orders_path(student, :year => year, :month => month)
 
