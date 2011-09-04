@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   roles :admin
 
   belongs_to :account
+  has_many :orders
 
   validates :email, :presence => true,
       :uniqueness => { :case_sensitive => false }
