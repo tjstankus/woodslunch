@@ -1,5 +1,8 @@
+- content_for :stylesheets do
+  = stylesheet_link_tag 'print_reports', :media => 'print'
+
 #reports
-  %h1 Daily Lunch Order Reports
+  %h1 Daily Lunch Order Report
   - unless @date.blank?
     - longform_date = Date.parse(@date).strftime('%A, %B %e, %Y')
     %h2= longform_date
@@ -17,7 +20,7 @@
           = reports_for_grade(grade)
         = header_row(@menu_items, :menu_items_only => true, :cell_type => :td)
         - elementary_school_totals = totals_for(@orders, Student::ELEMENTARY_SCHOOL_GRADES)
-        = totals_row(@menu_items, elementary_school_totals)
+        = totals_row(@menu_items, elementary_school_totals, 'Elementary School')
 
     #middle.school
       %h3.school_header
@@ -30,7 +33,7 @@
           = reports_for_grade(grade)
         = header_row(@menu_items, :menu_items_only => true, :cell_type => :td)
         - middle_school_totals = totals_for(@orders, Student::MIDDLE_SCHOOL_GRADES)
-        = totals_row(@menu_items, middle_school_totals)
+        = totals_row(@menu_items, middle_school_totals, 'Middle School')
 
 
     #high.school
@@ -44,7 +47,7 @@
           = reports_for_grade(grade)
         = header_row(@menu_items, :menu_items_only => true, :cell_type => :td)
         - high_school_totals = totals_for(@orders, Student::HIGH_SCHOOL_GRADES)
-        = totals_row(@menu_items, high_school_totals)
+        = totals_row(@menu_items, high_school_totals, 'High School')
 
     #summary
       %h3 Summary

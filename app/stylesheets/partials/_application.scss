@@ -344,7 +344,7 @@ div.account {
     table.orders {
       width: 100%;
       td, th {
-        border: 1px solid $off_white;
+        border: 1px solid $dark_brown;
         padding: 5px;
       }
       td {
@@ -358,6 +358,7 @@ div.account {
       }
       th, td.header {
         background-color: $dark_brown;
+        border: 1px solid $off_white;
         font: {
           size: 14px;
         }

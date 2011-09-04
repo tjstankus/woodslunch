@@ -62,10 +62,10 @@ module ReportsHelper
     end
   end
 
-  def totals_row(menu_items, totals)
+  def totals_row(menu_items, totals, school)
     ''.tap do |html|
       html << content_tag(:tr) do
-        content_tag(:td, 'Totals', :colspan => 3) +
+        content_tag(:td, "#{school} Totals", :colspan => 3) +
         ''.tap do |totals_html|
           menu_items.each do |menu_item|
             totals_html << content_tag(:td, totals[menu_item] || 0)
