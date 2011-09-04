@@ -1,0 +1,7 @@
+- order = read_only
+%td{:id => day.month_day, :class => day.day_name.downcase + ' read_only'}
+  .mday= day.month_day
+  - order.ordered_menu_items.each do |omi|
+    %div[omi]
+      = omi.menu_item.name
+      = "(#{omi.quantity})" if omi.quantity > 1

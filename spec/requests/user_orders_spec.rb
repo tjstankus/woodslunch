@@ -45,6 +45,7 @@ describe 'User orders' do
       let(:ids_for_mondays) { %w(5 12 19 26) }
 
       before(:each) do
+        Date.stub(:today).and_return(Date.parse('2011-09-01'))
         visit user_orders_path(user, :year => year, :month => month)
       end
 
@@ -117,6 +118,8 @@ describe 'User orders' do
   describe 'creating' do
 
     before(:each) do
+      Date.stub(:today).and_return(Date.parse('2011-09-01'))
+
       # Given a menu item for each day of the week
       DayOfWeek.all.each do |day_of_week|
         Factory(:daily_menu_item, :day_of_week => day_of_week)
@@ -174,6 +177,8 @@ describe 'User orders' do
     context 'multiple menu items for one day' do
 
       before(:each) do
+        Date.stub(:today).and_return(Date.parse('2011-09-01'))
+
         # When I visit the new user order page
         visit user_orders_path(user, :year => year, :month => month)
 

@@ -138,4 +138,29 @@ describe Order do
       order.quantity_by_menu_item.should == {menu_item => 1}
     end
   end
+
+  describe '.first_available_order_date' do
+
+    context 'given today is a weekday' do
+
+      before(:each) do
+        configatron.orders_first_available_on = Date.parse('2011-09-01')
+      end
+
+      it 'returns next monday' do
+        Date.stub(:today).and_return(Date.parse('2011-09-01'))
+        expected_date = Date.parse('2011-09-05')
+        Order.first_available_order_date.should == expected_date
+      end
+    end
+
+    context 'given today is a weekend day' do
+
+      it 'returns two mondays from now' do
+        Date.stub(:today).and_return(Date.parse('2011-09-03'))
+        expected_date = Date.parse('2011-09-12')
+        Order.first_available_order_date.should == expected_date
+      end
+    end
+  end
 end

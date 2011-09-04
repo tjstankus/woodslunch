@@ -40,7 +40,10 @@ class Order < ActiveRecord::Base
             arr.last << Day.new(date, nil, 'orders/unorderable_date')
           else
             if day_off = DayOff.for_date(date)
-              arr.last << Day.new(date, day_off)
+              arr.last << Day.new(date, day_off, 'orders/day_off')
+            elsif date < first_available_order_date
+              order = order_for_date(fk_id, date)
+              arr.last << Day.new(date, order, 'orders/read_only')
             else
               order = order_for_date(fk_id, date)
               arr.last << Day.new(date, order)
@@ -138,6 +141,15 @@ class Order < ActiveRecord::Base
           h[omi.menu_item] = omi.quantity
         end
       end
+    end
+  end
+
+  def self.first_available_order_date
+    start_date = [Date.today, configatron.orders_first_available_on].max
+    if start_date.wday >= 1 && start_date.wday <= 5
+      start_date.beginning_of_week + 1.week
+    else
+      start_date.beginning_of_week + 2.weeks
     end
   end
 
