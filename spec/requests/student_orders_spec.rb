@@ -85,6 +85,10 @@ describe 'Student orders' do
 
     context 'given an existing order' do
 
+      before(:each) do
+        Date.stub(:today).and_return(Date.parse('2011-09-01'))
+      end
+
       it 'displays quantity for ordered menu item' do
         daily_menu_item = Factory(:daily_menu_item, :day_of_week => DayOfWeek.first)
         student_order = Factory(:student_order, :student => student, :served_on => '2011-09-12')
@@ -157,6 +161,8 @@ describe 'Student orders' do
     context 'multiple menu items for one day' do
 
       before(:each) do
+        Date.stub(:today).and_return(Date.parse('2011-09-01'))
+
         # When I visit the new student order page
         visit student_orders_path(student, :year => year, :month => month)
 
@@ -223,6 +229,8 @@ describe 'Student orders' do
   describe 'updating' do
 
     before(:each) do
+      Date.stub(:today).and_return(Date.parse('2011-09-01'))
+
       # Given a menu item for each day of the week
       DayOfWeek.all.each do |day_of_week|
         Factory(:daily_menu_item, :day_of_week => day_of_week)
