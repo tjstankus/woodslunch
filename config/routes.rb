@@ -22,6 +22,7 @@ Woodslunch::Application.routes.draw do
   resources :accounts do
     resources :users
     resources :students
+    resources :payments
   end
 
   resources :menu_items

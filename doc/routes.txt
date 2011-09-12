@@ -33,6 +33,13 @@
                account_student GET    /accounts/:account_id/students/:id(.:format)                    {:action=>"show", :controller=>"students"}
                                PUT    /accounts/:account_id/students/:id(.:format)                    {:action=>"update", :controller=>"students"}
                                DELETE /accounts/:account_id/students/:id(.:format)                    {:action=>"destroy", :controller=>"students"}
+              account_payments GET    /accounts/:account_id/payments(.:format)                        {:action=>"index", :controller=>"payments"}
+                               POST   /accounts/:account_id/payments(.:format)                        {:action=>"create", :controller=>"payments"}
+           new_account_payment GET    /accounts/:account_id/payments/new(.:format)                    {:action=>"new", :controller=>"payments"}
+          edit_account_payment GET    /accounts/:account_id/payments/:id/edit(.:format)               {:action=>"edit", :controller=>"payments"}
+               account_payment GET    /accounts/:account_id/payments/:id(.:format)                    {:action=>"show", :controller=>"payments"}
+                               PUT    /accounts/:account_id/payments/:id(.:format)                    {:action=>"update", :controller=>"payments"}
+                               DELETE /accounts/:account_id/payments/:id(.:format)                    {:action=>"destroy", :controller=>"payments"}
                       accounts GET    /accounts(.:format)                                             {:action=>"index", :controller=>"accounts"}
                                POST   /accounts(.:format)                                             {:action=>"create", :controller=>"accounts"}
                    new_account GET    /accounts/new(.:format)                                         {:action=>"new", :controller=>"accounts"}
@@ -54,6 +61,7 @@
                        day_off GET    /days_off/:id(.:format)                                         {:action=>"show", :controller=>"days_off"}
                                PUT    /days_off/:id(.:format)                                         {:action=>"update", :controller=>"days_off"}
                                DELETE /days_off/:id(.:format)                                         {:action=>"destroy", :controller=>"days_off"}
+                       reports GET    /reports(.:format)                                              {:action=>"index", :controller=>"reports"}
        approve_account_request POST   /account_requests/:id/approve(.:format)                         {:action=>"approve", :controller=>"account_requests"}
        decline_account_request POST   /account_requests/:id/decline(.:format)                         {:action=>"decline", :controller=>"account_requests"}
    account_request_activations POST   /account_requests/:account_request_id/activations(.:format)     {:action=>"create", :controller=>"account_activations"}

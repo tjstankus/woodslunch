@@ -1,0 +1,7 @@
+= simple_form_for([@account, @payment]) do |f|
+  = f.error_notification
+  = f.input :amount, :as => :string, :label => 'Amount $', :input_html => {:size => 5}, 
+    :label_html => {:class => 'amount'}
+  = f.input :notes, :input_html => {:rows => 5, :cols => 60}
+  = f.submit 'Submit'
+  = link_to 'Cancel', account_payments_path(@account)
