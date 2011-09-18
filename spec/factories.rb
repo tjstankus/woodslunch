@@ -75,3 +75,8 @@ Factory.define :day_off do |f|
   f.starts_on '2011-11-22'
   f.ends_on '2011-11-25'
 end
+
+Factory.define :payment do |f|
+  f.association :account, :factory => :account
+  f.amount 20.00
+end

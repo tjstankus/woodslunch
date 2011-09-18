@@ -1,13 +1,19 @@
 %div[account]{:class => 'listing_item ' + cycle('even', 'odd')}
-  %h2= "Account (id: #{account.id})"
+  .account_header
+    - if action_name == 'index'
+      = link_to 'Manage account', account_path(account)
+    - elsif action_name == 'show'
+      = link_to 'Payments', account_payments_path(account)
+    %h2= "Account (id: #{account.id})"
+ 
   %h3 Users
-
   - account.users.each do |user|
     %div[user]
       %span.student_info
       = "#{user.name} (#{user.email})"
       %span.actions
         = link_to 'Edit', edit_account_user_path(account, user)
+
   .students
     .add_student= link_to 'Add a student', new_account_student_path(account)
     %h3 Students

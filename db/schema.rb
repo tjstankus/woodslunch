@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110903155101) do
+ActiveRecord::Schema.define(:version => 20110909042550) do
 
   create_table "account_requests", :force => true do |t|
     t.string   "email"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(:version => 20110903155101) do
     t.string   "activation_token"
     t.datetime "approved_at"
     t.datetime "declined_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "account_transactions", :force => true do |t|
+    t.integer  "account_id"
+    t.string   "type"
+    t.decimal  "amount",     :precision => 5, :scale => 2, :default => 0.0
+    t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

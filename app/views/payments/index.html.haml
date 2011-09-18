@@ -1,0 +1,17 @@
+#admin_menu_bar
+  %h2 Payments 
+  %span.actions  
+    = link_to 'New payment', new_account_payment_path if current_user.has_role?(:admin)
+
+- @payments.each do |payment|
+  %div[payment]{:class => 'listing_item ' + cycle('even', 'odd')}
+    %span.actions
+      = link_to('Delete', account_payment_path(@account, payment), :confirm => 'Are you sure?', 
+        :method => :delete, :class => 'alert button', :style => 'color:#fff;')
+    .amount
+      = number_to_currency(payment.amount)
+    .created_at
+      Paid
+      = payment.created_at.strftime("%m/%d/%Y %I:%M %p")
+    .notes
+      = payment.notes
