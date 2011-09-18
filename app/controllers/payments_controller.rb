@@ -1,4 +1,5 @@
 class PaymentsController < InheritedResources::Base
+  actions :index, :new, :create, :destroy
   belongs_to :account
 
   before_filter :authenticate_user!
@@ -6,9 +7,5 @@ class PaymentsController < InheritedResources::Base
 
   def create
     create!(:notice => "Successfully created payment.") { account_payments_path(@account) }
-  end
-
-  def update
-    update!(:notice => "Successfully updated payment.") { account_payments_path(@account) }
   end
 end
