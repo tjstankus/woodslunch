@@ -3,6 +3,7 @@ class PaymentsController < InheritedResources::Base
   belongs_to :account
 
   before_filter :authenticate_user!
+  before_filter :verify_admin, :except => [:index]
   before_filter :verify_account_member
 
   def create
