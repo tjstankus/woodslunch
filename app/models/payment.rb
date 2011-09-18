@@ -1,6 +1,10 @@
-class Payment < ActiveRecord::Base
-  belongs_to :account
+class Payment < AccountTransaction
 
-  validates :account_id, :presence => true
-  validates :amount, :presence => true
+  def update_balance_for_save
+    account.change_balance_by(-amount)
+  end
+
+  def update_balance_for_destroy
+    account.change_balance_by(amount)
+  end
 end

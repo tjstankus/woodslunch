@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(:version => 20110909042550) do
     t.datetime "updated_at"
   end
 
+  create_table "account_transactions", :force => true do |t|
+    t.integer  "account_id"
+    t.string   "type"
+    t.decimal  "amount",     :precision => 5, :scale => 2, :default => 0.0
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "accounts", :force => true do |t|
     t.decimal  "balance",    :precision => 5, :scale => 2, :default => 0.0
     t.datetime "created_at"
@@ -80,14 +89,6 @@ ActiveRecord::Schema.define(:version => 20110909042550) do
     t.integer  "user_id"
     t.string   "type"
     t.string   "grade"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "payments", :force => true do |t|
-    t.integer  "account_id"
-    t.decimal  "amount",     :precision => 5, :scale => 2, :default => 0.0
-    t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

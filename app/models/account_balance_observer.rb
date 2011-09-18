@@ -1,5 +1,5 @@
 class AccountBalanceObserver < ActiveRecord::Observer
-  observe OrderedMenuItem, Payment
+  observe OrderedMenuItem, AccountTransaction
 
   def before_save(model)
     account = model.account
@@ -9,7 +9,7 @@ class AccountBalanceObserver < ActiveRecord::Observer
         account.change_balance_by(diff)
       end
     elsif model.has_attribute?(:amount)
-      account.change_balance_by(-(model.amount))
+      model.update_balance_for_save
     end
   end
 
@@ -18,7 +18,7 @@ class AccountBalanceObserver < ActiveRecord::Observer
     if model.has_attribute?(:total)
       account.change_balance_by(-model.total)
     elsif model.has_attribute?(:amount)
-      account.change_balance_by(model.amount)
+      model.update_balance_for_destroy
     end
   end
 end
