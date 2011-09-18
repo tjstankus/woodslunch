@@ -99,6 +99,10 @@ describe 'User orders' do
 
     context 'given an existing order' do
 
+      before(:each) do
+        Date.stub(:today).and_return(Date.parse('2011-09-01'))
+      end
+
       it 'displays quantity for ordered menu item' do
         daily_menu_item = Factory(:daily_menu_item, :day_of_week => DayOfWeek.first)
         user_order = Factory(:user_order, :user => user, :served_on => '2011-09-12')
@@ -263,6 +267,10 @@ describe 'User orders' do
       end
 
       context 'changing quantity from 1 to 2' do
+
+        before(:each) do
+          Date.stub(:today).and_return(Date.parse('2011-09-01'))
+        end
 
         it 'updates the quantity' do
           visit user_orders_path(user, :month => month, :year => year)

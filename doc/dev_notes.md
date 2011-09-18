@@ -4,6 +4,21 @@ Dev Notes
 Account balance
 ---------------
 
+## Possible refactoring (2011-09-18)
+
+class AccountTransaction < ActiveRecord::Base
+class Payment < AccountTransaction
+class Purchase < AccountTransaction
+
+Does this clean up the AccountBalanceObserver, which now contains a stupid 
+conditional based on the name of an attribute. We could simply say something 
+like model.change_balance in the observer. Then the model itself can know how
+it should change that balance. In Payment it would deduct the amount. In 
+Purchase, it would add the total.
+
+This is a good refactoring, I think, but would need to be very carefully 
+implemented. For now, get Payments deployed, then consider this refactoring.
+
 ## Events that change account balance
 
   - Create a new ordered menu item should increase the account balance by

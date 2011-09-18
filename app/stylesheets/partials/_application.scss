@@ -383,3 +383,26 @@ div.account {
     }
   }
 }
+
+/* accounts */
+
+.account {
+  .account_header {
+    margin: 0;
+    padding: 5px;
+    a {
+      float: right;
+    }
+  }
+}
+form.payment {
+  label.amount {
+    display: inline;
+    margin: 0 3px 0 0;
+  }
+}
+div.payment {
+  div {
+    margin: 5px 0;
+  }
+}
