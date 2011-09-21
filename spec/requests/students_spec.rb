@@ -32,7 +32,7 @@ describe 'Students' do
     current_path.should == account_path(account)
 
     # And I should see 'Bart Simpson, grade: 3' listed under Students
-    page.should have_css("div.student span.student_info", :text => "Bart Simpson, grade 3")
+    page.should have_css("div.student span.student_info a", :text => "Bart Simpson")
   end
 
   it 'updates student information' do
@@ -44,7 +44,7 @@ describe 'Students' do
     select '2', :from => 'Grade'
     click_button 'Update Student'
     current_path.should == account_path(account)
-    page.should have_css("div.student span.student_info", :text => "#{student.name}, grade 2")
+    page.should have_css("div.student span.student_info a", :text => "#{student.name}")
   end
 
   it 'destroys a student' do

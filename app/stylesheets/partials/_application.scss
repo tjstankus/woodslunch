@@ -298,24 +298,6 @@ h3.activation {
 }
 
 
-/* accounts */
-
-div.account {
-  h3 {
-    padding: 0 0 0 10px;
-  }
-  .user, .student {
-    padding: 10px 0 0 10px;
-  }
-  .students {
-    margin: 20px 0 0 0;
-    .add_student {
-      float: right;
-    }
-  }
-
-}
-
 /* reports */
 #reports {
 
@@ -386,7 +368,7 @@ div.account {
 
 /* accounts */
 
-.account {
+div.account {
   .account_header {
     margin: 0;
     padding: 5px;
@@ -394,7 +376,17 @@ div.account {
       float: right;
     }
   }
+  .account_section {
+    padding: 10px;
+    div, h3 {
+      margin: 0 0 5px 0;
+    }
+    span.actions {
+      float: right;
+    }
+  }
 }
+
 form.payment {
   label.amount {
     display: inline;
