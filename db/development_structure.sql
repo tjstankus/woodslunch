@@ -15,6 +15,10 @@ CREATE UNIQUE INDEX "index_days_of_week_on_name" ON "days_of_week" ("name");
 CREATE UNIQUE INDEX "index_days_off_on_ends_on" ON "days_off" ("ends_on");
 CREATE UNIQUE INDEX "index_days_off_on_starts_on" ON "days_off" ("starts_on");
 CREATE UNIQUE INDEX "index_menu_items_on_name" ON "menu_items" ("name");
+CREATE INDEX "index_students_on_account_id" ON "students" ("account_id");
+CREATE INDEX "index_students_on_first_name" ON "students" ("first_name");
+CREATE INDEX "index_students_on_last_name" ON "students" ("last_name");
+CREATE INDEX "index_users_on_account_id" ON "users" ("account_id");
 CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email");
 CREATE INDEX "index_users_on_first_name" ON "users" ("first_name");
 CREATE INDEX "index_users_on_last_name" ON "users" ("last_name");
@@ -45,3 +49,5 @@ INSERT INTO schema_migrations (version) VALUES ('20110711120635');
 INSERT INTO schema_migrations (version) VALUES ('20110903155101');
 
 INSERT INTO schema_migrations (version) VALUES ('20110909042550');
+
+INSERT INTO schema_migrations (version) VALUES ('20110924052347');
