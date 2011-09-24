@@ -1,6 +1,24 @@
 Dev Notes
 =========
 
+Search
+------
+
+Add indexes to fields we want to search:
+
+[x] User#email
+[x] User#first_name
+[x] User#last_name
+[ ] User#account_id
+[ ] Student#first_name
+[ ] Student#last_name
+[ ] Student#account_id
+
+Database indexes
+----------------
+
+[ ] For order-related fields, such as ordered_menu_item_id.
+
 Account balance
 ---------------
 
