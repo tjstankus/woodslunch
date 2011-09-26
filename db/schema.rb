@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110909042550) do
+ActiveRecord::Schema.define(:version => 20110924052347) do
 
   create_table "account_requests", :force => true do |t|
     t.string   "email"
@@ -109,6 +109,10 @@ ActiveRecord::Schema.define(:version => 20110909042550) do
     t.datetime "updated_at"
   end
 
+  add_index "students", ["account_id"], :name => "index_students_on_account_id"
+  add_index "students", ["first_name"], :name => "index_students_on_first_name"
+  add_index "students", ["last_name"], :name => "index_students_on_last_name"
+
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -129,6 +133,7 @@ ActiveRecord::Schema.define(:version => 20110909042550) do
     t.datetime "updated_at"
   end
 
+  add_index "users", ["account_id"], :name => "index_users_on_account_id"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["first_name"], :name => "index_users_on_first_name"
   add_index "users", ["last_name"], :name => "index_users_on_last_name"

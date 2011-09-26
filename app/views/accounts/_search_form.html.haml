@@ -1,0 +1,4 @@
+= form_tag(accounts_path, :id => 'accounts_search', :method => :get) do
+  = text_field_tag(:q, params[:q], :size => 60)
+  = submit_tag('Search', :name => nil)
+  = link_to 'Cancel', accounts_path
