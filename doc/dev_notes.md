@@ -1,6 +1,28 @@
 Dev Notes
 =========
 
+Search
+------
+
+Add indexes to fields we want to search:
+
+[x] User#email
+[x] User#first_name
+[x] User#last_name
+[x] User#account_id
+[x] Student#first_name
+[x] Student#last_name
+[x] Student#account_id
+
+[ ] Implement search similar to railscast
+
+    http://railscasts.com/episodes/37-simple-search-form
+
+Database indexes
+----------------
+
+[ ] For order-related fields, such as ordered_menu_item_id.
+
 Account balance
 ---------------
 
