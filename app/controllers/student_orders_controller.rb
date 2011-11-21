@@ -7,7 +7,10 @@ class StudentOrdersController < ApplicationController
   before_filter :get_presenter, :only => [:index]
 
   def index
-    @days_by_week = StudentOrder.days_for_month_and_year_by_weekday(params[:month], params[:year], @student.id)
+    @days_by_week = StudentOrder.days_for_month_and_year_by_weekday(params[:month], 
+                                                                    params[:year], 
+                                                                    @student.id, 
+                                                                    current_user.has_role?(:admin))
   end
 
   def create
