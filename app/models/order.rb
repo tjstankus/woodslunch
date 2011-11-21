@@ -57,7 +57,9 @@ class Order < ActiveRecord::Base
   end
 
   def available_menu_items
-    @available_menu_items ||= self.day_of_week_served_on.menu_items
+    @available_menu_items ||= self.day_of_week_served_on.menu_items.reject do |menu_item|
+      menu_item.inactive_on_date?(self.served_on)
+    end
   end
 
   def quantity_for_menu_item(menu_item)

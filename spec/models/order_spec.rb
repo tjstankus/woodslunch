@@ -31,14 +31,21 @@ describe Order do
         end
       end
       @order = Factory(:student_order, :served_on => today)
+      @menu_items = @daily_menu_items.collect(&:menu_item)
     end
 
     it 'returns all menu items available on served_on date' do
-      menu_items = @daily_menu_items.collect(&:menu_item)
       available_menu_items = @order.available_menu_items
-      menu_items.each do |menu_item|
+      @menu_items.each do |menu_item|
         available_menu_items.should include(menu_item)
       end
+    end
+
+    it 'does not include inactive menu items' do
+      date = @order.served_on - 1.day
+      @menu_items.first.update_attributes!(:inactive_starts_on => date)
+      inactive_menu_item = @menu_items.first
+      @order.available_menu_items.should_not include(inactive_menu_item)
     end
   end
 

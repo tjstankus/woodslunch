@@ -68,4 +68,36 @@ describe MenuItem do
       }.should raise_error(ActiveRecord::RecordNotFound)
     end
   end
+
+  describe '#inactive_on_date?' do
+    let(:menu_item) { Factory.build(:menu_item) }
+
+    context 'given inactive_starts_on is nil' do
+      it 'returns false' do
+        menu_item.inactive_starts_on = nil
+        menu_item.inactive_on_date?(Date.today).should be_false
+      end
+    end
+
+    context 'given inactive_starts_on is set to a future date' do
+      it 'returns false' do
+        menu_item.inactive_starts_on = 3.days.from_now
+        menu_item.inactive_on_date?(Date.today).should be_false
+      end
+    end
+
+    context 'given inactive_starts_on is set to today' do
+      it 'returns true' do
+        menu_item.inactive_starts_on = Date.today
+        menu_item.inactive_on_date?(Date.today).should be_true
+      end
+    end
+
+    context 'given inactive_starts_on is set to a past date' do
+      it 'returns true' do
+        menu_item.inactive_starts_on = 3.days.ago
+        menu_item.inactive_on_date?(Date.today).should be_true
+      end
+    end
+  end
 end

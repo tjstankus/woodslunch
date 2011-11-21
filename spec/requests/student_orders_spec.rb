@@ -81,6 +81,18 @@ describe 'Student orders' do
           end
         end
       end
+
+      context 'that is inactive' do
+        before(:each) do
+          past_date = Date.parse("#{year}-#{month}-1") - 1.day
+          menu_item.update_attributes!(:inactive_starts_on => past_date)
+        end
+
+        it 'is not displayed' do
+          visit student_orders_path(student, :year => year, :month => month)
+          page.should_not have_content(menu_item.name)
+        end
+      end
     end
 
     context 'given an existing order' do
