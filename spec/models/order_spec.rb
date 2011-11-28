@@ -161,10 +161,17 @@ describe Order do
       end
     end
 
-    context 'given today is a weekend day' do
-
-      it 'returns two mondays from now' do
+    context 'given today is a Saturday' do
+      it 'returns next Monday' do
         Date.stub(:today).and_return(Date.parse('2011-09-03'))
+        expected_date = Date.parse('2011-09-05')
+        Order.first_available_order_date.should == expected_date
+      end
+    end
+
+    context 'given today is a Sunday' do
+      it 'returns two mondays from now' do
+        Date.stub(:today).and_return(Date.parse('2011-09-04'))
         expected_date = Date.parse('2011-09-12')
         Order.first_available_order_date.should == expected_date
       end
