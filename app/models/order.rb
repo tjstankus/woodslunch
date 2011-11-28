@@ -148,6 +148,15 @@ class Order < ActiveRecord::Base
   end
 
   def self.first_available_order_date
+    # TODO: Remove this temp line of code
+    if !Rails.env.test?
+      start_temp_cutoff = Time.zone.parse('2011-11-28 06:00:00')
+      end_temp_cutoff = Time.zone.parse('2011-11-30 20:00:00')
+      now = Time.zone.now
+      return Date.parse('2011-12-01') if now > start_temp_cutoff && now < end_temp_cutoff 
+    end
+
+
     start_date = [Date.today, configatron.orders_first_available_on].max
     if start_date.sunday?
       start_date.beginning_of_week + 2.weeks
