@@ -26,7 +26,8 @@ class Order < ActiveRecord::Base
   #   [ # remaining week arrays... ],
   #   [ # the last array (for last week of month) may have nils on the end ]
   # ]
-  def self.days_for_month_and_year_by_weekday(month, year, fk_id)
+  # TODO: This is such a candidate for refactoring
+  def self.days_for_month_and_year_by_weekday(month, year, fk_id, current_user_is_admin=false)
     first_of_month = Date.civil(year.to_i, month.to_i, 1)
     last_of_month = Date.civil(year.to_i, month.to_i, -1)
     [].tap do |arr|
@@ -41,7 +42,7 @@ class Order < ActiveRecord::Base
           else
             if day_off = DayOff.for_date(date)
               arr.last << Day.new(date, day_off, 'orders/day_off')
-            elsif date < first_available_order_date
+            elsif date < first_available_order_date && !current_user_is_admin
               order = order_for_date(fk_id, date)
               arr.last << Day.new(date, order, 'orders/read_only')
             else

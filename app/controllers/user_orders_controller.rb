@@ -8,7 +8,10 @@ class UserOrdersController < ApplicationController
   before_filter :get_presenter, :only => [:index]
 
   def index
-    @days_by_week = UserOrder.days_for_month_and_year_by_weekday(params[:month], params[:year], @user.id)
+    @days_by_week = UserOrder.days_for_month_and_year_by_weekday(params[:month], 
+                                                                 params[:year], 
+                                                                 @user.id,
+                                                                 current_user.has_role?(:admin))
   end
 
   def create
