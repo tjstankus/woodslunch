@@ -46,6 +46,33 @@ describe 'Student orders' do
       page.should have_content(student.name)
     end
 
+    context 'given I am logged in as an admin' do
+      let(:admin) { Factory(:admin) }
+
+      before(:each) do
+        configatron.orders_first_available_on = Date.parse('2011-08-29')
+        configatron.orders_last_available_on = Date.parse('2011-12-30')
+        Date.stub(:today).and_return(Date.parse('2011-11-20'))
+        sign_out # regular user
+        sign_in_as(admin)
+      end
+
+      it "displays any user's past orders as editable" do
+        create_menu_item_served_on_day('Monday')
+        ids_for_mondays_in_september = %w(5 12 19 26)
+        visit student_orders_path(student, :year => year, :month => month)
+        ids_for_mondays_in_september.each do |id|
+          within("td##{id}") do
+            page.should have_css('select')
+          end
+        end
+      end
+    end
+
+    context 'given I am signed in as a user' do
+      it 'does not display past orders as editable'
+    end
+
     context 'given a menu item served on Mondays' do
 
       let!(:daily_menu_item) { create_menu_item_served_on_day('Monday') }
@@ -81,6 +108,18 @@ describe 'Student orders' do
           end
         end
       end
+
+      context 'that is inactive' do
+        before(:each) do
+          past_date = Date.parse("#{year}-#{month}-1") - 1.day
+          menu_item.update_attributes!(:inactive_starts_on => past_date)
+        end
+
+        it 'is not displayed' do
+          visit student_orders_path(student, :year => year, :month => month)
+          page.should_not have_content(menu_item.name)
+        end
+      end
     end
 
     context 'given an existing order' do
@@ -102,7 +141,6 @@ describe 'Student orders' do
           end
         end
       end
-
     end
   end
 
@@ -317,7 +355,7 @@ describe 'Student orders' do
     end
   end
 
-  describe 'availabilty configuration' do
+  describe 'availabilty' do
 
     let(:month) { 8 }
     let(:year) { 2011 }
@@ -377,13 +415,15 @@ describe 'Student orders' do
   end
 
   describe 'orderable dates no longer available' do
-    it 'display available menu items'
+    context 'given no order for the date' do
+      it 'display as empty'
+    end
 
-    it 'display ordered menu items with quantity'
-
-    it 'display as read-only' do
-      pending
-      # should not have select field
+    context 'given and order for the date' do
+      it 'display ordered menu items with quantity as read only' do
+        pending
+        # should not have select field
+      end
     end
   end
 end

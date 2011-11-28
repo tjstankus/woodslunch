@@ -23,4 +23,7 @@ class MenuItem < ActiveRecord::Base
     short_name || name
   end
 
+  def inactive_on_date?(date)
+    inactive_starts_on? && inactive_starts_on <= date
+  end
 end
