@@ -148,10 +148,10 @@ class Order < ActiveRecord::Base
   end
 
   def self.first_available_order_date
-    # TODO: Remove this temp line of code
+    # TODO: Remove this temp code
     if !Rails.env.test?
       start_temp_cutoff = Time.zone.parse('2011-11-28 06:00:00')
-      end_temp_cutoff = Time.zone.parse('2011-11-30 20:00:00')
+      end_temp_cutoff = Time.zone.parse('2011-11-30 00:00:00')
       now = Time.zone.now
       return Date.parse('2011-12-01') if now > start_temp_cutoff && now < end_temp_cutoff 
     end
