@@ -21,17 +21,35 @@
         = number_to_currency(current_user.account.balance)
     %h2 Notes
     #notes
-      %p
-        Payments:
-      %p
-        We are just beginning to record payments into the system. Your account balance should reflect 
-        any payments you've made by the end of September. Thanks for your patience!
-      #paypal
-        %p Paypal payments coming soon!
-      %p{:style => 'padding: 10px 0'}
+      :markdown
+
+        January, February, and March calendars are open for lunch orders.  You
+        can order for just one, two, or all three months.  Each lunch costs $4.
+        Please note that you may order more than one lunch per child per day, so
+        be sure you select "1" if you just want one lunch.  Contact Emily
+        Anderson at lunchprogram@woodscharter.org with questions.
+
+        If your child received a lunch on a day for which it was not ordered
+        ahead of time, you will see that your order form was changed to reflect
+        the extra lunch and your account balance has been updated.  You can wait
+        till next month to pay the additional lunch balance.  If you have more
+        than one child at Woods there are instances where I was not sure which
+        one of your children received the extra lunch (or what exactly the lunch
+        selection was), so I just guessed in order to make your account add the
+        $4.
+
+        If you paid $32 in cash in November and you don't see it posted to
+        your account, please notify me at lunchprogram@woodscharter.org.  I
+        received an unmarked stack of bills and am not sure whose account it
+        should be applied to.
+
+        Paypal payments coming soon!
+
         For more information on the a la carte program please contact Susan Breen at
         = mail_to('sbreen@woodscharter.org') + '.'
+
         A la carte cards are pre-purchased in $25 increments and are paid for separately from hot catered lunches.
+
       #pay_cash_check
         = link_to 'Pay with cash or check', '#', :id => 'pay_cash_check_link'
 

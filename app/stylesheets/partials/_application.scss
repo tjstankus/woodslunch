@@ -235,16 +235,14 @@ a.cancel {
 .user_order_link {
   margin: 10px 0;
 }
-#balance, #paypal, #pay_cash_check {
+#balance {
   margin: 20px 0 0 0;
 }
 #balance {
   font-weight: bold;
 }
 #pay_cash_check {
-  p {
-    padding: 10px 0;
-  }
+  padding: 10px;
   #pay_cash_check_instructions {
     display: none;
   }
@@ -276,6 +274,9 @@ a.cancel {
   }
   #notes {
     background-color: $listing_even_bg;
+    p {
+      padding: 10px;
+    }
   }
 }
 
