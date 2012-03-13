@@ -1,0 +1,6 @@
+- bundle install --binstubs
+- Add bin/ to .gitignore
+Later:
+	- Add ./bin to path for this directory only
+	- Update gems
+	- Use pg locally
