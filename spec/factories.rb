@@ -31,6 +31,12 @@ Factory.define :daily_menu_item do |f|
   f.day_of_week { DayOfWeek.first }
 end
 
+Factory.define :daily_menu_item_availability do |f|
+  f.association :daily_menu_item, :factory => :daily_menu_item
+  f.starts_on Date.today.beginning_of_month + 1.month
+  f.available true
+end
+
 Factory.define :student do |f|
   f.association :account, :factory => :account
   f.first_name Faker::Name.first_name

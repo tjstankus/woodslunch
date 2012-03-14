@@ -1,6 +1,11 @@
-- bundle install --binstubs
-- Add bin/ to .gitignore
+- I think I want to implement the current feature with Cucumber. So go ahead and upgrade my testing tools. 
 Later:
+	- Switch to 1.9.3 per http://stackoverflow.com/questions/8784421/is-it-possible-to-run-my-rails-app-on-heroku-with-ruby-1-9-3-if-so-how or if an officially supported method exists by the time I do this, use that
 	- Add ./bin to path for this directory only
 	- Update gems
 	- Use pg locally
+	- Use Cucumber
+	- Change steak-style specs into Cucumber features
+Archive:
+	- bundle install --binstubs @done(2012-03-13)
+	- Add bin/ to .gitignore @done(2012-03-13)

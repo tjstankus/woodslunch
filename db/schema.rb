@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111107114158) do
+ActiveRecord::Schema.define(:version => 20120314092057) do
 
   create_table "account_requests", :force => true do |t|
     t.string   "email"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(:version => 20111107114158) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "balance",    :precision => 5, :scale => 2, :default => 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "daily_menu_item_availabilities", :force => true do |t|
+    t.integer  "daily_menu_item_id"
+    t.boolean  "available",          :default => true
+    t.date     "starts_on"
+    t.date     "ends_on"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
