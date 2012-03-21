@@ -9,6 +9,10 @@ describe DailyMenuItemAvailability do
     Factory.build(:daily_menu_item_availability).available.should be_false
   end
 
+  it 'skips initialization of availabile when already set' do
+    Factory.build(:daily_menu_item_availability, :available => true).available.should be_true
+  end
+
   it 'creates a valid object via factory' do
     Factory.build(:daily_menu_item_availability).should be_valid
   end
