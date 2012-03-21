@@ -16,12 +16,12 @@ gem 'escape_utils', '0.2.3'
 gem 'inherited_resources', '1.2.2'
 gem 'state_machine', '1.0.1'
 gem 'configatron', '2.8.2'
+gem 'pg'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-  gem 'sqlite3', '1.3.3'
 
   gem 'ruby-debug19', :require => 'ruby-debug'
 
@@ -35,6 +35,5 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pg'
   gem 'thin'
 end
