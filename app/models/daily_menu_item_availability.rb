@@ -11,7 +11,12 @@ class DailyMenuItemAvailability < ActiveRecord::Base
   belongs_to :daily_menu_item
   validates :daily_menu_item_id, :presence => true
   validates :starts_on, :presence => true
-  validates :available, :presence => true
+
+  after_initialize :init
+
+  def init
+    self.available = false if self.available.nil?
+  end
 
   def available_on_date?(date)
     raise NotImplementedError unless ends_on.blank?
