@@ -6,11 +6,11 @@ describe 'Daily menu item availability' do
 
     before(:each) do
       # TODO: Refactor this setup code. It's too much, which smells.
-      time = Time.now
-      @year = time.year
-      @month = time.month
-      configatron.orders_first_available_on = time.to_date - 1.month
-      configatron.orders_last_available_on = time.to_date + 3.months
+      @date = Date.today
+      @year = @date.year
+      @month = @date.month
+      configatron.orders_first_available_on = @date - 1.month
+      configatron.orders_last_available_on = @date + 3.months
       @daily_menu_item = Factory(:daily_menu_item)
       @student = create_student
       @user = @student.account.users.first
@@ -20,7 +20,10 @@ describe 'Daily menu item availability' do
     context 'that is not available until next month' do
 
       before(:each) do
-        @availability = Factory(:daily_menu_item_availability)
+        @availability = Factory(:daily_menu_item_availability,
+                                :daily_menu_item => @daily_menu_item,
+                                :available => true,
+                                :starts_on => @date + 1.month)
       end
 
       it "does not appear on this month's order form" do

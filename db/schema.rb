@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20120314092057) do
 
   create_table "daily_menu_item_availabilities", :force => true do |t|
     t.integer  "daily_menu_item_id"
-    t.boolean  "available",          :default => true
+    t.boolean  "available"
     t.date     "starts_on"
     t.date     "ends_on"
     t.datetime "created_at"

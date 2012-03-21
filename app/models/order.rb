@@ -58,9 +58,19 @@ class Order < ActiveRecord::Base
   end
 
   def available_menu_items
-    @available_menu_items ||= self.day_of_week_served_on.menu_items.reject do |menu_item|
+    @available_menu_items ||= menu_items_with_availability & active_menu_items
+  end
+
+  def active_menu_items
+    self.day_of_week_served_on.menu_items.reject do |menu_item|
       menu_item.inactive_on_date?(self.served_on)
     end
+  end
+
+  def menu_items_with_availability
+    self.day_of_week_served_on.daily_menu_items.collect do |dmi|
+      dmi if dmi.available_on_date?(self.served_on)
+    end.compact.collect(&:menu_item)
   end
 
   def quantity_for_menu_item(menu_item)
@@ -153,7 +163,7 @@ class Order < ActiveRecord::Base
       start_temp_cutoff = Time.zone.parse('2011-11-28 06:00:00')
       end_temp_cutoff = Time.zone.parse('2011-11-30 00:00:00')
       now = Time.zone.now
-      return Date.parse('2011-12-01') if now > start_temp_cutoff && now < end_temp_cutoff 
+      return Date.parse('2011-12-01') if now > start_temp_cutoff && now < end_temp_cutoff
     end
 
 

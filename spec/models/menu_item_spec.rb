@@ -21,11 +21,11 @@ describe MenuItem do
   end
 
   describe '.unassigned_to_day' do
-    
+
     context 'given menu item records with no days of week assigned' do
-      
+
       before(:each) do
-        @menu_items = [].tap do |a| 
+        @menu_items = [].tap do |a|
           3.times do |i|
             a << Factory(:menu_item, :name => "Food Item #{i}")
           end
@@ -41,7 +41,7 @@ describe MenuItem do
         @menu_items.each do |menu_item|
           unassigned.should include(menu_item)
         end
-        unassigned.size.should == @menu_items.size 
+        unassigned.size.should == @menu_items.size
       end
     end
   end
@@ -50,7 +50,7 @@ describe MenuItem do
 
     let!(:daily_menu_item) { Factory(:daily_menu_item) }
     let!(:menu_item) { daily_menu_item.menu_item }
-    
+
     it 'removes record from database' do
       id = menu_item.id
       menu_item.destroy
@@ -100,4 +100,5 @@ describe MenuItem do
       end
     end
   end
+
 end

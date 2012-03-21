@@ -3,6 +3,7 @@ class MenuItem < ActiveRecord::Base
 
   has_many :daily_menu_items, :dependent => :destroy
   has_many :days_of_week, :through => :daily_menu_items, :source => :day_of_week
+  has_many :availabilities, :class_name => 'DailyMenuItemAvailability'
 
   validates :name, :presence => true
   validates_uniqueness_of :name, :case_sensitive => false

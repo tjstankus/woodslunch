@@ -1,4 +1,4 @@
-require 'spec_helper'
+  require 'spec_helper'
 
 describe Order do
   it { should have_many(:menu_items).through(:ordered_menu_items) }
@@ -46,6 +46,17 @@ describe Order do
       @menu_items.first.update_attributes!(:inactive_starts_on => date)
       inactive_menu_item = @menu_items.first
       @order.available_menu_items.should_not include(inactive_menu_item)
+    end
+
+    it 'does not include menu items that are unavailable via daily menu item availability' do
+      dmi = @daily_menu_items.first
+      Factory(:daily_menu_item_availability,
+              :available => true,
+              :starts_on => 10.days.from_now,
+              :daily_menu_item => dmi)
+      dmi.reload.available_on_date?(Date.today).should be_false
+      # dmi.should_receive(:available_on_date?).and_return(false)
+      @order.available_menu_items.should_not include(dmi.menu_item)
     end
   end
 
@@ -177,4 +188,5 @@ describe Order do
       end
     end
   end
+
 end

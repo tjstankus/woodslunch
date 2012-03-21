@@ -2,7 +2,7 @@ class CreateDailyMenuItemAvailabilities < ActiveRecord::Migration
   def self.up
     create_table :daily_menu_item_availabilities do |t|
       t.integer :daily_menu_item_id
-      t.boolean :available, :default => true
+      t.boolean :available
       t.date    :starts_on
       t.date    :ends_on
       t.timestamps

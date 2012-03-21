@@ -1,6 +1,30 @@
 Dev Notes
 =========
 
+Daily menu item availability
+----------------------------
+
+If a DailyMenuItem has an associated Availability (DailyMenuItemAvailability)
+then we defer to those objects to determine whether or not that DailyMenuItem
+is available. Otherwise, the default assumption is that a DailyMenuItem is
+available. In other words, if it falls outside the range of any availabilities
+then it is considered available by default. But that question would be handled
+by DailyMenuItem#available_on_date?(date), not by DailyMenuItemAvailability.
+
+Probably only one availability rule can apply for any given date, otherwise
+there would be potential to have conflicting rules. It'd be nice to implement
+that now, but I'm not going to do that.
+
+What makes this a little confusing is that MenuItem objects also have the
+concept of being inactive, which is what made sense for the last menu tweak. But
+that affects the menu item itself, not a particular date or day.
+
+Ultimately, if we wanted to genericize this, menu scheduling changes should be
+able to be made at any time and for any menu item, whether or not there are
+existing orders for that menu item. If there are orders, the ordered menu item
+would need to be cancelled, a refund automatically triggered, and a
+notification (email) sent.
+
 Search
 ------
 
@@ -32,13 +56,13 @@ class AccountTransaction < ActiveRecord::Base
 class Payment < AccountTransaction
 class Purchase < AccountTransaction
 
-Does this clean up the AccountBalanceObserver, which now contains a stupid 
-conditional based on the name of an attribute. We could simply say something 
+Does this clean up the AccountBalanceObserver, which now contains a stupid
+conditional based on the name of an attribute. We could simply say something
 like model.change_balance in the observer. Then the model itself can know how
-it should change that balance. In Payment it would deduct the amount. In 
+it should change that balance. In Payment it would deduct the amount. In
 Purchase, it would add the total.
 
-This is a good refactoring, I think, but would need to be very carefully 
+This is a good refactoring, I think, but would need to be very carefully
 implemented. For now, get Payments deployed, then consider this refactoring.
 
 ## Events that change account balance

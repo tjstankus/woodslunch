@@ -30,7 +30,7 @@ group :development, :test do
   gem 'capybara', '1.0.0'
   gem 'launchy', '0.4.0'
   gem 'factory_girl_rails', '1.0.1'
-  gem 'shoulda', '2.11.3'
+  gem 'shoulda-matchers', '1.0.0'
   gem 'email_spec', '1.2.1'
 end
 
