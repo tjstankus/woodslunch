@@ -11,4 +11,11 @@ module StudentOrdersHelper
     link_to(options[:text], path)
   end
 
+  def link_to_student_month_order(student, date)
+    month = date.month
+    year = date.year
+    path = student_orders_path(student, :year => year, :month => month)
+    link_text = date.strftime('%B orders')
+    link_to(link_text, path)
+  end
 end

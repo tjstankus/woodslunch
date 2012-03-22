@@ -136,6 +136,12 @@ h3 {
     weight: 200;
   }
 }
+h4 {
+  font: {
+    size: 18px;
+    weight: 200;
+  }
+}
 a {
   color: $soft_green;
 }
@@ -231,9 +237,15 @@ a.cancel {
 
 /* home page */
 
+h4.student-name {
+  margin: 20px 0 0 10px;
+}
+.order-links {
+  margin-left: 20px;
+}
 .student_order_link,
 .user_order_link {
-  margin: 10px 0;
+  margin: 5px 0;
 }
 #balance {
   margin: 20px 0 0 0;

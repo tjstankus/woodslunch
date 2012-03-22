@@ -6,12 +6,14 @@
     - if current_user.students.any?
       %h2 Students
       - current_user.students.each do |student|
-        .student_order_link.tight_listing_item{:class => cycle('odd', 'even')}
-          = link_to_current_student_order(student)
+        %h4.student-name= student.name
+        .order-links
+          = render :partial => 'order_links_student', :locals => {:student => student}
     %h2 Users
     - current_user.account.users.each do |user|
-      .user_order_link
-        = link_to_current_user_order(user)
+      %h4.user-name= user.name
+      .order-links
+        = render :partial => 'order_links_user', :locals => {:user => user}
     %h2 Account Information
     #account_info
       %span.actions
@@ -22,28 +24,6 @@
     %h2 Notes
     #notes
       :markdown
-
-        January, February, and March calendars are open for lunch orders.  You
-        can order for just one, two, or all three months.  Each lunch costs $4.
-        Please note that you may order more than one lunch per child per day, so
-        be sure you select "1" if you just want one lunch.  Contact Emily
-        Anderson at lunchprogram@woodscharter.org with questions.
-
-        If your child received a lunch on a day for which it was not ordered
-        ahead of time, you will see that your order form was changed to reflect
-        the extra lunch and your account balance has been updated.  You can wait
-        till next month to pay the additional lunch balance.  If you have more
-        than one child at Woods there are instances where I was not sure which
-        one of your children received the extra lunch (or what exactly the lunch
-        selection was), so I just guessed in order to make your account add the
-        $4.
-
-        If you paid $32 in cash in November and you don't see it posted to
-        your account, please notify me at lunchprogram@woodscharter.org.  I
-        received an unmarked stack of bills and am not sure whose account it
-        should be applied to.
-
-        Paypal payments coming soon!
 
         For more information on the a la carte program please contact Susan Breen at
         = mail_to('sbreen@woodscharter.org') + '.'
@@ -56,9 +36,8 @@
         #pay_cash_check_instructions
           %p If paying by cash or check (make out to Woods PTSA), please send payment to school with your child in an envelope marked "PTSA Lunch Program". Alternately, you may mail payment to:
 
-          %p Woods Charter School<br />160 Woodland Grove Lane<br />P.O. Box 5008*<br />Chapel Hill, NC 27514<br />
+          %p Woods Charter School<br />160 Woodland Grove Lane<br />Chapel Hill, NC 27514<br />
 
-          %p *It is important that the P.O. Box 5008 appear UNDER the 160 Woodland Grove Lane street address to assure that your envelope and payment are received.
 - else
   #not_signed_in
     #sign_in
