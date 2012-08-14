@@ -1,9 +1,9 @@
 .bundle
 .DS_Store
 .rvmrc
+bin/
+config/database.yml
 db/*.sqlite3
 log/*.log
 public/stylesheets/compiled
 tmp/
-bin/
-woodslunch.sublime-workspace
