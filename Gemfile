@@ -15,11 +15,11 @@ gem 'faker', '0.9.5'
 gem 'escape_utils', '0.2.3'
 gem 'inherited_resources', '1.2.2'
 gem 'state_machine', '1.0.1'
-gem 'configatron', '2.8.2'
+gem 'configatron', '2.9.1'
 gem 'pg'
 
 group :development, :test do
-  gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'debugger', '~> 1.2.0'
   gem 'database_cleaner', '0.6.7'
   gem 'rspec-rails', '2.6.1'
   gem 'capybara', '1.0.0'
