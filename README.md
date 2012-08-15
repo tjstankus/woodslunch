@@ -8,7 +8,7 @@ Some quick notes about this software:
 
 - It is very specific to the needs of Woods
 - It has been in production use since September 2011
-- Over 5000 menu items have been ordered
+- Over 13,000 lunch orders have been placed and served
 - It's not perfect; there are some issues to address, but it has worked pretty
   well thus far
 
