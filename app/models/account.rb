@@ -19,4 +19,8 @@ class Account < ActiveRecord::Base
       results.collect(&:account).uniq
     end
   end
+
+  def emails
+    users.collect(&:email)
+  end
 end
