@@ -23,6 +23,9 @@ Woodslunch::Application.routes.draw do
     resources :users
     resources :students
     resources :payments
+    collection do
+      get 'with_balances'
+    end
   end
 
   resources :menu_items

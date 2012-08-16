@@ -17,4 +17,9 @@ module AccountHelpers
     user = Factory(:user, :account => account)
     Factory(:student, :account => account)
   end
+
+  def set_account_balance(account, balance)
+    account.balance = balance
+    account.save!
+  end
 end

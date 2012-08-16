@@ -79,4 +79,30 @@ describe 'Accounts' do
     end
 
   end
+
+  describe 'GET with_balances' do
+    let(:user) { Factory(:user) }
+    let!(:account) { user.account }
+    let!(:admin) { Factory(:admin) }
+
+    context 'given an account with a balance > 0' do
+      before(:each) do
+        set_account_balance(account, 10)
+      end
+
+      it 'displays account balance' do
+        signed_in_as(admin) do
+          visit with_balances_accounts_path
+          page.should have_content('$10.00')
+        end
+      end
+
+      it 'displays account user email' do
+        signed_in_as(admin) do
+          visit with_balances_accounts_path
+          page.should have_content(user.email)
+        end
+      end
+    end
+  end
 end

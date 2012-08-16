@@ -11,4 +11,10 @@ module SessionHelpers
   def sign_out
     visit destroy_user_session_path
   end
+
+  def signed_in_as(user)
+    sign_in_as user
+    yield
+    sign_out
+  end
 end

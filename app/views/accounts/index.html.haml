@@ -1,3 +1,5 @@
 %h1.listing_header Accounts
+%p
+  = link_to "Accounts with balances", with_balances_accounts_path
 = render 'search_form'
 = render :partial => 'account', :collection => @accounts
