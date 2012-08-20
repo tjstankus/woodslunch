@@ -24,6 +24,11 @@
     %h2 Notes
     #notes
       %p
+        Please make sure your
+        = link_to('account information', account_path(current_user.account))
+        is accurate. Click 'edit' to view each user's and student's information.
+
+      %p
         Catered lunches will be served beginning September 4. You may place
         orders for September 4 through December 2012. The a la carte program
         begins on the first full day of school.
