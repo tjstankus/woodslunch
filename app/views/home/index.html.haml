@@ -23,20 +23,33 @@
         = number_to_currency(current_user.account.balance)
     %h2 Notes
     #notes
-      :markdown
+      %p
+        Catered lunches will be served beginning September 4. You may place
+        orders for September 4 through December 2012. The a la carte program
+        begins on the first full day of school.
 
-        For more information on the a la carte program please contact Susan Breen at
+      %p
+        For more information on the a la carte program please contact Susan
+        Breen at
         = mail_to('sbreen@woodscharter.org') + '.'
 
-        A la carte cards are pre-purchased in $25 increments and are paid for separately from hot catered lunches.
+        %p
+          A la carte cards are pre-purchased in $25 increments and are paid for
+          separately from hot catered lunches.
 
       #pay_cash_check
         = link_to 'Pay with cash or check', '#', :id => 'pay_cash_check_link'
 
         #pay_cash_check_instructions
-          %p If paying by cash or check (make out to Woods PTSA), please send payment to school with your child in an envelope marked "PTSA Lunch Program". Alternately, you may mail payment to:
+          %p
+            If paying by cash or check (make out to Woods PTSA), please send
+            payment to school with your child in an envelope marked "PTSA Lunch
+            Program". Alternately, you may mail payment to:
 
-          %p Woods Charter School<br />160 Woodland Grove Lane<br />Chapel Hill, NC 27514<br />
+          %p
+            Woods Charter School<br />
+            160 Woodland Grove Lane<br />
+            Chapel Hill, NC 27514<br />
 
 - else
   #not_signed_in
@@ -46,6 +59,11 @@
     #request_account
       = link_to("Request an account", new_account_request_path, :class => 'button')
     .note
-      This application is for use by parents/guardians and staff of Woods Charter School.
-      Account requests are subject to approval.
+      %p
+        This application is for use by parents/guardians and staff of Woods
+        Charter School. Account requests are subject to approval.
+      %p
+        Catered lunches will be served beginning September 4. You may place
+        orders for September 4 through December 2012. The a la carte program
+        begins on the first full day of school.
 
