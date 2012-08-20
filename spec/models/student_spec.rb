@@ -29,4 +29,30 @@ describe Student do
     end
   end
 
+  describe '#increment_grade' do
+    it "changes K to 1" do
+      student = Factory.build(:student, :grade => 'K')
+      expect {
+        student.increment_grade
+      }.to change{ student.grade }.to('1')
+    end
+
+    it "does not change 12" do
+      student = Factory.build(:student, :grade => '12')
+      expect {
+        student.increment_grade
+      }.not_to change{ student.grade }
+    end
+
+    it "increments 1 through 11 by 1" do
+      (1..11).each do |grade|
+        student = Factory.build(:student, :grade => grade.to_s)
+        new_grade = grade + 1
+        expect {
+          student.increment_grade
+        }.to change{ student.grade }.to(new_grade.to_s)
+      end
+    end
+  end
+
 end

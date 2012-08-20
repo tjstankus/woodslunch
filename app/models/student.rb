@@ -16,4 +16,14 @@ class Student < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def increment_grade
+    return true if grade == '12'
+    new_grade = case grade
+                when 'K'
+                  '1'
+                else
+                  (grade.to_i + 1).to_s
+                end
+    update_attributes(:grade => new_grade)
+  end
 end
