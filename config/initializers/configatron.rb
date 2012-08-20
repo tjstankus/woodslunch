@@ -1,2 +1,2 @@
-configatron.orders_first_available_on = Date.parse('2011-09-06')
-configatron.orders_last_available_on = Date.parse('2012-06-08')
+configatron.orders_first_available_on = Date.parse('2012-09-04')
+configatron.orders_last_available_on = Date.parse('2012-12-31')
