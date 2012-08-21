@@ -167,11 +167,17 @@ class Order < ActiveRecord::Base
     end
 
 
-    start_date = [Date.today, configatron.orders_first_available_on].max
-    if start_date.sunday?
-      start_date.beginning_of_week + 2.weeks
+    # Quickfix
+    configured_start_date = configatron.orders_first_available_on
+    if configured_start_date > Date.today
+      return configured_start_date
     else
-      start_date.beginning_of_week + 1.week
+      start_date = Date.today
+      if start_date.sunday?
+        return start_date.beginning_of_week + 2.weeks
+      else
+        return start_date.beginning_of_week + 1.week
+      end
     end
   end
 
