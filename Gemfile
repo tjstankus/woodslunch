@@ -17,6 +17,7 @@ gem 'inherited_resources', '1.2.2'
 gem 'state_machine', '1.0.1'
 gem 'configatron', '2.9.1'
 gem 'pg'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'debugger', '~> 1.2.0'
