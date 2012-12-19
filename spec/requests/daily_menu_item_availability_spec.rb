@@ -33,7 +33,8 @@ describe 'Daily menu item availability' do
       end
 
       it "appears on next month's order form" do
-        visit student_orders_path(@student, :year => @year, :month => @month + 1)
+        date = next_month(@year, @month)
+        visit student_orders_path(@student, :year => date.year, :month => date.month)
         page.should have_content @daily_menu_item.menu_item.name
       end
     end
@@ -52,7 +53,8 @@ describe 'Daily menu item availability' do
       end
 
       it "does not appear on next month's order form" do
-        visit student_orders_path(@student, :year => @year, :month => @month + 1)
+        date = next_month(@year, @month)
+        visit student_orders_path(@student, :year => date.year, :month => date.month)
         page.should_not have_content @daily_menu_item.menu_item.name
       end
     end
@@ -64,7 +66,8 @@ describe 'Daily menu item availability' do
       end
 
       it "appears on next month's order form" do
-        visit student_orders_path(@student, :year => @year, :month => @month + 1)
+        date = next_month(@year, @month)
+        visit student_orders_path(@student, :year => date.year, :month => date.month)
         page.should have_content @daily_menu_item.menu_item.name
       end
     end
