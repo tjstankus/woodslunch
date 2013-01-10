@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rake', '~> 0.9.2'
-gem 'rails', '3.0.9'
+gem 'rails', '3.0.19'
 
 gem 'devise', '1.3.4'
 gem 'simple_form', '1.4.1'
