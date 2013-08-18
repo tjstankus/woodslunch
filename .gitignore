@@ -4,6 +4,7 @@
 bin/
 config/database.yml
 db/*.sqlite3
+latest.dump
 log/*.log
 public/stylesheets/compiled
 tmp/
