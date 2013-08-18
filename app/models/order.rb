@@ -27,6 +27,8 @@ class Order < ActiveRecord::Base
   #   [ # the last array (for last week of month) may have nils on the end ]
   # ]
   # TODO: This is such a candidate for refactoring
+  #
+  # I'm missing an abstraction here: named?
   def self.days_for_month_and_year_by_weekday(month, year, fk_id, current_user_is_admin=false)
     first_of_month = Date.civil(year.to_i, month.to_i, 1)
     last_of_month = Date.civil(year.to_i, month.to_i, -1)
