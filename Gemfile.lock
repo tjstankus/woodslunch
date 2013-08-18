@@ -97,7 +97,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.19)
-    newrelic_rpm (3.5.6.46)
+    newrelic_rpm (3.6.6.147)
     nokogiri (1.5.6)
     orm_adapter (0.0.7)
     pg (0.14.1)
@@ -183,7 +183,7 @@ DEPENDENCIES
   haml (= 3.1.2)
   inherited_resources (= 1.2.2)
   launchy (= 0.4.0)
-  newrelic_rpm
+  newrelic_rpm (~> 3.6)
   pg
   rails (= 3.0.20)
   rake (~> 0.9.2)
