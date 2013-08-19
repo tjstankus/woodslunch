@@ -35,7 +35,7 @@ For Orientation on 2013-08-19
 - [x] Able to order lunches. Open them up for the first month at least, starting
   with the first school day after Labor Day.
 
-- Deploy and test by ordering grilled cheeses for Graylyn.
+- [x] Deploy and test by ordering grilled cheeses for Graylyn.
 
 ### Nice-to-have
 
@@ -44,7 +44,15 @@ For Orientation on 2013-08-19
 
 - [ ] Donations. I'm thinking... a field that allows each account to choose an
   amount to enter to donate on a monthly basis. The number must be a whole
-  number. It must be displayed as part of the balance owed.
+  number. It must be displayed as part of the balance owed. It would be simpler
+  not to do this on a monthly basis. Perhaps a percentage?
+
+- Bug: when a person requests an account using an email of an existing user, the
+  app should stop them and state that an account with that email address already
+  exists, do you need to request a password reset? As it stands, the app will
+  let the user get all the way to the point of going through the account
+  request, etc., then it will bork on actually creating the real user with a
+  cryptic security error message.
 
 - [ ] Report columns get cut off. Particularly, Wednesday and Friday Salad
   column. But check all of them.
@@ -52,7 +60,8 @@ For Orientation on 2013-08-19
 - [ ] The summary on reports should display in the same order as rest of
   information.
 
-- [ ] Always display arrows on month view for admins.
+- [ ] Always display arrows on month view for admins. Does this open up any
+  issues with regards to placing orders on months that are not open yet?
 
 - [ ] Send an email with the same content as above note.
 
@@ -68,6 +77,8 @@ For Orientation on 2013-08-19
 
 - [ ] On menu item form, the checkboxes and days should align. (Will be a moot
   point if we switch to date-based menu item ordering instead of day-of-week.)
+
+- Root out empty accounts.
 
 ### Questions
 
