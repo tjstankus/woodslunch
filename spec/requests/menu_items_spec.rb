@@ -45,7 +45,7 @@ describe 'Menu items' do
       page.should have_selector(:xpath,
           "//input[@type='text']" +
           "[@id='menu_item_price']" +
-          "[@value='4.00']")
+          "[@value='4.25']")
     end
 
     it 'denotes required fields' do

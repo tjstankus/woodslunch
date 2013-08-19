@@ -14,12 +14,23 @@ For Orientation on 2013-08-19
   accuracy. Student names and grades are listed correctly." Add this to the
   dashboard page.
 
-- [ ] Menu changes
-  - [ ] Setup dates
-  - [ ] Price change to 4.25 across the board. Make sure specs cover this use
-    case. This will actually involve changing the price on each menu item in the
-    UI.
-  - [ ] Activate and deactivate menu items as necessary.
+- I'm about to remove these two objects from the database because I think
+  neither is needed now. But just in case I need to reconstitute them, here they
+  are:
+
+  [#<DailyMenuItemAvailability id: 1, daily_menu_item_id: 23, available: false, starts_on: "2012-04-01", ends_on: nil, created_at: "2012-03-22 00:11:38", updated_at: "2012-03-22 00:11:38">, #<DailyMenuItemAvailability id: 2, daily_menu_item_id: 24, available: true, starts_on: "2012-04-01", ends_on: nil, created_at: "2012-03-22 00:13:08", updated_at: "2012-03-22 00:13:08">]
+
+- Menu changes
+  - [ ] In UI change salad to also be served on Thursdays. In order for this to
+    work, in console run:
+      DailyMenuItemAvailability.all.each {|item| item.destroy}
+    WORKS IN DEV.
+  - [ ] Turn off all days for BBQ pork sandwich. WORKS IN DEV.
+  - [ ] Turn off all days for 3 quesadillas. WORKS IN DEV.
+  - [ ] Add burrito menu items. Confirm with Susan first.
+  - [ ] Price change to 4.25 across the board.  In console run:
+      MenuItem.all.each {|item| item.update_attributes(:price => 4.25)}
+    WORKS IN DEV.
 
 - [x] Able to order lunches. Open them up for the first month at least, starting
   with the first school day after Labor Day.

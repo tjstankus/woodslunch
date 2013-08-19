@@ -1,5 +1,5 @@
 class MenuItem < ActiveRecord::Base
-  DEFAULT_PRICE = 4.00
+  DEFAULT_PRICE = 4.25
 
   has_many :daily_menu_items, :dependent => :destroy
   has_many :days_of_week, :through => :daily_menu_items, :source => :day_of_week
