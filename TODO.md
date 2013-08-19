@@ -8,15 +8,20 @@ For Orientation on 2013-08-19
 
 - [ ] Make sure signup flow is okay.
 
-- [ ] Bump all curent grades by 1.
+- [x] Bump all curent grades by 1.
 
-- [ ] Add note to the effect of "Please check your account information for
+- [x] Add note to the effect of "Please check your account information for
   accuracy. Student names and grades are listed correctly." Add this to the
   dashboard page.
 
 - [ ] Menu changes
+  - [ ] Setup dates
+  - [ ] Price change to 4.25 across the board. Make sure specs cover this use
+    case. This will actually involve changing the price on each menu item in the
+    UI.
+  - [ ] Activate and deactivate menu items as necessary.
 
-- [ ] Able to order lunches. Open them up for the first month at least, starting
+- [x] Able to order lunches. Open them up for the first month at least, starting
   with the first school day after Labor Day.
 
 ### Nice-to-have
