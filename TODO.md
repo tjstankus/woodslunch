@@ -27,7 +27,8 @@ For Orientation on 2013-08-19
     WORKS IN DEV.
   - [x] Turn off all days for BBQ pork sandwich. WORKS IN DEV.
   - [x] Turn off all days for 3 quesadillas. WORKS IN DEV.
-  - [ ] Add burrito menu items. Confirm with Susan first.
+  - [x] Add burrito menu items? Confirm with Susan first. This included nilling
+    the inactive_starts_on data for the existing Cheese Burrito menu item.
   - [x] Price change to 4.25 across the board.  In console run:
       MenuItem.all.each {|item| item.update_attributes(:price => 4.25)}
     WORKS IN DEV.
