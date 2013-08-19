@@ -6,7 +6,7 @@ For Orientation on 2013-08-19
 
 ### Must have
 
-- [ ] Make sure signup flow is okay.
+- [x] Make sure signup flow is okay. Use gmail or rentpath email as test account.
 
 - [x] Bump all curent grades by 1.
 
@@ -21,19 +21,21 @@ For Orientation on 2013-08-19
   [#<DailyMenuItemAvailability id: 1, daily_menu_item_id: 23, available: false, starts_on: "2012-04-01", ends_on: nil, created_at: "2012-03-22 00:11:38", updated_at: "2012-03-22 00:11:38">, #<DailyMenuItemAvailability id: 2, daily_menu_item_id: 24, available: true, starts_on: "2012-04-01", ends_on: nil, created_at: "2012-03-22 00:13:08", updated_at: "2012-03-22 00:13:08">]
 
 - Menu changes
-  - [ ] In UI change salad to also be served on Thursdays. In order for this to
+  - [x] In UI change salad to also be served on Thursdays. In order for this to
     work, in console run:
       DailyMenuItemAvailability.all.each {|item| item.destroy}
     WORKS IN DEV.
-  - [ ] Turn off all days for BBQ pork sandwich. WORKS IN DEV.
-  - [ ] Turn off all days for 3 quesadillas. WORKS IN DEV.
+  - [x] Turn off all days for BBQ pork sandwich. WORKS IN DEV.
+  - [x] Turn off all days for 3 quesadillas. WORKS IN DEV.
   - [ ] Add burrito menu items. Confirm with Susan first.
-  - [ ] Price change to 4.25 across the board.  In console run:
+  - [x] Price change to 4.25 across the board.  In console run:
       MenuItem.all.each {|item| item.update_attributes(:price => 4.25)}
     WORKS IN DEV.
 
 - [x] Able to order lunches. Open them up for the first month at least, starting
   with the first school day after Labor Day.
+
+- Deploy and test by ordering grilled cheeses for Graylyn.
 
 ### Nice-to-have
 
@@ -63,6 +65,9 @@ For Orientation on 2013-08-19
 - [ ] Only show last 10 of approved list, or paginate.
 
 - [ ] Be specific about activation links being single use.
+
+- [ ] On menu item form, the checkboxes and days should align. (Will be a moot
+  point if we switch to date-based menu item ordering instead of day-of-week.)
 
 ### Questions
 
