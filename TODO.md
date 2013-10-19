@@ -1,45 +1,6 @@
 TODO
 ====
 
-For Orientation on 2013-08-19
------------------------------
-
-### Must have
-
-- [x] Make sure signup flow is okay. Use gmail or rentpath email as test account.
-
-- [x] Bump all curent grades by 1.
-
-- [x] Add note to the effect of "Please check your account information for
-  accuracy. Student names and grades are listed correctly." Add this to the
-  dashboard page.
-
-- I'm about to remove these two objects from the database because I think
-  neither is needed now. But just in case I need to reconstitute them, here they
-  are:
-
-  [#<DailyMenuItemAvailability id: 1, daily_menu_item_id: 23, available: false, starts_on: "2012-04-01", ends_on: nil, created_at: "2012-03-22 00:11:38", updated_at: "2012-03-22 00:11:38">, #<DailyMenuItemAvailability id: 2, daily_menu_item_id: 24, available: true, starts_on: "2012-04-01", ends_on: nil, created_at: "2012-03-22 00:13:08", updated_at: "2012-03-22 00:13:08">]
-
-- Menu changes
-  - [x] In UI change salad to also be served on Thursdays. In order for this to
-    work, in console run:
-      DailyMenuItemAvailability.all.each {|item| item.destroy}
-    WORKS IN DEV.
-  - [x] Turn off all days for BBQ pork sandwich. WORKS IN DEV.
-  - [x] Turn off all days for 3 quesadillas. WORKS IN DEV.
-  - [x] Add burrito menu items? Confirm with Susan first. This included nilling
-    the inactive_starts_on data for the existing Cheese Burrito menu item.
-  - [x] Price change to 4.25 across the board.  In console run:
-      MenuItem.all.each {|item| item.update_attributes(:price => 4.25)}
-    WORKS IN DEV.
-
-- [x] Able to order lunches. Open them up for the first month at least, starting
-  with the first school day after Labor Day.
-
-- [x] Deploy and test by ordering grilled cheeses for Graylyn.
-
-### Nice-to-have
-
 - [ ] JavaScript to ensure that when changing the form and browsing away from
   the page before clicking submit, present a confirmation dialog.
 
@@ -81,6 +42,13 @@ For Orientation on 2013-08-19
 
 - Root out empty accounts.
 
+- [ ] On reports when a menu item does not have a short description, use the
+  full name. As it stands, a menu item without a short description will show as
+  empty string in reports.
+
+- [ ] When viewing old reports for dates the menu has changed, does it show
+  correctly?
+
 ### Questions
 
 - [ ] ? Have we decided to offer reduced price lunches? What is the price?
@@ -100,4 +68,40 @@ For Orientation on 2013-08-19
 
 - [ ] Powerschool integration. (I'll only spend time doing this if I have a plan
   to commercialize the product.)
+
+Done
+----
+
+- [x] Make sure signup flow is okay. Use gmail or rentpath email as test account.
+
+- [x] Bump all curent grades by 1.
+
+- [x] Add note to the effect of "Please check your account information for
+  accuracy. Student names and grades are listed correctly." Add this to the
+  dashboard page.
+
+- I'm about to remove these two objects from the database because I think
+  neither is needed now. But just in case I need to reconstitute them, here they
+  are:
+
+  [#<DailyMenuItemAvailability id: 1, daily_menu_item_id: 23, available: false, starts_on: "2012-04-01", ends_on: nil, created_at: "2012-03-22 00:11:38", updated_at: "2012-03-22 00:11:38">, #<DailyMenuItemAvailability id: 2, daily_menu_item_id: 24, available: true, starts_on: "2012-04-01", ends_on: nil, created_at: "2012-03-22 00:13:08", updated_at: "2012-03-22 00:13:08">]
+
+- Menu changes
+  - [x] In UI change salad to also be served on Thursdays. In order for this to
+    work, in console run:
+      DailyMenuItemAvailability.all.each {|item| item.destroy}
+    WORKS IN DEV.
+  - [x] Turn off all days for BBQ pork sandwich. WORKS IN DEV.
+  - [x] Turn off all days for 3 quesadillas. WORKS IN DEV.
+  - [x] Add burrito menu items? Confirm with Susan first. This included nilling
+    the inactive_starts_on data for the existing Cheese Burrito menu item.
+  - [x] Price change to 4.25 across the board.  In console run:
+      MenuItem.all.each {|item| item.update_attributes(:price => 4.25)}
+    WORKS IN DEV.
+
+- [x] Able to order lunches. Open them up for the first month at least, starting
+  with the first school day after Labor Day.
+
+- [x] Deploy and test by ordering grilled cheeses for Graylyn.
+
 
