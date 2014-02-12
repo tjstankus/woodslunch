@@ -19,7 +19,6 @@ gem 'pg'
 gem 'newrelic_rpm', '~> 3.6'
 
 group :development, :test do
-  gem 'debugger', '~> 1.2.0'
   gem 'database_cleaner', '0.6.7'
   gem 'rspec-rails', '2.6.1'
   gem 'capybara', '1.0.0'
