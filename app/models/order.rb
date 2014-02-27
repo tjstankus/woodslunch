@@ -8,10 +8,12 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :ordered_menu_items,
       :reject_if => proc { |a| a['_destroy'].blank? && a['quantity'].blank? }, :allow_destroy => true
 
-  # Returns an array of arrays. Each nested array contains Day objects that serve as wrappers.
+  # Returns an array of arrays. Each nested array contains Day objects that
+  # serve as wrappers.
   #
-  # Missing weekdays at the beginning and end of the month are padded out with nils. So, if the
-  # first day of the month is a Wednesday, for example, the returned object might look like this:
+  # Missing weekdays at the beginning and end of the month are padded out with
+  # nils. So, if the first day of the month is a Wednesday, for example, the
+  # returned object might look like this:
   #
   # [ [ nil,
   #     nil,
@@ -26,9 +28,24 @@ class Order < ActiveRecord::Base
   #   [ # remaining week arrays... ],
   #   [ # the last array (for last week of month) may have nils on the end ]
   # ]
+  #
   # TODO: This is such a candidate for refactoring
   #
-  # I'm missing an abstraction here: named?
+  # Perhaps replacing the concept of DayOfWeek with dates will resolve this?
+  #
+  # I'm missing an abstraction here: named? Ideas:
+  #
+  # Month - Month.new(year, month)
+  #         Month#first_date
+  #         Monnth#last_date
+  #         Monnth#dates
+  #
+  # PaddedArray (see: Evernote search "unconditional programming")
+  #
+  # Day has a confusing initialize method. What is:
+  # `Day.new(date, nil, 'orders/unorderable_date')`
+  #
+  # ...
   def self.days_for_month_and_year_by_weekday(month, year, fk_id, current_user_is_admin=false)
     first_of_month = Date.civil(year.to_i, month.to_i, 1)
     last_of_month = Date.civil(year.to_i, month.to_i, -1)
